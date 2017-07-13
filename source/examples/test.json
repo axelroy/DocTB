@@ -1,0 +1,16 @@
+{
+  "id": "test",
+  "cmd": "python -m SimpleHTTPServer $PORT0",
+  "cpus": 0.1,
+  "mem": 32,
+  "disk": 0,
+  "instances": 1,
+  "portDefinitions": [
+    {
+      "port": 10000,
+      "protocol": "tcp",
+      "name": "default",
+      "labels": {}
+    }
+  ]
+}
