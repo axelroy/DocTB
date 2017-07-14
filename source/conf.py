@@ -123,7 +123,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'AutoML.tex', 'Rapport de porjet AutoML', 'Axel Roy',
+    (master_doc, 'AutoML.tex', 'Rapport de projet AutoML', 'Axel Roy',
      'report'),
 ]
 
