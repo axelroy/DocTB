@@ -5,15 +5,15 @@ Documentation written in RST format, and converted to LaTex and PDF using Sphinx
 
 # Installation
 
-Do as written (here)[http://www.sphinx-doc.org/en/stable/tutorial.html] :
+Do as written [here](http://www.sphinx-doc.org/en/stable/tutorial.html) :
 
 * `pip install Sphinx`
 * `sphinx-quickstart`
 
 then, to export as LaTex, install your favorite Tex document production binaries,
-such as (TexLive)[https://wiki.archlinux.org/index.php/TeX_Live].
+such as [TexLive](https://wiki.archlinux.org/index.php/TeX_Live).
 
-and then follow (these instructions)[http://www.sphinx-doc.org/en/stable/builders.html#sphinx.builders.latex.LaTeXBuilder]
+and then follow [these instructions](http://www.sphinx-doc.org/en/stable/builders.html#sphinx.builders.latex.LaTeXBuilder)
 to build LaTex and PDF with Sphinx.
 
 The bibliograpy is done using the `sphinxcontrib-bibtex` plugin. You can install it
