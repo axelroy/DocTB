@@ -140,5 +140,7 @@ man_pages = [(master_doc, 'AutoML', 'AutoML', [author], 1)]
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'AutoML', 'Rapport de projet - AutoML', author, 'Rapport de projet - AutoML',
-     'Optimisation du pipeline d\'apprentissage automatique dans le cadre du Human Brain Project SP8.', 'Miscellaneous'),
+     'Optimisation du pipeline d\'apprentissage automatique dans le cadre du Human Brain Project SP8.', 'Machine Learning'),
 ]
+
+ # latex_logo = 'images/ml_pipeline.png'
