@@ -99,7 +99,7 @@ une boite à outils, afin de faire ressortir les informations intéressantes.
 
 La partie intéressante dans le cadre de ce projet est la possibilité, à partir des
 variables sélectionnées, de lancer une expérience d’apprentissage automatique
-(machine learning) afin de trouver le modèle qui permet de représenter au mieux
+(Machine Learning) afin de trouver le modèle qui permet de représenter au mieux
 le lien entre les caractéristiques et le diagnostique.
 
 L’aide pour la configuration de l’expérience est présentée ainsi :
@@ -113,7 +113,7 @@ L’aide pour la configuration de l’expérience est présentée ainsi :
 
 Les étapes 1 et 2 sont celles qui nous intéressent :
 
-L’étape 1 correspond à la sélection d’un algorithme de machine learning dans
+L’étape 1 correspond à la sélection d’un algorithme de *Machine Learning* dans
 la liste fournie (catégories : analyse statistique, extraction de caractéristiques
 et modèle prédictif). Le modèle choisi influence fortement les résultats de l’expérience.
 
@@ -149,9 +149,7 @@ Cahier des charges (lien vers les annexes je suppose, en sachant qu'il est expli
 
 Se référer au cahier des charges fourni en annexes.
 
-
-
-Etat de l'Art : Passage en revue des différentes technologies, de la plus globale à la plus précise. En vue : Machine learning, Docker, Scala, AKKA, Marathon, even. ZeroMQ + autres technologies qui pourraient surgir.
+Etat de l'Art : Passage en revue des différentes technologies, de la plus globale à la plus précise. En vue : *Machine Learning*, Docker, Scala, AKKA, Marathon, even. ZeroMQ + autres technologies qui pourraient surgir.
 ============
 
 Avant de se lancer dans la partie plus en détail dans la description de la plateforme,
@@ -167,7 +165,7 @@ Cette section est rédigée en listant les différentes technologies, de la plus
 Théorie *Machine Learning*
 ------------
 
-Le machine learning (apprentissage automatique en francais), est un champ d’activité
+Le *Machine Learning* (apprentissage automatique en francais), est un champ d’activité
 de l’intelligence artificielle qui vise à permettre à une machine d’apprendre par elle-même
 plutôt que d’en fixer tous les comportements de manière programmatique.
 Elle est particulièrement utilisée dans les problématiques où le nombre de cas
@@ -236,7 +234,7 @@ permet de recouper les deux classificateurs afin d’affiner la classification f
 Optimisation automatique du pipeline d'apprentissage
 ---------------
 
-De manière générale, le Machine Learning est décrit comme une suite d'opérations à
+De manière générale, le *Machine Learning* est décrit comme une suite d'opérations à
 effectuer de manière séquentielle pour permettre de résoudre une problématique. On parle dès
 lors de pipeline, étant donné que chaque étape est effectuée, à la manière d'un flux
 d'opérations, de la première à la dernière.
@@ -251,11 +249,11 @@ On peut représenter ce flux via la représentation suivante :
 .. figure:: images/ml_pipeline.png
    :width: 500px
    :align: center
-   :alt: Exemple d'un pipeline de Machine Learning, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et modifié pour supprimer les parties liées à TPOT.
+   :alt: Exemple d'un pipeline de *Machine Learning*, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et modifié pour supprimer les parties liées à TPOT.
 
-   *Exemple d'un pipeline de Machine Learning, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et adapté pour supprimer les parties liées à TPOT.*
+   *Exemple d'un pipeline de *Machine Learning*, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et adapté pour supprimer les parties liées à TPOT.*
 
-Dans une approche traditionnelle d'optimisation d'une expérience de Machine Learning,
+Dans une approche traditionnelle d'optimisation d'une expérience de *Machine Learning*,
 on essaie de faire varier les hyper-paramètres du modèle (p.e via les grid-search :cite:`@datagridsearchdoc` de Scikit-Learn :cite:`scikit-learn`).
 
 Cette méthode permet d'optimiser les hyperparamètres du modèle, mais celui-ci doit avoir
@@ -343,23 +341,53 @@ Les outils utilisés dans le cadre du projet sont décrits dans la suite du docu
 Mesos
 ~~~~~~~~~~~~~~~
 
-Elément central de l'architecture distribuée utilisée au CHUV, *Mesos*
+Elément central de l'architecture distribuée utilisée au CHUV, *Mesos* :cite:`@mesosdoc` est un noyau
+exécuté sur chaque machine du cluster, qui fournit une abstraction des ressources
+des machines du cluster. Il est ainsi possible de lancer une application en définissant
+la quantité de mémoire vive, le nombre de processeurs, et l'espace disque à disposition,
+et Mesos s'occupe de gérer les ressources et la localisation de celles-ci, mais aussi
+de gérer le redémarrage de services en cas de pannes, et la mise à l'échelle d'un
+service.
+
+Il permet de lancer des applications natives, mais aussi des containers Dockers,
+comme c'est le cas dans ce projet.
+
+Le cluster est organisé sous la forme d'un noeud *Master*, et de noeuds *Slaves*.
+Le noeud *master* est responsable de recevoir les demandes d'instanciations de services,
+et il envoie les ordres aux noeuds *Slaves* approprié, selon les ressources disponibles.
+La communication entre le *Master* et les *Slaves* est effectué via *ZooKeeper*, qui
+est un système de stockage clé-valeurs dans un système de fichiers, ce qui permet
+de partager les configurations des différents acteurs de l'architecture.
+
+Mesos sert donc de support pour l'instanciation de services sur notre architecture distribuée.
+
+Marathon
+~~~~~~~~~~~~~~~
+
+*Marathon* est un logiciel développé par *Apache* dans le cadre de *Mesosphere* qui
+joue le rôle de surcouche à Mesos afin de simplifier le déploiement de **services longues
+durées**, c'est à dire qu'une définition de tâche adressée à *Marathon* concerne un
+certain nombre d'instances de ce service, et que si une instance vient à se stopper,
+*Marathon* va automatiquement relancer une instance de ce service.
+
+Le logiciel fournit lui aussi une *API REST* :cite:`@marathonapidoc`.
+
+
+
+Chronos
+~~~~~~~~~~~~~~~
+
 
 Docker
 ~~~~~~~~~~~~~~~
 
 Parler de Docker-hub, de la publication d'image, etc.
 
-Chronos
-~~~~~~~~~~~~~~~
-
-Marathon
-~~~~~~~~~~~~~~~
 
 Scala
 ~~~~~~~~~~~~~~~
 
-Ce travail est effectué au cœur du projet Woken 1du Human Brain Project. Ce projet
+Ce travail est effectué au cœur du projet Woken du Human Brain Project. Ce projet
 contient le langage de programmation Scala2. Scala a été concu à l’école polytechnique
 de Lausanne (EPFL) afin de proposer de lier des paradigmes de programmation différents
 et habituellement opposés, tels que la programmation fonctionnelle et la programmation
