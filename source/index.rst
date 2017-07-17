@@ -373,9 +373,12 @@ certain nombre d'instances de ce service, et que si une instance vient à se sto
 Le logiciel fournit lui aussi une *API REST* :cite:`@marathonapidoc`.
 
 
-
 Chronos
 ~~~~~~~~~~~~~~~
+
+
+
+
 
 
 Docker
