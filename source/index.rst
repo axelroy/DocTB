@@ -251,7 +251,7 @@ On peut représenter ce flux via la représentation suivante :
    :align: center
    :alt: Exemple d'un pipeline de *Machine Learning*, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et modifié pour supprimer les parties liées à TPOT.
 
-   *Exemple d'un pipeline de *Machine Learning*, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et adapté pour supprimer les parties liées à TPOT.*
+   *Exemple d'un pipeline de Machine Learning, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et adapté pour supprimer les parties liées à TPOT.*
 
 Dans une approche traditionnelle d'optimisation d'une expérience de *Machine Learning*,
 on essaie de faire varier les hyper-paramètres du modèle (p.e via les grid-search :cite:`@datagridsearchdoc` de Scikit-Learn :cite:`scikit-learn`).
@@ -269,14 +269,13 @@ de manière non dirigée, tout en fournissant un résultat exploitable.
 TODO:Vérifier la phrase sur les algos génétiques + reprendre du cours si besoin.
 
 Les réelles avancées dans le domaine sont récentes, les premiers articles concrets datent de
-2016, et il est difficile de trouver des exemples dans un domaine concret, prouvant l'efficacité de *l'Automated Machine Learning*.
+2016, et il est difficile de trouver des exemples dans un domaine concret, prouvant l'efficacité de *l'Automated Machine Learning* .
 Les créateurs de bibliothèque TPOT :cite:`Olson2016EvoBio` ont rédigé deux papiers TODO:Références + annexes
 d'exemple d'applications dans des cas réels, sur la classification de cas de cancers de la prostate,
-de manière conventionnelle, et via l'approche *Automed Machine Learning", et ont pu mettre en avant
+de manière conventionnelle, et via l'approche *Automed Machine Learning*, et ont pu mettre en avant
 une amélioration des résultats.
 Google a récemment communiqué son intérêt pour le domaine, en annoncant l'ouverture d'un département
-sur la recherche de cette discipline. TODO:Lien vers la conférence Youtube.
-Certaines sites spécialisés TODO:Lien vers le site http://www.kdnuggets.com/2017/01/current-state-automated-machine-learning.html
+sur la recherche de cette discipline :cite:`@googleautoml`. Certains sites spécialisés :cite:`@stateautoml` :cite:`@hhusain`
 décrivent ce domaine avec intérêt, mais en précisant que les résultats ne sont pas encore
 probants, et que, pour le moment, elle n'est pas applicable à toutes les problématiques.
 
@@ -285,8 +284,6 @@ le domaine du *Machine Learning*, il est que les résultats soient meilleurs que
 les configurations des utilisateurs.
 
 Si le travail abouti à une expérience, il est possible que celui-ci soit publié.
-
-
 
 Technologies
 ---------------
@@ -297,7 +294,13 @@ Systèmes distribués
 Historiquement, avant que le web ne vienne changer la donne, une application était
 localisé sur une machine unique, et son architecture se présentait ainsi :
 
-TODO:Image
+.. figure:: images/computer_architecture.png
+   :width: 200px
+   :align: center
+   :alt: Architecture simple basée sur une application unique
+
+   Architecture simple basée sur une application unique : crédits @ Groovytron :cite:`@groovytron`
+
 
 Avec l'augmentation de la demande, la première approche pour augmenter la capacité
 de réponse a été de parraléliser plusieurs machines sur le réseau, et d'effectuer
@@ -306,7 +309,12 @@ un balancage de charge entre les différentes instances, en fonction des moyens.
 Les machines sont déployées en cluster (groupes de machines), et le *load-balancer*
 s'occupe de répartir les requêtes.
 
-TODO:Image
+.. figure:: images/high_availability_architecture.png
+   :width: 200px
+   :align: center
+   :alt: Architecture orientée haute disponibilité et «scalabilité»
+
+   *Architecture orientée haute disponibilité et «scalabilité» : crédits @ Groovytron*
 
 Avec la venue d'internet, l'utilisation des applications a changée, et elles ont
 été amenées à communiquer entre elles, afin de partager des données ou des services.
@@ -318,7 +326,12 @@ pour formuler des réponses aux autres applications. On a ainsi un découpage pl
 des fonctionnalités, mais ce découpage engendre un travail supplémentaire pour le
 programmeur.
 
-TODO:image
+.. figure:: images/high_availability_architecture.png
+   :width: 250px
+   :align: center
+   :alt: Architecture orientée haute disponibilité et «scalabilité»
+
+   *Architecture orientée haute disponibilité et «scalabilité» : crédits @ Groovytron*
 
 Etant donné que les machines sont indépendantes, la gestion des ressources s'effectue
 pour chacune en local. Dans l'approche d'un système distribué, on cherche à pouvoir
@@ -329,8 +342,12 @@ La mise en place de systèmes d'exploitation distribués tels que *DC/OS* est un
 qui se superpose au système d'exploitation de la machine, et qui fournit une gestion
 fine des ressources.
 
+.. figure::
+   :width: 250px
+   :align: center
+   :alt: Architecture utilisant un outils d'orchestration de containers
 
-TODO:Image
+   *Architecture utilisant un outil d'orchestration de containers : crédits @ Groovytron*
 
 *DC/OS* est issu de la *Mesosphere*, un ensemble d'outils fournis par Apache qui
 répondent spécifiquement aux problématiques du cloud-computing. L'architecture du CHUV
@@ -364,25 +381,62 @@ Mesos sert donc de support pour l'instanciation de services sur notre architectu
 Marathon
 ~~~~~~~~~~~~~~~
 
-*Marathon* est un logiciel développé par *Apache* dans le cadre de *Mesosphere* qui
-joue le rôle de surcouche à Mesos afin de simplifier le déploiement de **services longues
-durées**, c'est à dire qu'une définition de tâche adressée à *Marathon* concerne un
-certain nombre d'instances de ce service, et que si une instance vient à se stopper,
+*Marathon* est un logiciel développé par *Apache* dans le cadre de la *Mesosphere*.
+La Mesosphère est l'ensemble des qui sont utilisés dans le cadre de *DC/OS*, et qui
+sont officiellement soutenus par la fondation *Apache*. Marathon joue le rôle de surcouche
+à Mesos afin de simplifier le déploiement de **services longues durées**, c'est à
+dire qu'une définition de tâche adressée à *Marathon* concerne un certain nombre
+d'instances de ce service, et que si une instance vient à se stopper,
 *Marathon* va automatiquement relancer une instance de ce service.
 
 Le logiciel fournit lui aussi une *API REST* :cite:`@marathonapidoc`.
 
-
 Chronos
 ~~~~~~~~~~~~~~~
 
+*Chronos* est un logiciel développé par la *communauté* Mesos. Cette communauté,
+contrairement à la *Mesosphere*, n'est pas officiellement soutenue par *Apache*,
+mais est constituée de gens ayant des interêts pour des outils liés à la Mesosphère,
+et qui collaborent en suivant le développement des outils de la *Mesosphère*.
+La pérénité de ces outils ne sont donc pas garantis.
 
+*Chronos* fait office de remplacement à *cron* de *Linux*, qui est un service permettant
+de planifier des commandes à effectuer à intervalles réguliers. Chronos permet d'effectuer
+le même travail sur un système distribué via *Mesos*.
 
+Il s'oppose à *Marathon* dans son utilisation, car il permet de lancer une commande
+ou un container de manière spontanée, ou programmée, mais qu'il ne cherchera pas à
+garder en tout temps un certain nombre d'instances en cours d'exécution.
 
+Il fournit une interface graphique permettant de programmer une nouvelle tâche planifiée,
+mais aussi une *API REST* permettant l'automatisation programmatique de création de tâches.
 
+.. figure:: images/chronos_gui.png
+   :width: 500px
+   :align: center
+   :alt: Capture d'écran de l'interface graphique de Chronos
+
+   *Capture d'écran de l'interface graphique de Chronos*
 
 Docker
 ~~~~~~~~~~~~~~~
+
+*Docker* est une solution *open-source* qui permet d'embarquer une application
+dans un container *Linux* qui peut être executé sur n'importe quelle machine.
+
+Dans une deuxième mesure, il fournit des mécanismes pour rendre un container proche
+de la virtualisation, en permettant d'isoler les containers entre eux, mais tout en
+fonctionnant sur le même système hôte. Ceci a l'avantage par rapport à la virtualisation
+de ne pas embarquer le système d'exploitation pour chaque container virtuel, ce qui
+réduit la taille des images. En revanche, étant donné que le système d'exploitation
+est partagé, et malgré les mécanismes d'isolation entre container et hôte, il est très
+difficile d'arriver à un niveau de sécurité identique à celui des machines virtuelles,
+qui elles peuvent être sécurisées jusqu'aux niveau des instructions micro-processeurs.
+
+Docker s'utilise généralement pour uniformiser les conditions de développement, car on
+peut dire qu'une image fonctionnant en *stand-alone* (c'est à dire sans interactions
+avec le système hôte) doit fonctionner sur une autre instance Docker.
+
 
 Parler de Docker-hub, de la publication d'image, etc.
 
@@ -391,7 +445,7 @@ Scala
 ~~~~~~~~~~~~~~~
 
 Ce travail est effectué au cœur du projet Woken du Human Brain Project. Ce projet
-contient le langage de programmation Scala2. Scala a été concu à l’école polytechnique
+contient le langage de programmation Scala :cite:`@scala`. Scala a été concu à l’école polytechnique
 de Lausanne (EPFL) afin de proposer de lier des paradigmes de programmation différents
 et habituellement opposés, tels que la programmation fonctionnelle et la programmation
 orientée objet. Scala se base sur la JVM3, ce qui permet de bénéficier de l’abstraction
@@ -403,7 +457,7 @@ Cette section ne précise pas la syntaxique du langage, ni son utilisation.
 
 AKKA
 ~~~~~~~~~~~~~~~
-Akka1 est un outil de développement et un environnement d’exécution libre et
+Akka :cite:`@akka` est un outil de développement et un environnement d’exécution libre et
 open-source qui a pour but de simplifier la mise en place d’applications distribuées
 et concurrentes basée sur la JVM. Il gère donc les langages de programmations Java et Scala,
 et est développé en Scala. Akka propose une résolution des problèmes de concurrence
@@ -431,6 +485,8 @@ Scikit-Learn
 
 Captain
 ~~~~~~~~~~~~~~~
+
+
 
 Analyse
 ================
