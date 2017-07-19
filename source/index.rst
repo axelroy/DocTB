@@ -122,7 +122,7 @@ renseigner des « **paramètres** » pour celui-ci. Nous appellerons ces param
 des « **hyper-paramètres** », afin d’éviter la confusion avec les paramètres
 qui sont les coefficients internes qui ont été déterminés après l’entraînement.
 Les hyper-paramètres définissent un fonctionnement interne (par exemple, pour le
-modèle KNN TODO:Liens vers KNN, l’hyper-paramètre k désigne le nombre des voisins les plus proches
+modèle KNN, l’hyper-paramètre k désigne le nombre des voisins les plus proches
 sur lesquels on veut travailler). Le choix de ces hyper-paramètres est donné au
 points deux de cette marche à suivre. Pour un même modèle, le choix d’un
 hyper-paramètres plutôt qu’un autre change à nouveau drastiquement les résultats.
@@ -149,15 +149,14 @@ Cahier des charges (lien vers les annexes je suppose, en sachant qu'il est expli
 
 Se référer au cahier des charges fourni en annexes.
 
-Etat de l'Art : Passage en revue des différentes technologies, de la plus globale à la plus précise. En vue : *Machine Learning*, Docker, Scala, AKKA, Marathon, even. ZeroMQ + autres technologies qui pourraient surgir.
+Etat de l'Art
 ============
 
 Avant de se lancer dans la partie plus en détail dans la description de la plateforme,
 il est intéressant d’effectuer un état de l’art des technologies qui pourraient
 nous intéresser. Etant donné que le projet consiste à ajouter des fonctionnalités
 à un projet existant, cette section décrira les technologies actuellement existantes,
-ainsi que les technologies qui seront probablement utilisées, ou tout du moins
-leur champ d’application.
+ainsi que les technologies ajoutées, ou tout du moins leur champ d’application.
 
 Cette section est rédigée en listant les différentes technologies, de la plus globale
 à la plus précise en terme d’utilisation dans le projet.
@@ -183,10 +182,14 @@ il peut par exemple concerner :
 
 Dans notre cas, l’apprentissage automatique est implémenté dans la plateforme via les méthodes suivantes :
 
-* TODO : Remplir via la Query-list
+* Résumé statistique ;
+* Analyse de la variance (anova) ;
+* Régression linéaire ;
+* KNN
+* Classification naïve bayésienne
 
 Mais on peut aussi ajouter à la plateforme d’autres méthodes d’apprentissage automatique
-via des containers Docker. TODO : Compléter cette fonctionnalité quand on aura plus d’infos.
+via des containers Docker vierges qui sont fournis par le projet.
 
 Apprentissage supervisé
 ~~~~~~~~~~~~
@@ -212,9 +215,9 @@ pour celles-ci, en maximisant la distance inter-classe, et en minimisant la dist
 .. figure:: images/distance_illustration.png
    :width: 300px
    :align: center
-   :alt: Représentation des distances inter-classe et intra-classe. Illustration issue du site MSDN TODO:LINK
+   :alt: Représentation des distances inter-classe et intra-classe. Illustration issue du site Microsoft :cite:`@theoryMLMS`
 
-   *Représentation des distances inter-classe et intra-classe. Illustration issue du site MSDN TODO:LINK*
+   *Représentation des distances inter-classe et intra-classe. Illustration issue du site MSDN :cite:`@theoryMLMS`
 
 Cette méthodologie peut aussi permettre d’analyser la relation entre les variables, par
 exemple pour réduire la dimension des vecteurs d’entrées.
@@ -251,26 +254,24 @@ On peut représenter ce flux via la représentation suivante :
    :align: center
    :alt: Exemple d'un pipeline de *Machine Learning*, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et modifié pour supprimer les parties liées à TPOT.
 
-   *Exemple d'un pipeline de Machine Learning, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et adapté pour supprimer les parties liées à TPOT.*
+   Exemple d'un pipeline de Machine Learning, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et adapté pour supprimer les parties liées à TPOT.
 
 Dans une approche traditionnelle d'optimisation d'une expérience de *Machine Learning*,
 on essaie de faire varier les hyper-paramètres du modèle (p.e via les grid-search :cite:`@datagridsearchdoc` de Scikit-Learn :cite:`scikit-learn`).
 
-Cette méthode permet d'optimiser les hyperparamètres du modèle, mais celui-ci doit avoir
-été selectionné manuellement auparavant. De plus, l'étendue et le pas des hyper-paramètres sont
-eux-aussi déterminés manuellement, ce qui réduit le domaine d'exploration.
+Cette méthode permet d'optimiser les hyper-paramètres du modèle. Ce dernier doit avoir
+été sélectionné manuellement auparavant par l'utilisateur. De plus, l'étendue et le pas des hyper-paramètres sont
+eux-aussi déterminés manuellement. Cela réduit le domaine d'exploration.
 
 Une tendance émergente de ces dernières années est d'utiliser des méthodes d'intelligence artificielle pour
-explorer l'espace des solutions de manière automatique, et optimisée. Cette exploration est souvent effectuée
-via des algorithmes génétiques [TODO:Lien(s) qui explique les principes], car ils
-correspondent à la problématique d'exploration d'un espace de solutions de grande dimension,
-de manière non dirigée, tout en fournissant un résultat exploitable.
-
-TODO:Vérifier la phrase sur les algos génétiques + reprendre du cours si besoin.
+explorer l'espace des solutions de manière automatique et optimisée. Cette exploration est souvent effectuée
+via des algorithmes génétiques [TODO:Lien(s) qui explique les principes] car ils
+correspondent à la problématique d'exploration d'un espace de solutions de grande dimension.
+Cette exploration est effectuée de manière non dirigée tout en fournissant un résultat exploitable.
 
 Les réelles avancées dans le domaine sont récentes, les premiers articles concrets datent de
 2016, et il est difficile de trouver des exemples dans un domaine concret, prouvant l'efficacité de *l'Automated Machine Learning* .
-Les créateurs de bibliothèque TPOT :cite:`Olson2016EvoBio` ont rédigé deux papiers TODO:Références + annexes
+Les créateurs de bibliothèque TPOT :cite:`Olson2016EvoBio` ont rédigé deux papiers :cite:`olson2016evaluation` :cite:`olson2016tpot`
 d'exemple d'applications dans des cas réels, sur la classification de cas de cancers de la prostate,
 de manière conventionnelle, et via l'approche *Automed Machine Learning*, et ont pu mettre en avant
 une amélioration des résultats.
@@ -435,10 +436,63 @@ qui elles peuvent être sécurisées jusqu'aux niveau des instructions micro-pro
 
 Docker s'utilise généralement pour uniformiser les conditions de développement, car on
 peut dire qu'une image fonctionnant en *stand-alone* (c'est à dire sans interactions
-avec le système hôte) doit fonctionner sur une autre instance Docker.
+avec le système hôte, comme par exemple un montage de volume) doit fonctionner sur une autre instance Docker.
 
+D'un point de vue haut niveau, un container est par défaut isolé de l'hôte au niveau :
 
-Parler de Docker-hub, de la publication d'image, etc.
+* du réseau ;
+* du système de fichier ;
+* des paquets installés ;
+* des services ;
+* des utilisateurs.
+* des processus (en partie);
+
+Ce qui n'implique pas qu'il est impossible d'accéder à ces différentes instances
+de l'hôte, plus ou moins sciemment.
+
+Docker se base sur un système d'image et d'héritage. Il est possible de créer son image
+personnalisée à partir d'une image minimale fournie par la communauté comme :
+
+* BusyBox;
+* CentOS / Scientific Linux CERN (SLC) on Debian/Ubuntu or on CentOS/RHEL/SLC/etc;
+* Debian / Ubuntu;
+
+Mais aussi from scratch, ou via une archive :cite:`@createbaseimagedocker`.
+
+De plus, on peut hériter de n'importe quelle image et la redéfinir via sa propre surcouche.
+Les images dont on hérite ne sont pas modifiables. L'héritage est possible pour toute image
+publiée sur un dépot d'image Docker (généralement Docker Hub, mais on peut en utiliser d'autres).
+
+La spécialisation du comportement d'un container Docker s'effectue via un fichier de
+définition, le `Dockerfile`. Ce fichier est constitué de commandes :cite:`@dockerfilereference`
+qui peuvent effectuer des actions pour construire l'image, dont les principales sont :
+
+* Définir de quelle image on hérite;
+* Copier un fichier de l'hôte à l'intérieur du système de fichier interne;
+* Exécuter une commande bash;
+* Définir des variables d'environnements;
+* Définir quels ports on veut exposer à l'hôte.
+
+Si on souhaite pouvoir choisir entre plusieurs commande, on peut définir des entrypoints,
+qui définissent en général un script que l'on peut exécuter suivant les paramètres d'appels
+du container.
+
+Il y a deux méthodes d'intéraction avec un container :
+
+* `docker run`
+* `docker exec`
+
+la méthode run instancie le container. Il permet de définir des paramètres qui définiront
+des caractéristiques internes ou externes du container. Il est par exemple possible de
+définir le nom du container, un argument d'entrée (utilisable par l'entrypoint) ou
+des variables d'environnement.
+
+La méthode exec ne peut s'appeler que sur un container qui a déjà été instancié.
+Si le container est en cours d'exécution, il est possible d'envoyer une nouvelle commande
+au container. La plus classique est l'exécution d'un bash en mode interactif, via la commande :
+`docker exec -it containername bash`
+
+ 
 
 
 Scala
@@ -476,15 +530,10 @@ d’état bloquant en cas de latence réseau ou tout autre problème technique.
 Akka s’occupe de distribuer les acteurs sur le cluster, ce qui permet d’avoir un
 haut niveau d’abstraction pour le programmeur.
 
-
-Scikit-Learn
-~~~~~~~~~~~~~~~
-
-:cite:`scikit-learn`
-
-
 Captain
 ~~~~~~~~~~~~~~~
+
+Captain :cite:`@captain` est un outil qui permet de créer un point
 
 
 
