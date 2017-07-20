@@ -20,7 +20,6 @@ Abstract
 
    \clearpage
 
-
 Introduction
 ============
 
@@ -52,18 +51,29 @@ expériences neuroscientifiques sur des données de patients recueillies à trav
 cliniques et hôpitaux partenaires. Etant donné la nature médicale de ces données,
 elles sont bien évidemment anonymisées, et il n’est pas possible de retrouver les
 données d’un patient, car les données sont présentées sous la forme d’agrégation
-par caractéristique, comme le présente la capture d’écran suivante :
+par caractéristique, comme le présente la :num:`figure #features`
 
+.. raw:: latex
+
+   \clearpage
+
+.. _features:
 .. figure:: images/Agregation_features_MIP.png
-   :width: 300px
+   :width: 500px
    :align: center
    :alt: Représentation des caractéristiques d'intérêts
 
    *Représentation des caractéristiques d'intérêts.*
 
-En selectionnant un des ronds blancs, on accède à la variable en question,
-et on peut observer différentes statistiques, comme par exemple des vues sous forme d’histogrammes.
+En sélectionnant un des ronds blancs, on accède à la variable en question,
+et on peut observer différentes statistiques, comme par exemple des vues sous forme d’histogrammes [cf :num:`figure #histogram`]
 
+.. raw:: latex
+
+   \clearpage
+
+
+.. _histogram:
 .. figure:: images/Histogram_features_MIP.png
    :width: 450px
    :align: center
@@ -84,8 +94,9 @@ des catégories suivantes il compte l’impliquer :
 * Co-variable
 * Filtre
 
-Via l’interface suivante :
+Via l’interface suivante présentée en :num:`figure #variables`.
 
+.. _variables:
 .. figure:: images/Variables_experiences.png
    :width: 450px
    :align: center
@@ -95,21 +106,30 @@ Via l’interface suivante :
 
 Ce qui nous amène vers la possibilité d’analyser des graphes mêlant les différentes
 variables. Il est encore possible de paramétrer la représentation sur l’axe via
-une boite à outils, afin de faire ressortir les informations intéressantes.
+une boite à outils, afin de faire ressortir les informations intéressantes, comme présenté à la :num:`figure #resultnoml`
+
+.. _resultnoml:
+.. figure:: images/Resultat_nonML_experiment.png
+   :width: 500px
+   :align: center
+   :alt: Résultat de l'expérience formulée à la :num:`figure #variables`. Représentation de la quantité de matière grise en cm3 en fonction de l'age et du sexe (bordeau = femme, rose = homme).
+
+   *Résultat de l'expérience formulée à la :num:`figure #variables`. Représentation de la quantité de matière grise en cm3 en fonction de l'age et du sexe (bordeau = femme, rose = homme).*
 
 La partie intéressante dans le cadre de ce projet est la possibilité, à partir des
 variables sélectionnées, de lancer une expérience d’apprentissage automatique
 (Machine Learning) afin de trouver le modèle qui permet de représenter au mieux
 le lien entre les caractéristiques et le diagnostique.
 
-L’aide pour la configuration de l’expérience est présentée ainsi :
+L’aide pour la configuration de l’expérience est présentée comme en :num:`figure #helpconfig`
 
-.. figure:: images/Resultat_nonML_experiment.png
-   :width: 400px
+.. _helpconfig:
+.. figure:: images/description_experience.png
+   :width: 600px
    :align: center
-   :alt: Résultat de l'expérience de l'illustration 3.  Représentation de la quantité de matière grise en cm3 en fonction de l'age et du sexe (bordeau = femme, rose = homme).
+   :alt: Aide pour la formulation d'une expérience de Machine Learning.
 
-   *Résultat de l'expérience de l'illustration 3.  Représentation de la quantité de matière grise en cm3 en fonction de l'age et du sexe (bordeau = femme, rose = homme).*
+   *Aide pour la formulation d'une expérience de Machine Learning.*
 
 Les étapes 1 et 2 sont celles qui nous intéressent :
 
@@ -161,7 +181,7 @@ ainsi que les technologies ajoutées, ou tout du moins leur champ d’applicatio
 Cette section est rédigée en listant les différentes technologies, de la plus globale
 à la plus précise en terme d’utilisation dans le projet.
 
-Théorie *Machine Learning*
+Théorie Machine Learning
 ------------
 
 Le *Machine Learning* (apprentissage automatique en francais), est un champ d’activité
@@ -170,7 +190,6 @@ plutôt que d’en fixer tous les comportements de manière programmatique.
 Elle est particulièrement utilisée dans les problématiques où le nombre de cas
 est trop important pour être codés à la mano. Le panel d’utilisation est large,
 il peut par exemple concerner :
-
 
 * L’analyse de graphes ou de données
 * La classification d’individus
@@ -210,14 +229,16 @@ Apprentissage non supervisé
 Cet apprentissage s’applique à des données qui ne sont pas labellées par des classes.
 C’est ici à la machine de déterminer les différentes classes qui représentent le problème.
 A partir d’un ensemble de données en entrées, il va chercher à créer des classes représentatives
-pour celles-ci, en maximisant la distance inter-classe, et en minimisant la distance des éléments intra-classe.
+pour celles-ci, en maximisant la distance inter-classe, et en minimisant la distance des éléments intra-classe
+comme représenté sur la :num:`figure #distanceml`.:num:`figure #distanceml`
 
+.. _distanceml:
 .. figure:: images/distance_illustration.png
    :width: 300px
    :align: center
    :alt: Représentation des distances inter-classe et intra-classe. Illustration issue du site Microsoft :cite:`@theoryMLMS`
 
-   *Représentation des distances inter-classe et intra-classe. Illustration issue du site MSDN :cite:`@theoryMLMS`
+   Représentation des distances inter-classe et intra-classe. Illustration issue du site MSDN :cite:`@theoryMLMS`
 
 Cette méthodologie peut aussi permettre d’analyser la relation entre les variables, par
 exemple pour réduire la dimension des vecteurs d’entrées.
@@ -247,18 +268,18 @@ Ce pipeline est généralement découpé en deux phases distinctes :
 * Extraction, normalisation et éventuellement construction des caractéristiques à partir des données brutes.
 * Application d'un modèle statistique ou linéaire pour effectuer, selon la problématique, une classification ou une régression.
 
-On peut représenter ce flux via la représentation :num:`Fig. #mlpipeline`:
+On peut représenter ce flux via la :num:`figure #mlpipeline`:
 
 .. _mlpipeline:
 .. figure:: images/ml_pipeline.png
-   :width: 500px
+   :width: 650px
    :align: center
    :alt: Exemple d'un pipeline de *Machine Learning*, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et modifié pour supprimer les parties liées à TPOT.
 
    Exemple d'un pipeline de Machine Learning, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et adapté pour supprimer les parties liées à TPOT.
 
 .. _mlphases:
-Par rapport à la figure :num:`Fig. #mlpipeline`, on peut décrire les phases ainsi :
+On peut en décrire les phases ainsi :
 
 * **Data Cleaning** : Mise en forme des données et nettoyage. Ceci peut consister à renseigner les données manquantes.
 * **Features Preprocessing** : Transformation des caractéristiques pour les rendre plus utilisables dans le contexte, par exemple en les normalisant.
@@ -312,10 +333,11 @@ mais qu'elle est aussi capable de sélectionner, construire ou d'effectuer du pr
 sur les caractéristiques. *TPOT* dispose d'une communauté active, et le créateur *Randy Olson*
 répond très rapidement aux issues postées sur le *Github* de *TPOT*.
 
-Si on reprend la figure :num:`Fig. #mlpipeline`, celà se présente de la manière suivante :
+Celà se représente comme sur la figure :num:`figure #mlpipelinetpot`.
 
+.. _mlpipelinetpot:
 .. figure:: images/tpot-ml-pipeline.png
-   :width: 500px
+   :width: 650px
    :align: center
    :alt: Exemple d'un pipeline de Machine Learning, avec les parties gérées automatiquement par TPOT. Illustration tirée de la documentation TPOT :cite:`Olson2016EvoBio`
 
@@ -323,7 +345,7 @@ Si on reprend la figure :num:`Fig. #mlpipeline`, celà se présente de la maniè
 
 
 Les différentes étapes ont la même signification que présenté au point de :ref:`présentation des phases typiques de machine learning <mlphases>`,
-au dessous de la figure :num:`Fig. #mlpipeline`.
+au dessous de la :num:`figure #mlpipeline`.
 
 Cette bibliothèque est codée en Python, et se base sur les modèles de Scikit-learn :cite:`scikit-learn`, ce qui
 permet d'avoir des résultats exploitables directement via cette bibliothèque *Python*. Pour son implémentation,
@@ -336,8 +358,13 @@ Systèmes distribués
 ~~~~~~~~~~~~~~~
 
 Historiquement, avant que le web ne vienne changer la donne, une application était
-localisé sur une machine unique, et son architecture se présentait ainsi :
+localisé sur une machine unique, et son architecture se présentait comme sur la :num:`figure #computerarchi`
 
+.. raw:: latex
+
+   \clearpage
+
+.. _computerarchi:
 .. figure:: images/computer_architecture.png
    :width: 200px
    :align: center
@@ -345,16 +372,16 @@ localisé sur une machine unique, et son architecture se présentait ainsi :
 
    Architecture simple basée sur une application unique : crédits @ Groovytron :cite:`@groovytron`
 
-
 Avec l'augmentation de la demande, la première approche pour augmenter la capacité
 de réponse a été de parraléliser plusieurs machines sur le réseau, et d'effectuer
 un balancage de charge entre les différentes instances, en fonction des moyens.
 
 Les machines sont déployées en cluster (groupes de machines), et le *load-balancer*
-s'occupe de répartir les requêtes.
+s'occupe de répartir les requêtes, comme présenté à la :num:`figure #highavailability`.
 
+.. _highavailability:
 .. figure:: images/high_availability_architecture.png
-   :width: 200px
+   :width: 500px
    :align: center
    :alt: Architecture orientée haute disponibilité et «scalabilité»
 
@@ -365,17 +392,10 @@ Avec la venue d'internet, l'utilisation des applications a changée, et elles on
 
 Dès lors, le découpage des applications s'est effectué par bloc, chaque application
 étant indépendante, mais fourni une interface comme point d'entrée pour communiquer,
-et s'appuie généralement sur un format d'encodage haut-niveau (XML, JSON, ...)
+et s'appuie généralement sur un format d'encodage haut-niveau (XML, JSON, ...).
 pour formuler des réponses aux autres applications. On a ainsi un découpage plus fin
 des fonctionnalités, mais ce découpage engendre un travail supplémentaire pour le
 programmeur.
-
-.. figure:: images/high_availability_architecture.png
-   :width: 250px
-   :align: center
-   :alt: Architecture orientée haute disponibilité et «scalabilité»
-
-   *Architecture orientée haute disponibilité et «scalabilité» : crédits @ Groovytron*
 
 Etant donné que les machines sont indépendantes, la gestion des ressources s'effectue
 pour chacune en local. Dans l'approche d'un système distribué, on cherche à pouvoir
@@ -384,14 +404,16 @@ un balanceur de charge.
 
 La mise en place de systèmes d'exploitation distribués tels que *DC/OS* est un système
 qui se superpose au système d'exploitation de la machine, et qui fournit une gestion
-fine des ressources.
+fine des ressources. la :num:`figure #distributedos` permet d'illustrer cette architecture.
 
-.. figure::
-   :width: 250px
+.. _distributedos:
+.. figure:: images/container_orchestration_revised.png
+   :width: 550px
    :align: center
    :alt: Architecture utilisant un outils d'orchestration de containers
 
    *Architecture utilisant un outil d'orchestration de containers : crédits @ Groovytron*
+
 
 *DC/OS* est issu de la *Mesosphere*, un ensemble d'outils fournis par Apache qui
 répondent spécifiquement aux problématiques du cloud-computing. L'architecture du CHUV
@@ -452,11 +474,12 @@ Il s'oppose à *Marathon* dans son utilisation, car il permet de lancer une comm
 ou un container de manière spontanée, ou programmée, mais qu'il ne cherchera pas à
 garder en tout temps un certain nombre d'instances en cours d'exécution.
 
-Il fournit une interface graphique permettant de programmer une nouvelle tâche planifiée,
+Il fournit une interface graphique [cf :num:`figure #chronosgui`] permettant de programmer une nouvelle tâche planifiée,
 mais aussi une *API REST* permettant l'automatisation programmatique de création de tâches.
 
+.. _chronosgui:
 .. figure:: images/chronos_gui.png
-   :width: 500px
+   :width: 650px
    :align: center
    :alt: Capture d'écran de l'interface graphique de Chronos
 
@@ -579,21 +602,36 @@ d’état bloquant en cas de latence réseau ou tout autre problème technique.
 Akka s’occupe de distribuer les acteurs sur le cluster, ce qui permet d’avoir un
 haut niveau d’abstraction pour le programmeur.
 
-Captain
-~~~~~~~~~~~~~~~
+.. Captain
+.. ~~~~~~~~~~~~~~~
 
-Captain :cite:`@captain` est un outil qui permet de créer un point
+.. Captain :cite:`@captain` est un outil qui permet de créer un point
 
 
 
 Analyse
 ================
 
-La place de Woken dans l'architecture globale (succinct, sans parler de toute la plateforme)
+Cette section vise à décrire le cadre logiciel dans lequel le travail sera effectué,
+et à préciser les acteurs ainsi que leurs fonctions.
+
+Woken
 ------------
+
+Woken est un service, utilisable via une *API REST*, qui fournit la possibilité
+d'explorer les données (*data mining* en anglais) de la plateforme. Cette exploration
+de données peut être de différentes natures, comme ériger un graphe qui permet
+à l'utilisateur de visualiser les données, de demander une analyse statistique,
+d'effectuer une expérience de classification via un des algorithme de classification
+fourni, ou encore une expérience de régression.
+
+Chacune de ces explorations de données est effectuée sur un ensemble de données,
+qui est qualifié par les champs configurés dans la :num:`Fig. #variables`
 
 Fonctionnement interne de Woken
 ------------
+
+
 
 But
 ~~~~~~~~~~~~
