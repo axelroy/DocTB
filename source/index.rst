@@ -247,14 +247,26 @@ Ce pipeline est généralement découpé en deux phases distinctes :
 * Extraction, normalisation et éventuellement construction des caractéristiques à partir des données brutes.
 * Application d'un modèle statistique ou linéaire pour effectuer, selon la problématique, une classification ou une régression.
 
-On peut représenter ce flux via la représentation suivante :
+On peut représenter ce flux via la représentation :num:`Fig. #mlpipeline`:
 
+.. _mlpipeline:
 .. figure:: images/ml_pipeline.png
    :width: 500px
    :align: center
    :alt: Exemple d'un pipeline de *Machine Learning*, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et modifié pour supprimer les parties liées à TPOT.
 
    Exemple d'un pipeline de Machine Learning, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et adapté pour supprimer les parties liées à TPOT.
+
+.. _mlphases:
+Par rapport à la figure :num:`Fig. #mlpipeline`, on peut décrire les phases ainsi :
+
+* **Data Cleaning** : Mise en forme des données et nettoyage. Ceci peut consister à renseigner les données manquantes.
+* **Features Preprocessing** : Transformation des caractéristiques pour les rendre plus utilisables dans le contexte, par exemple en les normalisant.
+* **Features Selection** : Sélection des caractéristiques les plus pertinentes pour le modèle.
+* **Feature Construction** : Création de nouvelles caractéristiques à partir des données.
+* **Model Selection** : Sélection du type de modèle ainsi que les hyper-paramètres liés à celui-ci (p.e. pour un réseau de neurones, le nombre de couches de neurones). Actuellement, l’utilisateur doit les configurer lui-même, et même un utilisateur expert ne peut pas garantir que ce sont les meilleurs hyper-paramètres possibles.
+* **Parameter Optimization** : le choix d’un modèle détermine les paramètres qui lui sont liés (p.e. pour un réseau de neurones, le poids de chaque neurone). Ces paramètres  influencent énormément la performance du modèle. Ils sont optimisés lors de cette phase.
+* **Model Validation** : En sortie, nous avons, pour un ensemble de caractéristiques donnée, un modèle et le hyper-paramètres de ce modèle. Il faut ensuite valider ce modèle sur un ensemble de sujets différents afin de déterminer sa pertinence.
 
 Dans une approche traditionnelle d'optimisation d'une expérience de *Machine Learning*,
 on essaie de faire varier les hyper-paramètres du modèle (p.e via les grid-search :cite:`@datagridsearchdoc` de Scikit-Learn :cite:`scikit-learn`).
@@ -288,6 +300,37 @@ Si le travail abouti à une expérience, il est possible que celui-ci soit publi
 
 Technologies
 ---------------
+
+TPOT
+~~~~~~~~~~~~~~~
+
+*TPOT* :cite:`Olson2016EvoBio` est une bibliothèque *open-source* permettant l'optimisation
+de pipeline automatisée, alias *automated Machine Learning*. Elle se distingue des autres
+bibliothèques telles que Auto-WEKA :cite:`@autoweka` et Hyperopt :cite:`@hyperopt` par le fait
+qu'il est capable non seulement de faire varier les modèles et le hyper-paramètres,
+mais qu'elle est aussi capable de sélectionner, construire ou d'effectuer du préprocessing
+sur les caractéristiques. *TPOT* dispose d'une communauté active, et le créateur *Randy Olson*
+répond très rapidement aux issues postées sur le *Github* de *TPOT*.
+
+Si on reprend la figure :num:`Fig. #mlpipeline`, celà se présente de la manière suivante :
+
+.. figure:: images/tpot-ml-pipeline.png
+   :width: 500px
+   :align: center
+   :alt: Exemple d'un pipeline de Machine Learning, avec les parties gérées automatiquement par TPOT. Illustration tirée de la documentation TPOT :cite:`Olson2016EvoBio`
+
+   Exemple d'un pipeline de Machine Learning, avec les parties gérées automatiquement par TPOT. Illustration tirée de la documentation TPOT :cite:`Olson2016EvoBio`
+
+
+Les différentes étapes ont la même signification que présenté au point de :ref:`présentation des phases typiques de machine learning <mlphases>`,
+au dessous de la figure :num:`Fig. #mlpipeline`.
+
+Cette bibliothèque est codée en Python, et se base sur les modèles de Scikit-learn :cite:`scikit-learn`, ce qui
+permet d'avoir des résultats exploitables directement via cette bibliothèque *Python*. Pour son implémentation,
+elle se base sur une représentation du pipeline sous forme d'arbre pour les pipeline (qui correspondent aux chromosomes
+dans la théorie de *Darwin*), et effectuer des mutations en croisant des parties de cet arbre,
+en en coupant des branches, ou en créant de nouvelles.
+
 
 Systèmes distribués
 ~~~~~~~~~~~~~~~
@@ -482,17 +525,23 @@ Il y a deux méthodes d'intéraction avec un container :
 * `docker run`
 * `docker exec`
 
-la méthode run instancie le container. Il permet de définir des paramètres qui définiront
+La méthode `run` instancie le container. Il permet de définir des paramètres qui définiront
 des caractéristiques internes ou externes du container. Il est par exemple possible de
 définir le nom du container, un argument d'entrée (utilisable par l'entrypoint) ou
-des variables d'environnement.
+des variables d'environnement. Suivant l'implémentation du container, il est possible
+que celui-ci agisse comme un service, et se maintienne en vie, en attente de nouveaux
+événements, ou qu'il se termine dès que le travail interne soit terminé. Dans les deux cas,
+il se contente d'attendre que le travail interne(souvent implémenté par un script) renvoie
+un code d'erreur :cite:`@codeerrorissue`
 
 La méthode exec ne peut s'appeler que sur un container qui a déjà été instancié.
 Si le container est en cours d'exécution, il est possible d'envoyer une nouvelle commande
 au container. La plus classique est l'exécution d'un bash en mode interactif, via la commande :
 `docker exec -it containername bash`
 
- 
+qui permet d'exécuter une ligne de commande bash. Le paramètre `-it` permet justement
+de laisser la commande en mode intéractif, ce qui permet de ne pas fermer l'exécution
+de la commande dès que celle-ci renvoie un code `0`.
 
 
 Scala

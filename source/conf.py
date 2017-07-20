@@ -30,7 +30,11 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.todo', 'sphinx.ext.mathjax', 'sphinxcontrib.bibtex']
+extensions = ['sphinx.ext.todo', 'sphinx.ext.mathjax', 'sphinxcontrib.bibtex', 'sphinx_numfig']
+
+# numfig:
+# numfig_number_figures = True
+# numfig_figure_caption_prefix = "Figure"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
