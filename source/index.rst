@@ -5,9 +5,6 @@
 Welcome to AutoML's documentation!
 =============================================
 
-Abstract
-============
-
 .. raw:: latex
 
    \clearpage
@@ -545,8 +542,8 @@ du container.
 
 Il y a deux méthodes d'intéraction avec un container :
 
-* `docker run`
-* `docker exec`
+* :code:`docker run`
+* :code:`docker exec`
 
 La méthode `run` instancie le container. Il permet de définir des paramètres qui définiront
 des caractéristiques internes ou externes du container. Il est par exemple possible de
@@ -566,6 +563,7 @@ qui permet d'exécuter une ligne de commande bash. Le paramètre `-it` permet ju
 de laisser la commande en mode intéractif, ce qui permet de ne pas fermer l'exécution
 de la commande dès que celle-ci renvoie un code `0`.
 
+TODO:Finir cette section.
 
 Scala
 ~~~~~~~~~~~~~~~
@@ -607,8 +605,6 @@ haut niveau d’abstraction pour le programmeur.
 
 .. Captain :cite:`@captain` est un outil qui permet de créer un point
 
-
-
 Analyse
 ================
 
@@ -618,7 +614,7 @@ et à préciser les acteurs ainsi que leurs fonctions.
 Woken
 ------------
 
-Woken est un service, utilisable via une *API REST*, qui fournit la possibilité
+Woken :cite:`@wokenaxel` est un service, utilisable via une *API REST*, qui fournit la possibilité
 d'explorer les données (*data mining* en anglais) de la plateforme. Cette exploration
 de données peut être de différentes natures, comme ériger un graphe qui permet
 à l'utilisateur de visualiser les données, de demander une analyse statistique,
@@ -626,10 +622,37 @@ d'effectuer une expérience de classification via un des algorithme de classific
 fourni, ou encore une expérience de régression.
 
 Chacune de ces explorations de données est effectuée sur un ensemble de données,
-qui est qualifié par les champs configurés dans la :num:`Fig. #variables`
+qui est qualifié par les champs configurés dans la :num:`Fig. #variables` par l'utilisateur
+de la plateforme.
+
+Une expérience fournit des résultats au service demandeur, sous format PFA :cite:`@pfa`,
+qui est un format dont la synthaxe est basée sur *yaml*, mais dont la structure est
+destinée à décrire des pipeline pour le data-mining.
+
+Des requêtes HTTP sont mises à disposition dans le répertoire :code:`dev-debug/http`
+ou :code:`dev-test/http` afin de permettre de se passer de l'interface graphique,
+et de simplifier le développement.
+
+Place de Woken dans l'architecture
+------------
+
+Woken étant un service, il est concu pour être utiliser par d'autres services demandeurs.
+La figure TODO:figure présente une version simplifiée de celle-ci, qui suffit pour expliquer
+les interactions dans le cadre de ce projet.
 
 Fonctionnement interne de Woken
 ------------
+
+La figure :num:`figure #wokenarchiinternal`
+
+.. _wokenarchiinternal:
+.. figure:: images/woken_archi_internal.png
+   :width: 650px
+   :align: center
+   :alt: Architecture  interne de woken.
+
+   *Architecture  interne de woken.*
+
 
 
 

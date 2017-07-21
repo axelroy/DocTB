@@ -101,6 +101,11 @@ htmlhelp_basename = 'Marackerdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
+# ADDITIONAL_PREAMBLE = """
+# \input{preamble._tex}
+# \usepackage{sphinx}
+# """
+
 latex_engine = 'xelatex'
 
 latex_elements = {
@@ -115,8 +120,7 @@ latex_elements = {
     '12pt',
 
     # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
+    # 'preamble': ADDITIONAL_PREAMBLE,
 
     # Latex figure (float) alignment
     #
@@ -141,6 +145,10 @@ latex_show_urls = 'footnote'
 latex_documents = [
     (master_doc, 'AutoML.tex', 'Rapport de projet AutoML', 'Axel Roy',
      'report'),
+]
+
+latex_additional_files = [
+    'tex/preamble._tex'
 ]
 
 # -- Options for manual page output ---------------------------------------
