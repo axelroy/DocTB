@@ -783,7 +783,7 @@ Fonctionnement actuel des containers Docker
 Actuellement, les containers utilisés par la plateforme Docker sont lancés via Chronos.
 A partir d'une définition d'expérience au format *JSON*, on instancie un objet de définition
 de cet algorithme en :code:`case classes` Scala. Depuis ces définitions de classes,
-Woken sérialize en `JSON` correspondant au format attendu par Chronos, comme par exemple :
+Woken sérialise en `JSON` correspondant au format attendu par Chronos, comme par exemple :
 
 .. literalinclude:: examples/example_chronos.json
    :language: json
@@ -801,7 +801,41 @@ Dans le cadre de notre nouveau flux, nous devons pouvoir attendre la fin du trav
 container, récupérer son résultat, puis adresser une deuxième requête sur le container.
 
 Cette fonctionnalité, que l'on peut qualifier de container "interactifs", doit faire
-l'objet de recherches.
+l'objet de recherches. Docker est conçu pour être *stateless*. Quand un container meurt,
+si il n'a pas de *Volume* configuré, le container n'a pas de moyen d'enregistrer l'état
+dans lequel il était. Un *Volume* est un répertoire partagé entre le container et l'hôte.
+Si il existe des fichiers dans le dossier au moment du montage du *Volume*, le container
+y aura accès. Si un le container meurt, le contenu du *Volume* reste.  
+
+Tests préliminaires avec TPOT
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Des tests ont été effectués avec TPOT afin de déterminer son efficactié et son utilisabilité.
+Dans le cadre de du projet, le plus important était de pouvoir:
+
+* Travailler avec le dataset du projet;
+* Pouvoir extraire le meilleure pipeline à la fin de l'optimisation;
+* Obtenir les scores;
+* Reconstruire le pipeline à partir via Scikit-learn.
+
+Mais aussi, si possible:
+
+* Déterminer les *features* construites;
+* Déterminer l'importance de chaque feature.
+* Déterminer l'exploitabilité de l'export implémenté dans TPOT.
+
+Des tests :cite:`@tpottests` ont été implémentés, et une issue :cite:`tpotissue` a été
+adressée sur le projet afin de vérifier les points délicats.
+
+A la fin de ces tests, il s'avère que :
+
+* Il est possible de récupérer le meilleur pipeline trouvé, avec les hyperparamètres du modèle, ainsi que son score;
+* Il est possible d'enregistrer un pipeline sous forme de texte, et de le ré-instancier en objet Scikit-learn utilisable pour des prédictions;
+* Tpot n'est pas en mesure de mettre à disposition la selection, la construction et la normalisation de features. Celles-ci sont données par le modèle;
+* L'export n'est pas utilisable dans notre contexte;
+* Il est possible de travailler via le dataset du projet.
+
+A la fin de cette analyse, les attentes envers TPOT dans le cadre du projet sont atteintes.
 
 Le cas de Marathon
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -818,17 +852,51 @@ pas assez abouti pour être incorporé à l'architecture.
 Conception
 ============
 
+Cette section ne décrit que les choix de conceptions qui ont étés implémentés.
+
 A partir de l'analyse effectuée au chapitre :ref:`analyse`, il est possible de concevoir
 la nouvelle architecture pour résoudre les problèmatiques connues qui sont :
 
-Modification du workflow Woken
+* Mettre en place un flux qui se passe de l'attente des résultats des containers dans la base de données;
+* Mettre en place un container qui accepte plusieurs points d'entrées;
+* Se passer de la mise en forme de PFA imposée dans le flux actuel.
+
+
+Système de containers interactifs
 ------------
 
-Nouveau diagramme d'acteurs imaginé, et comment on coupe le workflow actuel
-~~~~~~~~~~~~
 
-La problématique Marathon (intégration encore non définie)
-~~~~~~~~~~~~
+
+Modification globale du workflow Woken
+------------
+
+Sans parler directement de la modifications des acteurs *Akka*, il est intéressant
+de présenter une vue d'ensemble des intervenants dans la problématique du projet,
+et de définir les rôles qu'ils remplissent dans cette nouvelle conception.
+
+La :num:`figure #conceptionflow` présente une représentation du flux imaginé.
+
+.. _conceptionflow:
+.. figure:: images/conceivedworkflow.png
+   :width: 400px
+   :align: center
+   :alt: Schéma du nouveau workflow global.
+
+   Schéma représentant les intéractions entre les différents intervenants, pour la conception retenue.
+   Les titres de colonnes définissent la technologie responsable des tâches qui sont
+   dans la colonne. Pour le cas d'Akka, cette représentation ne correspond pas à un
+   diagramme d'acteur. Ce nouveau flux utilise les *volumes* de Docker afin de faire
+   persister les résultats d'entraînements et de prédicats.
+
+
+.. raw:: latex
+
+   \clearpage
+
+
+
+Nouveau diagramme d'acteurs imaginé, et comment on coupe le workflow actuel
+------------------
 
 
 Implémentation réalisée
@@ -909,7 +977,7 @@ TODO:Annexes :
 - CdC
 - Journal de travail
 - TPOT papers
--
+- FULL Rest API for TPOT
 
 .. .. raw:: latex
 
