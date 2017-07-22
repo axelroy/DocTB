@@ -618,7 +618,7 @@ Woken :cite:`@wokenaxel` est un service, utilisable via une *API REST*, qui four
 d'explorer les données (*data mining* en anglais) de la plateforme. Cette exploration
 de données peut être de différentes natures, comme ériger un graphe qui permet
 à l'utilisateur de visualiser les données, de demander une analyse statistique,
-d'effectuer une expérience de classification via un des algorithme de classification
+d'effectuer une expérience de classification via un des algorithmes de classification
 fourni, ou encore une expérience de régression.
 
 Chacune de ces explorations de données est effectuée sur un ensemble de données,
@@ -634,36 +634,89 @@ ou :code:`dev-test/http` afin de permettre de se passer de l'interface graphique
 et de simplifier le développement.
 
 Place de Woken dans l'architecture
-------------
+~~~~~~~~~~~~~~~
 
-Woken étant un service, il est concu pour être utiliser par d'autres services demandeurs.
-La figure TODO:figure présente une version simplifiée de celle-ci, qui suffit pour expliquer
-les interactions dans le cadre de ce projet.
+Woken étant un service, il est concu pour être utiliser par d'autres services.
+La figure :num:`figure #wokenarchiglobal` présente une version simplifiée de l'architecture
+de la plateforme MIP.
+
+.. _wokenarchiglobal:
+.. figure:: images/woken_archi_global.png
+   :width: 350px
+   :align: center
+   :alt: Architecture globale simplifiée de la plateforme MIP.
+
+   Architecture globale simplifiée de la plateforme MIP. Le **Portal Frontend** est le point d'accès
+   pour l'utilisateur. Il peut consulter les données et effectuer des expériences depuis celle-ci.
+   Le **Portal Backend** fournit les mécanismes de sécurité et d'accès aux bases de données, ainsi
+   que la répartition des demandes à **Woken** si nécessaire. La base de données **Science-db** contient
+   les données des patients, tandis que la base de données **Meta-db** contient les descriptions
+   de chaque *feature* disponible dans la plateforme. Cette description permet de déterminer différentes
+   informations pour la plateforme telles que le type de données (nominale ou continue) ou l'unité de mesure.
+   Si il s'agit d'une demande nécessitant un algorithme, c'est **Woken**, l'*algorithm factory*,
+   qui va s'occuper de traiter les demandes. **Woken** peut lui-aussi accéder aux bases de données afin
+   d'appliquer ses algorithmes. Cette figure est une représentation simplifiée de
+   l'architecture, qui ne contient pas tous les intervenants de la plateforme, mais
+   uniquement ceux utilisés à cette échelle.
+
+.. raw:: latex
+
+   \clearpage
+
+Lorsque l'utilisateur adresse une requête HTTP contenant une demande d'expérimentation,
+le backend envoie une demande de `mining` à woken via une requête POST de la forme :
+
+.. literalinclude:: examples/query-knn.bash
+   :language: bash
+
+Ce qui correspond aux paramétrage de l'expérience de l'utilisateur, comme présenté en
+:num:`figure #variables`.Woken effectuera traite la requête, effectue l'algorithme et retourne une réponse sous
+format *PFA*. Le format de réponse n'est pas important dans le cadre de ce projet.
+
+
+
+.. _routesrest:
+Il existe deux routes REST pour demander à Woken d'effectuer un travail :
+
+* :code:`/mining/job`
+* :code:`/mining/experiment`
+
+Le :code:`/mining/job` permet de lancer un seul algorithme à la fois, et permet pas
+de lancer des expériences utilisant la *cross-validation*, tandis que la route :code:`/mining/experiment`
+permet la *cross-validation* et de lancer plusieurs algorithmes.
 
 Fonctionnement interne de Woken
-------------
+~~~~~~~~~~~~~~~
 
-La figure :num:`figure #wokenarchiinternal`
+Woken a la responsabilité d'appliquer des algorithmes suite à la demande via l'une
+des deux :ref:`routes REST <routesrest>` mises à disposition.
+
+La :num:`figure #wokenarchiinternal` présente les intervenants liés à *Woken* lors
+d'une demande d'algorithme.
 
 .. _wokenarchiinternal:
 .. figure:: images/woken_archi_internal.png
-   :width: 650px
+   :width: 600px
    :align: center
    :alt: Architecture  interne de woken.
 
-   *Architecture  interne de woken.*
+   Architecture "interne" de woken. Les intervenants ici présents
+   sont ceux qui sont directement utilisés par le service *Woken*.
+   Le service **Woken** en lui-même est généralement contenu dans un
+   container, mais il peut être en natif dans l'architecture, comme dans le cas de l'architecture :code:`dev-debug`
+   du projet. Il est responsable d'instancier des **algorithmes** contenus
+   dans des containers *Docker*, via *Chronos*. Si l'expérience utilisateur demande une *cross-validation*, un **pool d'acteurs AKKA**
+   s'occupant de cette tâche est instanciée au lancement de l'architecture, et sont prêts en tout temps à répondre à cette tâche.
+   Ce choix a été effectué afin d'éviter de devoir instancier ces acteurs
+   pour chaque demande, en prévision d'une forte charge sur la plateforme. Ces acteurs sont contenus dans un container *Docker*, ce
+   qui permet de mettre à l'échelle en cas de besoin. Le résultat de chaque expérience
+   est stocké dans la base de données **Woken-DB**, ce qui permet de récupérer
+   le fichier de définition *PFA* afin de reconstruire l'éxpérience et de la vérifier,
+   si besoin. Attention, les intervenants décrits ci-contre ne sont pas contenus
+   dans le projet, mais bel et bien indépendants, et liés via la configuration *Docker-compose*.
 
 
 
-
-But
-~~~~~~~~~~~~
-
-Entrées et sorties
-~~~~~~~~~~~~
-
-Flux de traitement (présentation du diagramme d'acteurs réalisé en début de projet)
-~~~~~~~~~~~~
 
 Conception
 ============
