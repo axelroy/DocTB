@@ -1,0 +1,22 @@
+{
+  "id": "chronos",
+  "cpus": 1,
+  "mem": 1024,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "mesosphere/chronos",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 4400,
+          "hostPort": 0,
+          "servicePort": 4400,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "volumes": []
+  }
+}

@@ -605,6 +605,8 @@ haut niveau d’abstraction pour le programmeur.
 
 .. Captain :cite:`@captain` est un outil qui permet de créer un point
 
+
+.. _analyse:
 Analyse
 ================
 
@@ -685,8 +687,14 @@ Le :code:`/mining/job` permet de lancer un seul algorithme à la fois, et permet
 de lancer des expériences utilisant la *cross-validation*, tandis que la route :code:`/mining/experiment`
 permet la *cross-validation* et de lancer plusieurs algorithmes.
 
+La requête pour une expérience via la route :code:`/mining/experiment` se présente sous la
+forme :
+
+.. literalinclude:: examples/query-experiment.sh
+   :language: bash
+
 Fonctionnement interne de Woken
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Woken a la responsabilité d'appliquer des algorithmes suite à la demande via l'une
 des deux :ref:`routes REST <routesrest>` mises à disposition.
@@ -715,11 +723,103 @@ d'une demande d'algorithme.
    si besoin. Attention, les intervenants décrits ci-contre ne sont pas contenus
    dans le projet, mais bel et bien indépendants, et liés via la configuration *Docker-compose*.
 
+Par rapport au code de *Woken*, le principal intervenant est le flux d'acteurs *Akka*,
+implémenté dans le script :code:`/src/main/scala/core/coordinator.scala`. C'est celui-ci
+qui recoit les expérimentations à effectuer. Celles-ci sont déterminées par un code
+d'algorithme, des *features* concernées, les variables cibles ainsi que le modèle et
+les hyperparamètres pour les expériences de *machine learning*.
 
+Les acteurs Akka implémentés dans cette portion de code Scala héritent d'une méthodologie
+FSM (Finite State Machine), ce qui rend les acteurs capables de se comporter comme un
+automate à états finis. Les transition entre ces états s'effectuent via des événements
+précis. Cette implémentation permet de mettre un acteur parent en attente des résultats
+des acteurs enfants, de manière élégante et sans attente active bloquante.
+
+Suivant la :ref:`route REST <routesrest>` en question, il existe deux flux possibles.
+
+La route :code:`/mining/job` se contente de lancer un `coordinatorActor`, qui est un
+acteur responsable de convertir un `Job` (:code:`case class` scala) en JSON mis en
+forme selon le format d'entrée de Chronos, de lancer la requête à celui-ci, d'attendre
+les résultats dans la base de données *Woken-DB*, de mettre en forme le résultat et
+de le retourner au service demandeur.
+
+
+La voie intéressante dans le cadre de ce projet est celle de :code:`/mining/experiment`.
+Celle-ci a pour caractéristiques de pouvoir gérer plusieurs algorithmes pour une expérimentation,
+ainsi que de gérer la *cross-validation*.
+
+Le flux de travail entre les acteurs peut être représenté comme montré sur la
+:num:`figure #wokenactors`
+
+.. _wokenactors:
+.. figure:: images/wokenactors.png
+   :width: 650px
+   :align: center
+   :alt: Schéma des acteurs Akka du script coordinator.scala.
+
+   Schéma des acteurs Akka du script coordinator.scala. Les différents acteurs peuvent
+   instancier d'autres acteurs dynamiquement, ce qui permet de répondre à n'importe
+   quelle configuration d'expérimentation de l'utilisateur. Ce schéma correspond à
+   l'implémentation avant le début du projet. Il existe des `coordinatorActor` qui
+   ne sont pas documentés dans ce diagramme. Ils ont pour but d'envoyer un `Job` à
+   Chronos, et d'attendre les résultats du container dans la base de données. Ceci
+   induit qu'il n'y a pas de communication entre *Woken* et les containers. La cross-validation
+   n'est effectuée que si l'algorithme est défini dans *Woken* comme prédictif.
+   Les requêtes SQL sont envoyées aux configurations de Chronos (format JSON) sous
+   la forme de variables d'environnement. Il est prévu de limiter l'accès aux base
+   de données à l'avenir, en passant le dataset aux containers, plutôt que
+   de les laisser accéder directement aux bases de données.
+
+Ce flux de travail comporte oblige deux problématiques de taille :
+
+
+* Il est nécessaire d'attendre un résultat dans la base de données pour que les `localCoordinatorActor` détectent que le container a fourni un travail.
+* Il est nécessaire de passer par le mécanisme de *cross-validation* pour définir un score à une expérience. Ceci impose aussi un format *PFA* strict.
+
+
+Fonctionnement actuel des containers Docker
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Actuellement, les containers utilisés par la plateforme Docker sont lancés via Chronos.
+A partir d'une définition d'expérience au format *JSON*, on instancie un objet de définition
+de cet algorithme en :code:`case classes` Scala. Depuis ces définitions de classes,
+Woken sérialize en `JSON` correspondant au format attendu par Chronos, comme par exemple :
+
+.. literalinclude:: examples/example_chronos.json
+   :language: json
+
+Woken est actuellement capable d'instancier autant de containers que demandent les utilisateurs.
+Il s'occupe de générer des identifiants uniques comme `id` de tâche à Chronos,
+de récolter chacun des résultats dans la base de données et de les mettre en relation avec
+la bonne expérience.
+
+Il n'est en revanche pas capable de communiquer avec un container. Une fois le fichier
+de configuration `JSON` envoyé via une requête POST HTTP, il ne peut qu'attendre les résultats
+dans la base de données.
+
+Dans le cadre de notre nouveau flux, nous devons pouvoir attendre la fin du travail d'un
+container, récupérer son résultat, puis adresser une deuxième requête sur le container.
+
+Cette fonctionnalité, que l'on peut qualifier de container "interactifs", doit faire
+l'objet de recherches.
+
+Le cas de Marathon
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Durant ce projet, la substition de *Chronos* par *Marathon* a été explorée. La raison
+est que *Chronos* n'est pas diretement lié à la *Mesosphere*, et que son développement
+n'est pas assuré sur le long terme. Une fois intégré dans l'architecture, il s'est avéré que
+Marathon ne répond qu'à la problématique des services de longues durées.
+
+*Metronome* :cite:`@metronome` est destiné à être le remplacant de *Marathon*, mais il n'est actuellement
+pas assez abouti pour être incorporé à l'architecture.
 
 
 Conception
 ============
+
+A partir de l'analyse effectuée au chapitre :ref:`analyse`, il est possible de concevoir
+la nouvelle architecture pour résoudre les problèmatiques connues qui sont :
 
 Modification du workflow Woken
 ------------
