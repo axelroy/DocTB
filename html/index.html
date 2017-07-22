@@ -1,0 +1,1108 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to AutoML’s documentation! &#8212; documentation AutoML 0.0.1</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-automl-s-documentation">
+<h1>Welcome to AutoML’s documentation!<a class="headerlink" href="#welcome-to-automl-s-documentation" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le présent document fait office de rapport de projet.
+Il permet de comprendre le contexte de celui-ci, de reconstituer son cheminement du projet,
+de comprendre les choix et les déductions effectuées, ainsi que de connaître l’état final
+du travail et les perspectives d’amélioration.</p>
+<div class="section" id="contexte-du-projet">
+<h2>Contexte du projet<a class="headerlink" href="#contexte-du-projet" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le présent projet s’inscrit dans le cadre du travail de Bachelor en Informatique option «&nbsp;Développement logiciel
+et multimédia&nbsp;», réalisé à la HE-ARC de Neuchâtel.</p>
+<p>Le projet est effectué pour le CHUV-LREN dans le cadre du projet Human Brain Project.</p>
+<div class="section" id="human-brain-projet">
+<h3>Human Brain projet<a class="headerlink" href="#human-brain-projet" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Ce projet s’inscrit dans le cadre du projet Européen «&nbsp;Human Brain Project&nbsp;».
+Ce chapitre vise à expliquer le contexte de la partie du projet qui nous intéresse.</p>
+</div>
+<div class="section" id="presentation-de-la-plateforme-mip">
+<h3>Présentation de la plateforme MIP<a class="headerlink" href="#presentation-de-la-plateforme-mip" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Le but du sous-projet 8 du HBP est de fournir une plateforme pour effectuer des
+expériences neuroscientifiques sur des données de patients recueillies à travers les
+cliniques et hôpitaux partenaires. Etant donné la nature médicale de ces données,
+elles sont bien évidemment anonymisées, et il n’est pas possible de retrouver les
+données d’un patient, car les données sont présentées sous la forme d’agrégation
+par caractéristique, comme le présente la <a href="#features">figure  290</a></p>
+<div class="figure align-center" id="id32">
+<span id="features"></span><a class="reference internal image-reference" href="_images/Agregation_features_MIP.png"><img alt="Représentation des caractéristiques d'intérêts" src="_images/Agregation_features_MIP.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-text">Figure 290: &lt;emphasis&gt;Représentation des caractéristiques d’intérêts.&lt;/emphasis&gt;</span></p>
+</div>
+<p>En sélectionnant un des ronds blancs, on accède à la variable en question,
+et on peut observer différentes statistiques, comme par exemple des vues sous forme d’histogrammes [cf <a href="#histogram">figure  291</a>]</p>
+<div class="figure align-center" id="id33">
+<span id="histogram"></span><a class="reference internal image-reference" href="_images/Histogram_features_MIP.png"><img alt="Exemple d'histogramme d'une variable." src="_images/Histogram_features_MIP.png" style="width: 450px;" /></a>
+<p class="caption"><span class="caption-text">Figure 291: &lt;emphasis&gt;Exemple d’histogramme d’une variable.&lt;/emphasis&gt;</span></p>
+</div>
+<p>Il est ainsi possible d’accéder à toutes les caractéristique médicales et ainsi
+de les analyser manuellement. La plateforme permet aussi de formuler des expériences
+basées sur les données, afin de proposer un modèle personnalisé qui permet d’essayer
+de trouver des liens entre les variables des patients et leur diagnostiques médicaux.
+La plateforme permet vise à formuler des expériences liées à Alzheimer,
+mais d’autres maladie neurologiques pourraient être visées. A partir d’une caractéristique,
+l’utilisateur peut décider de formuler une expérience en choisissant dans laquelle
+des catégories suivantes il compte l’impliquer&nbsp;:</p>
+<ul class="simple">
+<li>Variable</li>
+<li>Co-variable</li>
+<li>Filtre</li>
+</ul>
+<p>Via l’interface suivante présentée en <a href="#variables">figure  292</a>.</p>
+<div class="figure align-center" id="id34">
+<span id="variables"></span><a class="reference internal image-reference" href="_images/Variables_experiences.png"><img alt="Exemple de formulation d'expérience, étape selection des variables. Cet exemple vise à trouver un lien entre la quantité de matière grise dans le Cuneus en fonction de l'age et du sexe." src="_images/Variables_experiences.png" style="width: 450px;" /></a>
+<p class="caption"><span class="caption-text">Figure 292: &lt;emphasis&gt;Exemple de formulation d’expérience, étape selection des variables. Cet exemple vise à trouver un lien entre la quantité de matière grise dans le Cuneus en fonction de l’age et du sexe.&lt;/emphasis&gt;</span></p>
+</div>
+<p>Ce qui nous amène vers la possibilité d’analyser des graphes mêlant les différentes
+variables. Il est encore possible de paramétrer la représentation sur l’axe via
+une boite à outils, afin de faire ressortir les informations intéressantes, comme présenté à la <a href="#resultnoml">figure  293</a></p>
+<div class="figure align-center" id="id35">
+<span id="resultnoml"></span><a class="reference internal image-reference" href="_images/Resultat_nonML_experiment.png"><img alt="Résultat de l'expérience formulée à la :num:`figure #variables`. Représentation de la quantité de matière grise en cm3 en fonction de l'age et du sexe (bordeau = femme, rose = homme)." src="_images/Resultat_nonML_experiment.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-text">Figure 293: &lt;emphasis&gt;Résultat de l’expérience formulée à la :num:`figure #variables`. Représentation de la quantité de matière grise en cm3 en fonction de l’age et du sexe (bordeau = femme, rose = homme).&lt;/emphasis&gt;</span></p>
+</div>
+<p>La partie intéressante dans le cadre de ce projet est la possibilité, à partir des
+variables sélectionnées, de lancer une expérience d’apprentissage automatique
+(Machine Learning) afin de trouver le modèle qui permet de représenter au mieux
+le lien entre les caractéristiques et le diagnostique.</p>
+<p>L’aide pour la configuration de l’expérience est présentée comme en <a href="#helpconfig">figure  294</a></p>
+<div class="figure align-center" id="id36">
+<span id="helpconfig"></span><a class="reference internal image-reference" href="_images/description_experience.png"><img alt="Aide pour la formulation d'une expérience de Machine Learning." src="_images/description_experience.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Figure 294: &lt;emphasis&gt;Aide pour la formulation d’une expérience de Machine Learning.&lt;/emphasis&gt;</span></p>
+</div>
+<p>Les étapes 1 et 2 sont celles qui nous intéressent&nbsp;:</p>
+<p>L’étape 1 correspond à la sélection d’un algorithme de <em>Machine Learning</em> dans
+la liste fournie (catégories&nbsp;: analyse statistique, extraction de caractéristiques
+et modèle prédictif). Le modèle choisi influence fortement les résultats de l’expérience.</p>
+<p>Lorsque le modèle est sélectionne, il est possible, suivant le modèle, de devoir
+renseigner des «&nbsp;<strong>paramètres</strong>&nbsp;» pour celui-ci. Nous appellerons ces paramètres
+des «&nbsp;<strong>hyper-paramètres</strong>&nbsp;», afin d’éviter la confusion avec les paramètres
+qui sont les coefficients internes qui ont été déterminés après l’entraînement.
+Les hyper-paramètres définissent un fonctionnement interne (par exemple, pour le
+modèle KNN, l’hyper-paramètre k désigne le nombre des voisins les plus proches
+sur lesquels on veut travailler). Le choix de ces hyper-paramètres est donné au
+points deux de cette marche à suivre. Pour un même modèle, le choix d’un
+hyper-paramètres plutôt qu’un autre change à nouveau drastiquement les résultats.</p>
+<p>Il peut définir plusieurs configurations «&nbsp;modèle-paramètres&nbsp;» pour une expérience.
+Une expérience ne donne pas instantanément ses résultats. L’utilisateur est notifié
+lorsque les résultats sont consultables.</p>
+<p>C’est ici que s’inscrit le projet. L’utilisateur, qui est probablement plus un spécialiste
+en neuroscience qu’en informatique, se trouve obligé de paramétrer et choisir des données
+qui sont liées uniquement à l’informatique.</p>
+</div>
+<div class="section" id="but-du-projet">
+<h3>But du projet<a class="headerlink" href="#but-du-projet" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Ce projet a pour but de mettre en place un moyen pour que l’utilisateur n’ait plus
+à s’occuper du choix du modèle et du paramétrage pour son expérience, et que la
+plateforme s’occupe de trouver automatiquement la meilleure configuration possible.
+Dans l’idéal, l’utilisateur n’a qu’un bouton a presser pour cette étape.</p>
+</div>
+</div>
+</div>
+<div class="section" id="cahier-des-charges-lien-vers-les-annexes-je-suppose-en-sachant-qu-il-est-explique-en-detail-dans-le-document">
+<h1>Cahier des charges (lien vers les annexes je suppose, en sachant qu’il est expliqué en détail dans le document)<a class="headerlink" href="#cahier-des-charges-lien-vers-les-annexes-je-suppose-en-sachant-qu-il-est-explique-en-detail-dans-le-document" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Se référer au cahier des charges fourni en annexes.</p>
+</div>
+<div class="section" id="etat-de-l-art">
+<h1>Etat de l’Art<a class="headerlink" href="#etat-de-l-art" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Avant de se lancer dans la partie plus en détail dans la description de la plateforme,
+il est intéressant d’effectuer un état de l’art des technologies qui pourraient
+nous intéresser. Etant donné que le projet consiste à ajouter des fonctionnalités
+à un projet existant, cette section décrira les technologies actuellement existantes,
+ainsi que les technologies ajoutées, ou tout du moins leur champ d’application.</p>
+<p>Cette section est rédigée en listant les différentes technologies, de la plus globale
+à la plus précise en terme d’utilisation dans le projet.</p>
+<div class="section" id="theorie-machine-learning">
+<h2>Théorie Machine Learning<a class="headerlink" href="#theorie-machine-learning" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le <em>Machine Learning</em> (apprentissage automatique en francais), est un champ d’activité
+de l’intelligence artificielle qui vise à permettre à une machine d’apprendre par elle-même
+plutôt que d’en fixer tous les comportements de manière programmatique.
+Elle est particulièrement utilisée dans les problématiques où le nombre de cas
+est trop important pour être codés à la mano. Le panel d’utilisation est large,
+il peut par exemple concerner&nbsp;:</p>
+<ul class="simple">
+<li>L’analyse de graphes ou de données</li>
+<li>La classification d’individus</li>
+<li>La résolution de problèmes de régression</li>
+<li>La reconnaissance d’objets</li>
+<li>L’analyse de documents (notamment pour les moteurs de recherche)</li>
+<li>La reconnaissance de caractères manuscrits</li>
+<li>L’aide au diagnostiques médicaux</li>
+</ul>
+<p>Dans notre cas, l’apprentissage automatique est implémenté dans la plateforme via les méthodes suivantes&nbsp;:</p>
+<ul class="simple">
+<li>Résumé statistique ;</li>
+<li>Analyse de la variance (anova) ;</li>
+<li>Régression linéaire ;</li>
+<li>KNN</li>
+<li>Classification naïve bayésienne</li>
+</ul>
+<p>Mais on peut aussi ajouter à la plateforme d’autres méthodes d’apprentissage automatique
+via des containers Docker vierges qui sont fournis par le projet.</p>
+<div class="section" id="apprentissage-supervise">
+<h3>Apprentissage supervisé<a class="headerlink" href="#apprentissage-supervise" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Dans cette méthodologie, on connait déjà les classes que l’on souhaite pouvoir déterminer
+automatiquement via l’algorithme. Ces classes sont tirées des données par un expert.
+Dans certains cas, il est aussi possible d’attribuer une probabilité d’appartenance à une classe.
+L’apprentissage se déroule généralement en deux phases. La première phase est dite d’entrainement.
+Elle consiste à déterminer un modèle qui permet de reproduire pour de nouvelles données la même
+classification/régression que celle donnée via les labels. La seconde phase est dite de validation.
+Elle consiste à déterminer si le modèle entrainé est pertinent, via des méthodes métriques.
+Ces deux phases ne s’effectuent pas sur les mêmes données. La phase d’entrainement nécessite
+une quantité d’informations suffisantes afin d’avoir un modèle représentatif.</p>
+</div>
+<div class="section" id="apprentissage-non-supervise">
+<h3>Apprentissage non supervisé<a class="headerlink" href="#apprentissage-non-supervise" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Cet apprentissage s’applique à des données qui ne sont pas labellées par des classes.
+C’est ici à la machine de déterminer les différentes classes qui représentent le problème.
+A partir d’un ensemble de données en entrées, il va chercher à créer des classes représentatives
+pour celles-ci, en maximisant la distance inter-classe, et en minimisant la distance des éléments intra-classe
+comme représenté sur la <a href="#distanceml">figure  295</a>.:num:<cite>figure #distanceml</cite></p>
+<div class="figure align-center" id="id37">
+<span id="distanceml"></span><a class="reference internal image-reference" href="_images/distance_illustration.png"><img alt="Représentation des distances inter-classe et intra-classe. Illustration issue du site Microsoft :cite:`&#64;theoryMLMS`" src="_images/distance_illustration.png" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">Figure 295: Représentation des distances inter-classe et intra-classe. Illustration issue du site MSDN <a class="reference internal" href="#theorymlms" id="id1">[1]</a></span></p>
+</div>
+<p>Cette méthodologie peut aussi permettre d’analyser la relation entre les variables, par
+exemple pour réduire la dimension des vecteurs d’entrées.</p>
+</div>
+<div class="section" id="apprentissage-semi-supervise">
+<h3>Apprentissage semi-supervisé<a class="headerlink" href="#apprentissage-semi-supervise" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Etant donné que l’apprentissage supervisé nécessite un labelisation des données par expert,
+il devient très coûteux de réaliser ce travail au fur et à mesure que les données augmentent.
+L’utilisation de données labellées, liées à des données labellées, peut permettre d’améliorer
+la qualité de l’apprentissage. Par exemple, il est ainsi possible d’utiliser un classificateur
+crée par l’apprentissage supervisé, et un autre crée par l’apprentissage non-supervisé.</p>
+<p>Idéalement, les deux classificateurs ne se basent pas sur les mêmes caractéristiques, ce qui
+permet de recouper les deux classificateurs afin d’affiner la classification finale.</p>
+</div>
+</div>
+<div class="section" id="optimisation-automatique-du-pipeline-d-apprentissage">
+<h2>Optimisation automatique du pipeline d’apprentissage<a class="headerlink" href="#optimisation-automatique-du-pipeline-d-apprentissage" title="Lien permanent vers ce titre">¶</a></h2>
+<p>De manière générale, le <em>Machine Learning</em> est décrit comme une suite d’opérations à
+effectuer de manière séquentielle pour permettre de résoudre une problématique. On parle dès
+lors de pipeline, étant donné que chaque étape est effectuée, à la manière d’un flux
+d’opérations, de la première à la dernière.</p>
+<p>Ce pipeline est généralement découpé en deux phases distinctes :</p>
+<ul class="simple">
+<li>Extraction, normalisation et éventuellement construction des caractéristiques à partir des données brutes.</li>
+<li>Application d’un modèle statistique ou linéaire pour effectuer, selon la problématique, une classification ou une régression.</li>
+</ul>
+<p>On peut représenter ce flux via la <a href="#mlpipeline">figure  296</a>:</p>
+<div class="figure align-center" id="id38">
+<span id="mlpipeline"></span><a class="reference internal image-reference" href="_images/ml_pipeline.png"><img alt="Exemple d'un pipeline de *Machine Learning*, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et modifié pour supprimer les parties liées à TPOT." src="_images/ml_pipeline.png" style="width: 650px;" /></a>
+<p class="caption"><span class="caption-text">Figure 296: Exemple d’un pipeline de Machine Learning, tiré de la documentation TPOT <a class="reference internal" href="#olson2016evobio" id="id2">[2]</a> et adapté pour supprimer les parties liées à TPOT.</span></p>
+</div>
+<p>On peut en décrire les phases ainsi :</p>
+<ul class="simple">
+<li><strong>Data Cleaning</strong>&nbsp;: Mise en forme des données et nettoyage. Ceci peut consister à renseigner les données manquantes.</li>
+<li><strong>Features Preprocessing</strong>&nbsp;: Transformation des caractéristiques pour les rendre plus utilisables dans le contexte, par exemple en les normalisant.</li>
+<li><strong>Features Selection</strong>&nbsp;: Sélection des caractéristiques les plus pertinentes pour le modèle.</li>
+<li><strong>Feature Construction</strong>&nbsp;: Création de nouvelles caractéristiques à partir des données.</li>
+<li><strong>Model Selection</strong>&nbsp;: Sélection du type de modèle ainsi que les hyper-paramètres liés à celui-ci (p.e. pour un réseau de neurones, le nombre de couches de neurones). Actuellement, l’utilisateur doit les configurer lui-même, et même un utilisateur expert ne peut pas garantir que ce sont les meilleurs hyper-paramètres possibles.</li>
+<li><strong>Parameter Optimization</strong>&nbsp;: le choix d’un modèle détermine les paramètres qui lui sont liés (p.e. pour un réseau de neurones, le poids de chaque neurone). Ces paramètres  influencent énormément la performance du modèle. Ils sont optimisés lors de cette phase.</li>
+<li><strong>Model Validation</strong>&nbsp;: En sortie, nous avons, pour un ensemble de caractéristiques donnée, un modèle et le hyper-paramètres de ce modèle. Il faut ensuite valider ce modèle sur un ensemble de sujets différents afin de déterminer sa pertinence.</li>
+</ul>
+<p>Dans une approche traditionnelle d’optimisation d’une expérience de <em>Machine Learning</em>,
+on essaie de faire varier les hyper-paramètres du modèle (p.e via les grid-search <a class="reference internal" href="#datagridsearchdoc" id="id3">[3]</a> de Scikit-Learn <a class="reference internal" href="#scikit-learn" id="id4">[4]</a>).</p>
+<p>Cette méthode permet d’optimiser les hyper-paramètres du modèle. Ce dernier doit avoir
+été sélectionné manuellement auparavant par l’utilisateur. De plus, l’étendue et le pas des hyper-paramètres sont
+eux-aussi déterminés manuellement. Cela réduit le domaine d’exploration.</p>
+<p>Une tendance émergente de ces dernières années est d’utiliser des méthodes d’intelligence artificielle pour
+explorer l’espace des solutions de manière automatique et optimisée. Cette exploration est souvent effectuée
+via des algorithmes génétiques [TODO:Lien(s) qui explique les principes] car ils
+correspondent à la problématique d’exploration d’un espace de solutions de grande dimension.
+Cette exploration est effectuée de manière non dirigée tout en fournissant un résultat exploitable.</p>
+<p>Les réelles avancées dans le domaine sont récentes, les premiers articles concrets datent de
+2016, et il est difficile de trouver des exemples dans un domaine concret, prouvant l’efficacité de <em>l’Automated Machine Learning</em> .
+Les créateurs de bibliothèque TPOT <a class="reference internal" href="#olson2016evobio" id="id5">[2]</a> ont rédigé deux papiers <a class="reference internal" href="#olson2016evaluation" id="id6">[5]</a> <a class="reference internal" href="#olson2016tpot" id="id7">[6]</a>
+d’exemple d’applications dans des cas réels, sur la classification de cas de cancers de la prostate,
+de manière conventionnelle, et via l’approche <em>Automed Machine Learning</em>, et ont pu mettre en avant
+une amélioration des résultats.
+Google a récemment communiqué son intérêt pour le domaine, en annoncant l’ouverture d’un département
+sur la recherche de cette discipline <a class="reference internal" href="#googleautoml" id="id8">[7]</a>. Certains sites spécialisés <a class="reference internal" href="#stateautoml" id="id9">[8]</a> <a class="reference internal" href="#hhusain" id="id10">[9]</a>
+décrivent ce domaine avec intérêt, mais en précisant que les résultats ne sont pas encore
+probants, et que, pour le moment, elle n’est pas applicable à toutes les problématiques.</p>
+<p>Dans le cadre du projet, étant donné que les utilisateurs ne sont pas experts dans
+le domaine du <em>Machine Learning</em>, il est que les résultats soient meilleurs que
+les configurations des utilisateurs.</p>
+<p>Si le travail abouti à une expérience, il est possible que celui-ci soit publié.</p>
+</div>
+<div class="section" id="technologies">
+<h2>Technologies<a class="headerlink" href="#technologies" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="tpot">
+<h3>TPOT<a class="headerlink" href="#tpot" title="Lien permanent vers ce titre">¶</a></h3>
+<p><em>TPOT</em> <a class="reference internal" href="#olson2016evobio" id="id11">[2]</a> est une bibliothèque <em>open-source</em> permettant l’optimisation
+de pipeline automatisée, alias <em>automated Machine Learning</em>. Elle se distingue des autres
+bibliothèques telles que Auto-WEKA <a class="reference internal" href="#autoweka" id="id12">[10]</a> et Hyperopt <a class="reference internal" href="#hyperopt" id="id13">[11]</a> par le fait
+qu’il est capable non seulement de faire varier les modèles et le hyper-paramètres,
+mais qu’elle est aussi capable de sélectionner, construire ou d’effectuer du préprocessing
+sur les caractéristiques. <em>TPOT</em> dispose d’une communauté active, et le créateur <em>Randy Olson</em>
+répond très rapidement aux issues postées sur le <em>Github</em> de <em>TPOT</em>.</p>
+<p>Celà se représente comme sur la figure <a href="#mlpipelinetpot">figure  297</a>.</p>
+<div class="figure align-center" id="id39">
+<span id="mlpipelinetpot"></span><a class="reference internal image-reference" href="_images/tpot-ml-pipeline.png"><img alt="Exemple d'un pipeline de Machine Learning, avec les parties gérées automatiquement par TPOT. Illustration tirée de la documentation TPOT :cite:`Olson2016EvoBio`" src="_images/tpot-ml-pipeline.png" style="width: 650px;" /></a>
+<p class="caption"><span class="caption-text">Figure 297: Exemple d’un pipeline de Machine Learning, avec les parties gérées automatiquement par TPOT. Illustration tirée de la documentation TPOT <a class="reference internal" href="#olson2016evobio" id="id14">[2]</a></span></p>
+</div>
+<p>Les différentes étapes ont la même signification que présenté au point de <a class="reference internal" href="#mlphases"><span class="std std-ref">présentation des phases typiques de machine learning</span></a>,
+au dessous de la <a href="#mlpipeline">figure  296</a>.</p>
+<p>Cette bibliothèque est codée en Python, et se base sur les modèles de Scikit-learn <a class="reference internal" href="#scikit-learn" id="id15">[4]</a>, ce qui
+permet d’avoir des résultats exploitables directement via cette bibliothèque <em>Python</em>. Pour son implémentation,
+elle se base sur une représentation du pipeline sous forme d’arbre pour les pipeline (qui correspondent aux chromosomes
+dans la théorie de <em>Darwin</em>), et effectuer des mutations en croisant des parties de cet arbre,
+en en coupant des branches, ou en créant de nouvelles.</p>
+</div>
+<div class="section" id="systemes-distribues">
+<h3>Systèmes distribués<a class="headerlink" href="#systemes-distribues" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Historiquement, avant que le web ne vienne changer la donne, une application était
+localisé sur une machine unique, et son architecture se présentait comme sur la <a href="#computerarchi">figure  298</a></p>
+<div class="figure align-center" id="id40">
+<span id="computerarchi"></span><a class="reference internal image-reference" href="_images/computer_architecture.png"><img alt="Architecture simple basée sur une application unique" src="_images/computer_architecture.png" style="width: 200px;" /></a>
+<p class="caption"><span class="caption-text">Figure 298: Architecture simple basée sur une application unique : crédits &#64; Groovytron <a class="reference internal" href="#groovytron" id="id16">[12]</a></span></p>
+</div>
+<p>Avec l’augmentation de la demande, la première approche pour augmenter la capacité
+de réponse a été de parraléliser plusieurs machines sur le réseau, et d’effectuer
+un balancage de charge entre les différentes instances, en fonction des moyens.</p>
+<p>Les machines sont déployées en cluster (groupes de machines), et le <em>load-balancer</em>
+s’occupe de répartir les requêtes, comme présenté à la <a href="#highavailability">figure  299</a>.</p>
+<div class="figure align-center" id="id41">
+<span id="highavailability"></span><a class="reference internal image-reference" href="_images/high_availability_architecture.png"><img alt="Architecture orientée haute disponibilité et «scalabilité»" src="_images/high_availability_architecture.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-text">Figure 299: &lt;emphasis&gt;Architecture orientée haute disponibilité et «scalabilité» : crédits &#64; Groovytron&lt;/emphasis&gt;</span></p>
+</div>
+<p>Avec la venue d’internet, l’utilisation des applications a changée, et elles ont
+été amenées à communiquer entre elles, afin de partager des données ou des services.</p>
+<p>Dès lors, le découpage des applications s’est effectué par bloc, chaque application
+étant indépendante, mais fourni une interface comme point d’entrée pour communiquer,
+et s’appuie généralement sur un format d’encodage haut-niveau (XML, JSON, …).
+pour formuler des réponses aux autres applications. On a ainsi un découpage plus fin
+des fonctionnalités, mais ce découpage engendre un travail supplémentaire pour le
+programmeur.</p>
+<p>Etant donné que les machines sont indépendantes, la gestion des ressources s’effectue
+pour chacune en local. Dans l’approche d’un système distribué, on cherche à pouvoir
+gérer le plus finement les ressources au niveau du cluster, et pas uniquement par
+un balanceur de charge.</p>
+<p>La mise en place de systèmes d’exploitation distribués tels que <em>DC/OS</em> est un système
+qui se superpose au système d’exploitation de la machine, et qui fournit une gestion
+fine des ressources. la <a href="#distributedos">figure  300</a> permet d’illustrer cette architecture.</p>
+<div class="figure align-center" id="id42">
+<span id="distributedos"></span><a class="reference internal image-reference" href="_images/container_orchestration_revised.png"><img alt="Architecture utilisant un outils d'orchestration de containers" src="_images/container_orchestration_revised.png" style="width: 550px;" /></a>
+<p class="caption"><span class="caption-text">Figure 300: &lt;emphasis&gt;Architecture utilisant un outil d’orchestration de containers : crédits &#64; Groovytron&lt;/emphasis&gt;</span></p>
+</div>
+<p><em>DC/OS</em> est issu de la <em>Mesosphere</em>, un ensemble d’outils fournis par Apache qui
+répondent spécifiquement aux problématiques du cloud-computing. L’architecture du CHUV
+est basée sur les outils de la <em>Mesossphere</em>, mais n’utilise pas <em>DC/OS</em> au complet.</p>
+<p>Les outils utilisés dans le cadre du projet sont décrits dans la suite du document.</p>
+</div>
+<div class="section" id="mesos">
+<h3>Mesos<a class="headerlink" href="#mesos" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Elément central de l’architecture distribuée utilisée au CHUV, <em>Mesos</em> <a class="reference internal" href="#mesosdoc" id="id17">[13]</a> est un noyau
+exécuté sur chaque machine du cluster, qui fournit une abstraction des ressources
+des machines du cluster. Il est ainsi possible de lancer une application en définissant
+la quantité de mémoire vive, le nombre de processeurs, et l’espace disque à disposition,
+et Mesos s’occupe de gérer les ressources et la localisation de celles-ci, mais aussi
+de gérer le redémarrage de services en cas de pannes, et la mise à l’échelle d’un
+service.</p>
+<p>Il permet de lancer des applications natives, mais aussi des containers Dockers,
+comme c’est le cas dans ce projet.</p>
+<p>Le cluster est organisé sous la forme d’un noeud <em>Master</em>, et de noeuds <em>Slaves</em>.
+Le noeud <em>master</em> est responsable de recevoir les demandes d’instanciations de services,
+et il envoie les ordres aux noeuds <em>Slaves</em> approprié, selon les ressources disponibles.
+La communication entre le <em>Master</em> et les <em>Slaves</em> est effectué via <em>ZooKeeper</em>, qui
+est un système de stockage clé-valeurs dans un système de fichiers, ce qui permet
+de partager les configurations des différents acteurs de l’architecture.</p>
+<p>Mesos sert donc de support pour l’instanciation de services sur notre architecture distribuée.</p>
+</div>
+<div class="section" id="marathon">
+<h3>Marathon<a class="headerlink" href="#marathon" title="Lien permanent vers ce titre">¶</a></h3>
+<p><em>Marathon</em> est un logiciel développé par <em>Apache</em> dans le cadre de la <em>Mesosphere</em>.
+La Mesosphère est l’ensemble des qui sont utilisés dans le cadre de <em>DC/OS</em>, et qui
+sont officiellement soutenus par la fondation <em>Apache</em>. Marathon joue le rôle de surcouche
+à Mesos afin de simplifier le déploiement de <strong>services longues durées</strong>, c’est à
+dire qu’une définition de tâche adressée à <em>Marathon</em> concerne un certain nombre
+d’instances de ce service, et que si une instance vient à se stopper,
+<em>Marathon</em> va automatiquement relancer une instance de ce service.</p>
+<p>Le logiciel fournit lui aussi une <em>API REST</em> <a class="reference internal" href="#marathonapidoc" id="id18">[14]</a>.</p>
+</div>
+<div class="section" id="chronos">
+<h3>Chronos<a class="headerlink" href="#chronos" title="Lien permanent vers ce titre">¶</a></h3>
+<p><em>Chronos</em> est un logiciel développé par la <em>communauté</em> Mesos. Cette communauté,
+contrairement à la <em>Mesosphere</em>, n’est pas officiellement soutenue par <em>Apache</em>,
+mais est constituée de gens ayant des interêts pour des outils liés à la Mesosphère,
+et qui collaborent en suivant le développement des outils de la <em>Mesosphère</em>.
+La pérénité de ces outils ne sont donc pas garantis.</p>
+<p><em>Chronos</em> fait office de remplacement à <em>cron</em> de <em>Linux</em>, qui est un service permettant
+de planifier des commandes à effectuer à intervalles réguliers. Chronos permet d’effectuer
+le même travail sur un système distribué via <em>Mesos</em>.</p>
+<p>Il s’oppose à <em>Marathon</em> dans son utilisation, car il permet de lancer une commande
+ou un container de manière spontanée, ou programmée, mais qu’il ne cherchera pas à
+garder en tout temps un certain nombre d’instances en cours d’exécution.</p>
+<p>Il fournit une interface graphique [cf <a href="#chronosgui">figure  301</a>] permettant de programmer une nouvelle tâche planifiée,
+mais aussi une <em>API REST</em> permettant l’automatisation programmatique de création de tâches.</p>
+<div class="figure align-center" id="id43">
+<span id="chronosgui"></span><a class="reference internal image-reference" href="_images/chronos_gui.png"><img alt="Capture d'écran de l'interface graphique de Chronos" src="_images/chronos_gui.png" style="width: 650px;" /></a>
+<p class="caption"><span class="caption-text">Figure 301: &lt;emphasis&gt;Capture d’écran de l’interface graphique de Chronos&lt;/emphasis&gt;</span></p>
+</div>
+</div>
+<div class="section" id="docker">
+<h3>Docker<a class="headerlink" href="#docker" title="Lien permanent vers ce titre">¶</a></h3>
+<p><em>Docker</em> est une solution <em>open-source</em> qui permet d’embarquer une application
+dans un container <em>Linux</em> qui peut être executé sur n’importe quelle machine.</p>
+<p>Dans une deuxième mesure, il fournit des mécanismes pour rendre un container proche
+de la virtualisation, en permettant d’isoler les containers entre eux, mais tout en
+fonctionnant sur le même système hôte. Ceci a l’avantage par rapport à la virtualisation
+de ne pas embarquer le système d’exploitation pour chaque container virtuel, ce qui
+réduit la taille des images. En revanche, étant donné que le système d’exploitation
+est partagé, et malgré les mécanismes d’isolation entre container et hôte, il est très
+difficile d’arriver à un niveau de sécurité identique à celui des machines virtuelles,
+qui elles peuvent être sécurisées jusqu’aux niveau des instructions micro-processeurs.</p>
+<p>Docker s’utilise généralement pour uniformiser les conditions de développement, car on
+peut dire qu’une image fonctionnant en <em>stand-alone</em> (c’est à dire sans interactions
+avec le système hôte, comme par exemple un montage de volume) doit fonctionner sur une autre instance Docker.</p>
+<p>D’un point de vue haut niveau, un container est par défaut isolé de l’hôte au niveau :</p>
+<ul class="simple">
+<li>du réseau ;</li>
+<li>du système de fichier ;</li>
+<li>des paquets installés ;</li>
+<li>des services ;</li>
+<li>des utilisateurs.</li>
+<li>des processus (en partie);</li>
+</ul>
+<p>Ce qui n’implique pas qu’il est impossible d’accéder à ces différentes instances
+de l’hôte, plus ou moins sciemment.</p>
+<p>Docker se base sur un système d’image et d’héritage. Il est possible de créer son image
+personnalisée à partir d’une image minimale fournie par la communauté comme :</p>
+<ul class="simple">
+<li>BusyBox;</li>
+<li>CentOS / Scientific Linux CERN (SLC) on Debian/Ubuntu or on CentOS/RHEL/SLC/etc;</li>
+<li>Debian / Ubuntu;</li>
+</ul>
+<p>Mais aussi from scratch, ou via une archive <a class="reference internal" href="#createbaseimagedocker" id="id19">[15]</a>.</p>
+<p>De plus, on peut hériter de n’importe quelle image et la redéfinir via sa propre surcouche.
+Les images dont on hérite ne sont pas modifiables. L’héritage est possible pour toute image
+publiée sur un dépot d’image Docker (généralement Docker Hub, mais on peut en utiliser d’autres).</p>
+<p>La spécialisation du comportement d’un container Docker s’effectue via un fichier de
+définition, le <cite>Dockerfile</cite>. Ce fichier est constitué de commandes <a class="reference internal" href="#dockerfilereference" id="id20">[16]</a>
+qui peuvent effectuer des actions pour construire l’image, dont les principales sont :</p>
+<ul class="simple">
+<li>Définir de quelle image on hérite;</li>
+<li>Copier un fichier de l’hôte à l’intérieur du système de fichier interne;</li>
+<li>Exécuter une commande bash;</li>
+<li>Définir des variables d’environnements;</li>
+<li>Définir quels ports on veut exposer à l’hôte.</li>
+</ul>
+<p>Si on souhaite pouvoir choisir entre plusieurs commande, on peut définir des entrypoints,
+qui définissent en général un script que l’on peut exécuter suivant les paramètres d’appels
+du container.</p>
+<p>Il y a deux méthodes d’intéraction avec un container :</p>
+<ul class="simple">
+<li><code class="code docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code></li>
+<li><code class="code docutils literal"><span class="pre">docker</span> <span class="pre">exec</span></code></li>
+</ul>
+<p>La méthode <cite>run</cite> instancie le container. Il permet de définir des paramètres qui définiront
+des caractéristiques internes ou externes du container. Il est par exemple possible de
+définir le nom du container, un argument d’entrée (utilisable par l’entrypoint) ou
+des variables d’environnement. Suivant l’implémentation du container, il est possible
+que celui-ci agisse comme un service, et se maintienne en vie, en attente de nouveaux
+événements, ou qu’il se termine dès que le travail interne soit terminé. Dans les deux cas,
+il se contente d’attendre que le travail interne(souvent implémenté par un script) renvoie
+un code d’erreur <a class="reference internal" href="#codeerrorissue" id="id21">[17]</a></p>
+<p>La méthode exec ne peut s’appeler que sur un container qui a déjà été instancié.
+Si le container est en cours d’exécution, il est possible d’envoyer une nouvelle commande
+au container. La plus classique est l’exécution d’un bash en mode interactif, via la commande :
+<cite>docker exec -it containername bash</cite></p>
+<p>qui permet d’exécuter une ligne de commande bash. Le paramètre <cite>-it</cite> permet justement
+de laisser la commande en mode intéractif, ce qui permet de ne pas fermer l’exécution
+de la commande dès que celle-ci renvoie un code <cite>0</cite>.</p>
+<p>TODO:Finir cette section.</p>
+</div>
+<div class="section" id="scala">
+<h3>Scala<a class="headerlink" href="#scala" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Ce travail est effectué au cœur du projet Woken du Human Brain Project. Ce projet
+contient le langage de programmation Scala <a class="reference internal" href="#id30" id="id22">[18]</a>. Scala a été concu à l’école polytechnique
+de Lausanne (EPFL) afin de proposer de lier des paradigmes de programmation différents
+et habituellement opposés, tels que la programmation fonctionnelle et la programmation
+orientée objet. Scala se base sur la JVM3, ce qui permet de bénéficier de l’abstraction
+de celle-ci en termes de plateforme d’exécution, ainsi que pour la gestion de la mémoire,
+notamment. Scala coopère ainsi de manière transparente avec Java, ce qui permet d’utiliser
+des bibliothèques non codées en Scala.</p>
+<p>Cette section ne précise pas la syntaxique du langage, ni son utilisation.</p>
+</div>
+<div class="section" id="akka">
+<h3>AKKA<a class="headerlink" href="#akka" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Akka <a class="reference internal" href="#id31" id="id23">[19]</a> est un outil de développement et un environnement d’exécution libre et
+open-source qui a pour but de simplifier la mise en place d’applications distribuées
+et concurrentes basée sur la JVM. Il gère donc les langages de programmations Java et Scala,
+et est développé en Scala. Akka propose une résolution des problèmes de concurrence
+via un système d’acteurs.</p>
+<p>Chaque acteur propose des fonctionnalités, et peut communiquer avec les autres en
+envoyant des messages.  Lorsqu’un acteur reçoit un message, il le traite, effectue des
+actions et peut envoyer d’autres messages, instancier d’autres acteurs ou encore se stopper.</p>
+<p>Chaque acteur est un client léger, qui possède son état et sa boite aux lettres.
+Lorsqu’un acteur plante, il est réinstancié automatiquement, dans le même état
+qu’il était avant, et avec sa file de message, ce qui procure une haute disponibilité.
+De plus, lorsqu’un acteur enfant plante, le parent est notifié, et il peut dès lors
+prendre des mesures. Les messages sont asynchrones,ce qui permet de ne pas avoir
+d’état bloquant en cas de latence réseau ou tout autre problème technique.
+Akka s’occupe de distribuer les acteurs sur le cluster, ce qui permet d’avoir un
+haut niveau d’abstraction pour le programmeur.</p>
+</div>
+</div>
+</div>
+<div class="section" id="id24">
+<h1>Analyse<a class="headerlink" href="#id24" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Cette section vise à décrire le cadre logiciel dans lequel le travail sera effectué,
+et à préciser les acteurs ainsi que leurs fonctions.</p>
+<div class="section" id="woken">
+<h2>Woken<a class="headerlink" href="#woken" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Woken <a class="reference internal" href="#wokenaxel" id="id25">[20]</a> est un service, utilisable via une <em>API REST</em>, qui fournit la possibilité
+d’explorer les données (<em>data mining</em> en anglais) de la plateforme. Cette exploration
+de données peut être de différentes natures, comme ériger un graphe qui permet
+à l’utilisateur de visualiser les données, de demander une analyse statistique,
+d’effectuer une expérience de classification via un des algorithmes de classification
+fourni, ou encore une expérience de régression.</p>
+<p>Chacune de ces explorations de données est effectuée sur un ensemble de données,
+qui est qualifié par les champs configurés dans la <a href="#variables">Fig.  292</a> par l’utilisateur
+de la plateforme.</p>
+<p>Une expérience fournit des résultats au service demandeur, sous format PFA <a class="reference internal" href="#pfa" id="id26">[21]</a>,
+qui est un format dont la synthaxe est basée sur <em>yaml</em>, mais dont la structure est
+destinée à décrire des pipeline pour le data-mining.</p>
+<p>Des requêtes HTTP sont mises à disposition dans le répertoire <code class="code docutils literal"><span class="pre">dev-debug/http</span></code>
+ou <code class="code docutils literal"><span class="pre">dev-test/http</span></code> afin de permettre de se passer de l’interface graphique,
+et de simplifier le développement.</p>
+<div class="section" id="place-de-woken-dans-l-architecture">
+<h3>Place de Woken dans l’architecture<a class="headerlink" href="#place-de-woken-dans-l-architecture" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Woken étant un service, il est concu pour être utiliser par d’autres services.
+La figure <a href="#wokenarchiglobal">figure  302</a> présente une version simplifiée de l’architecture
+de la plateforme MIP.</p>
+<div class="figure align-center" id="id44">
+<span id="wokenarchiglobal"></span><a class="reference internal image-reference" href="_images/woken_archi_global.png"><img alt="Architecture globale simplifiée de la plateforme MIP." src="_images/woken_archi_global.png" style="width: 350px;" /></a>
+<p class="caption"><span class="caption-text">Figure 302: Architecture globale simplifiée de la plateforme MIP. Le <strong>Portal Frontend</strong> est le point d’accès
+pour l’utilisateur. Il peut consulter les données et effectuer des expériences depuis celle-ci.
+Le <strong>Portal Backend</strong> fournit les mécanismes de sécurité et d’accès aux bases de données, ainsi
+que la répartition des demandes à <strong>Woken</strong> si nécessaire. La base de données <strong>Science-db</strong> contient
+les données des patients, tandis que la base de données <strong>Meta-db</strong> contient les descriptions
+de chaque <em>feature</em> disponible dans la plateforme. Cette description permet de déterminer différentes
+informations pour la plateforme telles que le type de données (nominale ou continue) ou l’unité de mesure.
+Si il s’agit d’une demande nécessitant un algorithme, c’est <strong>Woken</strong>, l”<em>algorithm factory</em>,
+qui va s’occuper de traiter les demandes. <strong>Woken</strong> peut lui-aussi accéder aux bases de données afin
+d’appliquer ses algorithmes. Cette figure est une représentation simplifiée de
+l’architecture, qui ne contient pas tous les intervenants de la plateforme, mais
+uniquement ceux utilisés à cette échelle.</span></p>
+</div>
+<p>Lorsque l’utilisateur adresse une requête HTTP contenant une demande d’expérimentation,
+le backend envoie une demande de <cite>mining</cite> à woken via une requête POST de la forme :</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>POST localhost:8087/mining/job <span class="se">\</span>
+         variables:<span class="o">=</span><span class="s1">&#39;[{&quot;code&quot;:&quot;cognitive_task2&quot;}]&#39;</span> <span class="se">\</span>
+         grouping:<span class="o">=</span><span class="s1">&#39;[]&#39;</span> <span class="se">\</span>
+         covariables:<span class="o">=</span><span class="s1">&#39;[{&quot;code&quot;:&quot;score_math_course1&quot;}]&#39;</span> <span class="se">\</span>
+         filters:<span class="o">=</span><span class="s1">&#39;[]&#39;</span> <span class="se">\</span>
+         algorithm:<span class="o">=</span><span class="s1">&#39;{&quot;code&quot;:&quot;knn&quot;, &quot;name&quot;: &quot;KNN&quot;, &quot;parameters&quot;: []}&#39;</span>
+</pre></div>
+</div>
+<p>Ce qui correspond aux paramétrage de l’expérience de l’utilisateur, comme présenté en
+<a href="#variables">figure  292</a>.Woken effectuera traite la requête, effectue l’algorithme et retourne une réponse sous
+format <em>PFA</em>. Le format de réponse n’est pas important dans le cadre de ce projet.</p>
+<p>Il existe deux routes REST pour demander à Woken d’effectuer un travail :</p>
+<ul class="simple">
+<li><code class="code docutils literal"><span class="pre">/mining/job</span></code></li>
+<li><code class="code docutils literal"><span class="pre">/mining/experiment</span></code></li>
+</ul>
+<p>Le <code class="code docutils literal"><span class="pre">/mining/job</span></code> permet de lancer un seul algorithme à la fois, et permet pas
+de lancer des expériences utilisant la <em>cross-validation</em>, tandis que la route <code class="code docutils literal"><span class="pre">/mining/experiment</span></code>
+permet la <em>cross-validation</em> et de lancer plusieurs algorithmes.</p>
+<p>La requête pour une expérience via la route <code class="code docutils literal"><span class="pre">/mining/experiment</span></code> se présente sous la
+forme :</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>POST localhost:8087/mining/experiment <span class="se">\</span>
+         variables:<span class="o">=</span><span class="s1">&#39;[{&quot;code&quot;:&quot;cognitive_task2&quot;}]&#39;</span> <span class="se">\</span>
+         grouping:<span class="o">=</span><span class="s1">&#39;[]&#39;</span> <span class="se">\</span>
+         covariables:<span class="o">=</span><span class="s1">&#39;[{&quot;code&quot;:&quot;score_test1&quot;}, {&quot;code&quot;:&quot;college_math&quot;}]&#39;</span> <span class="se">\</span>
+         filters:<span class="o">=</span><span class="s1">&#39;[]&#39;</span> <span class="se">\</span>
+         algorithms:<span class="o">=</span><span class="s1">&#39;[{&quot;code&quot;:&quot;knn&quot;, &quot;name&quot;: &quot;knn&quot;, &quot;parameters&quot;: []}]&#39;</span> <span class="se">\</span>
+         validations:<span class="o">=</span><span class="s1">&#39;[{&quot;code&quot;:&quot;kfold&quot;, &quot;name&quot;: &quot;kfold&quot;, &quot;parameters&quot;: [{&quot;code&quot;: &quot;k&quot;, &quot;value&quot;: &quot;2&quot;}]}]&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fonctionnement-interne-de-woken">
+<h3>Fonctionnement interne de Woken<a class="headerlink" href="#fonctionnement-interne-de-woken" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Woken a la responsabilité d’appliquer des algorithmes suite à la demande via l’une
+des deux <a class="reference internal" href="#routesrest"><span class="std std-ref">routes REST</span></a> mises à disposition.</p>
+<p>La <a href="#wokenarchiinternal">figure  303</a> présente les intervenants liés à <em>Woken</em> lors
+d’une demande d’algorithme.</p>
+<div class="figure align-center" id="id45">
+<span id="wokenarchiinternal"></span><a class="reference internal image-reference" href="_images/woken_archi_internal.png"><img alt="Architecture  interne de woken." src="_images/woken_archi_internal.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Figure 303: Architecture «&nbsp;interne&nbsp;» de woken. Les intervenants ici présents
+sont ceux qui sont directement utilisés par le service <em>Woken</em>.
+Le service <strong>Woken</strong> en lui-même est généralement contenu dans un
+container, mais il peut être en natif dans l’architecture, comme dans le cas de l’architecture <code class="code docutils literal"><span class="pre">dev-debug</span></code>
+du projet. Il est responsable d’instancier des <strong>algorithmes</strong> contenus
+dans des containers <em>Docker</em>, via <em>Chronos</em>. Si l’expérience utilisateur demande une <em>cross-validation</em>, un <strong>pool d’acteurs AKKA</strong>
+s’occupant de cette tâche est instanciée au lancement de l’architecture, et sont prêts en tout temps à répondre à cette tâche.
+Ce choix a été effectué afin d’éviter de devoir instancier ces acteurs
+pour chaque demande, en prévision d’une forte charge sur la plateforme. Ces acteurs sont contenus dans un container <em>Docker</em>, ce
+qui permet de mettre à l’échelle en cas de besoin. Le résultat de chaque expérience
+est stocké dans la base de données <strong>Woken-DB</strong>, ce qui permet de récupérer
+le fichier de définition <em>PFA</em> afin de reconstruire l’éxpérience et de la vérifier,
+si besoin. Attention, les intervenants décrits ci-contre ne sont pas contenus
+dans le projet, mais bel et bien indépendants, et liés via la configuration <em>Docker-compose</em>.</span></p>
+</div>
+<p>Par rapport au code de <em>Woken</em>, le principal intervenant est le flux d’acteurs <em>Akka</em>,
+implémenté dans le script <code class="code docutils literal"><span class="pre">/src/main/scala/core/coordinator.scala</span></code>. C’est celui-ci
+qui recoit les expérimentations à effectuer. Celles-ci sont déterminées par un code
+d’algorithme, des <em>features</em> concernées, les variables cibles ainsi que le modèle et
+les hyperparamètres pour les expériences de <em>machine learning</em>.</p>
+<p>Les acteurs Akka implémentés dans cette portion de code Scala héritent d’une méthodologie
+FSM (Finite State Machine), ce qui rend les acteurs capables de se comporter comme un
+automate à états finis. Les transition entre ces états s’effectuent via des événements
+précis. Cette implémentation permet de mettre un acteur parent en attente des résultats
+des acteurs enfants, de manière élégante et sans attente active bloquante.</p>
+<p>Suivant la <a class="reference internal" href="#routesrest"><span class="std std-ref">route REST</span></a> en question, il existe deux flux possibles.</p>
+<p>La route <code class="code docutils literal"><span class="pre">/mining/job</span></code> se contente de lancer un <cite>coordinatorActor</cite>, qui est un
+acteur responsable de convertir un <cite>Job</cite> (<code class="code docutils literal"><span class="pre">case</span> <span class="pre">class</span></code> scala) en JSON mis en
+forme selon le format d’entrée de Chronos, de lancer la requête à celui-ci, d’attendre
+les résultats dans la base de données <em>Woken-DB</em>, de mettre en forme le résultat et
+de le retourner au service demandeur.</p>
+<p>La voie intéressante dans le cadre de ce projet est celle de <code class="code docutils literal"><span class="pre">/mining/experiment</span></code>.
+Celle-ci a pour caractéristiques de pouvoir gérer plusieurs algorithmes pour une expérimentation,
+ainsi que de gérer la <em>cross-validation</em>.</p>
+<p>Le flux de travail entre les acteurs peut être représenté comme montré sur la
+<a href="#wokenactors">figure  304</a></p>
+<div class="figure align-center" id="id46">
+<span id="wokenactors"></span><a class="reference internal image-reference" href="_images/wokenactors.png"><img alt="Schéma des acteurs Akka du script coordinator.scala." src="_images/wokenactors.png" style="width: 650px;" /></a>
+<p class="caption"><span class="caption-text">Figure 304: Schéma des acteurs Akka du script coordinator.scala. Les différents acteurs peuvent
+instancier d’autres acteurs dynamiquement, ce qui permet de répondre à n’importe
+quelle configuration d’expérimentation de l’utilisateur. Ce schéma correspond à
+l’implémentation avant le début du projet. Il existe des <cite>coordinatorActor</cite> qui
+ne sont pas documentés dans ce diagramme. Ils ont pour but d’envoyer un <cite>Job</cite> à
+Chronos, et d’attendre les résultats du container dans la base de données. Ceci
+induit qu’il n’y a pas de communication entre <em>Woken</em> et les containers. La cross-validation
+n’est effectuée que si l’algorithme est défini dans <em>Woken</em> comme prédictif.
+Les requêtes SQL sont envoyées aux configurations de Chronos (format JSON) sous
+la forme de variables d’environnement. Il est prévu de limiter l’accès aux base
+de données à l’avenir, en passant le dataset aux containers, plutôt que
+de les laisser accéder directement aux bases de données.</span></p>
+</div>
+<p>Ce flux de travail comporte oblige deux problématiques de taille :</p>
+<ul class="simple">
+<li>Il est nécessaire d’attendre un résultat dans la base de données pour que les <cite>localCoordinatorActor</cite> détectent que le container a fourni un travail.</li>
+<li>Il est nécessaire de passer par le mécanisme de <em>cross-validation</em> pour définir un score à une expérience. Ceci impose aussi un format <em>PFA</em> strict.</li>
+</ul>
+</div>
+<div class="section" id="fonctionnement-actuel-des-containers-docker">
+<h3>Fonctionnement actuel des containers Docker<a class="headerlink" href="#fonctionnement-actuel-des-containers-docker" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Actuellement, les containers utilisés par la plateforme Docker sont lancés via Chronos.
+A partir d’une définition d’expérience au format <em>JSON</em>, on instancie un objet de définition
+de cet algorithme en <code class="code docutils literal"><span class="pre">case</span> <span class="pre">classes</span></code> Scala. Depuis ces définitions de classes,
+Woken sérialise en <cite>JSON</cite> correspondant au format attendu par Chronos, comme par exemple :</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;chronos&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;cpus&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nt">&quot;mem&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+  <span class="nt">&quot;instances&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nt">&quot;container&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;DOCKER&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;docker&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;image&quot;</span><span class="p">:</span> <span class="s2">&quot;mesosphere/chronos&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;BRIDGE&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;portMappings&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;containerPort&quot;</span><span class="p">:</span> <span class="mi">4400</span><span class="p">,</span>
+          <span class="nt">&quot;hostPort&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="nt">&quot;servicePort&quot;</span><span class="p">:</span> <span class="mi">4400</span><span class="p">,</span>
+          <span class="nt">&quot;protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;tcp&quot;</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;volumes&quot;</span><span class="p">:</span> <span class="p">[]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Woken est actuellement capable d’instancier autant de containers que demandent les utilisateurs.
+Il s’occupe de générer des identifiants uniques comme <cite>id</cite> de tâche à Chronos,
+de récolter chacun des résultats dans la base de données et de les mettre en relation avec
+la bonne expérience.</p>
+<p>Il n’est en revanche pas capable de communiquer avec un container. Une fois le fichier
+de configuration <cite>JSON</cite> envoyé via une requête POST HTTP, il ne peut qu’attendre les résultats
+dans la base de données.</p>
+<p>Dans le cadre de notre nouveau flux, nous devons pouvoir attendre la fin du travail d’un
+container, récupérer son résultat, puis adresser une deuxième requête sur le container.</p>
+<p>Cette fonctionnalité, que l’on peut qualifier de container «&nbsp;interactifs&nbsp;», doit faire
+l’objet de recherches. Docker est conçu pour être <em>stateless</em>. Quand un container meurt,
+si il n’a pas de <em>Volume</em> configuré, le container n’a pas de moyen d’enregistrer l’état
+dans lequel il était. Un <em>Volume</em> est un répertoire partagé entre le container et l’hôte.
+Si il existe des fichiers dans le dossier au moment du montage du <em>Volume</em>, le container
+y aura accès. Si un le container meurt, le contenu du <em>Volume</em> reste.</p>
+</div>
+<div class="section" id="tests-preliminaires-avec-tpot">
+<h3>Tests préliminaires avec TPOT<a class="headerlink" href="#tests-preliminaires-avec-tpot" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Des tests ont été effectués avec TPOT afin de déterminer son efficactié et son utilisabilité.
+Dans le cadre de du projet, le plus important était de pouvoir:</p>
+<ul class="simple">
+<li>Travailler avec le dataset du projet;</li>
+<li>Pouvoir extraire le meilleure pipeline à la fin de l’optimisation;</li>
+<li>Obtenir les scores;</li>
+<li>Reconstruire le pipeline à partir via Scikit-learn.</li>
+</ul>
+<p>Mais aussi, si possible:</p>
+<ul class="simple">
+<li>Déterminer les <em>features</em> construites;</li>
+<li>Déterminer l’importance de chaque feature.</li>
+<li>Déterminer l’exploitabilité de l’export implémenté dans TPOT.</li>
+</ul>
+<p>Des tests <a class="reference internal" href="#tpottests" id="id27">[22]</a> ont été implémentés, et une issue [tpotissue] a été
+adressée sur le projet afin de vérifier les points délicats.</p>
+<p>A la fin de ces tests, il s’avère que :</p>
+<ul class="simple">
+<li>Il est possible de récupérer le meilleur pipeline trouvé, avec les hyperparamètres du modèle, ainsi que son score;</li>
+<li>Il est possible d’enregistrer un pipeline sous forme de texte, et de le ré-instancier en objet Scikit-learn utilisable pour des prédictions;</li>
+<li>Tpot n’est pas en mesure de mettre à disposition la selection, la construction et la normalisation de features. Celles-ci sont données par le modèle;</li>
+<li>L’export n’est pas utilisable dans notre contexte;</li>
+<li>Il est possible de travailler via le dataset du projet.</li>
+</ul>
+<p>A la fin de cette analyse, les attentes envers TPOT dans le cadre du projet sont atteintes.</p>
+</div>
+<div class="section" id="le-cas-de-marathon">
+<h3>Le cas de Marathon<a class="headerlink" href="#le-cas-de-marathon" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Durant ce projet, la substition de <em>Chronos</em> par <em>Marathon</em> a été explorée. La raison
+est que <em>Chronos</em> n’est pas diretement lié à la <em>Mesosphere</em>, et que son développement
+n’est pas assuré sur le long terme. Une fois intégré dans l’architecture, il s’est avéré que
+Marathon ne répond qu’à la problématique des services de longues durées.</p>
+<p><em>Metronome</em> <a class="reference internal" href="#metronome" id="id29">[23]</a> est destiné à être le remplacant de <em>Marathon</em>, mais il n’est actuellement
+pas assez abouti pour être incorporé à l’architecture.</p>
+</div>
+</div>
+</div>
+<div class="section" id="conception">
+<h1>Conception<a class="headerlink" href="#conception" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Cette section ne décrit que les choix de conceptions qui ont étés implémentés.</p>
+<p>A partir de l’analyse effectuée au chapitre <span class="xref std std-ref">analyse</span>, il est possible de concevoir
+la nouvelle architecture pour résoudre les problèmatiques connues qui sont :</p>
+<ul class="simple">
+<li>Mettre en place un flux qui se passe de l’attente des résultats des containers dans la base de données;</li>
+<li>Mettre en place un container qui accepte plusieurs points d’entrées;</li>
+<li>Se passer de la mise en forme de PFA imposée dans le flux actuel.</li>
+</ul>
+<div class="section" id="systeme-de-containers-interactifs">
+<h2>Système de containers interactifs<a class="headerlink" href="#systeme-de-containers-interactifs" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+<div class="section" id="modification-globale-du-workflow-woken">
+<h2>Modification globale du workflow Woken<a class="headerlink" href="#modification-globale-du-workflow-woken" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Sans parler directement de la modifications des acteurs <em>Akka</em>, il est intéressant
+de présenter une vue d’ensemble des intervenants dans la problématique du projet,
+et de définir les rôles qu’ils remplissent dans cette nouvelle conception.</p>
+<p>La <a href="#conceptionflow">figure  305</a> présente une représentation du flux imaginé.</p>
+<div class="figure align-center" id="id47">
+<span id="conceptionflow"></span><a class="reference internal image-reference" href="_images/conceivedworkflow.png"><img alt="Schéma du nouveau workflow global." src="_images/conceivedworkflow.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Figure 305: Schéma représentant les intéractions entre les différents intervenants, pour la conception retenue.
+Les titres de colonnes définissent la technologie responsable des tâches qui sont
+dans la colonne. Pour le cas d’Akka, cette représentation ne correspond pas à un
+diagramme d’acteur. Ce nouveau flux utilise les <em>volumes</em> de Docker afin de faire
+persister les résultats d’entraînements et de prédicats.</span></p>
+</div>
+</div>
+<div class="section" id="nouveau-diagramme-d-acteurs-imagine-et-comment-on-coupe-le-workflow-actuel">
+<h2>Nouveau diagramme d’acteurs imaginé, et comment on coupe le workflow actuel<a class="headerlink" href="#nouveau-diagramme-d-acteurs-imagine-et-comment-on-coupe-le-workflow-actuel" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+</div>
+<div class="section" id="implementation-realisee">
+<h1>Implémentation réalisée<a class="headerlink" href="#implementation-realisee" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="creation-d-un-container-interactif">
+<h2>Création d’un container interactif<a class="headerlink" href="#creation-d-un-container-interactif" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="probleme-initial">
+<h3>Problème initial<a class="headerlink" href="#probleme-initial" title="Lien permanent vers ce titre">¶</a></h3>
+</div>
+<div class="section" id="presentation-des-solutions-au-probleme">
+<h3>Présentation des solutions au problème<a class="headerlink" href="#presentation-des-solutions-au-probleme" title="Lien permanent vers ce titre">¶</a></h3>
+</div>
+<div class="section" id="choix-effectue">
+<h3>Choix effectué<a class="headerlink" href="#choix-effectue" title="Lien permanent vers ce titre">¶</a></h3>
+</div>
+</div>
+<div class="section" id="modification-du-workflow-woken">
+<h2>Modification du workflow Woken<a class="headerlink" href="#modification-du-workflow-woken" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="ajout-du-nouveau-container-dans-la-configuration">
+<h3>Ajout du nouveau container dans la configuration<a class="headerlink" href="#ajout-du-nouveau-container-dans-la-configuration" title="Lien permanent vers ce titre">¶</a></h3>
+</div>
+</div>
+<div class="section" id="integration-de-tpot">
+<h2>Intégration de TPOT<a class="headerlink" href="#integration-de-tpot" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="a-determiner-mais-je-suppose-les-contraintes-posees-par-la-bibliotheque-les-choix-qui-ont-du-etre-effectues">
+<h3>A déterminer, mais je suppose : Les contraintes posées par la bibliothèque, les choix qui ont du être effectués.<a class="headerlink" href="#a-determiner-mais-je-suppose-les-contraintes-posees-par-la-bibliotheque-les-choix-qui-ont-du-etre-effectues" title="Lien permanent vers ce titre">¶</a></h3>
+</div>
+</div>
+<div class="section" id="eventuellement-si-plus-de-travail-a-ete-effectue-presentation-de-celui-ci">
+<h2>Eventuellement, si plus de travail a été effectué, présentation de celui-ci.<a class="headerlink" href="#eventuellement-si-plus-de-travail-a-ete-effectue-presentation-de-celui-ci" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+</div>
+<div class="section" id="validation-experience">
+<h1>Validation (Expérience)<a class="headerlink" href="#validation-experience" title="Lien permanent vers ce titre">¶</a></h1>
+<dl class="docutils">
+<dt>6.1 Présentation de l’expérience</dt>
+<dd>6.1.1 pourquoi
+6.1.2 comment
+6.1.3 les conditions de tests</dd>
+</dl>
+<p>6.2 Résultats de l’expérience
+6.3 Discussion des résultats</p>
+</div>
+<div class="section" id="conclusion">
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="etat-des-lieux-au-moment-du-rendu">
+<h2>Etat des lieux au moment du rendu<a class="headerlink" href="#etat-des-lieux-au-moment-du-rendu" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li>Atteintes des objectifs<ul>
+<li>Le contexte du mandant a-t-il été compris?</li>
+<li>L’API se superposant à Marathon fonctionne-t-elle?</li>
+<li>Un format de métadonnées a-t-il été spécifié? Existe-t-il un moyen
+de vérifier que telle ou telle image Docker respecte ce format?</li>
+<li>Un démonstrateur a-t-il été développé?</li>
+</ul>
+</li>
+<li>Améliorations possibles</li>
+</ul>
+</div>
+<div class="section" id="perspectives-et-ameliorations">
+<h2>Perspectives et améliorations<a class="headerlink" href="#perspectives-et-ameliorations" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+<div class="section" id="bilan-personnel-presenter-ce-qui-apporte-quelque-chose">
+<h2>Bilan personnel (Présenter ce qui apporte quelque chose)<a class="headerlink" href="#bilan-personnel-presenter-ce-qui-apporte-quelque-chose" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+</div>
+<div class="section" id="remerciements">
+<h1>Remerciements<a class="headerlink" href="#remerciements" title="Lien permanent vers ce titre">¶</a></h1>
+</div>
+<div class="section" id="annexes-references-et-table-des-illustrations">
+<h1>Annexes, références et Table des illustrations.<a class="headerlink" href="#annexes-references-et-table-des-illustrations" title="Lien permanent vers ce titre">¶</a></h1>
+<p>TODO:Annexes :
+- CdC
+- Journal de travail
+- TPOT papers
+- FULL Rest API for TPOT</p>
+<p id="bibtex-bibliography-index-0"><table class="docutils citation" frame="void" id="theorymlms" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Philippe Beraud -&nbsp;Microsoft France. Un peu de théorie pour l’apprentissage non-supervisé). <span><a class="reference external" href="#"></a></span>https://blogs.msdn.microsoft.com/big_data_france/2014/06/06/un-peu-de-thorie-pour-lapprentissage-non-supervis/, June 2014.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="olson2016evobio" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id5">2</a>, <a class="fn-backref" href="#id11">3</a>, <a class="fn-backref" href="#id14">4</a>)</em> Randal&nbsp;S. Olson, Ryan&nbsp;J. Urbanowicz, Peter&nbsp;C. Andrews, Nicole&nbsp;A. Lavender, La&nbsp;Creis Kidd, and Jason&nbsp;H. Moore. <em>Applications of Evolutionary Computation: 19th European Conference, EvoApplications 2016, Porto, Portugal, March 30 – April 1, 2016, Proceedings, Part I</em>. Springer International Publishing, 2016. ISBN 978-3-319-31204-0. URL: <a class="reference external" href="http://dx.doi.org/10.1007/978-3-319-31204-0_9">http://dx.doi.org/10.1007/978-3-319-31204-0_9</a>, <a class="reference external" href="https://doi.org/10.1007/978-3-319-31204-0_9">doi:10.1007/978-3-319-31204-0_9</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="datagridsearchdoc" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>Scikit-Learn’s Documentation. Tuning the hyper-parameters of an estimator. <span><a class="reference external" href="#"></a></span>http://scikit-learn.org/stable/modules/grid_search.html, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="scikit-learn" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id15">2</a>)</em> F.&nbsp;Pedregosa, G.&nbsp;Varoquaux, A.&nbsp;Gramfort, V.&nbsp;Michel, B.&nbsp;Thirion, O.&nbsp;Grisel, M.&nbsp;Blondel, P.&nbsp;Prettenhofer, R.&nbsp;Weiss, V.&nbsp;Dubourg, J.&nbsp;Vanderplas, A.&nbsp;Passos, D.&nbsp;Cournapeau, M.&nbsp;Brucher, M.&nbsp;Perrot, and E.&nbsp;Duchesnay. Scikit-learn: machine learning in Python. <em>Journal of Machine Learning Research</em>, 12:2825–2830, 2011.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="olson2016evaluation" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[5]</a></td><td>Randal&nbsp;S Olson, Nathan Bartley, Ryan&nbsp;J Urbanowicz, and Jason&nbsp;H Moore. Evaluation of a tree-based pipeline optimization tool for automating data science. In <em>Proceedings of the 2016 on Genetic and Evolutionary Computation Conference</em>, 485–492. ACM, 2016.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="olson2016tpot" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[6]</a></td><td>Randal&nbsp;S Olson and Jason&nbsp;H Moore. Tpot: a tree-based pipeline optimization tool for automating machine learning. In <em>Workshop on Automatic Machine Learning</em>, 66–74. 2016.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="googleautoml" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[7]</a></td><td>Google developers. Google i/o keynote (google i/o “17). <span><a class="reference external" href="#"></a></span>https://www.youtube.com/watch?v=Y2VF8tmLFHw, May 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="stateautoml" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[8]</a></td><td>Matthew Mayo. The current state of automated machine learning). <span><a class="reference external" href="#"></a></span>http://www.kdnuggets.com/2017/01/current-state-automated-machine-learning.html, Jan 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="hhusain" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[9]</a></td><td>Hamel Husain. Automated machine learning — a paradigm shift that accelerates data scientist productivity &#64; airbnb. <span><a class="reference external" href="#"></a></span>https://medium.com/airbnb-engineering/automated-machine-learning-a-paradigm-shift-that-accelerates-data-scientist-productivity-airbnb-f1f8a10d61f8, July 2016.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="autoweka" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12">[10]</a></td><td>auto-WEKA. Automatic model selection and hyperparameter optimization in weka. <span><a class="reference external" href="#"></a></span>http://www.cs.ubc.ca/labs/beta/Projects/autoweka/, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="hyperopt" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id13">[11]</a></td><td>hyperopt. Hyperopt - distributed asynchronous hyperparameter optimization in python. <span><a class="reference external" href="#"></a></span>http://hyperopt.github.io/hyperopt, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="groovytron" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id16">[12]</a></td><td>Julien M’Poy&nbsp;/ Groovytron. Maracker’s repository : api aiming to make human brain project’s medical informatics platform’s developped apps deployment on mesos marathon easier. <span><a class="reference external" href="#"></a></span>https://github.com/groovytron/maracker, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="mesosdoc" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id17">[13]</a></td><td>Apache&nbsp;Software Foundation. Apache mesos. <span><a class="reference external" href="#"></a></span>http://mesos.apache.org, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="marathonapidoc" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id18">[14]</a></td><td>Apache&nbsp;Software Foundation. Marathon rest api. <span><a class="reference external" href="#"></a></span>https://mesosphere.github.io/marathon/docs/rest-api.html, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="createbaseimagedocker" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id19">[15]</a></td><td>Docker Inc. Create a base image - docker documentation. <span><a class="reference external" href="#"></a></span>https://docs.docker.com/engine/userguide/eng-image/baseimages/#create-a-full-image-using-tar, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="dockerfilereference" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id20">[16]</a></td><td>Docker Inc. Dockerfile reference - docker documentation. <span><a class="reference external" href="#"></a></span>https://docs.docker.com/engine/reference/builder/, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="codeerrorissue" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id21">[17]</a></td><td>sallyom. Change “docker run” exit codes to distinguish docker/contained errors #14012. <span><a class="reference external" href="#"></a></span>https://github.com/moby/moby/pull/14012, December 2015.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="id30" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id22">[18]</a></td><td>Switzerland Lausanne (EPFL)&nbsp;Lausanne. The scala programming language. <span><a class="reference external" href="#"></a></span>https://www.scala-lang.org/, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="id31" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id23">[19]</a></td><td>AKKA Lightbend&nbsp;Inc. Akka official website. <span><a class="reference external" href="#"></a></span>http://akka.io, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="wokenaxel" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id25">[20]</a></td><td>axelroy. Woken - an orchestration platform for docker containers running data mining algorithms - forked by axelroy on github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/woken/tree/AutoML, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="pfa" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id26">[21]</a></td><td>DMG - Data&nbsp;Mining Group. Pfa - portable format for analytics). <span><a class="reference external" href="#"></a></span>http://dmg.org/pfa/index.html, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="tpottests" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id27">[22]</a></td><td>Axel Roy. Tests with the tpot library github page. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/TPOT_Tests, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="metronome" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id29">[23]</a></td><td>DCOS/Metronome&nbsp;- Apache. Apache mesos framework for scheduled jobs - github page. <span><a class="reference external" href="#"></a></span>https://github.com/dcos/metronome, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="captain" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[24]</td><td>Harbur Cloud&nbsp;Solutions S.L. Captain - convert your git workflow to docker containers ). <span><a class="reference external" href="#"></a></span>https://github.com/harbur/captain, July 2017.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="tpotissue" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[25]</td><td>Axel Roy. Visualize constructed features and get best pipeline found. <span><a class="reference external" href="#"></a></span>https://github.com/rhiever/tpot/issues/459, May 2017.</td></tr>
+</tbody>
+</table>
+</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table des Matières</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to AutoML’s documentation!</a></li>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#contexte-du-projet">Contexte du projet</a><ul>
+<li><a class="reference internal" href="#human-brain-projet">Human Brain projet</a></li>
+<li><a class="reference internal" href="#presentation-de-la-plateforme-mip">Présentation de la plateforme MIP</a></li>
+<li><a class="reference internal" href="#but-du-projet">But du projet</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cahier-des-charges-lien-vers-les-annexes-je-suppose-en-sachant-qu-il-est-explique-en-detail-dans-le-document">Cahier des charges (lien vers les annexes je suppose, en sachant qu’il est expliqué en détail dans le document)</a></li>
+<li><a class="reference internal" href="#etat-de-l-art">Etat de l’Art</a><ul>
+<li><a class="reference internal" href="#theorie-machine-learning">Théorie Machine Learning</a><ul>
+<li><a class="reference internal" href="#apprentissage-supervise">Apprentissage supervisé</a></li>
+<li><a class="reference internal" href="#apprentissage-non-supervise">Apprentissage non supervisé</a></li>
+<li><a class="reference internal" href="#apprentissage-semi-supervise">Apprentissage semi-supervisé</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#optimisation-automatique-du-pipeline-d-apprentissage">Optimisation automatique du pipeline d’apprentissage</a></li>
+<li><a class="reference internal" href="#technologies">Technologies</a><ul>
+<li><a class="reference internal" href="#tpot">TPOT</a></li>
+<li><a class="reference internal" href="#systemes-distribues">Systèmes distribués</a></li>
+<li><a class="reference internal" href="#mesos">Mesos</a></li>
+<li><a class="reference internal" href="#marathon">Marathon</a></li>
+<li><a class="reference internal" href="#chronos">Chronos</a></li>
+<li><a class="reference internal" href="#docker">Docker</a></li>
+<li><a class="reference internal" href="#scala">Scala</a></li>
+<li><a class="reference internal" href="#akka">AKKA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id24">Analyse</a><ul>
+<li><a class="reference internal" href="#woken">Woken</a><ul>
+<li><a class="reference internal" href="#place-de-woken-dans-l-architecture">Place de Woken dans l’architecture</a></li>
+<li><a class="reference internal" href="#fonctionnement-interne-de-woken">Fonctionnement interne de Woken</a></li>
+<li><a class="reference internal" href="#fonctionnement-actuel-des-containers-docker">Fonctionnement actuel des containers Docker</a></li>
+<li><a class="reference internal" href="#tests-preliminaires-avec-tpot">Tests préliminaires avec TPOT</a></li>
+<li><a class="reference internal" href="#le-cas-de-marathon">Le cas de Marathon</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conception">Conception</a><ul>
+<li><a class="reference internal" href="#systeme-de-containers-interactifs">Système de containers interactifs</a></li>
+<li><a class="reference internal" href="#modification-globale-du-workflow-woken">Modification globale du workflow Woken</a></li>
+<li><a class="reference internal" href="#nouveau-diagramme-d-acteurs-imagine-et-comment-on-coupe-le-workflow-actuel">Nouveau diagramme d’acteurs imaginé, et comment on coupe le workflow actuel</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation-realisee">Implémentation réalisée</a><ul>
+<li><a class="reference internal" href="#creation-d-un-container-interactif">Création d’un container interactif</a><ul>
+<li><a class="reference internal" href="#probleme-initial">Problème initial</a></li>
+<li><a class="reference internal" href="#presentation-des-solutions-au-probleme">Présentation des solutions au problème</a></li>
+<li><a class="reference internal" href="#choix-effectue">Choix effectué</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modification-du-workflow-woken">Modification du workflow Woken</a><ul>
+<li><a class="reference internal" href="#ajout-du-nouveau-container-dans-la-configuration">Ajout du nouveau container dans la configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integration-de-tpot">Intégration de TPOT</a><ul>
+<li><a class="reference internal" href="#a-determiner-mais-je-suppose-les-contraintes-posees-par-la-bibliotheque-les-choix-qui-ont-du-etre-effectues">A déterminer, mais je suppose : Les contraintes posées par la bibliothèque, les choix qui ont du être effectués.</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#eventuellement-si-plus-de-travail-a-ete-effectue-presentation-de-celui-ci">Eventuellement, si plus de travail a été effectué, présentation de celui-ci.</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#validation-experience">Validation (Expérience)</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a><ul>
+<li><a class="reference internal" href="#etat-des-lieux-au-moment-du-rendu">Etat des lieux au moment du rendu</a></li>
+<li><a class="reference internal" href="#perspectives-et-ameliorations">Perspectives et améliorations</a></li>
+<li><a class="reference internal" href="#bilan-personnel-presenter-ce-qui-apporte-quelque-chose">Bilan personnel (Présenter ce qui apporte quelque chose)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#remerciements">Remerciements</a></li>
+<li><a class="reference internal" href="#annexes-references-et-table-des-illustrations">Annexes, références et Table des illustrations.</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Cette page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Montrer le code source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Axel Roy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
