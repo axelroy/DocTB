@@ -899,7 +899,7 @@ de la conception est rédigée en parcourant les intervenants de droite à gauch
 
 .. _conceptionflow:
 .. figure:: images/conceivedworkflow.png
-   :width: 400px
+   :width: 450px
    :align: center
    :alt: Schéma du nouveau workflow global.
 
@@ -909,6 +909,9 @@ de la conception est rédigée en parcourant les intervenants de droite à gauch
    diagramme d'acteur. Ce nouveau flux utilise les *volumes* de Docker afin de faire
    persister les résultats d'entraînements et de prédicats.
 
+   .. raw:: latex
+
+      \clearpage
 
 Conception pour TPOT
 --------------------
@@ -1026,13 +1029,132 @@ cheminement effectués.
 Présentation des tâches
 ------------
 
+Afin de faciliter la lecture, ce chapitre sera présenté en suivant la numérotation de
+la représentation de la :num:`figure #tasksbreakdown`.
+
+.. _tasksbreakdown:
+.. figure:: images/ImplementationRepresentation.png
+   :width: 600px
+   :align: center
+   :alt: Représentation graphique des tâches réalisées.
+
+   Représentation graphique des tâches réalisées. Elles sont volontairement
+   traitées de droite à gauche, car il y a une imbrication ou une utilisation toujours
+   dirigée vers la gauche, ce qui implique que les restrictions proviennent toujours
+   d'un composant plus à gauche. La taille des blocs n'a pas de lien avec la durée
+   d'implémentation d'une tâches.
+
+.. raw:: latex
+
+   \clearpage
 
 
-Création d'un container interactif
+TPOT
 ------------
+
+Cette section présente les points importants de l'implémentation du script `Python`
+qui implémente la solution d'optimisation de pipeline automatique de `TPOT`.
+
+Le script implémenté est disponible sur *Github* :cite:`@tpotcode`.
+
+**1 : Récupération du meilleur pipeline**
+
+Le meilleur est disponible après l'optimisation du pipeline via TPOT. La récupération
+se fait via la variable interne :code:`_optimized_pipeline` de l'objet `TPOTClassifier`
+ou :code:`TPOTRegressor`. L'accès via les variables internes, spécifiées via le "_"
+avant le nom de la variable, est généralement contraire aux conventions de codage `Python`,
+mais il a été confirmé dans une issue :cite:`@tpotissue` par l'auteur du code que
+c'est pour l'instant la seule méthode, mais une récente issue :cite:`@tpotissuerefactor`
+montre que les développeurs ont conscience de cette mauvaise pratique.
+
+Si le changement est effectué dans la même *release*, il faudra modifier le code du
+script.
+
+**2 : Liaison de la BDD du CHUV, mise en forme du dataset pour TPOT et découpage du dataset**
+
+Le script :code:`database_connector.py`, fourni par le CHUV avec les images de base
+*Docker* `Python` pour l'implémentation de nouveaux algorithme, se base sur les variables
+d'environnement du container. Le script permet d'effectuer des requêtes `SQL` directement
+sur la `Science-db`, en `SELECT` uniquement, et sur la `Woken-DB` en écriture afin
+d'inscrire les résultats d'expériences.
+
+Le dataset est transformé en `array` *numpy* après la récupération des *records* de
+la requête, afin de correspondre au type attendu par TPOT. Ceci est appliqué pour les
+*features*, mais aussi pour les *targets*.
+
+**3 : Analyse du type de features**
+
+Il est possible de récupérer le type des features (nominal ou continu) via la
+méthode `var_type` du script `database_connector.py`. Ces types sont récupérés
+depuis les variables d'environnement du container.
+
+Cette fonctionnalité n'est pas encore implémentée. Il faudra tester toutes les features,
+et, si il n'y a que des features de type continues, instancier un `TPOTRegressor`,
+et si non, instancier un `TPOTClassifier`. Le reste du script ne change pas.
+
+**4 : Reconstruction du pipeline via la description texte crée par TPOT**
+
+
+**5 : Retour des prédictions**
+
+Pour l'instant, le retour des prédictions se fait au format JSON en sérialisant l'objet
+`array` de `numpy`. Ce formatage de retour n'est pas définitif, mais il n'as pas été
+encore précisé comment nous allons implémenter la liaison du retour du containeur au flux
+*Woken*. Dans tous les cas, l'acteur, après la récupération des scores, devra
+s'occuper du formatage pour permettre de retourner au *AlgorithmActor* qui lui a
+confié le *job* pour l'algorithme *TPOT*.
+
 
 Le `Dockerfile` définit un entrypoint sur un script *bash* personnalisé qui se présente ainsi.
 
+Docker
+------------
+
+**Implémentation d’un container stateful**
+
+**Gestion des entrypoints**
+
+**Variables d’environnements**
+
+**Gestion des codes d’erreurs**
+
+**Connexion aux bases de données.**
+
+Chronos
+------------
+
+**Instanciation du container personnalisé via le GUI**
+
+**Instanciation du container via une requête POST avec un fichier JSON**
+
+Akka
+------------
+
+**Mise en relation du validation pool Akka**
+
+avec les acteurs Woken pour la route /mining/experiment
+
+**Mise en place du nouveau flux d’acteurs dans Woken pour traiter nos container interactif**
+
+Scala
+------------
+
+**Mise en relation du scoring pour le retour à l’AlgorithmActor**
+
+**Configuration des définitions de containers d’algorithmes**
+
+**Configuration des définitions de containers d’algorithmes**
+
+**Génération automatique des répertoires pour la liaison des volumes**
+
+Architecture
+------------
+
+**Sortie de Woken du container pour permettre un débuggage en natif**
+
+**Adaptation du docker-compose pour gérer les bases de données via les migrations**
+
+**Mise à jour du docker-compose pour le validation-pool Akka**
 
 Validation (Expérience)
 ============
