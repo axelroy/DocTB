@@ -556,14 +556,32 @@ un code d'erreur :cite:`@codeerrorissue`
 
 La méthode exec ne peut s'appeler que sur un container qui a déjà été instancié.
 Si le container est en cours d'exécution, il est possible d'envoyer une nouvelle commande
-au container. La plus classique est l'exécution d'un bash en mode interactif, via la commande :
-`docker exec -it containername bash`
-
+au container. La plus classique est l'exécution d'un bash en mode interactif, via la commande code:`docker exec -it containername bash`
 qui permet d'exécuter une ligne de commande bash. Le paramètre `-it` permet justement
 de laisser la commande en mode intéractif, ce qui permet de ne pas fermer l'exécution
 de la commande dès que celle-ci renvoie un code `0`.
 
-TODO:Finir cette section.
+Il est possible de formuler une description d'architecture composée de containers
+*Docker* sous la forme d'un fichier `docker-compose.yml`, qui peut se présenter ainsi :
+
+
+.. literalinclude:: examples/docker-compose.yml
+   :language: yaml
+
+On peut ici voir les configurations de variables d'environnement, de volumes, d'exposition
+de ports du container à l'hôte, les versions d'images ainsi que les commandes à
+exécuter lorsque le container est prêt.
+
+L'infrastructure peut être lancée via la commande :code:`docker-compose up`. Le fichier
+présenté ici ne propose pas de dépendances pour le lancement, ce qui implique que tous
+les containers vont tenter de se monter en même temps. Bien qu'une directive :code:`depends-on`
+existe pour *docker-compose*, cette option est récente, et ne fonctionne pas à tous les coups.
+On préférera utiliser un script *bash* qui s'occupe de démarrer les composants prioritaires
+un à un via la commande :code:`docker-compose up nomducomposant`.
+
+Il est intéressant de soulever que *docker-compose* s'occupe seul d'éviter les conflits
+de noms de container, contrairement à un démarrage via :code:`docker run`.
+
 
 Scala
 ~~~~~~~~~~~~~~~
@@ -862,11 +880,6 @@ la nouvelle architecture pour résoudre les problèmatiques connues qui sont :
 * Se passer de la mise en forme de PFA imposée dans le flux actuel.
 
 
-Système de containers interactifs
-------------
-
-
-
 Modification globale du workflow Woken
 ------------
 
@@ -875,6 +888,14 @@ de présenter une vue d'ensemble des intervenants dans la problématique du proj
 et de définir les rôles qu'ils remplissent dans cette nouvelle conception.
 
 La :num:`figure #conceptionflow` présente une représentation du flux imaginé.
+Elle est volontairement présentée en premier, et avec un haut niveau d'abstraction,
+afin de définir la conception des différentes parties qui la constituent. Etant donné
+que les restrictions sont fortement liées à Docker et à son fonctionnement, la suite
+de la conception est rédigée en parcourant les intervenants de droite à gauche.
+
+.. raw:: latex
+
+   \clearpage
 
 .. _conceptionflow:
 .. figure:: images/conceivedworkflow.png
@@ -889,45 +910,128 @@ La :num:`figure #conceptionflow` présente une représentation du flux imaginé.
    persister les résultats d'entraînements et de prédicats.
 
 
-.. raw:: latex
+Conception pour TPOT
+--------------------
 
-   \clearpage
+Sans se soucier de la problématique *Docker*, le script *Python* doit pouvoir fournir deux
+méthodes, :code:`train` et :code:`test`.
+
+La méthode :code:`train` s'occupe de :
+
+* Charger les paramètrages via un fichier *JSON* ;
+* Charger le dataset;
+* Transformer le dataset pour qu'il soit utilisable par TPOT;
+* Séparer le dataset en *training set* et *validation test*;
+* Lancer l'entraînement de TPOT avec les données correspondantes;
+* Récupérer le meilleur pipeline et l'écrire dans un fichier texte.
+
+La méthode :code:`test` s'occupe de :
+
+* Charger le meilleur pipeline entraîné via un fichier *JSON*;
+* Reconstruire le pipeline en objet *Scikit-Learn*;
+* Effectuer des prédicats sur les données passées en paramètres;
+* Ecrire les scores dans un fichier texte.
 
 
+Système de containers interactifs
+------------
 
-Nouveau diagramme d'acteurs imaginé, et comment on coupe le workflow actuel
+Un container n'est normalement pas conçu pour faire persister des données sur son état.
+Lors de l'arrêt d'un container, l'hôte n'enregistre en général pas de données sur son
+état avant de l'arrêter. Il est tout de même possible de partager des informations entre
+un container et l'hôte via le système de volumes :cite:`@dockervolumes`.
+
+Un volume est un répertoire partagé entre l'hôte et le container. Le lien entre l'hôte
+et le container se fait au moment du lancement du container via la commande code:`docker run -v containerpath:hostpath imagename args`.
+
+Si le répertoire contient des fichiers au moment du lien, les fichiers sont directement
+accessibles par celui-ci. Le container peut manipuler des fichiers dans ce repertoire
+comme il le désire. Une fois le container arrêté, les fichiers crées dans ce répertoire
+persistent pour l'hôte.
+
+Partant de ce principe, il est imaginable de créer un container dont le script effectue
+un travail différent selon la méthode d'appel, et les fichiers contenus dans le répertoire.
+
+Pour ce faire, il est possible de définir un script qui redirige vers la bonne méthode
+du script python en fontion de l'argument `commande` passé en paramètre lors de l'instanciation
+du container. Pour rappel, ce paramètre se présente ainsi :code:`docker run parametres nomducontainer commande`.
+
+Une autre méthode explorée (et testée) est de lancer le container dans un mode d'attente,
+sans lancer le script, via la commande :code:`docker run containername`, puis de demander
+l'exécution d'un entrypoint via la méthode :code:`docker exec containername commande`, où
+commande correspond au nom défini dans l'entrypoint.
+
+On connaît déjà à ce stade un **problème** lié à la nature distribuée de l'architecture.
+L'utilisation des *volumes* docker utilise un répertoire hôte pour effectuer le lien.
+Chronos repose sur Mesos afin de répartir la charge en fonction des ressources, ce qui fait
+que l'on ne contrôle pas la machine physique sur laquelle le fichier est crée.
+Etant donné qu'il n'y a pas de **système de fichier distribué** dans la plateforme, il
+est nécessaire que, pour une expérience, l'appel de l'entraînement et des prédicats
+soient effectués sur **la même machine physique**.
+
+Ce problème, bien que connu, n'est pas prioritaire dans le cadre de ce projet. L'utilisation
+des *volumes Docker* n'est pas définitive, il est prévu de mettre en place une communication
+directe entre l'acteur *Akka* et le container. La principale option semble être la mise
+en place d'un système de queues de messages entre l'acteur *Akka* et le container *Docker* lié,
+par exemple via une bibliothèque comme ZeroMQ :cite:`zeromq`. Le but de ce projet est
+de faire une expérience scientifique sur l'apport de l' *automated machine learning*
+dans le cadre de la plateforme.
+
+Chronos
 ------------------
+
+Chronos est un logiciel que l'on se contentera d'utiliser depuis une
+image Docker, il n'y a pas de conception liée à cette partie. Il faut néanmoins
+observer précisément le format du JSON à fournir en entrée pour permettre de donner
+la configuration complète et correcte pour notre container qui sera lancé.
+
+Il a déjà été vérifié que Chronos, dans sa version `3.0.2`, permet de lancer un
+container avec des volumes, des variables d'environnement, et un entrypoint.
+
+Akka
+------------------
+
+Le flux d'acteurs présenté à la figure :num:`figure #wokenactors` est modifié afin
+de répondre au nouveau container "interactif" lié à Docker. La :num:`figure #newinteractiveactors`
+présente le flux de travail alternatif conçu.
+
+.. _newinteractiveactors:
+.. figure:: images/modifieddiagramactorscoordinator.png
+   :width: 500px
+   :align: center
+   :alt: Schéma de la nouvelle conception d'acteurs pour le nouveau flux interactif.
+
+   Schéma de la nouvelle conception d'acteurs pour le nouveau flux interactif.
+   Un seul acteur suffit à effectuer les deux appels consécutifs du container TPOT.
+   Le nouvel acteur commence par définir les conditions d'entraînement pour l'optimisation
+   du pipeline dans le cadre de l'expérience. Il doit définir les features, les targets,
+   lier les meta-données pour déterminer s'il s'agit d'une expérience de classification
+   ou de régression. Le passage via les variables d'environnement des configurations des
+   bases de données évitent une configuration trop restrictive en interne au container.
+   Les états d'attentes peuvent être implémentés en vérifiant la présence du fichier sur
+   le volume ou demander via des requêtes :code:`GET` sur la route du code:`job` de *Chronos*
+   l'état de la tâche. La deuxième méthode est recommandée, car elle permet de récupérer
+   le code de réussite ou d'erreur de Chronos. La seule présence d'un fichier sur le
+   disque ne permet pas de dire si le travail est complet. La mise en forme des prédicats
+   pour le retour à l'AlgorithmActor n'est pas encore déterminé.
 
 
 Implémentation réalisée
 ============
 
+Cette section précise l'implémentation réalisée dans le cadre de ce projet. Comme toutes
+les autres sections, elle ne présente que la version finale, et pas tous les tests et le
+cheminement effectués.
+
+Présentation des tâches
+------------
+
+
+
 Création d'un container interactif
 ------------
 
-Problème initial
-~~~~~~~~~~~~
-
-Présentation des solutions au problème
-~~~~~~~~~~~~
-
-Choix effectué
-~~~~~~~~~~~~
-
-Modification du workflow Woken
-------------
-
-Ajout du nouveau container dans la configuration
-~~~~~~~~~~~~
-
-Intégration de TPOT
-------------
-
-A déterminer, mais je suppose : Les contraintes posées par la bibliothèque, les choix qui ont du être effectués.
-~~~~~~~~~~~~
-
-Eventuellement, si plus de travail a été effectué, présentation de celui-ci.
-------------
+Le `Dockerfile` définit un entrypoint sur un script *bash* personnalisé qui se présente ainsi.
 
 
 Validation (Expérience)

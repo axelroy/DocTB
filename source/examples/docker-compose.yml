@@ -1,0 +1,40 @@
+version: '2'
+
+services:
+  zoo1:
+    image: zookeeper:3.4
+    ports:
+       - 2181:2181
+
+  mesos-master:
+    image: mesosphere/mesos-master:1.3.0
+    environment:
+      - MESOS_CLUSTER=local
+      - MESOS_ZK=zk://zoo1:2181/mesos
+      - MESOS_QUORUM=1
+      - MESOS_CLUSTER=docker-compose
+      - MESOS_WORK_DIR=/var/lib/mesos
+
+  mesos-slave:
+    image: mesosphere/mesos-slave:1.3.0
+    privileged: true
+    environment:
+      - MESOS_PORT=5051
+      - MESOS_MASTER=zk://zoo1:2181/mesos
+      - MESOS_CONTAINERIZERS=docker,mesos
+      - MESOS_WORK_DIR=/var/lib/mesos
+      - MESOS_SWITCH_USER=0
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /usr/bin/docker:/usr/bin/docker.so
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  chronos:
+    image: mesosphere/chronos:v3.0.2
+    ports:
+      - 4400:4400
+      - 8081:8081
+    environment:
+      - PORT0=4400
+      - PORT1=8081
+    command: --zk_hosts zoo1:2181 --master zk://zoo1:2181/mesos
