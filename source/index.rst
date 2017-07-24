@@ -2,8 +2,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to AutoML's documentation!
-=============================================
+Bienvenue sur la documentation du travail de Bachelor Auto ML
+=============================================================
 
 .. raw:: latex
 
@@ -11,7 +11,7 @@ Welcome to AutoML's documentation!
 
 .. toctree::
    :numbered:
-   :maxdepth: 5
+   :maxdepth: 4  
 
 .. raw:: latex
 
@@ -89,7 +89,7 @@ des catégories suivantes il compte l’impliquer :
 
 * Variable
 * Co-variable
-* Filtre
+* Filtre:num:`figure #features`
 
 Via l’interface suivante présentée en :num:`figure #variables`.
 
@@ -1275,50 +1275,246 @@ le container. Ces points sont traités dans la partie architecture de ce chapitr
 Chronos
 ------------
 
+Ce chapitre décrit la méthodologie de mise en place du passage de l'Instanciation
+du container *Docker* *TPOT* de la ligne de commande Docker au lancement via Chronos.
+hbpmip/woken-validation:AutoML
+Chronos se base sur un fichier JSON pour définir la configuration d'une tâche.
+Chronos a la fâcheuse manie à ne pas générer de code d'erreur en cas de format incorrect
+du fichier JSON. Il remplace systèmatiquement la partie en question par une configuration
+par défaut, ce qui rend le débuggage complexe.
+
+Pour régler ce problème le plus directement possible, l'implémentation a été effectuée
+tout d'abord via l'interface graphique. Une fois que le container a eu toutes les informations
+correctement configurée pour qu'il puisse réaliser le travail en interne, la configuration
+JSON a été enregistrée, et envoyée sur l'API en requête `HTTP POST` via *Woken*, afin de
+découpler au maximum les sources de problèmes.
+
 Tâche 11 : Instanciation du container personnalisé via le GUI
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Chronos fourni une interface graphique présentée en :num:`figure #chonosguijson`
+
+.. _chonosguijson:
+.. figure:: images/chronos_json_gui.png
+   :width: 300px
+   :align: center
+   :alt: Interface graphique de configuration JSON d'une tâche Chronos.
+
+   Interface graphique de configuration JSON d'une tâche Chronos.
+
+Il est possible de tester tous les points spécifiques au container TPOT, telles que
+la définition de *volumes*, le passage de variables d'environnement, ainsi que le format
+pour la commande pour lancer correctement le
+
 Tâche 12 : Instanciation du container via une requête POST avec un fichier JSON
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Dès que le format JSON a été défini avec la tâche 13, l'envoi de ce fichier via une
+requête :code:`HTTP POST` via curl a été testée. Celle-ci fonctionne comme prévu, en
+l'adressant à l'url :code:`127.0.0.1:4400/v1/scheduler/iso8601`, mais aussi sur la
+version 2.5 de Chronos, actuellement implémentée en production dans le projet.
+L'ancienne version de Chronos utilise la route :code:`127.0.0.1:4400/scheduler/iso8601`.
 
 Akka
 ------------
 
-Tâche 13 : Mise en relation du validation pool Akka
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Etant donné que l'instanciation du container TPOT est possible via Chronos, il est
+possible d'implémenter le flux d'acteur nécessaire pour effectuer le travail présenté
+à la :num:`figure #newinteractiveactors`.
 
-avec les acteurs Woken pour la route /mining/experiment
+Cette partie est plus compliquée que les autres, car l'implémentation demande des connaissances
+en *Scala*, en utilisant les définitions *AKKA* et en liant l'utilisation des automates
+à états finis, choses totalement inconnues au début de ce projet.
+
+Dans l'environnement de test `dev-test`, le code de *Woken* est compilé en `jar`, et
+inclu dans un container *Docker*. Le :code:`docker-compose` de cet environnement
+lance donc *Woken* dans un container. Le code prend plusieurs minutes à être compilées,
+et les logs d'erreurs sont accessibles via :code:`docker-compose logs woken`, qui fournit
+dans la ligne de commande, les exceptions qui sortent habituellement en console.
+Il s'est vite avéré qu'il était trop compliqué pour chaque modification de tester
+via se procédé, qui au complet prend une dizaine de minutes.
+
+Il a été choisi créer un environnement `dev-debug` qui externalise *Woken* du container,
+et le fait fonctionner en natif. Il est ainsi possible de débugger via les points
+d'arrêts. La configuration a demandé un certain temps, car le :code:`docker-compose`
+a du être finement configuré.
+
+L'environnement est désormais disponible pour n'importe quel développeur externe.
+Le document de configuration de l'environnement de développement est en cours de
+rédaction.
+
+.. _directories:
+Tâche 13 : Mise en relation du validation pool Akka
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Etant donné que *Woken* a été passé en natif dans l'environnement :code:`dev-debug`,
+le pool d'acteurs *Akka* de validation a du être adapté pour que la route `/mining/experiment/`
+soit à nouveau fonctionnelle. Pour rappel, cette route est nécessaire pour que la
+version avec cross-validation soit fonctionnelle. Bien qu'elle est coupée avant
+l'utilisation du pool de validation dans ce projet, elle est néccessaire pour effectuer
+une expérience de comparaison entre avec et sans optimisation de pipeline automatique.
+
+Cette implémentation a été possible grace à une version spécifique de l'image
+:code:`hbpmip/woken-validation:AutoML`.
 
 Tâche 14 : Mise en place du nouveau flux d’acteurs dans Woken pour traiter nos container interactif
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Actuellement, le nouvel acteur :code:`InteractiveActor` est implémenté pour remplacer
+le :code:`ExperimentActor`, comme le suggère la :num:`figure #newinteractiveactors`.
+
+Au moment du rendu, la configuration du container pour l'entrainement est configuré.
+Un fichier situé au chemin :code:`home/user/docker-volume` et contenant les informations
+suivantes sont pour le moment nécéssaire :
+
+.. literalinclude:: examples/input_training.json
+   :language: json
+
+Il est à prévu de générer dynamiquement les répertoire pour les volumes, comme décrit dans la section
+Architecture.
+
+Pour le moment, le repertoire doit exister, et le fichier doit être valide.
+
+Etant donné le manque de temps, la sérialisation de la configuration de classe Scala
+est encore effectuée par un :code:`localCoordinatorActor`, ce qui implique qu'une fois
+la requête envoyée à Chronos, l'acteur se met dans un état d'attente des résultats dans
+la base de données, chose qui n'arrivera jamais étant donné que le container *TPOT*
+ne répond pas comme ca.
+
+la suite de l'implémentation sera effectuée en redéfinissant les :code:`localCoordinatorActor`
+en une autre implémentation, qui permet de ne pas attendre de résultat dans la base de données.
+
+Si cet acteur fontionne, il devient possible de passer dans l'état d'attente de résultat
+de travail du container, géré par Chronos via la route :code:`/v1/scheduler/jobs/search?name=id`,
+ou l'`id` est retourné au moment de la demande d'effectuer la tâche à Chronos.
+
+Dès que la tâche est finie, il faut reconfigurer les définitions de classes pour lancer en
+mode test, configurer le fichier en entrée sur le volume, et attendre à nouveau de *Chronos*
+la confirmation de fin du travail du container.
+
+Dès lors, le dernier état s'occupe de récupérer les prédicats, d'en tirer des métriques
+et de les mettre en forme pour les transmettre à l'`AlgorithmActor` qui a appelé l'acteur traitant
+de *TPOT*.
+
 Scala
 ------------
 
+Bien que la frontière soit mince entre la partie *Scala* et *Akka* soit mince, les
+point suivants sont généralement liés uniquement à la synthaxe *Scala*, et plus au
+paradigme de programmation *Akka*.
+
 Tâche 15 : Mise en relation du scoring pour le retour à l’AlgorithmActor
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ce point n'est pas encore implémenté, et, comme dit lors de la phase de conception,
+le format de retour du container pour les prédicats n'est pas encore fixé.
+
+Il n'y a pas de difficulté majeure en vue, étant donné que l'on a le contrôle sur
+le format de sortie du container, ainsi que sur le traitement avant le retour des prédicats
+sous format *PFA* au `AlgorithmActor`. La définition sera effectuée quand la partie
+*Akka* sera implémentée et fonctionnelle.
 
 Tâche 16 : Configuration des définitions de containers d’algorithmes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Tâche 17 : Configuration des définitions de containers d’algorithmes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Woken envoie des demandes d'exécution d'algorithmes à Chronos sous format `JSON`.
+Il doit stipuler l'image et la version pour chaque algorithme disponible à l'utilisateur.
+Le fichier de configuration est propre à l'environnement, soit `dev-debug` ou `dev-test`.
+
+Ces fichiers de configurations sont disponible dans l'arborescence au chemin `/dev-*/woken/cofig/application.conf`.
+
+.. literalinclude:: examples/application.conf
+   :language: conf
+
+Cette exemple montre que l'on définit le nom l'image et la version à utiliser pour
+résoudre un algorithme. Si l'image n'est pas présente localement, elle sera reprise
+depuis le *Docker-Hub*. Le flag prédictive indique si la voie à utiliser peut être
+:code:`mining/experiment`.
+
+A l'avenir, il est probable qu'un tag "interactive" définisse si on peut utiliser
+le nouveau flux de travail interactif implémenté dans ce travail.
+
+Pour information, il est prévu que ce flux soit utilisé afin de mettre à disposition
+les algorithmes de *scikit-learn* via ce nouveau flux, car les prédicats pourront
+s'effectuer via une simple représentation du texte du pipeline.
+
+Tâche 17 : Mise en place de la nouvelle structure de case classes pour les volumes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+La représentation d'un :code:`Job` donné à Chronos est effectué via des case-classes
+*Scala* directement dans *Woken*. Cette définition n'intégrait pas les notions de
+`volumes` et de `commandes` dans le flux actuel. Les volumes n'étaient pas utilisés,
+et la commande était systématiquement définie comme :code:`compute`.
+
+Il a été nécessaire d'ajouter des définitions supplémentaires pour les `volumes` :cite:`@wokenvolume`
+et de laisser la possibilité de définir une autre commande que :code:`compute` :cite:`@wokencommands`
+pour l'entrypoint.
+
+La sérialisation est gérée par Spray :cite:`@spray`. Des tests unitaires ont été implémentés
+pour vérifier le format. Ils sont disponibles au chemin :code:`/src/test/scala/JSONFormat/JSONFormattingTests.scala`.
 
 Tâche 18 : Génération automatique des répertoires pour la liaison des volumes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A l'instant de la rédaction de ce rapport, le chemin pour la liaison de *volume* est
+hard-codé. Ceci n'est pas viable quand le flux d'acteur est complet.
+
+La problématique dans le cadre de l'architecture distribuée sur laquelle fonctionne
+Mesos est qu'il n'y a pas de système de fichier centralisé, ce qui implique que
+deux appels successifs via un acteur Woken doit s'effectuer sur la même machine physique
+afin que le résultat de l'entrainement soit récupérable pour les prédicats. Ce problème
+peut être résolu en forcant tous les containers TPOT instanciés à être placés sur le
+même hôte. Les recherches pour ce faire n'ont pas encore été effectuées.
+
+En imaginant que le point ci-dessus est le cas, il existe encore un problème de concurrence.
+Dans un cadre de production, le chemin d'optimisation sera utilisé par plusieurs acteurs
+en parralèlle, il est indispensable que chacun ait son propre répertoire de travail.
+
+Chaque acteur s'occupe de l'instancier avec un nom lié au UUID, identifiant unique utilisé
+dans la génération de nom pour les tâches *Chronos*. Il est possible de demander un
+identifiant unique, de vérifier si le répertoire existe sur le disque.
+
+Si c'est le cas, on demande un nouveau UUID. Sinon, on le crée, et on travaille dans
+celui-ci le temps du flux de l'*InteractiveActor*.
+
+Avec cette implémentation, chaque acteur peut travailler de manière autonome,
+sans devoir tenir compte d'un dictionnaire de répertoires global pour les acteurs.
 
 Architecture
 ------------
 
 Tâche 19 : Sortie de Woken du container pour permettre un débuggage en natif
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-: _dockercompose:
+C'est la première fois qu'un externe aux ressources du CHUV travaille sur *Woken*.
+Il a été nécessaire d'adapter et de substituer les dépendances qui étaient *hard-codées*,
+comme par exemple la base de données des patients qui a été substituée par une base
+de données fictive.
+
+Le fruit de ce travail est un nouveau repertoire :code:`dev-debug`, qui contient
+un :code:`docker-compose` permettant de mettre en place une architecture qui permet
+de peupler les bases de données, mettre en place l'architecture distribuée (*Mesos, ZooKeeper*)
+ainsi que les outils pour l'utiliser (*Chronos*).
+
+L'environnement de test se démarre via le script :code:`run.sh`. Il arrive que :code:`Mesos-slave`
+ne se coordonne pas correctement avec :code:`Mesos-master`, et qu'il ne donne pas de code d'erreur.
+
+Si c'est le cas, cela ce manifeste par des containers qui restent en état "queued"
+dans le GUI de :cite:`Chronos`. Pour le relancer : :code:`docker-compose up mesos-slave`.
+
+Une fois la stack lancée, il est possible d'utiliser IntelliJ en natif, et de débugger via celui-ci.
+
+Il a fallu comprendre l'architecture pour effectuer le passage en natif de *Woken*.
+
 Tâche 20 : Adaptation du docker-compose pour gérer les bases de données via les migrations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Tâche 21 : Mise à jour du docker-compose pour le validation-pool Akka
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Compte rendu graphique de l'avancement du projet
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Validation (Expérience)
 ============

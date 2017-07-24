@@ -1,0 +1,4 @@
+{
+  "query_features": "SELECT score_test1, stress_before_test1  from linreg_sample;",
+  "query_targets": "SELECT score_math_course1 from linreg_sample;"
+}
