@@ -1526,7 +1526,17 @@ Tâche 21 : Mise à jour du docker-compose pour le validation-pool Akka
 
 
 Compte rendu graphique de l'avancement du projet
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------
+
+.. _progressrepresentation:
+.. figure:: images/implementationRepresentationProgress.png
+   :width: 600px
+   :align: center
+   :alt: Représentation graphique des tâches effectuées.
+
+   Représentation graphique de l'avancement des tâches. Les tâches vertes sont
+   totalement implémentées et testées, les tâches oranges sont en cours de réalisation
+   et les tâches rouges ne sont pas commencées.
 
 Validation (Expérience)
 ============

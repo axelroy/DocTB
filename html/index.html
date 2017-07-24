@@ -51,18 +51,19 @@
 <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h1>
 <p>Le présent document fait office de rapport de projet.
-Il permet de comprendre le contexte de celui-ci, de reconstituer son cheminement du projet,
-de comprendre les choix et les déductions effectuées, ainsi que de connaître l’état final
-du travail et les perspectives d’amélioration.</p>
+Il permet de comprendre le contexte de celui-ci, de décrire les éléments qui le compose,
+fait une analyse de la problématique, la conception en vue de la résolution et
+présente l’implémentation effectuée. Ce document ne présente pas tout le cheminement,
+mais uniquement l’état final</p>
 <div class="section" id="contexte-du-projet">
 <h2>Contexte du projet<a class="headerlink" href="#contexte-du-projet" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Le présent projet s’inscrit dans le cadre du travail de Bachelor en Informatique option «&nbsp;Développement logiciel
 et multimédia&nbsp;», réalisé à la HE-ARC de Neuchâtel.</p>
-<p>Le projet est effectué pour le CHUV-LREN dans le cadre du projet Human Brain Project.</p>
+<p>Le projet est effectué pour le CHUV-LREN dans le cadre du «&nbsp;Human Brain Project&nbsp;».</p>
 <div class="section" id="human-brain-projet">
 <h3>Human Brain projet<a class="headerlink" href="#human-brain-projet" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Ce projet s’inscrit dans le cadre du projet Européen «&nbsp;Human Brain Project&nbsp;».
-Ce chapitre vise à expliquer le contexte de la partie du projet qui nous intéresse.</p>
+Ce chapitre vise à expliquer le contexte du sous-projet 8, et ce qui nous intéresse.</p>
 </div>
 <div class="section" id="presentation-de-la-plateforme-mip">
 <h3>Présentation de la plateforme MIP<a class="headerlink" href="#presentation-de-la-plateforme-mip" title="Lien permanent vers ce titre">¶</a></h3>
@@ -71,47 +72,47 @@ expériences neuroscientifiques sur des données de patients recueillies à trav
 cliniques et hôpitaux partenaires. Etant donné la nature médicale de ces données,
 elles sont bien évidemment anonymisées, et il n’est pas possible de retrouver les
 données d’un patient, car les données sont présentées sous la forme d’agrégation
-par caractéristique, comme le présente la <a href="#features">figure  242</a></p>
+par caractéristique, comme le présente la <a href="#features">figure  300</a></p>
 <div class="figure align-center" id="id55">
 <span id="features"></span><a class="reference internal image-reference" href="_images/Agregation_features_MIP.png"><img alt="Représentation des caractéristiques d'intérêts" src="_images/Agregation_features_MIP.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-text"><em>Représentation des caractéristiques d’intérêts.</em></span></p>
 </div>
 <p>En sélectionnant un des ronds blancs, on accède à la variable en question,
-et on peut observer différentes statistiques, comme par exemple des vues sous forme d’histogrammes [cf <a href="#histogram">figure  243</a>]</p>
+et on peut observer différentes statistiques, comme par exemple des vues sous forme d’histogrammes [cf <a href="#histogram">figure  301</a>]</p>
 <div class="figure align-center" id="id56">
 <span id="histogram"></span><a class="reference internal image-reference" href="_images/Histogram_features_MIP.png"><img alt="Exemple d'histogramme d'une variable." src="_images/Histogram_features_MIP.png" style="width: 450px;" /></a>
 <p class="caption"><span class="caption-text"><em>Exemple d’histogramme d’une variable.</em></span></p>
 </div>
-<p>Il est ainsi possible d’accéder à toutes les caractéristique médicales et ainsi
+<p>Il est ainsi possible d’accéder à toutes les caractéristiques médicales et ainsi
 de les analyser manuellement. La plateforme permet aussi de formuler des expériences
-basées sur les données, afin de proposer un modèle personnalisé qui permet d’essayer
+basées sur les données, afin de proposer un modèle permettant d’essayer
 de trouver des liens entre les variables des patients et leur diagnostiques médicaux.
-La plateforme permet vise à formuler des expériences liées à Alzheimer,
+La plateforme vise à formuler des expériences liées à Alzheimer,
 mais d’autres maladie neurologiques pourraient être visées. A partir d’une caractéristique,
 l’utilisateur peut décider de formuler une expérience en choisissant dans laquelle
 des catégories suivantes il compte l’impliquer&nbsp;:</p>
 <ul class="simple">
-<li>Variable</li>
-<li>Co-variable</li>
-<li>Filtre:num:<cite>figure #features</cite></li>
+<li>Variable, qui correspondent à la cible de l’expérience;</li>
+<li>Co-variable, qui correspondent aux variables de l’expériences.</li>
+<li>Filtre</li>
 </ul>
-<p>Via l’interface suivante présentée en <a href="#variables">figure  244</a>.</p>
+<p>Via l’interface suivante présentée en <a href="#variables">figure  302</a>.</p>
 <div class="figure align-center" id="id57">
 <span id="variables"></span><a class="reference internal image-reference" href="_images/Variables_experiences.png"><img alt="Exemple de formulation d'expérience, étape selection des variables. Cet exemple vise à trouver un lien entre la quantité de matière grise dans le Cuneus en fonction de l'age et du sexe." src="_images/Variables_experiences.png" style="width: 450px;" /></a>
-<p class="caption"><span class="caption-text"><em>Exemple de formulation d’expérience, étape selection des variables. Cet exemple vise à trouver un lien entre la quantité de matière grise dans le Cuneus en fonction de l’age et du sexe.</em></span></p>
+<p class="caption"><span class="caption-text"><em>Exemple de formulation d’expérience, étape selection des variables. Cet exemple vise à trouver un lien entre la quantité de matière grise dans le Cuneus gauche en fonction de l’age et du sexe.</em></span></p>
 </div>
-<p>Ce qui nous amène vers la possibilité d’analyser des graphes mêlant les différentes
+<p>Ce qui permet d’analyser des graphes mêlant les différentes
 variables. Il est encore possible de paramétrer la représentation sur l’axe via
-une boite à outils, afin de faire ressortir les informations intéressantes, comme présenté à la <a href="#resultnoml">figure  245</a></p>
+une boite à outils, afin de faire ressortir les informations intéressantes, comme le montre la <a href="#resultnoml">figure  303</a></p>
 <div class="figure align-center" id="id58">
 <span id="resultnoml"></span><a class="reference internal image-reference" href="_images/Resultat_nonML_experiment.png"><img alt="Résultat de l'expérience formulée à la :num:`figure #variables`. Représentation de la quantité de matière grise en cm3 en fonction de l'age et du sexe (bordeau = femme, rose = homme)." src="_images/Resultat_nonML_experiment.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-text"><em>Résultat de l’expérience formulée à la :num:`figure #variables`. Représentation de la quantité de matière grise en cm3 en fonction de l’age et du sexe (bordeau = femme, rose = homme).</em></span></p>
+<p class="caption"><span class="caption-text"><em>Résultat de l’expérience formulée Représentation de la quantité de matière grise en cm3 en fonction de l’age et du sexe (bordeau = femme, rose = homme).</em></span></p>
 </div>
 <p>La partie intéressante dans le cadre de ce projet est la possibilité, à partir des
 variables sélectionnées, de lancer une expérience d’apprentissage automatique
-(Machine Learning) afin de trouver le modèle qui permet de représenter au mieux
+(<em>Machine Learning</em>) afin de trouver le modèle qui permet de représenter au mieux
 le lien entre les caractéristiques et le diagnostique.</p>
-<p>L’aide pour la configuration de l’expérience est présentée comme en <a href="#helpconfig">figure  246</a></p>
+<p>L’aide pour la configuration de l’expérience est présentée comme en <a href="#helpconfig">figure  304</a></p>
 <div class="figure align-center" id="id59">
 <span id="helpconfig"></span><a class="reference internal image-reference" href="_images/description_experience.png"><img alt="Aide pour la formulation d'une expérience de Machine Learning." src="_images/description_experience.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text"><em>Aide pour la formulation d’une expérience de Machine Learning.</em></span></p>
@@ -120,16 +121,16 @@ le lien entre les caractéristiques et le diagnostique.</p>
 <p>L’étape 1 correspond à la sélection d’un algorithme de <em>Machine Learning</em> dans
 la liste fournie (catégories&nbsp;: analyse statistique, extraction de caractéristiques
 et modèle prédictif). Le modèle choisi influence fortement les résultats de l’expérience.</p>
-<p>Lorsque le modèle est sélectionne, il est possible, suivant le modèle, de devoir
+<p>Lorsque le modèle est sélectionné, il est nécessaire, suivant le modèle, de devoir
 renseigner des «&nbsp;<strong>paramètres</strong>&nbsp;» pour celui-ci. Nous appellerons ces paramètres
 des «&nbsp;<strong>hyper-paramètres</strong>&nbsp;», afin d’éviter la confusion avec les paramètres
 qui sont les coefficients internes qui ont été déterminés après l’entraînement.
-Les hyper-paramètres définissent un fonctionnement interne (par exemple, pour le
+Les hyper-paramètres définissent l’architecture ou le fonctionnement de l’algorithme (par exemple, pour le
 modèle KNN, l’hyper-paramètre k désigne le nombre des voisins les plus proches
 sur lesquels on veut travailler). Le choix de ces hyper-paramètres est donné au
-points deux de cette marche à suivre. Pour un même modèle, le choix d’un
+points 2 de cette marche à suivre. Pour un même modèle, le choix d’un
 hyper-paramètres plutôt qu’un autre change à nouveau drastiquement les résultats.</p>
-<p>Il peut définir plusieurs configurations «&nbsp;modèle-paramètres&nbsp;» pour une expérience.
+<p>L’utilisateur peut définir plusieurs configurations «&nbsp;modèle-paramètres&nbsp;» pour une expérience.
 Une expérience ne donne pas instantanément ses résultats. L’utilisateur est notifié
 lorsque les résultats sont consultables.</p>
 <p>C’est ici que s’inscrit le projet. L’utilisateur, qui est probablement plus un spécialiste
@@ -141,7 +142,7 @@ qui sont liées uniquement à l’informatique.</p>
 <p>Ce projet a pour but de mettre en place un moyen pour que l’utilisateur n’ait plus
 à s’occuper du choix du modèle et du paramétrage pour son expérience, et que la
 plateforme s’occupe de trouver automatiquement la meilleure configuration possible.
-Dans l’idéal, l’utilisateur n’a qu’un bouton a presser pour cette étape.</p>
+Dans l’idéal, l’utilisateur n’a qu’un bouton à presser pour cette étape.</p>
 </div>
 </div>
 </div>
@@ -151,7 +152,7 @@ Dans l’idéal, l’utilisateur n’a qu’un bouton a presser pour cette étap
 </div>
 <div class="section" id="etat-de-l-art">
 <h1>Etat de l’Art<a class="headerlink" href="#etat-de-l-art" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Avant de se lancer dans la partie plus en détail dans la description de la plateforme,
+<p>Avant de se lancerdans la description du travail,
 il est intéressant d’effectuer un état de l’art des technologies qui pourraient
 nous intéresser. Etant donné que le projet consiste à ajouter des fonctionnalités
 à un projet existant, cette section décrira les technologies actuellement existantes,
@@ -184,7 +185,7 @@ il peut par exemple concerner&nbsp;:</p>
 <li>Classification naïve bayésienne</li>
 </ul>
 <p>Mais on peut aussi ajouter à la plateforme d’autres méthodes d’apprentissage automatique
-via des containers Docker vierges qui sont fournis par le projet.</p>
+via des containers <em>Docker</em> préconfigurés qui sont fournis par le projet.</p>
 <div class="section" id="apprentissage-supervise">
 <h3>Apprentissage supervisé<a class="headerlink" href="#apprentissage-supervise" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Dans cette méthodologie, on connait déjà les classes que l’on souhaite pouvoir déterminer
@@ -203,7 +204,7 @@ une quantité d’informations suffisantes afin d’avoir un modèle représenta
 C’est ici à la machine de déterminer les différentes classes qui représentent le problème.
 A partir d’un ensemble de données en entrées, il va chercher à créer des classes représentatives
 pour celles-ci, en maximisant la distance inter-classe, et en minimisant la distance des éléments intra-classe
-comme représenté sur la <a href="#distanceml">figure  247</a>.:num:<cite>figure #distanceml</cite></p>
+comme représenté sur la <a href="#distanceml">figure  305</a>.</p>
 <div class="figure align-center" id="id60">
 <span id="distanceml"></span><a class="reference internal image-reference" href="_images/distance_illustration.png"><img alt="Représentation des distances inter-classe et intra-classe. Illustration issue du site Microsoft :cite:`&#64;theoryMLMS`" src="_images/distance_illustration.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text">Représentation des distances inter-classe et intra-classe. Illustration issue du site MSDN <a class="reference internal" href="#theorymlms" id="id1">[8]</a></span></p>
@@ -233,7 +234,7 @@ d’opérations, de la première à la dernière.</p>
 <li>Extraction, normalisation et éventuellement construction des caractéristiques à partir des données brutes.</li>
 <li>Application d’un modèle statistique ou linéaire pour effectuer, selon la problématique, une classification ou une régression.</li>
 </ul>
-<p>On peut représenter ce flux via la <a href="#mlpipeline">figure  248</a>:</p>
+<p>On peut représenter ce flux via la <a href="#mlpipeline">figure  306</a>:</p>
 <div class="figure align-center" id="id61">
 <span id="mlpipeline"></span><a class="reference internal image-reference" href="_images/ml_pipeline.png"><img alt="Exemple d'un pipeline de *Machine Learning*, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et modifié pour supprimer les parties liées à TPOT." src="_images/ml_pipeline.png" style="width: 650px;" /></a>
 <p class="caption"><span class="caption-text">Exemple d’un pipeline de Machine Learning, tiré de la documentation TPOT <a class="reference internal" href="#olson2016evobio" id="id2">[23]</a> et adapté pour supprimer les parties liées à TPOT.</span></p>
@@ -245,31 +246,31 @@ d’opérations, de la première à la dernière.</p>
 <li><strong>Features Selection</strong>&nbsp;: Sélection des caractéristiques les plus pertinentes pour le modèle.</li>
 <li><strong>Feature Construction</strong>&nbsp;: Création de nouvelles caractéristiques à partir des données.</li>
 <li><strong>Model Selection</strong>&nbsp;: Sélection du type de modèle ainsi que les hyper-paramètres liés à celui-ci (p.e. pour un réseau de neurones, le nombre de couches de neurones). Actuellement, l’utilisateur doit les configurer lui-même, et même un utilisateur expert ne peut pas garantir que ce sont les meilleurs hyper-paramètres possibles.</li>
-<li><strong>Parameter Optimization</strong>&nbsp;: le choix d’un modèle détermine les paramètres qui lui sont liés (p.e. pour un réseau de neurones, le poids de chaque neurone). Ces paramètres  influencent énormément la performance du modèle. Ils sont optimisés lors de cette phase.</li>
+<li><strong>Parameter Optimization</strong>&nbsp;: le choix d’un modèle détermine les paramètres qui lui sont liés (p.e. pour un réseau de neurones, le poids de chaque neurone). Ces paramètres  influencent énormément la performance du modèle. Ils sont définis lors de cette phase.</li>
 <li><strong>Model Validation</strong>&nbsp;: En sortie, nous avons, pour un ensemble de caractéristiques donnée, un modèle et le hyper-paramètres de ce modèle. Il faut ensuite valider ce modèle sur un ensemble de sujets différents afin de déterminer sa pertinence.</li>
 </ul>
 <p>Dans une approche traditionnelle d’optimisation d’une expérience de <em>Machine Learning</em>,
 on essaie de faire varier les hyper-paramètres du modèle (p.e via les grid-search <a class="reference internal" href="#datagridsearchdoc" id="id3">[5]</a> de Scikit-Learn <a class="reference internal" href="#scikit-learn" id="id4">[26]</a>).</p>
 <p>Cette méthode permet d’optimiser les hyper-paramètres du modèle. Ce dernier doit avoir
 été sélectionné manuellement auparavant par l’utilisateur. De plus, l’étendue et le pas des hyper-paramètres sont
-eux-aussi déterminés manuellement. Cela réduit le domaine d’exploration.</p>
+eux-aussi déterminés manuellement, ce qui réduit le domaine d’exploration.</p>
 <p>Une tendance émergente de ces dernières années est d’utiliser des méthodes d’intelligence artificielle pour
 explorer l’espace des solutions de manière automatique et optimisée. Cette exploration est souvent effectuée
-via des algorithmes génétiques [TODO:Lien(s) qui explique les principes] car ils
+via des algorithmes génétiques car ils
 correspondent à la problématique d’exploration d’un espace de solutions de grande dimension.
 Cette exploration est effectuée de manière non dirigée tout en fournissant un résultat exploitable.</p>
 <p>Les réelles avancées dans le domaine sont récentes, les premiers articles concrets datent de
 2016, et il est difficile de trouver des exemples dans un domaine concret, prouvant l’efficacité de <em>l’Automated Machine Learning</em> .
 Les créateurs de bibliothèque TPOT <a class="reference internal" href="#olson2016evobio" id="id5">[23]</a> ont rédigé deux papiers <a class="reference internal" href="#olson2016evaluation" id="id6">[21]</a> <a class="reference internal" href="#olson2016tpot" id="id7">[22]</a>
-d’exemple d’applications dans des cas réels, sur la classification de cas de cancers de la prostate,
-de manière conventionnelle, et via l’approche <em>Automed Machine Learning</em>, et ont pu mettre en avant
+d’exemple d’applications dans des cas réels, sur la classification de cas de cancers de la prostate, en comprarant
+l’approche conventionnelle et  l’approche <em>Automed Machine Learning</em>, et ont pu mettre en avant
 une amélioration des résultats.
 Google a récemment communiqué son intérêt pour le domaine, en annoncant l’ouverture d’un département
 sur la recherche de cette discipline <a class="reference internal" href="#googleautoml" id="id8">[4]</a>. Certains sites spécialisés <a class="reference internal" href="#stateautoml" id="id9">[20]</a> <a class="reference internal" href="#hhusain" id="id10">[12]</a>
 décrivent ce domaine avec intérêt, mais en précisant que les résultats ne sont pas encore
 probants, et que, pour le moment, elle n’est pas applicable à toutes les problématiques.</p>
 <p>Dans le cadre du projet, étant donné que les utilisateurs ne sont pas experts dans
-le domaine du <em>Machine Learning</em>, il est que les résultats soient meilleurs que
+le domaine du <em>Machine Learning</em>, il est probable que les résultats soient meilleurs que
 les configurations des utilisateurs.</p>
 <p>Si le travail abouti à une expérience, il est possible que celui-ci soit publié.</p>
 </div>
@@ -282,34 +283,31 @@ de pipeline automatisée, alias <em>automated Machine Learning</em>. Elle se dis
 bibliothèques telles que Auto-WEKA <a class="reference internal" href="#autoweka" id="id12">[2]</a> et Hyperopt <a class="reference internal" href="#hyperopt" id="id13">[13]</a> par le fait
 qu’il est capable non seulement de faire varier les modèles et le hyper-paramètres,
 mais qu’elle est aussi capable de sélectionner, construire ou d’effectuer du préprocessing
-sur les caractéristiques. <em>TPOT</em> dispose d’une communauté active, et le créateur <em>Randy Olson</em>
-répond très rapidement aux issues postées sur le <em>Github</em> de <em>TPOT</em>.</p>
-<p>Celà se représente comme sur la figure <a href="#mlpipelinetpot">figure  249</a>.</p>
+sur les caractéristiques. <em>TPOT</em> dispose d’une communauté active, et le créateur,*Randy Olson*,
+répond très rapidement aux <em>issues</em> postées sur le <em>Github</em> de <em>TPOT</em>.</p>
+<p>La <a href="#mlpipelinetpot">figure  307</a> présente un flux de <em>Machine Learning</em>.</p>
 <div class="figure align-center" id="id62">
 <span id="mlpipelinetpot"></span><a class="reference internal image-reference" href="_images/tpot-ml-pipeline.png"><img alt="Exemple d'un pipeline de Machine Learning, avec les parties gérées automatiquement par TPOT. Illustration tirée de la documentation TPOT :cite:`Olson2016EvoBio`" src="_images/tpot-ml-pipeline.png" style="width: 650px;" /></a>
 <p class="caption"><span class="caption-text">Exemple d’un pipeline de Machine Learning, avec les parties gérées automatiquement par TPOT. Illustration tirée de la documentation TPOT <a class="reference internal" href="#olson2016evobio" id="id14">[23]</a></span></p>
 </div>
 <p>Les différentes étapes ont la même signification que présenté au point de <a class="reference internal" href="#mlphases"><span class="std std-ref">présentation des phases typiques de machine learning</span></a>,
-au dessous de la <a href="#mlpipeline">figure  248</a>.</p>
+au dessous de la <a href="#mlpipeline">figure  306</a>.</p>
 <p>Cette bibliothèque est codée en Python, et se base sur les modèles de Scikit-learn <a class="reference internal" href="#scikit-learn" id="id15">[26]</a>, ce qui
-permet d’avoir des résultats exploitables directement via cette bibliothèque <em>Python</em>. Pour son implémentation,
-elle se base sur une représentation du pipeline sous forme d’arbre pour les pipeline (qui correspondent aux chromosomes
-dans la théorie de <em>Darwin</em>), et effectuer des mutations en croisant des parties de cet arbre,
-en en coupant des branches, ou en créant de nouvelles.</p>
+permet d’avoir une compatibilité avec cette bibliothèque <em>Python</em>.</p>
 </div>
 <div class="section" id="systemes-distribues">
 <h3>Systèmes distribués<a class="headerlink" href="#systemes-distribues" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Historiquement, avant que le web ne vienne changer la donne, une application était
-localisé sur une machine unique, et son architecture se présentait comme sur la <a href="#computerarchi">figure  250</a></p>
+localisé sur une machine unique, et son architecture se présentait comme sur la <a href="#computerarchi">figure  308</a></p>
 <div class="figure align-center" id="id63">
-<span id="computerarchi"></span><a class="reference internal image-reference" href="_images/computer_architecture.png"><img alt="Architecture simple basée sur une application unique" src="_images/computer_architecture.png" style="width: 200px;" /></a>
+<span id="computerarchi"></span><a class="reference internal image-reference" href="_images/computer_architecture.png"><img alt="Architecture simple basée sur une machine unique" src="_images/computer_architecture.png" style="width: 200px;" /></a>
 <p class="caption"><span class="caption-text">Architecture simple basée sur une application unique : crédits &#64; Groovytron <a class="reference internal" href="#groovytron" id="id16">[9]</a></span></p>
 </div>
 <p>Avec l’augmentation de la demande, la première approche pour augmenter la capacité
 de réponse a été de parraléliser plusieurs machines sur le réseau, et d’effectuer
 un balancage de charge entre les différentes instances, en fonction des moyens.</p>
 <p>Les machines sont déployées en cluster (groupes de machines), et le <em>load-balancer</em>
-s’occupe de répartir les requêtes, comme présenté à la <a href="#highavailability">figure  251</a>.</p>
+s’occupe de répartir les requêtes, comme présenté à la <a href="#highavailability">figure  309</a>.</p>
 <div class="figure align-center" id="id64">
 <span id="highavailability"></span><a class="reference internal image-reference" href="_images/high_availability_architecture.png"><img alt="Architecture orientée haute disponibilité et «scalabilité»" src="_images/high_availability_architecture.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-text"><em>Architecture orientée haute disponibilité et «scalabilité» : crédits &#64; Groovytron</em></span></p>
@@ -326,17 +324,17 @@ programmeur.</p>
 pour chacune en local. Dans l’approche d’un système distribué, on cherche à pouvoir
 gérer le plus finement les ressources au niveau du cluster, et pas uniquement par
 un balanceur de charge.</p>
-<p>La mise en place de systèmes d’exploitation distribués tels que <em>DC/OS</em> est un système
+<p>Un système d’exploitation distribué tel que <em>DC/OS</em> est un système
 qui se superpose au système d’exploitation de la machine, et qui fournit une gestion
-fine des ressources. la <a href="#distributedos">figure  252</a> permet d’illustrer cette architecture.</p>
+fine des ressources. La <a href="#distributedos">figure  310</a> permet d’illustrer cette architecture.</p>
 <div class="figure align-center" id="id65">
 <span id="distributedos"></span><a class="reference internal image-reference" href="_images/container_orchestration_revised.png"><img alt="Architecture utilisant un outils d'orchestration de containers" src="_images/container_orchestration_revised.png" style="width: 550px;" /></a>
-<p class="caption"><span class="caption-text"><em>Architecture utilisant un outil d’orchestration de containers : crédits &#64; Groovytron</em></span></p>
+<p class="caption"><span class="caption-text"><em>Architecture superposant un système d’exploitation distribué au système d’exploitation natif de la machine.: crédits &#64; Groovytron</em></span></p>
 </div>
 <p><em>DC/OS</em> est issu de la <em>Mesosphere</em>, un ensemble d’outils fournis par Apache qui
 répondent spécifiquement aux problématiques du cloud-computing. L’architecture du CHUV
-est basée sur les outils de la <em>Mesossphere</em>, mais n’utilise pas <em>DC/OS</em> au complet.</p>
-<p>Les outils utilisés dans le cadre du projet sont décrits dans la suite du document.</p>
+est basée sur les outils de la <em>Mesosphere</em>, mais n’utilise pas <em>DC/OS</em> au complet.</p>
+<p>Ces outils utilisés dans le cadre du projet sont décrits dans la suite du document.</p>
 </div>
 <div class="section" id="mesos">
 <h3>Mesos<a class="headerlink" href="#mesos" title="Lien permanent vers ce titre">¶</a></h3>
@@ -347,32 +345,33 @@ la quantité de mémoire vive, le nombre de processeurs, et l’espace disque à
 et Mesos s’occupe de gérer les ressources et la localisation de celles-ci, mais aussi
 de gérer le redémarrage de services en cas de pannes, et la mise à l’échelle d’un
 service.</p>
-<p>Il permet de lancer des applications natives, mais aussi des containers Dockers,
+<p>Il permet de lancer des applications natives, mais aussi des containers <em>Docker</em>,
 comme c’est le cas dans ce projet.</p>
 <p>Le cluster est organisé sous la forme d’un noeud <em>Master</em>, et de noeuds <em>Slaves</em>.
-Le noeud <em>master</em> est responsable de recevoir les demandes d’instanciations de services,
-et il envoie les ordres aux noeuds <em>Slaves</em> approprié, selon les ressources disponibles.
+Le noeud <em>Master</em> est responsable de recevoir les demandes d’instanciations de services,
+et il envoie les ordres au noeud <em>Slave</em> approprié, selon les ressources disponibles.
 La communication entre le <em>Master</em> et les <em>Slaves</em> est effectué via <em>ZooKeeper</em>, qui
 est un système de stockage clé-valeurs dans un système de fichiers, ce qui permet
 de partager les configurations des différents acteurs de l’architecture.</p>
-<p>Mesos sert donc de support pour l’instanciation de services sur notre architecture distribuée.</p>
+<p>Mesos sert de support pour l’instanciation de services sur notre architecture distribuée.</p>
 </div>
 <div class="section" id="marathon">
 <h3>Marathon<a class="headerlink" href="#marathon" title="Lien permanent vers ce titre">¶</a></h3>
 <p><em>Marathon</em> est un logiciel développé par <em>Apache</em> dans le cadre de la <em>Mesosphere</em>.
-La Mesosphère est l’ensemble des qui sont utilisés dans le cadre de <em>DC/OS</em>, et qui
-sont officiellement soutenus par la fondation <em>Apache</em>. Marathon joue le rôle de surcouche
+La Mesosphère est l’ensemble des outils qui sont utilisés dans le cadre de <em>DC/OS</em>, et qui
+sont officiellement soutenus par la fondation <em>Apache</em>. <em>Marathon</em> joue le rôle de surcouche
 à Mesos afin de simplifier le déploiement de <strong>services longues durées</strong>, c’est à
 dire qu’une définition de tâche adressée à <em>Marathon</em> concerne un certain nombre
 d’instances de ce service, et que si une instance vient à se stopper,
 <em>Marathon</em> va automatiquement relancer une instance de ce service.</p>
-<p>Le logiciel fournit lui aussi une <em>API REST</em> <a class="reference internal" href="#marathonapidoc" id="id18">[7]</a>.</p>
+<p>Le logiciel fournit une <em>API REST</em> <a class="reference internal" href="#marathonapidoc" id="id18">[7]</a> pour instancier des services
+via d’autres applications.</p>
 </div>
 <div class="section" id="chronos">
 <h3>Chronos<a class="headerlink" href="#chronos" title="Lien permanent vers ce titre">¶</a></h3>
 <p><em>Chronos</em> est un logiciel développé par la <em>communauté</em> Mesos. Cette communauté,
 contrairement à la <em>Mesosphere</em>, n’est pas officiellement soutenue par <em>Apache</em>,
-mais est constituée de gens ayant des interêts pour des outils liés à la Mesosphère,
+mais est constituée de gens ayant des interêts à développer des outils liés à la Mesosphère,
 et qui collaborent en suivant le développement des outils de la <em>Mesosphère</em>.
 La pérénité de ces outils ne sont donc pas garantis.</p>
 <p><em>Chronos</em> fait office de remplacement à <em>cron</em> de <em>Linux</em>, qui est un service permettant
@@ -381,7 +380,7 @@ le même travail sur un système distribué via <em>Mesos</em>.</p>
 <p>Il s’oppose à <em>Marathon</em> dans son utilisation, car il permet de lancer une commande
 ou un container de manière spontanée, ou programmée, mais qu’il ne cherchera pas à
 garder en tout temps un certain nombre d’instances en cours d’exécution.</p>
-<p>Il fournit une interface graphique [cf <a href="#chronosgui">figure  253</a>] permettant de programmer une nouvelle tâche planifiée,
+<p>Il fournit une interface graphique [cf <a href="#chronosgui">figure  311</a>] permettant de programmer une nouvelle tâche planifiée,
 mais aussi une <em>API REST</em> permettant l’automatisation programmatique de création de tâches.</p>
 <div class="figure align-center" id="id66">
 <span id="chronosgui"></span><a class="reference internal image-reference" href="_images/chronos_gui.png"><img alt="Capture d'écran de l'interface graphique de Chronos" src="_images/chronos_gui.png" style="width: 650px;" /></a>
@@ -391,7 +390,8 @@ mais aussi une <em>API REST</em> permettant l’automatisation programmatique de
 <div class="section" id="docker">
 <h3>Docker<a class="headerlink" href="#docker" title="Lien permanent vers ce titre">¶</a></h3>
 <p><em>Docker</em> est une solution <em>open-source</em> qui permet d’embarquer une application
-dans un container <em>Linux</em> qui peut être executé sur n’importe quelle machine.</p>
+dans un container <em>Linux</em> qui peut être executé sur n’importe quelle machine supportant
+le moteur <em>Docker</em>.</p>
 <p>Dans une deuxième mesure, il fournit des mécanismes pour rendre un container proche
 de la virtualisation, en permettant d’isoler les containers entre eux, mais tout en
 fonctionnant sur le même système hôte. Ceci a l’avantage par rapport à la virtualisation
@@ -402,7 +402,8 @@ difficile d’arriver à un niveau de sécurité identique à celui des machines
 qui elles peuvent être sécurisées jusqu’aux niveau des instructions micro-processeurs.</p>
 <p>Docker s’utilise généralement pour uniformiser les conditions de développement, car on
 peut dire qu’une image fonctionnant en <em>stand-alone</em> (c’est à dire sans interactions
-avec le système hôte, comme par exemple un montage de volume) doit fonctionner sur une autre instance Docker.</p>
+avec le système hôte, comme par exemple un montage de volume) doit fonctionner sur une autre machine
+supportant le moteur <em>Docker</em>.</p>
 <p>D’un point de vue haut niveau, un container est par défaut isolé de l’hôte au niveau :</p>
 <ul class="simple">
 <li>du réseau ;</li>
@@ -421,7 +422,7 @@ personnalisée à partir d’une image minimale fournie par la communauté comme
 <li>CentOS / Scientific Linux CERN (SLC) on Debian/Ubuntu or on CentOS/RHEL/SLC/etc;</li>
 <li>Debian / Ubuntu;</li>
 </ul>
-<p>Mais aussi from scratch, ou via une archive <a class="reference internal" href="#createbaseimagedocker" id="id19">[14]</a>.</p>
+<p>Mais aussi from <code class="code docutils literal"><span class="pre">scratch</span></code>, ou via une archive <a class="reference internal" href="#createbaseimagedocker" id="id19">[14]</a>.</p>
 <p>De plus, on peut hériter de n’importe quelle image et la redéfinir via sa propre surcouche.
 Les images dont on hérite ne sont pas modifiables. L’héritage est possible pour toute image
 publiée sur un dépot d’image Docker (généralement Docker Hub, mais on peut en utiliser d’autres).</p>
@@ -435,8 +436,8 @@ qui peuvent effectuer des actions pour construire l’image, dont les principale
 <li>Définir des variables d’environnements;</li>
 <li>Définir quels ports on veut exposer à l’hôte.</li>
 </ul>
-<p>Si on souhaite pouvoir choisir entre plusieurs commande, on peut définir des entrypoints,
-qui définissent en général un script que l’on peut exécuter suivant les paramètres d’appels
+<p>Si on souhaite pouvoir choisir entre plusieurs commandes, on peut définir des <code class="code docutils literal"><span class="pre">entrypoints</span></code>,
+qui définissent un script que l’on peut exécuter suivant les paramètres d’appels
 du container.</p>
 <p>Il y a deux méthodes d’intéraction avec un container :</p>
 <ul class="simple">
@@ -450,13 +451,13 @@ des variables d’environnement. Suivant l’implémentation du container, il es
 que celui-ci agisse comme un service, et se maintienne en vie, en attente de nouveaux
 événements, ou qu’il se termine dès que le travail interne soit terminé. Dans les deux cas,
 il se contente d’attendre que le travail interne(souvent implémenté par un script) renvoie
-un code d’erreur <a class="reference internal" href="#codeerrorissue" id="id21">[35]</a></p>
+un code d’exécution. <a class="reference internal" href="#codeerrorissue" id="id21">[35]</a></p>
 <p>La méthode exec ne peut s’appeler que sur un container qui a déjà été instancié.
 Si le container est en cours d’exécution, il est possible d’envoyer une nouvelle commande
-au container. La plus classique est l’exécution d’un bash en mode interactif, via la commande code:<cite>docker exec -it containername bash</cite>
-qui permet d’exécuter une ligne de commande bash. Le paramètre <cite>-it</cite> permet justement
-de laisser la commande en mode intéractif, ce qui permet de ne pas fermer l’exécution
-de la commande dès que celle-ci renvoie un code <cite>0</cite>.</p>
+au container. La plus classique est l’exécution d’un bash en mode interactif, via la commande
+code:<cite>docker exec -it containername bash</cite> qui permet d’exécuter une ligne de commande bash.
+Le paramètre <cite>-it</cite> permet justement de laisser la commande en mode intéractif, ce qui
+permet de ne pas fermer l’exécution de la commande dès que celle-ci renvoie un code <cite>0</cite>.</p>
 <p>Il est possible de formuler une description d’architecture composée de containers
 <em>Docker</em> sous la forme d’un fichier <cite>docker-compose.yml</cite>, qui peut se présenter ainsi :</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&#39;2&#39;</span>
@@ -519,23 +520,22 @@ de noms de container, contrairement à un démarrage via <code class="code docut
 contient le langage de programmation Scala <a class="reference internal" href="#id53" id="id22">[18]</a>. Scala a été concu à l’école polytechnique
 de Lausanne (EPFL) afin de proposer de lier des paradigmes de programmation différents
 et habituellement opposés, tels que la programmation fonctionnelle et la programmation
-orientée objet. Scala se base sur la JVM3, ce qui permet de bénéficier de l’abstraction
-de celle-ci en termes de plateforme d’exécution, ainsi que pour la gestion de la mémoire,
-notamment. Scala coopère ainsi de manière transparente avec Java, ce qui permet d’utiliser
+orientée objet. Scala se base sur la <em>JVM</em>, ce qui permet de bénéficier de l’abstraction
+de celle-ci en termes de plateforme d’exécution, ainsi que pour la gestion de la mémoire.
+Scala coopère ainsi de manière transparente avec Java, ce qui permet d’utiliser
 des bibliothèques non codées en Scala.</p>
-<p>Cette section ne précise pas la syntaxique du langage, ni son utilisation.</p>
 </div>
 <div class="section" id="akka">
 <h3>AKKA<a class="headerlink" href="#akka" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Akka <a class="reference internal" href="#id54" id="id23">[19]</a> est un outil de développement et un environnement d’exécution libre et
 open-source qui a pour but de simplifier la mise en place d’applications distribuées
-et concurrentes basée sur la JVM. Il gère donc les langages de programmations Java et Scala,
+et concurrentes basée sur la JVM. Il gère donc les langages de programmations <em>Java</em> et <em>Scala</em>,
 et est développé en Scala. Akka propose une résolution des problèmes de concurrence
 via un système d’acteurs.</p>
 <p>Chaque acteur propose des fonctionnalités, et peut communiquer avec les autres en
 envoyant des messages.  Lorsqu’un acteur reçoit un message, il le traite, effectue des
 actions et peut envoyer d’autres messages, instancier d’autres acteurs ou encore se stopper.</p>
-<p>Chaque acteur est un client léger, qui possède son état et sa boite aux lettres.
+<p>Chaque acteur est un client léger, qui possède son état et sa boîte aux lettres.
 Lorsqu’un acteur plante, il est réinstancié automatiquement, dans le même état
 qu’il était avant, et avec sa file de message, ce qui procure une haute disponibilité.
 De plus, lorsqu’un acteur enfant plante, le parent est notifié, et il peut dès lors
@@ -559,7 +559,7 @@ de données peut être de différentes natures, comme ériger un graphe qui perm
 d’effectuer une expérience de classification via un des algorithmes de classification
 fourni, ou encore une expérience de régression.</p>
 <p>Chacune de ces explorations de données est effectuée sur un ensemble de données,
-qui est qualifié par les champs configurés dans la <a href="#variables">Fig.  244</a> par l’utilisateur
+qui est qualifié par les champs configurés dans la <a href="#variables">Fig.  302</a> par l’utilisateur
 de la plateforme.</p>
 <p>Une expérience fournit des résultats au service demandeur, sous format PFA <a class="reference internal" href="#pfa" id="id26">[10]</a>,
 qui est un format dont la synthaxe est basée sur <em>yaml</em>, mais dont la structure est
@@ -570,14 +570,14 @@ et de simplifier le développement.</p>
 <div class="section" id="place-de-woken-dans-l-architecture">
 <h3>Place de Woken dans l’architecture<a class="headerlink" href="#place-de-woken-dans-l-architecture" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Woken étant un service, il est concu pour être utiliser par d’autres services.
-La figure <a href="#wokenarchiglobal">figure  254</a> présente une version simplifiée de l’architecture
+La <a href="#wokenarchiglobal">figure  312</a> présente une version simplifiée de l’architecture
 de la plateforme MIP.</p>
 <div class="figure align-center" id="id67">
 <span id="wokenarchiglobal"></span><a class="reference internal image-reference" href="_images/woken_archi_global.png"><img alt="Architecture globale simplifiée de la plateforme MIP." src="_images/woken_archi_global.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-text">Architecture globale simplifiée de la plateforme MIP. Le <strong>Portal Frontend</strong> est le point d’accès
 pour l’utilisateur. Il peut consulter les données et effectuer des expériences depuis celle-ci.
 Le <strong>Portal Backend</strong> fournit les mécanismes de sécurité et d’accès aux bases de données, ainsi
-que la répartition des demandes à <strong>Woken</strong> si nécessaire. La base de données <strong>Science-db</strong> contient
+que le passage des demandes à <strong>Woken</strong> si nécessaire. La base de données <strong>Science-db</strong> contient
 les données des patients, tandis que la base de données <strong>Meta-db</strong> contient les descriptions
 de chaque <em>feature</em> disponible dans la plateforme. Cette description permet de déterminer différentes
 informations pour la plateforme telles que le type de données (nominale ou continue) ou l’unité de mesure.
@@ -585,7 +585,7 @@ Si il s’agit d’une demande nécessitant un algorithme, c’est <strong>Woken
 qui va s’occuper de traiter les demandes. <strong>Woken</strong> peut lui-aussi accéder aux bases de données afin
 d’appliquer ses algorithmes. Cette figure est une représentation simplifiée de
 l’architecture, qui ne contient pas tous les intervenants de la plateforme, mais
-uniquement ceux utilisés à cette échelle.</span></p>
+uniquement ceux utilisés à cette échelle, dans le projet.</span></p>
 </div>
 <p>Lorsque l’utilisateur adresse une requête HTTP contenant une demande d’expérimentation,
 le backend envoie une demande de <cite>mining</cite> à woken via une requête POST de la forme :</p>
@@ -598,7 +598,7 @@ le backend envoie une demande de <cite>mining</cite> à woken via une requête P
 </pre></div>
 </div>
 <p>Ce qui correspond aux paramétrage de l’expérience de l’utilisateur, comme présenté en
-<a href="#variables">figure  244</a>.Woken effectuera traite la requête, effectue l’algorithme et retourne une réponse sous
+<a href="#variables">figure  302</a>.Woken traite la requête, effectue l’algorithme et retourne une réponse sous
 format <em>PFA</em>. Le format de réponse n’est pas important dans le cadre de ce projet.</p>
 <p>Il existe deux routes REST pour demander à Woken d’effectuer un travail :</p>
 <ul class="simple">
@@ -624,7 +624,7 @@ forme :</p>
 <h3>Fonctionnement interne de Woken<a class="headerlink" href="#fonctionnement-interne-de-woken" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Woken a la responsabilité d’appliquer des algorithmes suite à la demande via l’une
 des deux <a class="reference internal" href="#routesrest"><span class="std std-ref">routes REST</span></a> mises à disposition.</p>
-<p>La <a href="#wokenarchiinternal">figure  255</a> présente les intervenants liés à <em>Woken</em> lors
+<p>La <a href="#wokenarchiinternal">figure  313</a> présente les intervenants liés à <em>Woken</em> lors
 d’une demande d’algorithme.</p>
 <div class="figure align-center" id="id68">
 <span id="wokenarchiinternal"></span><a class="reference internal image-reference" href="_images/woken_archi_internal.png"><img alt="Architecture  interne de woken." src="_images/woken_archi_internal.png" style="width: 600px;" /></a>
@@ -641,14 +641,14 @@ qui permet de mettre à l’échelle en cas de besoin. Le résultat de chaque ex
 est stocké dans la base de données <strong>Woken-DB</strong>, ce qui permet de récupérer
 le fichier de définition <em>PFA</em> afin de reconstruire l’éxpérience et de la vérifier,
 si besoin. Attention, les intervenants décrits ci-contre ne sont pas contenus
-dans le projet, mais bel et bien indépendants, et liés via la configuration <em>Docker-compose</em>.</span></p>
+dans le projet <em>Woken</em>, mais bel et bien indépendants, et liés via la configuration <em>Docker-compose</em>.</span></p>
 </div>
 <p>Par rapport au code de <em>Woken</em>, le principal intervenant est le flux d’acteurs <em>Akka</em>,
 implémenté dans le script <code class="code docutils literal"><span class="pre">/src/main/scala/core/coordinator.scala</span></code>. C’est celui-ci
 qui recoit les expérimentations à effectuer. Celles-ci sont déterminées par un code
 d’algorithme, des <em>features</em> concernées, les variables cibles ainsi que le modèle et
 les hyperparamètres pour les expériences de <em>machine learning</em>.</p>
-<p>Les acteurs Akka implémentés dans cette portion de code Scala héritent d’une méthodologie
+<p>Les acteurs <em>Akka</em> implémentés dans cette portion de code Scala héritent d’une méthodologie
 FSM (Finite State Machine), ce qui rend les acteurs capables de se comporter comme un
 automate à états finis. Les transition entre ces états s’effectuent via des événements
 précis. Cette implémentation permet de mettre un acteur parent en attente des résultats
@@ -660,10 +660,10 @@ forme selon le format d’entrée de Chronos, de lancer la requête à celui-ci,
 les résultats dans la base de données <em>Woken-DB</em>, de mettre en forme le résultat et
 de le retourner au service demandeur.</p>
 <p>La voie intéressante dans le cadre de ce projet est celle de <code class="code docutils literal"><span class="pre">/mining/experiment</span></code>.
-Celle-ci a pour caractéristiques de pouvoir gérer plusieurs algorithmes pour une expérimentation,
+Celle-ci a pour caractéristique de pouvoir gérer plusieurs algorithmes pour une expérimentation,
 ainsi que de gérer la <em>cross-validation</em>.</p>
 <p>Le flux de travail entre les acteurs peut être représenté comme montré sur la
-<a href="#wokenactors">figure  256</a></p>
+<a href="#wokenactors">figure  314</a></p>
 <div class="figure align-center" id="id69">
 <span id="wokenactors"></span><a class="reference internal image-reference" href="_images/wokenactors.png"><img alt="Schéma des acteurs Akka du script coordinator.scala." src="_images/wokenactors.png" style="width: 650px;" /></a>
 <p class="caption"><span class="caption-text">Schéma des acteurs Akka du script coordinator.scala. Les différents acteurs peuvent
@@ -715,7 +715,7 @@ Woken sérialise en <cite>JSON</cite> correspondant au format attendu par Chrono
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Woken est actuellement capable d’instancier autant de containers que demandent les utilisateurs.
+<p><em>Woken</em> est actuellement capable d’instancier autant de containers que demandent les utilisateurs.
 Il s’occupe de générer des identifiants uniques comme <cite>id</cite> de tâche à Chronos,
 de récolter chacun des résultats dans la base de données et de les mettre en relation avec
 la bonne expérience.</p>
@@ -723,17 +723,18 @@ la bonne expérience.</p>
 de configuration <cite>JSON</cite> envoyé via une requête POST HTTP, il ne peut qu’attendre les résultats
 dans la base de données.</p>
 <p>Dans le cadre de notre nouveau flux, nous devons pouvoir attendre la fin du travail d’un
-container, récupérer son résultat, puis adresser une deuxième requête sur le container.</p>
+container, récupérer son résultat, puis adresser une deuxième requête utilisant le résultat précédemment
+rendu.</p>
 <p>Cette fonctionnalité, que l’on peut qualifier de container «&nbsp;interactifs&nbsp;», doit faire
 l’objet de recherches. Docker est conçu pour être <em>stateless</em>. Quand un container meurt,
 si il n’a pas de <em>Volume</em> configuré, le container n’a pas de moyen d’enregistrer l’état
 dans lequel il était. Un <em>Volume</em> est un répertoire partagé entre le container et l’hôte.
 Si il existe des fichiers dans le dossier au moment du montage du <em>Volume</em>, le container
-y aura accès. Si un le container meurt, le contenu du <em>Volume</em> reste.</p>
+y aura accès. Si le container meurt, le contenu du <em>Volume</em> reste.</p>
 </div>
 <div class="section" id="tests-preliminaires-avec-tpot">
 <h3>Tests préliminaires avec TPOT<a class="headerlink" href="#tests-preliminaires-avec-tpot" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Des tests ont été effectués avec TPOT afin de déterminer son efficactié et son utilisabilité.
+<p>Des tests ont été effectués avec TPOT afin de déterminer son utilisabilité.
 Dans le cadre de du projet, le plus important était de pouvoir:</p>
 <ul class="simple">
 <li>Travailler avec le dataset du projet;</li>
@@ -753,9 +754,9 @@ adressée sur le projet afin de vérifier les points délicats.</p>
 <ul class="simple">
 <li>Il est possible de récupérer le meilleur pipeline trouvé, avec les hyperparamètres du modèle, ainsi que son score;</li>
 <li>Il est possible d’enregistrer un pipeline sous forme de texte, et de le ré-instancier en objet Scikit-learn utilisable pour des prédictions;</li>
-<li>Tpot n’est pas en mesure de mettre à disposition la selection, la construction et la normalisation de features. Celles-ci sont données par le modèle;</li>
+<li><em>TPOT</em> n’est pas en mesure de mettre à disposition la selection, la construction et la normalisation de features. Celles-ci sont données par le modèle;</li>
 <li>L’export n’est pas utilisable dans notre contexte;</li>
-<li>Il est possible de travailler via le dataset du projet.</li>
+<li>Il est possible de travailler avec le dataset du projet.</li>
 </ul>
 <p>A la fin de cette analyse, les attentes envers TPOT dans le cadre du projet sont atteintes.</p>
 </div>
@@ -785,7 +786,7 @@ la nouvelle architecture pour résoudre les problèmatiques connues qui sont :</
 <p>Sans parler directement de la modifications des acteurs <em>Akka</em>, il est intéressant
 de présenter une vue d’ensemble des intervenants dans la problématique du projet,
 et de définir les rôles qu’ils remplissent dans cette nouvelle conception.</p>
-<p>La <a href="#conceptionflow">figure  257</a> présente une représentation du flux imaginé.
+<p>La <a href="#conceptionflow">figure  315</a> présente une représentation du flux imaginé.
 Elle est volontairement présentée en premier, et avec un haut niveau d’abstraction,
 afin de définir la conception des différentes parties qui la constituent. Etant donné
 que les restrictions sont fortement liées à Docker et à son fonctionnement, la suite
@@ -869,8 +870,8 @@ container avec des volumes, des variables d’environnement, et un entrypoint.</
 </div>
 <div class="section" id="id33">
 <h2>Akka<a class="headerlink" href="#id33" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Le flux d’acteurs présenté à la figure <a href="#wokenactors">figure  256</a> est modifié afin
-de répondre au nouveau container «&nbsp;interactif&nbsp;» lié à Docker. La <a href="#newinteractiveactors">figure  258</a>
+<p>Le flux d’acteurs présenté à la figure <a href="#wokenactors">figure  314</a> est modifié afin
+de répondre au nouveau container «&nbsp;interactif&nbsp;» lié à Docker. La <a href="#newinteractiveactors">figure  316</a>
 présente le flux de travail alternatif conçu.</p>
 <div class="figure align-center" id="id71">
 <span id="newinteractiveactors"></span><a class="reference internal image-reference" href="_images/modifieddiagramactorscoordinator.png"><img alt="Schéma de la nouvelle conception d'acteurs pour le nouveau flux interactif." src="_images/modifieddiagramactorscoordinator.png" style="width: 600px;" /></a>
@@ -898,7 +899,7 @@ cheminement effectués.</p>
 <div class="section" id="presentation-des-taches">
 <h2>Présentation des tâches<a class="headerlink" href="#presentation-des-taches" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Afin de faciliter la lecture, ce chapitre sera présenté en suivant la numérotation de
-la représentation de la <a href="#tasksbreakdown">figure  259</a>.</p>
+la représentation de la <a href="#tasksbreakdown">figure  317</a>.</p>
 <div class="figure align-center" id="id72">
 <span id="tasksbreakdown"></span><a class="reference internal image-reference" href="_images/ImplementationRepresentation.png"><img alt="Représentation graphique des tâches réalisées." src="_images/ImplementationRepresentation.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Représentation graphique des tâches réalisées. Elles sont volontairement
@@ -1117,7 +1118,7 @@ JSON a été enregistrée, et envoyée sur l’API en requête <cite>HTTP POST</
 découpler au maximum les sources de problèmes.</p>
 <div class="section" id="tache-11-instanciation-du-container-personnalise-via-le-gui">
 <h3>Tâche 11 : Instanciation du container personnalisé via le GUI<a class="headerlink" href="#tache-11-instanciation-du-container-personnalise-via-le-gui" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Chronos fourni une interface graphique présentée en <a href="#chonosguijson">figure  260</a></p>
+<p>Chronos fourni une interface graphique présentée en <a href="#chonosguijson">figure  318</a></p>
 <div class="figure align-center" id="id73">
 <span id="chonosguijson"></span><a class="reference internal image-reference" href="_images/chronos_json_gui.png"><img alt="Interface graphique de configuration JSON d'une tâche Chronos." src="_images/chronos_json_gui.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text">Interface graphique de configuration JSON d’une tâche Chronos.</span></p>
@@ -1139,7 +1140,7 @@ L’ancienne version de Chronos utilise la route <code class="code docutils lite
 <h2>Akka<a class="headerlink" href="#id47" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Etant donné que l’instanciation du container TPOT est possible via Chronos, il est
 possible d’implémenter le flux d’acteur nécessaire pour effectuer le travail présenté
-à la <a href="#newinteractiveactors">figure  258</a>.</p>
+à la <a href="#newinteractiveactors">figure  316</a>.</p>
 <p>Cette partie est plus compliquée que les autres, car l’implémentation demande des connaissances
 en <em>Scala</em>, en utilisant les définitions <em>AKKA</em> et en liant l’utilisation des automates
 à états finis, choses totalement inconnues au début de ce projet.</p>
@@ -1171,7 +1172,7 @@ une expérience de comparaison entre avec et sans optimisation de pipeline autom
 <div class="section" id="tache-14-mise-en-place-du-nouveau-flux-dacteurs-dans-woken-pour-traiter-nos-container-interactif">
 <h3>Tâche 14 : Mise en place du nouveau flux d’acteurs dans Woken pour traiter nos container interactif<a class="headerlink" href="#tache-14-mise-en-place-du-nouveau-flux-dacteurs-dans-woken-pour-traiter-nos-container-interactif" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Actuellement, le nouvel acteur <code class="code docutils literal"><span class="pre">InteractiveActor</span></code> est implémenté pour remplacer
-le <code class="code docutils literal"><span class="pre">ExperimentActor</span></code>, comme le suggère la <a href="#newinteractiveactors">figure  258</a>.</p>
+le <code class="code docutils literal"><span class="pre">ExperimentActor</span></code>, comme le suggère la <a href="#newinteractiveactors">figure  316</a>.</p>
 <p>Au moment du rendu, la configuration du container pour l’entrainement est configuré.
 Un fichier situé au chemin <code class="code docutils literal"><span class="pre">home/user/docker-volume</span></code> et contenant les informations
 suivantes sont pour le moment nécéssaire :</p>
@@ -1312,17 +1313,25 @@ ainsi que les outils pour l’utiliser (<em>Chronos</em>).</p>
 ne se coordonne pas correctement avec <code class="code docutils literal"><span class="pre">Mesos-master</span></code>, et qu’il ne donne pas de code d’erreur.</p>
 <p>Si c’est le cas, cela ce manifeste par des containers qui restent en état «&nbsp;queued&nbsp;»
 dans le GUI de [Chronos]. Pour le relancer : <code class="code docutils literal"><span class="pre">docker-compose</span> <span class="pre">up</span> <span class="pre">mesos-slave</span></code>.</p>
-<p>Une fois la stack lancée, il est possible d’utiliser IntelliJ en natif, et de débugger via celui-ci.</p>
+<p>Une fois la stack lancée, il est possible d’utiliser <em>IntelliJ</em> en natif, et de débugger via celui-ci.</p>
 <p>Il a fallu comprendre l’architecture pour effectuer le passage en natif de <em>Woken</em>.</p>
 </div>
 <div class="section" id="tache-20-adaptation-du-docker-compose-pour-gerer-les-bases-de-donnees-via-les-migrations">
 <h3>Tâche 20 : Adaptation du docker-compose pour gérer les bases de données via les migrations<a class="headerlink" href="#tache-20-adaptation-du-docker-compose-pour-gerer-les-bases-de-donnees-via-les-migrations" title="Lien permanent vers ce titre">¶</a></h3>
+<p>De base, le container <em>Docker</em> de <em>PostgresSQL</em> est prévu pour charger un script de base
+de données dans le volume</p>
 </div>
 <div class="section" id="tache-21-mise-a-jour-du-docker-compose-pour-le-validation-pool-akka">
 <h3>Tâche 21 : Mise à jour du docker-compose pour le validation-pool Akka<a class="headerlink" href="#tache-21-mise-a-jour-du-docker-compose-pour-le-validation-pool-akka" title="Lien permanent vers ce titre">¶</a></h3>
 </div>
+</div>
 <div class="section" id="compte-rendu-graphique-de-l-avancement-du-projet">
-<h3>Compte rendu graphique de l’avancement du projet<a class="headerlink" href="#compte-rendu-graphique-de-l-avancement-du-projet" title="Lien permanent vers ce titre">¶</a></h3>
+<h2>Compte rendu graphique de l’avancement du projet<a class="headerlink" href="#compte-rendu-graphique-de-l-avancement-du-projet" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="figure align-center" id="id74">
+<span id="progressrepresentation"></span><a class="reference internal image-reference" href="_images/implementationRepresentationProgress.png"><img alt="Représentation graphique des tâches effectuées." src="_images/implementationRepresentationProgress.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Représentation graphique de l’avancement des tâches. Les tâches vertes sont
+totalement implémentées et testées, les tâches oranges sont en cours de réalisation
+et les tâches rouges ne sont pas commencées.</span></p>
 </div>
 </div>
 </div>
@@ -1693,9 +1702,9 @@ de vérifier que telle ou telle image Docker respecte ce format?</li>
 <li><a class="reference internal" href="#tache-19-sortie-de-woken-du-container-pour-permettre-un-debuggage-en-natif">Tâche 19 : Sortie de Woken du container pour permettre un débuggage en natif</a></li>
 <li><a class="reference internal" href="#tache-20-adaptation-du-docker-compose-pour-gerer-les-bases-de-donnees-via-les-migrations">Tâche 20 : Adaptation du docker-compose pour gérer les bases de données via les migrations</a></li>
 <li><a class="reference internal" href="#tache-21-mise-a-jour-du-docker-compose-pour-le-validation-pool-akka">Tâche 21 : Mise à jour du docker-compose pour le validation-pool Akka</a></li>
-<li><a class="reference internal" href="#compte-rendu-graphique-de-l-avancement-du-projet">Compte rendu graphique de l’avancement du projet</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#compte-rendu-graphique-de-l-avancement-du-projet">Compte rendu graphique de l’avancement du projet</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#validation-experience">Validation (Expérience)</a></li>
