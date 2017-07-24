@@ -842,7 +842,7 @@ Mais aussi, si possible:
 * Déterminer l'importance de chaque feature.
 * Déterminer l'exploitabilité de l'export implémenté dans TPOT.
 
-Des tests :cite:`@tpottests` ont été implémentés, et une issue :cite:`tpotissue` a été
+Des tests :cite:`@tpottests` ont été implémentés, et une issue :cite:`@tpotissue` a été
 adressée sur le projet afin de vérifier les points délicats.
 
 A la fin de ces tests, il s'avère que :
@@ -976,7 +976,7 @@ Ce problème, bien que connu, n'est pas prioritaire dans le cadre de ce projet. 
 des *volumes Docker* n'est pas définitive, il est prévu de mettre en place une communication
 directe entre l'acteur *Akka* et le container. La principale option semble être la mise
 en place d'un système de queues de messages entre l'acteur *Akka* et le container *Docker* lié,
-par exemple via une bibliothèque comme ZeroMQ :cite:`zeromq`. Le but de ce projet est
+par exemple via une bibliothèque comme ZeroMQ :cite:`@zeromq`. Le but de ce projet est
 de faire une expérience scientifique sur l'apport de l' *automated machine learning*
 dans le cadre de la plateforme.
 
@@ -1000,7 +1000,7 @@ présente le flux de travail alternatif conçu.
 
 .. _newinteractiveactors:
 .. figure:: images/modifieddiagramactorscoordinator.png
-   :width: 500px
+   :width: 600px
    :align: center
    :alt: Schéma de la nouvelle conception d'acteurs pour le nouveau flux interactif.
 
@@ -1057,7 +1057,8 @@ qui implémente la solution d'optimisation de pipeline automatique de `TPOT`.
 
 Le script implémenté est disponible sur *Github* :cite:`@tpotcode`.
 
-**1 : Récupération du meilleur pipeline**
+Tâche 1 : Récupération du meilleur pipeline
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Le meilleur est disponible après l'optimisation du pipeline via TPOT. La récupération
 se fait via la variable interne :code:`_optimized_pipeline` de l'objet `TPOTClassifier`
@@ -1070,8 +1071,8 @@ montre que les développeurs ont conscience de cette mauvaise pratique.
 Si le changement est effectué dans la même *release*, il faudra modifier le code du
 script.
 
-**2 : Liaison de la BDD du CHUV, mise en forme du dataset pour TPOT et découpage du dataset**
-
+Tâche 2 : Liaison de la BDD du CHUV, mise en forme du dataset pour TPOT et découpage du dataset
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Le script :code:`database_connector.py`, fourni par le CHUV avec les images de base
 *Docker* `Python` pour l'implémentation de nouveaux algorithme, se base sur les variables
 d'environnement du container. Le script permet d'effectuer des requêtes `SQL` directement
@@ -1082,7 +1083,8 @@ Le dataset est transformé en `array` *numpy* après la récupération des *reco
 la requête, afin de correspondre au type attendu par TPOT. Ceci est appliqué pour les
 *features*, mais aussi pour les *targets*.
 
-**3 : Analyse du type de features**
+Tâche 3 : Analyse du type de features
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Il est possible de récupérer le type des features (nominal ou continu) via la
 méthode `var_type` du script `database_connector.py`. Ces types sont récupérés
@@ -1092,10 +1094,19 @@ Cette fonctionnalité n'est pas encore implémentée. Il faudra tester toutes le
 et, si il n'y a que des features de type continues, instancier un `TPOTRegressor`,
 et si non, instancier un `TPOTClassifier`. Le reste du script ne change pas.
 
-**4 : Reconstruction du pipeline via la description texte crée par TPOT**
+Tâche 4 : Reconstruction du pipeline via la description texte crée par TPOT
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Depuis l'enregistrement sous format d'une chaîne de caratères via la phase de *training*,
+il est possible de reconstruire le pipeline en objet *scikit-learn* via la *toolbox* de TPOT
+via la directive :code:`tpot._toolbox.compile(expr=pipeline)`. Dès lors, il est
+possible de fitter le pipeline par rapport au même training et test set que lors
+de la phase de `training`. Il est facile de récupérer le même découpage du training
+test et du test set en définissant la `seed` pour la méthode de découpage du dataset,
+soit :code:`train_test_split(X,y, random_state = 42)` qui est fournie par *scikit-learn*.
 
-**5 : Retour des prédictions**
+Tâche 5 : Retour des prédictions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pour l'instant, le retour des prédictions se fait au format JSON en sérialisant l'objet
 `array` de `numpy`. Ce formatage de retour n'est pas définitif, mais il n'as pas été
@@ -1104,57 +1115,210 @@ encore précisé comment nous allons implémenter la liaison du retour du contai
 s'occuper du formatage pour permettre de retourner au *AlgorithmActor* qui lui a
 confié le *job* pour l'algorithme *TPOT*.
 
-
-Le `Dockerfile` définit un entrypoint sur un script *bash* personnalisé qui se présente ainsi.
-
 Docker
 ------------
 
-**Implémentation d’un container stateful**
+Une fois le script TPOT fonctionnel en stand-alone, il est possible d'intégrer ce
+script dans les images de créations d'algorithmes pour la plateforme fournies par
+le CHUV :cite:`@dockerimages`.
 
-**Gestion des entrypoints**
+La copie du script dans le container s'effectue via le Dockerfile, en utilisant
+la directive :code:`COPY`. Le script de connexion :code:`database_connector.py`
+est lui aussi copié en interne au container.
 
-**Variables d’environnements**
+Dans le cadre du projet, Captain :cite:`@captain` est utilisé afin de générer des images
+taguées par leur numéro de commit. On utilise le script :code:`build.sh` pour générer
+l'image. Le nom de l'image est contenu dans le fichier de définition :code:`captain.yml`.
 
-**Gestion des codes d’erreurs**
+Le fichier `README` du repository de travail :cite:`@dockerimages` contient les commandes
+pour tester le container interactif.
 
-**Connexion aux bases de données.**
+Une version a été publiée sur Docker-Hub :cite:`@dockerhubtpot` afin de tester l'application du container
+dans le cadre de Woken.
+
+L'installation de la dépendance TPOT via *pip* est effectuée directement dans le Dockerfile.
+
+Tâche 6 : Implémentation d’un container stateful
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Le point principal d'implémentation de la partie Docker réside dans le fait de pouvoir
+conserver des informations entre la phase de *training* et la phase de *test* (qui correspond
+aux prédicats).
+
+Au niveau *Python*, entre deux appels successifs sur le script de *TPOT*, les variables
+n'ont pas de persistance, car les variables sont supprimées à la fin de l'exécution de la
+méthode appellée. Il est donc nécessaire d'enregistrer de manière persistante le résultat
+à la fin de chaque appel d'une des deux méthodes.
+
+Dès lors, deux implémentations sont possibles :
+
+* Attente active
+* Démarrage avec un état déterminé.
+
+**Attente active**
+
+Un container est démarré via la méthode :code:`docker run` en mode d'attente.
+Il ne contient qu'un processus d'attente de travail.
+
+Lorsqu'il reçoit une demande de training via la commande :code:`docker exec containername train`,
+le processus d'attente crée un processus enfant, qui correspond à l'appel *Python* sur le script
+TPOT. Le script python va chercher les informations sur la description de l'expérience, soit dans
+les variables d'environnement, soit dans le fichier de définition du *volume*.Lorsqu'il a fini l'entrainement,
+il inscrit le meilleur pipeline dans fichier texte, dans un répertoire local, non accessible par
+l'hôte.
+
+Le processus enfant est supprimé, et le processus d'attente reste en vie.
+
+Lors de la demande de prédicats via la commande :code:`docker exec containername test`,
+un nouveau processus enfant est crée. Il effectue les prédicats et les mets à disposition
+dans le *volume* partagé par l'hôte.
+
+Une nouvelle demande de travail peut en tout temps être effectuée, car le processus
+d'attente est actif tant que le container n'est pas stoppé.
+
+Cette implémentation doit être faite en étant attentif au problème de `PID 1` et de processus
+zombies :cite:`@zombiesdocker`, problème bas-niveau Linux connu et géré dans toutes les distribution, mais qui n'est
+pas nativement appliqué dans le cadre de Docker. Pour résumer simplement ce problème,
+le processus avec le `PID 1` est responsable de la suite des signaux bas-niveau à tous
+les enfants, et de récupérer les processus orphelins qui peuvent survenir dans les
+cas ou un parent n'attend pas la fin du travail du sous-processus enfant.
+
+Ces problématiques créent des processus zombies, qui peuvent saturer l'utilisation
+de `PID` et provoquer un freeze total de la machine.
+
+Ce problème est réglé dans l'implémentation :cite:`@tiniimplementation` effectuée via
+l'utilisation de `tini` :cite:`@tini`.
+
+Cette implémentation, bien que fonctionnelle via la ligne de commande *Docker*,
+n'est pas utilisable via Chronos, car il ne gère par l'envoi de commande :code:`exec`
+après le lancement d'un container.
+
+**Démarrage avec un état déterminé**
+
+Dans cette implémentation, le container reçoit lui-aussi toutes les informations nécessaires
+au mode dans lequel il est appellé. En revanche, il se lance directement en appellant
+un travail via la méthode :code:`docker run containername commande`, où :code:`commande`
+peut prendre les valeurs :code:`train` et :code:`test`.
+
+Etant donné que le container meurt à la fin de l'éxécution du script, il est nécessaire
+d'enregistrer toutes les sorties qui sont nécessaires au prochain appel sur le *volume*
+partagé entre l'hôte et le container. Un appel sur la méthode :code:`test` doit être lié
+au même *volume* que celui qui a effectué la phase d'entraînement.
+
+Cette méthode est celle de l'implémentation finale, car elle permet d'être compatible
+avec les restrictions de Chronos, qui ne permet d'envoyer des commandes :code:`docker run`.
+
+Tâche 7 : Gestion des entrypoints
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+La définition des entrypoints est effectuée en donnant dans le Dockerfile la commande
+:code:`ENTRYPOINT [/docker-entrypoint.sh]`, où :code:`docker-entrypoint.sh` est un
+script bash de la forme:
+
+.. literalinclude:: examples/entrypoint.sh
+   :language: bash
+
+Le paramètre :code:`commande` du :code:`docker-run` est automatiquement transmis
+à ce script, qui défini le point d'entrée du script python à appeler. En cas de
+commande non reconnue, le container n'effectuera pas d'appel au script, et ne plantera
+pas.
+
+Tâche 8 : Variables d’environnements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Les variables d'environnement sont toutes passées par le demandeur de l'algorithme
+du container. Elles sont passées au moment de l'appel de la méthode de lancement de celui-ci
+via la synthaxe :code:`docker run --env cle="valeur"`. Il est possible d'en stipuler
+autant que besoin au lancement, et celles-ci sont accessibles dans le container comme
+des variables d'environnement standard Linux, bien que leur portée soit locale au
+container.
+
+Tâche 9 : Gestion des codes d’erreurs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Pour la gestion des erreurs dans un container Docker, il faut prendre en compte
+plusieurs niveaux auxquels celle-ci peuvent intervenir :
+
+* Au niveau du script exécuté en interne;
+* Au niveau de la redirection des actions via les entrypoints;
+* Au moment du lancement du container.
+
+Les exceptions dans le script TPOT sont gérées, et renvoyées via la méthode traditionnelle
+de *Python* :code:`sys.exit(code)`.
+
+Ceux-ci sont renvoyées au script *bash* :code:`entrypoint.sh`,
+qui s'est occupé d'appeler le script.
+
+Les codes d'erreurs au moment de l'exécution, généralement générés par une erreur
+de configuration, sont traités nativement par `Docker`.
+
+Le script intérmédiaire :code:`entrypoint.sh` coupe actuellement le flux d'erreur,
+car il ne retransmet pas les codes générés par le script *Python*. Ce problème est
+réellement handicapant, car si une exception intervient dans le code, on ne peut
+pas la retrouver en dehors du container, y compris avec les `Docker logs`.
+
+Un travail supplémentaire doit être effectué pour que le script :code:`entrypoint.sh`
+puisse retourner le code d'erreur au container, et inscrire les exception dans les logs.
+
+Cette fonctionnalité n'a pas été implémentée par manque de temps.
+
+Tâche 10 : Connexion aux bases de données
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Etant donné que le script *Python* est désormais intégré dans le container,
+l'accès à la base de données doit s'effectuer entre deux containers.
+La configuration des bases de données sont passées via des variables d'environnement.
+La configuration correcte du réseau, décrite dans le fichier *docker-compose.yml* de
+l'architecture, est essentielle pour que les bases de données soient accessibles via
+le container. Ces points sont traités dans la partie architecture de ce chapitre.
 
 Chronos
 ------------
 
-**Instanciation du container personnalisé via le GUI**
+Tâche 11 : Instanciation du container personnalisé via le GUI
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Instanciation du container via une requête POST avec un fichier JSON**
+Tâche 12 : Instanciation du container via une requête POST avec un fichier JSON
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Akka
 ------------
 
-**Mise en relation du validation pool Akka**
+Tâche 13 : Mise en relation du validation pool Akka
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 avec les acteurs Woken pour la route /mining/experiment
 
-**Mise en place du nouveau flux d’acteurs dans Woken pour traiter nos container interactif**
+Tâche 14 : Mise en place du nouveau flux d’acteurs dans Woken pour traiter nos container interactif
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Scala
 ------------
 
-**Mise en relation du scoring pour le retour à l’AlgorithmActor**
+Tâche 15 : Mise en relation du scoring pour le retour à l’AlgorithmActor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Configuration des définitions de containers d’algorithmes**
+Tâche 16 : Configuration des définitions de containers d’algorithmes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Configuration des définitions de containers d’algorithmes**
+Tâche 17 : Configuration des définitions de containers d’algorithmes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Génération automatique des répertoires pour la liaison des volumes**
+Tâche 18 : Génération automatique des répertoires pour la liaison des volumes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Architecture
 ------------
 
-**Sortie de Woken du container pour permettre un débuggage en natif**
+Tâche 19 : Sortie de Woken du container pour permettre un débuggage en natif
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Adaptation du docker-compose pour gérer les bases de données via les migrations**
+: _dockercompose:
+Tâche 20 : Adaptation du docker-compose pour gérer les bases de données via les migrations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Mise à jour du docker-compose pour le validation-pool Akka**
+Tâche 21 : Mise à jour du docker-compose pour le validation-pool Akka
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Validation (Expérience)
 ============
@@ -1205,14 +1369,9 @@ TODO:Annexes :
 - TPOT papers
 - FULL Rest API for TPOT
 
-.. .. raw:: latex
-
-..  \bibliographystyle{plain}
-..  \bibliography{references.bib}
-
 .. bibliography:: references.bib
    :all:
-   :style: unsrt
+   :style: plain
 
 .. Indices and tables
 .. ==================
