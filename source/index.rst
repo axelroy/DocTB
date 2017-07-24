@@ -21,9 +21,10 @@ Introduction
 ============
 
 Le présent document fait office de rapport de projet.
-Il permet de comprendre le contexte de celui-ci, de reconstituer son cheminement du projet,
-de comprendre les choix et les déductions effectuées, ainsi que de connaître l'état final
-du travail et les perspectives d'amélioration.
+Il permet de comprendre le contexte de celui-ci, de décrire les éléments qui le compose,
+fait une analyse de la problématique, la conception en vue de la résolution et
+présente l'implémentation effectuée. Ce document ne présente pas tout le cheminement,
+mais uniquement l'état final
 
 Contexte du projet
 ----------------
@@ -31,13 +32,13 @@ Contexte du projet
 Le présent projet s'inscrit dans le cadre du travail de Bachelor en Informatique option "Développement logiciel
 et multimédia", réalisé à la HE-ARC de Neuchâtel.
 
-Le projet est effectué pour le CHUV-LREN dans le cadre du projet Human Brain Project.
+Le projet est effectué pour le CHUV-LREN dans le cadre du "Human Brain Project".
 
 Human Brain projet
 ~~~~~~~~~~~~
 
 Ce projet s’inscrit dans le cadre du projet Européen « Human Brain Project ».
-Ce chapitre vise à expliquer le contexte de la partie du projet qui nous intéresse.
+Ce chapitre vise à expliquer le contexte du sous-projet 8, et ce qui nous intéresse.
 
 
 Présentation de la plateforme MIP
@@ -78,18 +79,18 @@ et on peut observer différentes statistiques, comme par exemple des vues sous f
 
    *Exemple d'histogramme d'une variable.*
 
-Il est ainsi possible d’accéder à toutes les caractéristique médicales et ainsi
+Il est ainsi possible d’accéder à toutes les caractéristiques médicales et ainsi
 de les analyser manuellement. La plateforme permet aussi de formuler des expériences
-basées sur les données, afin de proposer un modèle personnalisé qui permet d’essayer
+basées sur les données, afin de proposer un modèle permettant d’essayer
 de trouver des liens entre les variables des patients et leur diagnostiques médicaux.
-La plateforme permet vise à formuler des expériences liées à Alzheimer,
+La plateforme vise à formuler des expériences liées à Alzheimer,
 mais d’autres maladie neurologiques pourraient être visées. A partir d’une caractéristique,
 l’utilisateur peut décider de formuler une expérience en choisissant dans laquelle
 des catégories suivantes il compte l’impliquer :
 
-* Variable
-* Co-variable
-* Filtre:num:`figure #features`
+* Variable, qui correspondent à la cible de l'expérience;
+* Co-variable, qui correspondent aux variables de l'expériences.
+* Filtre
 
 Via l’interface suivante présentée en :num:`figure #variables`.
 
@@ -99,11 +100,11 @@ Via l’interface suivante présentée en :num:`figure #variables`.
    :align: center
    :alt: Exemple de formulation d'expérience, étape selection des variables. Cet exemple vise à trouver un lien entre la quantité de matière grise dans le Cuneus en fonction de l'age et du sexe.
 
-   *Exemple de formulation d'expérience, étape selection des variables. Cet exemple vise à trouver un lien entre la quantité de matière grise dans le Cuneus en fonction de l'age et du sexe.*
+   *Exemple de formulation d'expérience, étape selection des variables. Cet exemple vise à trouver un lien entre la quantité de matière grise dans le Cuneus gauche en fonction de l'age et du sexe.*
 
-Ce qui nous amène vers la possibilité d’analyser des graphes mêlant les différentes
+Ce qui permet d’analyser des graphes mêlant les différentes
 variables. Il est encore possible de paramétrer la représentation sur l’axe via
-une boite à outils, afin de faire ressortir les informations intéressantes, comme présenté à la :num:`figure #resultnoml`
+une boite à outils, afin de faire ressortir les informations intéressantes, comme le montre la :num:`figure #resultnoml`
 
 .. _resultnoml:
 .. figure:: images/Resultat_nonML_experiment.png
@@ -111,11 +112,11 @@ une boite à outils, afin de faire ressortir les informations intéressantes, co
    :align: center
    :alt: Résultat de l'expérience formulée à la :num:`figure #variables`. Représentation de la quantité de matière grise en cm3 en fonction de l'age et du sexe (bordeau = femme, rose = homme).
 
-   *Résultat de l'expérience formulée à la :num:`figure #variables`. Représentation de la quantité de matière grise en cm3 en fonction de l'age et du sexe (bordeau = femme, rose = homme).*
+   *Résultat de l'expérience formulée Représentation de la quantité de matière grise en cm3 en fonction de l'age et du sexe (bordeau = femme, rose = homme).*
 
 La partie intéressante dans le cadre de ce projet est la possibilité, à partir des
 variables sélectionnées, de lancer une expérience d’apprentissage automatique
-(Machine Learning) afin de trouver le modèle qui permet de représenter au mieux
+(*Machine Learning*) afin de trouver le modèle qui permet de représenter au mieux
 le lien entre les caractéristiques et le diagnostique.
 
 L’aide pour la configuration de l’expérience est présentée comme en :num:`figure #helpconfig`
@@ -134,17 +135,17 @@ L’étape 1 correspond à la sélection d’un algorithme de *Machine Learning*
 la liste fournie (catégories : analyse statistique, extraction de caractéristiques
 et modèle prédictif). Le modèle choisi influence fortement les résultats de l’expérience.
 
-Lorsque le modèle est sélectionne, il est possible, suivant le modèle, de devoir
+Lorsque le modèle est sélectionné, il est nécessaire, suivant le modèle, de devoir
 renseigner des « **paramètres** » pour celui-ci. Nous appellerons ces paramètres
 des « **hyper-paramètres** », afin d’éviter la confusion avec les paramètres
 qui sont les coefficients internes qui ont été déterminés après l’entraînement.
-Les hyper-paramètres définissent un fonctionnement interne (par exemple, pour le
+Les hyper-paramètres définissent l'architecture ou le fonctionnement de l'algorithme (par exemple, pour le
 modèle KNN, l’hyper-paramètre k désigne le nombre des voisins les plus proches
 sur lesquels on veut travailler). Le choix de ces hyper-paramètres est donné au
-points deux de cette marche à suivre. Pour un même modèle, le choix d’un
+points 2 de cette marche à suivre. Pour un même modèle, le choix d’un
 hyper-paramètres plutôt qu’un autre change à nouveau drastiquement les résultats.
 
-Il peut définir plusieurs configurations "modèle-paramètres" pour une expérience.
+L'utilisateur peut définir plusieurs configurations "modèle-paramètres" pour une expérience.
 Une expérience ne donne pas instantanément ses résultats. L’utilisateur est notifié
 lorsque les résultats sont consultables.
 
@@ -158,7 +159,7 @@ But du projet
 Ce projet a pour but de mettre en place un moyen pour que l’utilisateur n’ait plus
 à s’occuper du choix du modèle et du paramétrage pour son expérience, et que la
 plateforme s’occupe de trouver automatiquement la meilleure configuration possible.
-Dans l’idéal, l’utilisateur n’a qu’un bouton a presser pour cette étape.
+Dans l’idéal, l’utilisateur n’a qu’un bouton à presser pour cette étape.
 
 
 Cahier des charges (lien vers les annexes je suppose, en sachant qu'il est expliqué en détail dans le document)
@@ -169,7 +170,7 @@ Se référer au cahier des charges fourni en annexes.
 Etat de l'Art
 ============
 
-Avant de se lancer dans la partie plus en détail dans la description de la plateforme,
+Avant de se lancerdans la description du travail,
 il est intéressant d’effectuer un état de l’art des technologies qui pourraient
 nous intéresser. Etant donné que le projet consiste à ajouter des fonctionnalités
 à un projet existant, cette section décrira les technologies actuellement existantes,
@@ -205,7 +206,7 @@ Dans notre cas, l’apprentissage automatique est implémenté dans la plateform
 * Classification naïve bayésienne
 
 Mais on peut aussi ajouter à la plateforme d’autres méthodes d’apprentissage automatique
-via des containers Docker vierges qui sont fournis par le projet.
+via des containers *Docker* préconfigurés qui sont fournis par le projet.
 
 Apprentissage supervisé
 ~~~~~~~~~~~~
@@ -227,7 +228,7 @@ Cet apprentissage s’applique à des données qui ne sont pas labellées par de
 C’est ici à la machine de déterminer les différentes classes qui représentent le problème.
 A partir d’un ensemble de données en entrées, il va chercher à créer des classes représentatives
 pour celles-ci, en maximisant la distance inter-classe, et en minimisant la distance des éléments intra-classe
-comme représenté sur la :num:`figure #distanceml`.:num:`figure #distanceml`
+comme représenté sur la :num:`figure #distanceml`.
 
 .. _distanceml:
 .. figure:: images/distance_illustration.png
@@ -275,6 +276,10 @@ On peut représenter ce flux via la :num:`figure #mlpipeline`:
 
    Exemple d'un pipeline de Machine Learning, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et adapté pour supprimer les parties liées à TPOT.
 
+.. raw:: latex
+
+   \clearpage
+
 .. _mlphases:
 On peut en décrire les phases ainsi :
 
@@ -283,7 +288,7 @@ On peut en décrire les phases ainsi :
 * **Features Selection** : Sélection des caractéristiques les plus pertinentes pour le modèle.
 * **Feature Construction** : Création de nouvelles caractéristiques à partir des données.
 * **Model Selection** : Sélection du type de modèle ainsi que les hyper-paramètres liés à celui-ci (p.e. pour un réseau de neurones, le nombre de couches de neurones). Actuellement, l’utilisateur doit les configurer lui-même, et même un utilisateur expert ne peut pas garantir que ce sont les meilleurs hyper-paramètres possibles.
-* **Parameter Optimization** : le choix d’un modèle détermine les paramètres qui lui sont liés (p.e. pour un réseau de neurones, le poids de chaque neurone). Ces paramètres  influencent énormément la performance du modèle. Ils sont optimisés lors de cette phase.
+* **Parameter Optimization** : le choix d’un modèle détermine les paramètres qui lui sont liés (p.e. pour un réseau de neurones, le poids de chaque neurone). Ces paramètres  influencent énormément la performance du modèle. Ils sont définis lors de cette phase.
 * **Model Validation** : En sortie, nous avons, pour un ensemble de caractéristiques donnée, un modèle et le hyper-paramètres de ce modèle. Il faut ensuite valider ce modèle sur un ensemble de sujets différents afin de déterminer sa pertinence.
 
 Dans une approche traditionnelle d'optimisation d'une expérience de *Machine Learning*,
@@ -291,19 +296,19 @@ on essaie de faire varier les hyper-paramètres du modèle (p.e via les grid-sea
 
 Cette méthode permet d'optimiser les hyper-paramètres du modèle. Ce dernier doit avoir
 été sélectionné manuellement auparavant par l'utilisateur. De plus, l'étendue et le pas des hyper-paramètres sont
-eux-aussi déterminés manuellement. Cela réduit le domaine d'exploration.
+eux-aussi déterminés manuellement, ce qui réduit le domaine d'exploration.
 
 Une tendance émergente de ces dernières années est d'utiliser des méthodes d'intelligence artificielle pour
 explorer l'espace des solutions de manière automatique et optimisée. Cette exploration est souvent effectuée
-via des algorithmes génétiques [TODO:Lien(s) qui explique les principes] car ils
+via des algorithmes génétiques car ils
 correspondent à la problématique d'exploration d'un espace de solutions de grande dimension.
 Cette exploration est effectuée de manière non dirigée tout en fournissant un résultat exploitable.
 
 Les réelles avancées dans le domaine sont récentes, les premiers articles concrets datent de
 2016, et il est difficile de trouver des exemples dans un domaine concret, prouvant l'efficacité de *l'Automated Machine Learning* .
 Les créateurs de bibliothèque TPOT :cite:`Olson2016EvoBio` ont rédigé deux papiers :cite:`olson2016evaluation` :cite:`olson2016tpot`
-d'exemple d'applications dans des cas réels, sur la classification de cas de cancers de la prostate,
-de manière conventionnelle, et via l'approche *Automed Machine Learning*, et ont pu mettre en avant
+d'exemple d'applications dans des cas réels, sur la classification de cas de cancers de la prostate, en comprarant
+l'approche conventionnelle et  l'approche *Automed Machine Learning*, et ont pu mettre en avant
 une amélioration des résultats.
 Google a récemment communiqué son intérêt pour le domaine, en annoncant l'ouverture d'un département
 sur la recherche de cette discipline :cite:`@googleautoml`. Certains sites spécialisés :cite:`@stateautoml` :cite:`@hhusain`
@@ -311,7 +316,7 @@ décrivent ce domaine avec intérêt, mais en précisant que les résultats ne s
 probants, et que, pour le moment, elle n'est pas applicable à toutes les problématiques.
 
 Dans le cadre du projet, étant donné que les utilisateurs ne sont pas experts dans
-le domaine du *Machine Learning*, il est que les résultats soient meilleurs que
+le domaine du *Machine Learning*, il est probable que les résultats soient meilleurs que
 les configurations des utilisateurs.
 
 Si le travail abouti à une expérience, il est possible que celui-ci soit publié.
@@ -327,10 +332,10 @@ de pipeline automatisée, alias *automated Machine Learning*. Elle se distingue 
 bibliothèques telles que Auto-WEKA :cite:`@autoweka` et Hyperopt :cite:`@hyperopt` par le fait
 qu'il est capable non seulement de faire varier les modèles et le hyper-paramètres,
 mais qu'elle est aussi capable de sélectionner, construire ou d'effectuer du préprocessing
-sur les caractéristiques. *TPOT* dispose d'une communauté active, et le créateur *Randy Olson*
-répond très rapidement aux issues postées sur le *Github* de *TPOT*.
+sur les caractéristiques. *TPOT* dispose d'une communauté active, et le créateur,*Randy Olson*,
+répond très rapidement aux *issues* postées sur le *Github* de *TPOT*.
 
-Celà se représente comme sur la figure :num:`figure #mlpipelinetpot`.
+La :num:`figure #mlpipelinetpot` présente un flux de *Machine Learning*.
 
 .. _mlpipelinetpot:
 .. figure:: images/tpot-ml-pipeline.png
@@ -345,10 +350,7 @@ Les différentes étapes ont la même signification que présenté au point de :
 au dessous de la :num:`figure #mlpipeline`.
 
 Cette bibliothèque est codée en Python, et se base sur les modèles de Scikit-learn :cite:`scikit-learn`, ce qui
-permet d'avoir des résultats exploitables directement via cette bibliothèque *Python*. Pour son implémentation,
-elle se base sur une représentation du pipeline sous forme d'arbre pour les pipeline (qui correspondent aux chromosomes
-dans la théorie de *Darwin*), et effectuer des mutations en croisant des parties de cet arbre,
-en en coupant des branches, ou en créant de nouvelles.
+permet d'avoir une compatibilité avec cette bibliothèque *Python*.
 
 
 Systèmes distribués
@@ -365,7 +367,7 @@ localisé sur une machine unique, et son architecture se présentait comme sur l
 .. figure:: images/computer_architecture.png
    :width: 200px
    :align: center
-   :alt: Architecture simple basée sur une application unique
+   :alt: Architecture simple basée sur une machine unique
 
    Architecture simple basée sur une application unique : crédits @ Groovytron :cite:`@groovytron`
 
@@ -399,9 +401,9 @@ pour chacune en local. Dans l'approche d'un système distribué, on cherche à p
 gérer le plus finement les ressources au niveau du cluster, et pas uniquement par
 un balanceur de charge.
 
-La mise en place de systèmes d'exploitation distribués tels que *DC/OS* est un système
+Un système d'exploitation distribué tel que *DC/OS* est un système
 qui se superpose au système d'exploitation de la machine, et qui fournit une gestion
-fine des ressources. la :num:`figure #distributedos` permet d'illustrer cette architecture.
+fine des ressources. La :num:`figure #distributedos` permet d'illustrer cette architecture.
 
 .. _distributedos:
 .. figure:: images/container_orchestration_revised.png
@@ -409,14 +411,14 @@ fine des ressources. la :num:`figure #distributedos` permet d'illustrer cette ar
    :align: center
    :alt: Architecture utilisant un outils d'orchestration de containers
 
-   *Architecture utilisant un outil d'orchestration de containers : crédits @ Groovytron*
+   *Architecture superposant un système d'exploitation distribué au système d'exploitation natif de la machine.: crédits @ Groovytron*
 
 
 *DC/OS* est issu de la *Mesosphere*, un ensemble d'outils fournis par Apache qui
 répondent spécifiquement aux problématiques du cloud-computing. L'architecture du CHUV
-est basée sur les outils de la *Mesossphere*, mais n'utilise pas *DC/OS* au complet.
+est basée sur les outils de la *Mesosphere*, mais n'utilise pas *DC/OS* au complet.
 
-Les outils utilisés dans le cadre du projet sont décrits dans la suite du document.
+Ces outils utilisés dans le cadre du projet sont décrits dans la suite du document.
 
 Mesos
 ~~~~~~~~~~~~~~~
@@ -429,37 +431,38 @@ et Mesos s'occupe de gérer les ressources et la localisation de celles-ci, mais
 de gérer le redémarrage de services en cas de pannes, et la mise à l'échelle d'un
 service.
 
-Il permet de lancer des applications natives, mais aussi des containers Dockers,
+Il permet de lancer des applications natives, mais aussi des containers *Docker*,
 comme c'est le cas dans ce projet.
 
 Le cluster est organisé sous la forme d'un noeud *Master*, et de noeuds *Slaves*.
-Le noeud *master* est responsable de recevoir les demandes d'instanciations de services,
-et il envoie les ordres aux noeuds *Slaves* approprié, selon les ressources disponibles.
+Le noeud *Master* est responsable de recevoir les demandes d'instanciations de services,
+et il envoie les ordres au noeud *Slave* approprié, selon les ressources disponibles.
 La communication entre le *Master* et les *Slaves* est effectué via *ZooKeeper*, qui
 est un système de stockage clé-valeurs dans un système de fichiers, ce qui permet
 de partager les configurations des différents acteurs de l'architecture.
 
-Mesos sert donc de support pour l'instanciation de services sur notre architecture distribuée.
+Mesos sert de support pour l'instanciation de services sur notre architecture distribuée.
 
 Marathon
 ~~~~~~~~~~~~~~~
 
 *Marathon* est un logiciel développé par *Apache* dans le cadre de la *Mesosphere*.
-La Mesosphère est l'ensemble des qui sont utilisés dans le cadre de *DC/OS*, et qui
-sont officiellement soutenus par la fondation *Apache*. Marathon joue le rôle de surcouche
+La Mesosphère est l'ensemble des outils qui sont utilisés dans le cadre de *DC/OS*, et qui
+sont officiellement soutenus par la fondation *Apache*. *Marathon* joue le rôle de surcouche
 à Mesos afin de simplifier le déploiement de **services longues durées**, c'est à
 dire qu'une définition de tâche adressée à *Marathon* concerne un certain nombre
 d'instances de ce service, et que si une instance vient à se stopper,
 *Marathon* va automatiquement relancer une instance de ce service.
 
-Le logiciel fournit lui aussi une *API REST* :cite:`@marathonapidoc`.
+Le logiciel fournit une *API REST* :cite:`@marathonapidoc` pour instancier des services
+via d'autres applications.
 
 Chronos
 ~~~~~~~~~~~~~~~
 
 *Chronos* est un logiciel développé par la *communauté* Mesos. Cette communauté,
 contrairement à la *Mesosphere*, n'est pas officiellement soutenue par *Apache*,
-mais est constituée de gens ayant des interêts pour des outils liés à la Mesosphère,
+mais est constituée de gens ayant des interêts à développer des outils liés à la Mesosphère,
 et qui collaborent en suivant le développement des outils de la *Mesosphère*.
 La pérénité de ces outils ne sont donc pas garantis.
 
@@ -486,7 +489,8 @@ Docker
 ~~~~~~~~~~~~~~~
 
 *Docker* est une solution *open-source* qui permet d'embarquer une application
-dans un container *Linux* qui peut être executé sur n'importe quelle machine.
+dans un container *Linux* qui peut être executé sur n'importe quelle machine supportant
+le moteur *Docker*.
 
 Dans une deuxième mesure, il fournit des mécanismes pour rendre un container proche
 de la virtualisation, en permettant d'isoler les containers entre eux, mais tout en
@@ -499,7 +503,8 @@ qui elles peuvent être sécurisées jusqu'aux niveau des instructions micro-pro
 
 Docker s'utilise généralement pour uniformiser les conditions de développement, car on
 peut dire qu'une image fonctionnant en *stand-alone* (c'est à dire sans interactions
-avec le système hôte, comme par exemple un montage de volume) doit fonctionner sur une autre instance Docker.
+avec le système hôte, comme par exemple un montage de volume) doit fonctionner sur une autre machine
+supportant le moteur *Docker*.
 
 D'un point de vue haut niveau, un container est par défaut isolé de l'hôte au niveau :
 
@@ -520,7 +525,7 @@ personnalisée à partir d'une image minimale fournie par la communauté comme :
 * CentOS / Scientific Linux CERN (SLC) on Debian/Ubuntu or on CentOS/RHEL/SLC/etc;
 * Debian / Ubuntu;
 
-Mais aussi from scratch, ou via une archive :cite:`@createbaseimagedocker`.
+Mais aussi from :code:`scratch`, ou via une archive :cite:`@createbaseimagedocker`.
 
 De plus, on peut hériter de n'importe quelle image et la redéfinir via sa propre surcouche.
 Les images dont on hérite ne sont pas modifiables. L'héritage est possible pour toute image
@@ -536,8 +541,8 @@ qui peuvent effectuer des actions pour construire l'image, dont les principales 
 * Définir des variables d'environnements;
 * Définir quels ports on veut exposer à l'hôte.
 
-Si on souhaite pouvoir choisir entre plusieurs commande, on peut définir des entrypoints,
-qui définissent en général un script que l'on peut exécuter suivant les paramètres d'appels
+Si on souhaite pouvoir choisir entre plusieurs commandes, on peut définir des :code:`entrypoints`,
+qui définissent un script que l'on peut exécuter suivant les paramètres d'appels
 du container.
 
 Il y a deux méthodes d'intéraction avec un container :
@@ -552,14 +557,14 @@ des variables d'environnement. Suivant l'implémentation du container, il est po
 que celui-ci agisse comme un service, et se maintienne en vie, en attente de nouveaux
 événements, ou qu'il se termine dès que le travail interne soit terminé. Dans les deux cas,
 il se contente d'attendre que le travail interne(souvent implémenté par un script) renvoie
-un code d'erreur :cite:`@codeerrorissue`
+un code d'exécution. :cite:`@codeerrorissue`
 
 La méthode exec ne peut s'appeler que sur un container qui a déjà été instancié.
 Si le container est en cours d'exécution, il est possible d'envoyer une nouvelle commande
-au container. La plus classique est l'exécution d'un bash en mode interactif, via la commande code:`docker exec -it containername bash`
-qui permet d'exécuter une ligne de commande bash. Le paramètre `-it` permet justement
-de laisser la commande en mode intéractif, ce qui permet de ne pas fermer l'exécution
-de la commande dès que celle-ci renvoie un code `0`.
+au container. La plus classique est l'exécution d'un bash en mode interactif, via la commande
+code:`docker exec -it containername bash` qui permet d'exécuter une ligne de commande bash.
+Le paramètre `-it` permet justement de laisser la commande en mode intéractif, ce qui
+permet de ne pas fermer l'exécution de la commande dès que celle-ci renvoie un code `0`.
 
 Il est possible de formuler une description d'architecture composée de containers
 *Docker* sous la forme d'un fichier `docker-compose.yml`, qui peut se présenter ainsi :
@@ -590,18 +595,16 @@ Ce travail est effectué au cœur du projet Woken du Human Brain Project. Ce pro
 contient le langage de programmation Scala :cite:`@scala`. Scala a été concu à l’école polytechnique
 de Lausanne (EPFL) afin de proposer de lier des paradigmes de programmation différents
 et habituellement opposés, tels que la programmation fonctionnelle et la programmation
-orientée objet. Scala se base sur la JVM3, ce qui permet de bénéficier de l’abstraction
-de celle-ci en termes de plateforme d’exécution, ainsi que pour la gestion de la mémoire,
-notamment. Scala coopère ainsi de manière transparente avec Java, ce qui permet d’utiliser
+orientée objet. Scala se base sur la *JVM*, ce qui permet de bénéficier de l’abstraction
+de celle-ci en termes de plateforme d’exécution, ainsi que pour la gestion de la mémoire.
+Scala coopère ainsi de manière transparente avec Java, ce qui permet d’utiliser
 des bibliothèques non codées en Scala.
-
-Cette section ne précise pas la syntaxique du langage, ni son utilisation.
 
 AKKA
 ~~~~~~~~~~~~~~~
 Akka :cite:`@akka` est un outil de développement et un environnement d’exécution libre et
 open-source qui a pour but de simplifier la mise en place d’applications distribuées
-et concurrentes basée sur la JVM. Il gère donc les langages de programmations Java et Scala,
+et concurrentes basée sur la JVM. Il gère donc les langages de programmations *Java* et *Scala*,
 et est développé en Scala. Akka propose une résolution des problèmes de concurrence
 via un système d’acteurs.
 
@@ -609,7 +612,7 @@ Chaque acteur propose des fonctionnalités, et peut communiquer avec les autres 
 envoyant des messages.  Lorsqu’un acteur reçoit un message, il le traite, effectue des
 actions et peut envoyer d’autres messages, instancier d’autres acteurs ou encore se stopper.
 
-Chaque acteur est un client léger, qui possède son état et sa boite aux lettres.
+Chaque acteur est un client léger, qui possède son état et sa boîte aux lettres.
 Lorsqu’un acteur plante, il est réinstancié automatiquement, dans le même état
 qu’il était avant, et avec sa file de message, ce qui procure une haute disponibilité.
 De plus, lorsqu’un acteur enfant plante, le parent est notifié, et il peut dès lors
@@ -657,7 +660,7 @@ Place de Woken dans l'architecture
 ~~~~~~~~~~~~~~~
 
 Woken étant un service, il est concu pour être utiliser par d'autres services.
-La figure :num:`figure #wokenarchiglobal` présente une version simplifiée de l'architecture
+La :num:`figure #wokenarchiglobal` présente une version simplifiée de l'architecture
 de la plateforme MIP.
 
 .. _wokenarchiglobal:
@@ -669,7 +672,7 @@ de la plateforme MIP.
    Architecture globale simplifiée de la plateforme MIP. Le **Portal Frontend** est le point d'accès
    pour l'utilisateur. Il peut consulter les données et effectuer des expériences depuis celle-ci.
    Le **Portal Backend** fournit les mécanismes de sécurité et d'accès aux bases de données, ainsi
-   que la répartition des demandes à **Woken** si nécessaire. La base de données **Science-db** contient
+   que le passage des demandes à **Woken** si nécessaire. La base de données **Science-db** contient
    les données des patients, tandis que la base de données **Meta-db** contient les descriptions
    de chaque *feature* disponible dans la plateforme. Cette description permet de déterminer différentes
    informations pour la plateforme telles que le type de données (nominale ou continue) ou l'unité de mesure.
@@ -677,7 +680,7 @@ de la plateforme MIP.
    qui va s'occuper de traiter les demandes. **Woken** peut lui-aussi accéder aux bases de données afin
    d'appliquer ses algorithmes. Cette figure est une représentation simplifiée de
    l'architecture, qui ne contient pas tous les intervenants de la plateforme, mais
-   uniquement ceux utilisés à cette échelle.
+   uniquement ceux utilisés à cette échelle, dans le projet.
 
 .. raw:: latex
 
@@ -690,7 +693,7 @@ le backend envoie une demande de `mining` à woken via une requête POST de la f
    :language: bash
 
 Ce qui correspond aux paramétrage de l'expérience de l'utilisateur, comme présenté en
-:num:`figure #variables`.Woken effectuera traite la requête, effectue l'algorithme et retourne une réponse sous
+:num:`figure #variables`.Woken traite la requête, effectue l'algorithme et retourne une réponse sous
 format *PFA*. Le format de réponse n'est pas important dans le cadre de ce projet.
 
 
@@ -739,7 +742,12 @@ d'une demande d'algorithme.
    est stocké dans la base de données **Woken-DB**, ce qui permet de récupérer
    le fichier de définition *PFA* afin de reconstruire l'éxpérience et de la vérifier,
    si besoin. Attention, les intervenants décrits ci-contre ne sont pas contenus
-   dans le projet, mais bel et bien indépendants, et liés via la configuration *Docker-compose*.
+   dans le projet *Woken*, mais bel et bien indépendants, et liés via la configuration *Docker-compose*.
+
+.. raw:: latex
+
+   \clearpage
+
 
 Par rapport au code de *Woken*, le principal intervenant est le flux d'acteurs *Akka*,
 implémenté dans le script :code:`/src/main/scala/core/coordinator.scala`. C'est celui-ci
@@ -747,7 +755,7 @@ qui recoit les expérimentations à effectuer. Celles-ci sont déterminées par 
 d'algorithme, des *features* concernées, les variables cibles ainsi que le modèle et
 les hyperparamètres pour les expériences de *machine learning*.
 
-Les acteurs Akka implémentés dans cette portion de code Scala héritent d'une méthodologie
+Les acteurs *Akka* implémentés dans cette portion de code Scala héritent d'une méthodologie
 FSM (Finite State Machine), ce qui rend les acteurs capables de se comporter comme un
 automate à états finis. Les transition entre ces états s'effectuent via des événements
 précis. Cette implémentation permet de mettre un acteur parent en attente des résultats
@@ -763,7 +771,7 @@ de le retourner au service demandeur.
 
 
 La voie intéressante dans le cadre de ce projet est celle de :code:`/mining/experiment`.
-Celle-ci a pour caractéristiques de pouvoir gérer plusieurs algorithmes pour une expérimentation,
+Celle-ci a pour caractéristique de pouvoir gérer plusieurs algorithmes pour une expérimentation,
 ainsi que de gérer la *cross-validation*.
 
 Le flux de travail entre les acteurs peut être représenté comme montré sur la
@@ -806,7 +814,7 @@ Woken sérialise en `JSON` correspondant au format attendu par Chronos, comme pa
 .. literalinclude:: examples/example_chronos.json
    :language: json
 
-Woken est actuellement capable d'instancier autant de containers que demandent les utilisateurs.
+*Woken* est actuellement capable d'instancier autant de containers que demandent les utilisateurs.
 Il s'occupe de générer des identifiants uniques comme `id` de tâche à Chronos,
 de récolter chacun des résultats dans la base de données et de les mettre en relation avec
 la bonne expérience.
@@ -816,19 +824,20 @@ de configuration `JSON` envoyé via une requête POST HTTP, il ne peut qu'attend
 dans la base de données.
 
 Dans le cadre de notre nouveau flux, nous devons pouvoir attendre la fin du travail d'un
-container, récupérer son résultat, puis adresser une deuxième requête sur le container.
+container, récupérer son résultat, puis adresser une deuxième requête utilisant le résultat précédemment
+rendu.
 
 Cette fonctionnalité, que l'on peut qualifier de container "interactifs", doit faire
 l'objet de recherches. Docker est conçu pour être *stateless*. Quand un container meurt,
 si il n'a pas de *Volume* configuré, le container n'a pas de moyen d'enregistrer l'état
 dans lequel il était. Un *Volume* est un répertoire partagé entre le container et l'hôte.
 Si il existe des fichiers dans le dossier au moment du montage du *Volume*, le container
-y aura accès. Si un le container meurt, le contenu du *Volume* reste.  
+y aura accès. Si le container meurt, le contenu du *Volume* reste.  
 
 Tests préliminaires avec TPOT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Des tests ont été effectués avec TPOT afin de déterminer son efficactié et son utilisabilité.
+Des tests ont été effectués avec TPOT afin de déterminer son utilisabilité.
 Dans le cadre de du projet, le plus important était de pouvoir:
 
 * Travailler avec le dataset du projet;
@@ -849,9 +858,9 @@ A la fin de ces tests, il s'avère que :
 
 * Il est possible de récupérer le meilleur pipeline trouvé, avec les hyperparamètres du modèle, ainsi que son score;
 * Il est possible d'enregistrer un pipeline sous forme de texte, et de le ré-instancier en objet Scikit-learn utilisable pour des prédictions;
-* Tpot n'est pas en mesure de mettre à disposition la selection, la construction et la normalisation de features. Celles-ci sont données par le modèle;
+* *TPOT* n'est pas en mesure de mettre à disposition la selection, la construction et la normalisation de features. Celles-ci sont données par le modèle;
 * L'export n'est pas utilisable dans notre contexte;
-* Il est possible de travailler via le dataset du projet.
+* Il est possible de travailler avec le dataset du projet.
 
 A la fin de cette analyse, les attentes envers TPOT dans le cadre du projet sont atteintes.
 
@@ -1502,12 +1511,15 @@ ne se coordonne pas correctement avec :code:`Mesos-master`, et qu'il ne donne pa
 Si c'est le cas, cela ce manifeste par des containers qui restent en état "queued"
 dans le GUI de :cite:`Chronos`. Pour le relancer : :code:`docker-compose up mesos-slave`.
 
-Une fois la stack lancée, il est possible d'utiliser IntelliJ en natif, et de débugger via celui-ci.
+Une fois la stack lancée, il est possible d'utiliser *IntelliJ* en natif, et de débugger via celui-ci.
 
 Il a fallu comprendre l'architecture pour effectuer le passage en natif de *Woken*.
 
 Tâche 20 : Adaptation du docker-compose pour gérer les bases de données via les migrations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+De base, le container *Docker* de *PostgresSQL* est prévu pour charger un script de base
+de données dans le volume
 
 Tâche 21 : Mise à jour du docker-compose pour le validation-pool Akka
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
