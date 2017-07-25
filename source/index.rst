@@ -11,7 +11,7 @@ Bienvenue sur la documentation du travail de Bachelor Auto ML
 
 .. toctree::
    :numbered:
-   :maxdepth: 4  
+   :maxdepth: 4
 
 .. raw:: latex
 
@@ -32,17 +32,12 @@ Contexte du projet
 Le présent projet s'inscrit dans le cadre du travail de Bachelor en Informatique option "Développement logiciel
 et multimédia", réalisé à la HE-ARC de Neuchâtel.
 
-Le projet est effectué pour le CHUV-LREN dans le cadre du "Human Brain Project".
-
-Human Brain projet
-~~~~~~~~~~~~
-
-Ce projet s’inscrit dans le cadre du projet Européen « Human Brain Project ».
+Le projet est effectué pour le CHUV-LREN dans le cadre du "Human Brain Project". Ce projet s’inscrit dans le cadre du projet Européen « Human Brain Project ».
 Ce chapitre vise à expliquer le contexte du sous-projet 8, et ce qui nous intéresse.
 
 
 Présentation de la plateforme MIP
-~~~~~~~~~~~~~~
+----------------
 
 Le but du sous-projet 8 du HBP est de fournir une plateforme pour effectuer des
 expériences neuroscientifiques sur des données de patients recueillies à travers les
@@ -154,7 +149,7 @@ en neuroscience qu’en informatique, se trouve obligé de paramétrer et choisi
 qui sont liées uniquement à l’informatique.
 
 But du projet
-~~~~~~~~~~~~~~
+----------------
 
 Ce projet a pour but de mettre en place un moyen pour que l’utilisateur n’ait plus
 à s’occuper du choix du modèle et du paramétrage pour son expérience, et que la
@@ -162,10 +157,10 @@ plateforme s’occupe de trouver automatiquement la meilleure configuration poss
 Dans l’idéal, l’utilisateur n’a qu’un bouton à presser pour cette étape.
 
 
-Cahier des charges (lien vers les annexes je suppose, en sachant qu'il est expliqué en détail dans le document)
-============
+Cahier des charges
+----------------
 
-Se référer au cahier des charges fourni en annexes.
+le cahier des charges est fourni en annexes.
 
 Etat de l'Art
 ============
@@ -206,7 +201,7 @@ Dans notre cas, l’apprentissage automatique est implémenté dans la plateform
 * Classification naïve bayésienne
 
 Mais on peut aussi ajouter à la plateforme d’autres méthodes d’apprentissage automatique
-via des containers *Docker* préconfigurés qui sont fournis par le projet.
+via des containers :ref:`Docker <docker>` préconfigurés qui sont fournis par le projet.
 
 Apprentissage supervisé
 ~~~~~~~~~~~~
@@ -401,9 +396,12 @@ pour chacune en local. Dans l'approche d'un système distribué, on cherche à p
 gérer le plus finement les ressources au niveau du cluster, et pas uniquement par
 un balanceur de charge.
 
-Un système d'exploitation distribué tel que *DC/OS* est un système
+Un système d'exploitation distribué est un système
 qui se superpose au système d'exploitation de la machine, et qui fournit une gestion
-fine des ressources. La :num:`figure #distributedos` permet d'illustrer cette architecture.
+fine des ressources.
+
+
+La :num:`figure #distributedos` permet d'illustrer cette architecture.
 
 .. _distributedos:
 .. figure:: images/container_orchestration_revised.png
@@ -413,8 +411,9 @@ fine des ressources. La :num:`figure #distributedos` permet d'illustrer cette ar
 
    *Architecture superposant un système d'exploitation distribué au système d'exploitation natif de la machine.: crédits @ Groovytron*
 
-
-*DC/OS* est issu de la *Mesosphere*, un ensemble d'outils fournis par Apache qui
+*DC/OS* (the Datacenter Operating System) est un système
+d'exploitation distribué basé sur le noyau du système distribué *Mesos* d' *Apache*, et issu
+de la *Mesosphere*, un ensemble d'outils fournis par Apache qui
 répondent spécifiquement aux problématiques du cloud-computing. L'architecture du CHUV
 est basée sur les outils de la *Mesosphere*, mais n'utilise pas *DC/OS* au complet.
 
@@ -485,6 +484,7 @@ mais aussi une *API REST* permettant l'automatisation programmatique de créatio
 
    *Capture d'écran de l'interface graphique de Chronos*
 
+.. _docker:
 Docker
 ~~~~~~~~~~~~~~~
 
@@ -505,6 +505,10 @@ Docker s'utilise généralement pour uniformiser les conditions de développemen
 peut dire qu'une image fonctionnant en *stand-alone* (c'est à dire sans interactions
 avec le système hôte, comme par exemple un montage de volume) doit fonctionner sur une autre machine
 supportant le moteur *Docker*.
+
+Un *volume* est un répertoire partagé entre le container et l'hôte.
+Si il existe des fichiers dans le dossier au moment du montage du *volume*, le container
+y aura accès. Si le container meurt, le contenu du *volume* reste.
 
 D'un point de vue haut niveau, un container est par défaut isolé de l'hôte au niveau :
 
@@ -569,13 +573,14 @@ permet de ne pas fermer l'exécution de la commande dès que celle-ci renvoie un
 Il est possible de formuler une description d'architecture composée de containers
 *Docker* sous la forme d'un fichier `docker-compose.yml`, qui peut se présenter ainsi :
 
-
 .. literalinclude:: examples/docker-compose.yml
    :language: yaml
 
 On peut ici voir les configurations de variables d'environnement, de volumes, d'exposition
 de ports du container à l'hôte, les versions d'images ainsi que les commandes à
 exécuter lorsque le container est prêt.
+
+
 
 L'infrastructure peut être lancée via la commande :code:`docker-compose up`. Le fichier
 présenté ici ne propose pas de dépendances pour le lancement, ce qui implique que tous
@@ -591,7 +596,7 @@ de noms de container, contrairement à un démarrage via :code:`docker run`.
 Scala
 ~~~~~~~~~~~~~~~
 
-Ce travail est effectué au cœur du projet Woken du Human Brain Project. Ce projet
+Ce travail est effectué au cœur du projet :ref:`Woken <woken>` du Human Brain Project. Ce projet
 contient le langage de programmation Scala :cite:`@scala`. Scala a été concu à l’école polytechnique
 de Lausanne (EPFL) afin de proposer de lier des paradigmes de programmation différents
 et habituellement opposés, tels que la programmation fonctionnelle et la programmation
@@ -634,6 +639,7 @@ Analyse
 Cette section vise à décrire le cadre logiciel dans lequel le travail sera effectué,
 et à préciser les acteurs ainsi que leurs fonctions.
 
+.. _woken:
 Woken
 ------------
 
@@ -648,16 +654,16 @@ Chacune de ces explorations de données est effectuée sur un ensemble de donné
 qui est qualifié par les champs configurés dans la :num:`Fig. #variables` par l'utilisateur
 de la plateforme.
 
-Une expérience fournit des résultats au service demandeur, sous format PFA :cite:`@pfa`,
-qui est un format dont la synthaxe est basée sur *yaml*, mais dont la structure est
-destinée à décrire des pipeline pour le data-mining.
+Une expérience fournit des résultats au service demandeur, sous format PFA :cite:`@pfa`
+(Portable Format for Analytics), qui est un format dont la synthaxe est basée sur
+*yaml*, mais dont la structure est destinée à décrire des pipeline pour le data-mining.
 
 Des requêtes HTTP sont mises à disposition dans le répertoire :code:`dev-debug/http`
 ou :code:`dev-test/http` afin de permettre de se passer de l'interface graphique,
 et de simplifier le développement.
 
 Place de Woken dans l'architecture
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Woken étant un service, il est concu pour être utiliser par d'autres services.
 La :num:`figure #wokenarchiglobal` présente une version simplifiée de l'architecture
@@ -804,7 +810,7 @@ Ce flux de travail comporte oblige deux problématiques de taille :
 
 
 Fonctionnement actuel des containers Docker
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------
 
 Actuellement, les containers utilisés par la plateforme Docker sont lancés via Chronos.
 A partir d'une définition d'expérience au format *JSON*, on instancie un objet de définition
@@ -827,15 +833,15 @@ Dans le cadre de notre nouveau flux, nous devons pouvoir attendre la fin du trav
 container, récupérer son résultat, puis adresser une deuxième requête utilisant le résultat précédemment
 rendu.
 
-Cette fonctionnalité, que l'on peut qualifier de container "interactifs", doit faire
+Cette fonctionnalité, que l'on peut qualifier de container "interactifs", a du faire
 l'objet de recherches. Docker est conçu pour être *stateless*. Quand un container meurt,
-si il n'a pas de *Volume* configuré, le container n'a pas de moyen d'enregistrer l'état
-dans lequel il était. Un *Volume* est un répertoire partagé entre le container et l'hôte.
-Si il existe des fichiers dans le dossier au moment du montage du *Volume*, le container
-y aura accès. Si le container meurt, le contenu du *Volume* reste.  
+si il n'a pas de *volume* configuré, le container n'a pas de moyen d'enregistrer l'état
+dans lequel il était. Comme dit précédemment, un *volume* est un répertoire partagé entre le container et l'hôte.
+Si il existe des fichiers dans le dossier au moment du montage du *volume*, le container
+y aura accès. Si le container meurt, le contenu du *volume* reste.
 
 Tests préliminaires avec TPOT
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
 Des tests ont été effectués avec TPOT afin de déterminer son utilisabilité.
 Dans le cadre de du projet, le plus important était de pouvoir:
@@ -865,12 +871,20 @@ A la fin de ces tests, il s'avère que :
 A la fin de cette analyse, les attentes envers TPOT dans le cadre du projet sont atteintes.
 
 Le cas de Marathon
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------
 
 Durant ce projet, la substition de *Chronos* par *Marathon* a été explorée. La raison
 est que *Chronos* n'est pas diretement lié à la *Mesosphere*, et que son développement
 n'est pas assuré sur le long terme. Une fois intégré dans l'architecture, il s'est avéré que
-Marathon ne répond qu'à la problématique des services de longues durées.
+*Marathon* ne répond qu'à la problématique des services de longues durées. En effet,
+*Marathon* réinstanciera toujours un container lorsque le nombre de container configuré
+n'est pas atteint. Dans le cas de nos container d'algorithmes, celà n'est pas fonctionnel,
+car un fois le travail de l'algorithme effectué, le container s'arrête, et on ne veut pas
+qu'un nouveau soit instancié avant la prochaine demande d'expérience.
+
+Il est possible de court-circuiter ceci en effectuant une requête `DELETE` sur son
+propre `job`, mais il s'agit d'une mauvaise pratique pour contourner une limitation
+voulue dans les cas d'utilisations de *Marathon*.
 
 *Metronome* :cite:`@metronome` est destiné à être le remplacant de *Marathon*, mais il n'est actuellement
 pas assez abouti pour être incorporé à l'architecture.
@@ -878,8 +892,6 @@ pas assez abouti pour être incorporé à l'architecture.
 
 Conception
 ============
-
-Cette section ne décrit que les choix de conceptions qui ont étés implémentés.
 
 A partir de l'analyse effectuée au chapitre :ref:`analyse`, il est possible de concevoir
 la nouvelle architecture pour résoudre les problèmatiques connues qui sont :
@@ -945,7 +957,7 @@ La méthode :code:`test` s'occupe de :
 * Ecrire les scores dans un fichier texte.
 
 
-Système de containers interactifs
+Système de containers Docker interactifs
 ------------
 
 Un container n'est normalement pas conçu pour faire persister des données sur son état.
@@ -1000,6 +1012,7 @@ la configuration complète et correcte pour notre container qui sera lancé.
 Il a déjà été vérifié que Chronos, dans sa version `3.0.2`, permet de lancer un
 container avec des volumes, des variables d'environnement, et un entrypoint.
 
+.. _akkaconception:
 Akka
 ------------------
 
@@ -1492,6 +1505,23 @@ sans devoir tenir compte d'un dictionnaire de répertoires global pour les acteu
 Architecture
 ------------
 
+Cette section décrit les modifications de l'architecture pour le déroulement du projet.
+Au lancement de ce projet, une architecture de test était disponible dans le répertoire
+:code:`dev-test`. Toute l'architecture, y compris *Woken*, était lancée depuis des
+containers *Docker*. Celui-ci était containerisé via le script :code:`build.sh` situé à la racine
+du projet. Le build consiste en la création d'une image :code:`jar` (java archive)
+contenant le code scala et toutes ses dépendances, et mis dans un container disposant
+d'une :code:`JVM` pouvant l'exécuter. Ceci implique une compilation
+et une containerisation à chaque modification du code. Pour débugger, il fallait passer
+par les outils :code:`docker-compose logs`, qui ne fournissent pas toujours les
+détails en cas d'exception, et qui ne permettent pas d'analyser via des points d'arrêt
+l'état de l'application. Il a donc été décidé de fournir un environnement de développement
+pour aider la réalisation de ce projet. L'architecture et les outils de test de celui-ci
+sont disponibles dans le répertoire :code:`dev-debug`. Il pourra être réutilisé en
+cas de reprise du projet par un externe. Le fichier :code:`REAMDE` du projet tente
+d'expliquer au mieux la (difficile) configuration de l'environment de développement
+pour la synchronisation entre l'architecture *Docker* et le code natif *Scala*.
+
 Tâche 19 : Sortie de Woken du container pour permettre un débuggage en natif
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1503,30 +1533,84 @@ de données fictive.
 Le fruit de ce travail est un nouveau repertoire :code:`dev-debug`, qui contient
 un :code:`docker-compose` permettant de mettre en place une architecture qui permet
 de peupler les bases de données, mettre en place l'architecture distribuée (*Mesos, ZooKeeper*)
-ainsi que les outils pour l'utiliser (*Chronos*).
+ainsi que les outils pour l'utiliser (*Chronos* dans notre cas, et *Marathon* qui reste
+inclu).
 
-L'environnement de test se démarre via le script :code:`run.sh`. Il arrive que :code:`Mesos-slave`
-ne se coordonne pas correctement avec :code:`Mesos-master`, et qu'il ne donne pas de code d'erreur.
+L'environnement de développement se démarre via le script :code:`run.sh` situé dans le
+répertoire :code:`dev-debug`. Il est important de ne pas utiliser directement la commande
+:code:`docker-compose up`, car certains containers *Docker* pour des problèmes de dépendances
+entre containers. Il arrive que :code:`Mesos-slave` ne se coordonne pas
+correctement avec :code:`Mesos-master`, et qu'il ne donne pas de code d'erreur.
 
 Si c'est le cas, cela ce manifeste par des containers qui restent en état "queued"
-dans le GUI de :cite:`Chronos`. Pour le relancer : :code:`docker-compose up mesos-slave`.
+dans le GUI de :cite:`Chronos` (accessible via le navigateur à l'adresse :code:`localhost:4400`).
+
+Pour le relancer : :code:`docker-compose up mesos-slave`.
 
 Une fois la stack lancée, il est possible d'utiliser *IntelliJ* en natif, et de débugger via celui-ci.
-
 Il a fallu comprendre l'architecture pour effectuer le passage en natif de *Woken*.
+La mise à jour du pool d'acteurs *Akka* distant pour la validation a été effectuée
+et integrée l'avant dernière semaine de ce projet. Le script de démarrage :code:`run.sh`
+démarre le pool d'acteurs de validations, mais ils s'arrêtent si le projet *Woken* natif
+n'est pas lancé assez vite pour qu'ils s'envoient des :code:`heartbeats` signalant de
+leur état de santé.
 
 Tâche 20 : Adaptation du docker-compose pour gérer les bases de données via les migrations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 De base, le container *Docker* de *PostgresSQL* est prévu pour charger un script de base
-de données dans le volume
+de données dans le dossier :code:`/docker-entrypoint-initdb.d/` du container. On copie en général
+le fichier dans ce répertoire au moment de la génération du container via le :code:`Dockerfile`
+en utilisation la commande :code:`COPY`.
+
+Le mécanisme était ainsi paramétré au début de projet, mais une autre méthodologie a
+été utilisée en cours de projet, et a du être adaptée dans notre :code:`fork git`.
+
+Cette méthodologie se base sur 3 containers *Docker*:
+
+* :code:`woken_db`
+* :code:`wait_dbs`
+* :code:`woken_db_setup`
+
+:code:`woken_db` est toujours la base de données permanente qui contient les données
+de résultat d'expériences de *Woken*. :code:`woken_db_setup` est un container de
+migration, qui doit se connecter à la base de données permanente, créer les schémas
+et peupler de données.
+
+Pour effectuer la migration, on commençe par lancer :code:`woken_db` et attendre
+qu'elle soit prête à recevoir des requêtes via le container :code:`wait_dbs`.
+Une fois ceci effectué, `woken_db_setup` peut effectuer ses migrations.
+
+Les trois définitions de containers ont du être modifiées dans le :code:`docker-compose.yml`
+pour que l'utilisateur et le schéma produit soit correct.
+
+Dans un deuxième temps, il faut modifier le fichier de configuration *Woken*
+:code:`dev-debug/woken/config/application.conf` de la sorte :
+
+.. literalinclude:: examples/dbconfig.conf
+   :language: conf
+
+Sans entrer dans les détails techniques, les containers de base de données ont du être
+changés de mode de liaison de réseau de :code:`Host` à :code:`Bridge`, et les chemins
+code:`jdbc` (url + port) adaptés afin de permettre à *Woken* d'y accéder.
 
 Tâche 21 : Mise à jour du docker-compose pour le validation-pool Akka
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Le code de *Woken* ayant été sorti du container *Docker* pour être utilisé en natif,
+les acteurs *Scala* du *validation-pool*, contenus dans un container *Docker* distant,
+n'étaient plus accessibles. Il a fallu modifier le fichier de configuration
+:code:`/dev-debug/woken/config/validation/application.conf` ont été mis à jour.
+
+Celà nécessite de définir de nouvelles résolutions de noms dans le fichier :code:`/etc/hosts`,
+comme décrit dans la procédure du README du projet :cite:`@readmewoken` .
 
 Compte rendu graphique de l'avancement du projet
 ------------------------------------------------
+
+Etant donné que le projet n'a pas pu aboutir par manque de temps, la :num:`figure #progressrepresentation`
+présente une représentation visuelle des points ayant été implémentés, de ceux en cours
+de réalisation, ainsi que de ceux non commencés, basé sur la même structure que la :num:`figure #tasksbreakdown`.
 
 .. _progressrepresentation:
 .. figure:: images/implementationRepresentationProgress.png
@@ -1538,16 +1622,12 @@ Compte rendu graphique de l'avancement du projet
    totalement implémentées et testées, les tâches oranges sont en cours de réalisation
    et les tâches rouges ne sont pas commencées.
 
-Validation (Expérience)
-============
+Etant donné que tous les acteurs doivent remplir leurs fonctions pour qu'une première
+version soit exploitable, il est regrettable de constater que le manque de temps a fait
+que l'implémentation de la partie *Akka* soit la seule empêchant de mener à bien une expérience.
 
-6.1 Présentation de l'expérience
-    6.1.1 pourquoi
-    6.1.2 comment
-    6.1.3 les conditions de tests
-6.2 Résultats de l'expérience
-6.3 Discussion des résultats
-
+Un développeur expérimenté en *Scala/Akka* devrait pouvoir implémenter une première version
+de l'architecture proposée dans la partie :ref:`conception akka <akkaconception>`.
 
 Conclusion
 ============
@@ -1555,24 +1635,10 @@ Conclusion
 Etat des lieux au moment du rendu
 ------------
 
-- Atteintes des objectifs
+parler de l'expérience.
 
-  - Le contexte du mandant a-t-il été compris?
-  - L'API se superposant à Marathon fonctionne-t-elle?
-  - Un format de métadonnées a-t-il été spécifié? Existe-t-il un moyen
-    de vérifier que telle ou telle image Docker respecte ce format?
-  - Un démonstrateur a-t-il été développé?
-
-- Améliorations possibles
-
-.. Le développeur a pris un risque en prenant en tester des technologies
-.. qu'il n'utiliserait peut-être même pas mais cela lui a permis de mieux saisir
-.. la problématique.
 
 Perspectives et améliorations
-------------
-
-Bilan personnel (Présenter ce qui apporte quelque chose)
 ------------
 
 Remerciements
