@@ -121,39 +121,32 @@ latex_elements = {
 
     # Additional stuff for the LaTeX preamble.
     # 'preamble': ADDITIONAL_PREAMBLE,
-  #   'preamble': r'''
-  #      \makeatletter
-  #      \renewcommand{\maketitle}{
-  #        \begin{titlepage}
-  #
-  # begin{center}
-  # \large \textsc{\ifthenelse{\boolean{@french}}{Rapport de \@worktype}{\@worktype\ report}}}
-  # ifthenelse{\boolean{@confidential}}{\\[2em]\textcolor{red}{\Large \textbf{\MakeUppercase{\confidentialname}}}}{}
-  # end{center}
-  # \vskip 60\p@
-  # \begin{center}%
-  #   {\Huge \@title \par}%
-  #   \vskip 6em%
-  #   {\large
-  #    \lineskip .75em%
-  #     \begin{tabular}[t]{l l}%
-  #       {\small \authorname:} & \@author \\
-  # 		{\small \professorname:} & \@professor \\
-  # 		{\small \requestorname:} & \@requestor \\
-  # 		{\small Date:} & \@date \\
-  # 		{\small \versionname:} & {\small \@version}\\[1em]
-  # 		%\@projectnumber
-  #     \end{tabular} \hspace*{\fill}
-  # 	%\@author \\[2em]
-  # 	%\@date , version \@version
-  # 	\par}%
-  #     \vskip 1.5em%
-  # \end{center}\par
-  # \vfil\null
-  # \end{titlepage}
-  #        \end{titlepage}
-  #      }
-  #      \makeatother''',
+    'preamble': r'''
+       \makeatletter
+       \renewcommand{\maketitle}{
+         \begin{titlepage}
+
+            \centering
+            	\includegraphics[width=0.30\textwidth]{logoarc}\par\vspace{1cm}
+            	\vspace{1cm}
+            	{\scshape\Large Travail de Bachelor 17INF-TB225\par}
+            	\vspace{1.5cm}
+            	{\huge\bfseries Automated Machine Learning pour le Human Brain Project\par}
+            	\vspace{1.5cm}
+            	{\itshape Auteur : Axel Roy\par}
+            	\vspace{0.1cm}
+            	{\itshape Superviseur : Stefano Carrino\par}
+            	\vspace{0.1cm}
+            	{\itshape Expert : Antonio Ridi\par}
+            	\vfill
+            % Bottom of the page
+	{\large \today\par}
+
+
+
+         \end{titlepage}
+       }
+       \makeatother''',
 
     # Latex figure (float) alignment
     #
@@ -199,7 +192,3 @@ texinfo_documents = [
     (master_doc, 'Automated Machine Learning', 'Rapport de projet du travail de Bachelor 17INF-TB225 -  Automated Machine Learning', author, 'Rapport de projet du travail de Bachelor 17INF-TB225 -  Automated Machine Learning',
      'Optimisation automatique du pipeline de Machine Learning dans le cadre du Human Brain Project SP8.', 'Machine Learning'),
 ]
-
-
-
- # latex_logo = 'images/ml_pipeline.png'
