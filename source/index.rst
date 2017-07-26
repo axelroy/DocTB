@@ -3,7 +3,7 @@
    contain the root `toctree` directive.
 
 Bienvenue sur la documentation du travail de Bachelor Auto ML
-=============================================================
+==============================================================
 
 .. raw:: latex
 
@@ -25,15 +25,15 @@ Bienvenue sur la documentation du travail de Bachelor Auto ML
  \end{abstract}
 
 .. toctree::
-   :numbered:
-   :maxdepth: 2
+   :maxdepth: 4
 
 .. raw:: latex
 
    \clearpage
 
+############
 Introduction
-============
+############
 
 Le présent document fait office de rapport de projet.
 Il permet de comprendre le contexte de celui-ci, de décrire les éléments qui le compose,
@@ -41,8 +41,9 @@ fait une analyse de la problématique, la conception en vue de la résolution et
 présente l'implémentation effectuée. Ce document ne présente pas tout le cheminement,
 mais uniquement l'état final
 
+********************
 Contexte du projet
-----------------
+********************
 
 Le présent projet s'inscrit dans le cadre du travail de Bachelor en Informatique option "Développement logiciel
 et multimédia", réalisé à la HE-ARC de Neuchâtel.
@@ -50,9 +51,9 @@ et multimédia", réalisé à la HE-ARC de Neuchâtel.
 Le projet est effectué pour le CHUV-LREN dans le cadre du "Human Brain Project". Ce projet s’inscrit dans le cadre du projet Européen « Human Brain Project ».
 Ce chapitre vise à expliquer le contexte du sous-projet 8, et ce qui nous intéresse.
 
-
+****************************************
 Présentation de la plateforme MIP
-----------------
+****************************************
 
 Le but du sous-projet 8 du HBP est de fournir une plateforme pour effectuer des
 expériences neuroscientifiques sur des données de patients recueillies à travers les
@@ -163,22 +164,24 @@ C’est ici que s’inscrit le projet. L’utilisateur, qui est probablement plu
 en neuroscience qu’en informatique, se trouve obligé de paramétrer et choisir des données
 qui sont liées uniquement à l’informatique.
 
+********************
 But du projet
-----------------
+********************
 
 Ce projet a pour but de mettre en place un moyen pour que l’utilisateur n’ait plus
 à s’occuper du choix du modèle et du paramétrage pour son expérience, et que la
 plateforme s’occupe de trouver automatiquement la meilleure configuration possible.
 Dans l’idéal, l’utilisateur n’a qu’un bouton à presser pour cette étape.
 
+********************
+Cahier des charges et planification
+********************
 
-Cahier des charges
-----------------
+le cahier des charges ainsi que la planification sont disponibles en annexes.
 
-le cahier des charges est fourni en annexes.
-
+########################
 Etat de l'Art
-============
+########################
 
 Avant de se lancerdans la description du travail,
 il est intéressant d’effectuer un état de l’art des technologies qui pourraient
@@ -189,8 +192,9 @@ ainsi que les technologies ajoutées, ou tout du moins leur champ d’applicatio
 Cette section est rédigée en listant les différentes technologies, de la plus globale
 à la plus précise en terme d’utilisation dans le projet.
 
+************************
 Théorie Machine Learning
-------------
+************************
 
 Le *Machine Learning* (apprentissage automatique en francais), est un champ d’activité
 de l’intelligence artificielle qui vise à permettre à une machine d’apprendre par elle-même
@@ -218,8 +222,9 @@ Dans notre cas, l’apprentissage automatique est implémenté dans la plateform
 Mais on peut aussi ajouter à la plateforme d’autres méthodes d’apprentissage automatique
 via des containers :ref:`Docker <docker>` préconfigurés qui sont fournis par le projet.
 
+========================
 Apprentissage supervisé
-~~~~~~~~~~~~
+========================
 
 Dans cette méthodologie, on connait déjà les classes que l’on souhaite pouvoir déterminer
 automatiquement via l’algorithme. Ces classes sont tirées des données par un expert.
@@ -231,8 +236,9 @@ Elle consiste à déterminer si le modèle entrainé est pertinent, via des mét
 Ces deux phases ne s’effectuent pas sur les mêmes données. La phase d’entrainement nécessite
 une quantité d’informations suffisantes afin d’avoir un modèle représentatif.
 
+====================================
 Apprentissage non supervisé
-~~~~~~~~~~~~
+====================================
 
 Cet apprentissage s’applique à des données qui ne sont pas labellées par des classes.
 C’est ici à la machine de déterminer les différentes classes qui représentent le problème.
@@ -251,8 +257,9 @@ comme représenté sur la :num:`figure #distanceml`.
 Cette méthodologie peut aussi permettre d’analyser la relation entre les variables, par
 exemple pour réduire la dimension des vecteurs d’entrées.
 
+============================
 Apprentissage semi-supervisé
-~~~~~~~~~~~~~~~
+============================
 
 Etant donné que l’apprentissage supervisé nécessite un labelisation des données par expert,
 il devient très coûteux de réaliser ce travail au fur et à mesure que les données augmentent.
@@ -263,8 +270,9 @@ crée par l’apprentissage supervisé, et un autre crée par l’apprentissage 
 Idéalement, les deux classificateurs ne se basent pas sur les mêmes caractéristiques, ce qui
 permet de recouper les deux classificateurs afin d’affiner la classification finale.
 
+****************************************************
 Optimisation automatique du pipeline d'apprentissage
----------------
+****************************************************
 
 De manière générale, le *Machine Learning* est décrit comme une suite d'opérations à
 effectuer de manière séquentielle pour permettre de résoudre une problématique. On parle dès
@@ -331,14 +339,16 @@ les configurations des utilisateurs.
 
 Si le travail abouti à une expérience, il est possible que celui-ci soit publié.
 
+***************
 Technologies
----------------
+***************
 
 Après passage en revue des concepts théoriques liés au projet, il est intéressant
 de se pencher sur les technologies principales qui sont utilisées dans le projet.
 
+============================
 TPOT
-~~~~~~~~~~~~~~~
+============================
 
 *TPOT* :cite:`Olson2016EvoBio` est une bibliothèque *open-source* permettant l'optimisation
 de pipeline automatisée, alias *automated Machine Learning*. Elle se distingue des autres
@@ -365,9 +375,9 @@ au dessous de la :num:`figure #mlpipeline`.
 Cette bibliothèque est codée en Python, et se base sur les modèles de Scikit-learn :cite:`scikit-learn`, ce qui
 permet d'avoir une compatibilité avec cette bibliothèque *Python*.
 
-
+============================
 Systèmes distribués
-~~~~~~~~~~~~~~~
+============================
 
 Historiquement, avant que le web ne vienne changer la donne, une application était
 localisé sur une machine unique, et son architecture se présentait comme sur la :num:`figure #computerarchi`
@@ -433,8 +443,9 @@ est basée sur les outils de la *Mesosphere*, mais n'utilise pas *DC/OS* au comp
 
 Ces outils utilisés dans le cadre du projet sont décrits dans la suite du document.
 
+============================
 Mesos
-~~~~~~~~~~~~~~~
+============================
 
 Elément central de l'architecture distribuée utilisée au CHUV, *Mesos* :cite:`@mesosdoc` est un noyau
 exécuté sur chaque machine du cluster, qui fournit une abstraction des ressources
@@ -456,8 +467,9 @@ de partager les configurations des différents acteurs de l'architecture.
 
 Mesos sert de support pour l'instanciation de services sur notre architecture distribuée.
 
+============================
 Marathon
-~~~~~~~~~~~~~~~
+============================
 
 *Marathon* est un logiciel développé par *Apache* dans le cadre de la *Mesosphere*.
 La Mesosphère est l'ensemble des outils qui sont utilisés dans le cadre de *DC/OS*, et qui
@@ -470,8 +482,9 @@ d'instances de ce service, et que si une instance vient à se stopper,
 Le logiciel fournit une *API REST* :cite:`@marathonapidoc` pour instancier des services
 via d'autres applications.
 
+============================
 Chronos
-~~~~~~~~~~~~~~~
+============================
 
 *Chronos* est un logiciel développé par la *communauté* Mesos. Cette communauté,
 contrairement à la *Mesosphere*, n'est pas officiellement soutenue par *Apache*,
@@ -498,9 +511,10 @@ mais aussi une *API REST* permettant l'automatisation programmatique de créatio
 
    *Capture d'écran de l'interface graphique de Chronos*
 
+============================
 .. _docker:
 Docker
-~~~~~~~~~~~~~~~
+============================
 
 *Docker* est une solution *open-source* qui permet d'embarquer une application
 dans un container *Linux* qui peut être executé sur n'importe quelle machine supportant
@@ -606,9 +620,9 @@ un à un via la commande :code:`docker-compose up nomducomposant`.
 Il est intéressant de soulever que *docker-compose* s'occupe seul d'éviter les conflits
 de noms de container, contrairement à un démarrage via :code:`docker run`.
 
-
+============================
 Scala
-~~~~~~~~~~~~~~~
+============================
 
 Ce travail est effectué au cœur du projet :ref:`Woken <woken>` du Human Brain Project. Ce projet
 contient le langage de programmation Scala :cite:`@scala`. Scala a été concu à l’école polytechnique
@@ -619,8 +633,10 @@ de celle-ci en termes de plateforme d’exécution, ainsi que pour la gestion de
 Scala coopère ainsi de manière transparente avec Java, ce qui permet d’utiliser
 des bibliothèques non codées en Scala.
 
+============================
 AKKA
-~~~~~~~~~~~~~~~
+============================
+
 Akka :cite:`@akka` est un outil de développement et un environnement d’exécution libre et
 open-source qui a pour but de simplifier la mise en place d’applications distribuées
 et concurrentes basée sur la JVM. Il gère donc les langages de programmations *Java* et *Scala*,
@@ -640,22 +656,19 @@ d’état bloquant en cas de latence réseau ou tout autre problème technique.
 Akka s’occupe de distribuer les acteurs sur le cluster, ce qui permet d’avoir un
 haut niveau d’abstraction pour le programmeur.
 
-.. Captain
-.. ~~~~~~~~~~~~~~~
-
-.. Captain :cite:`@captain` est un outil qui permet de créer un point
-
 
 .. _analyse:
+############
 Analyse
-================
+############
 
 Cette section vise à décrire le cadre logiciel dans lequel le travail sera effectué,
 et à préciser les acteurs ainsi que leurs fonctions.
 
 .. _woken:
+****************
 Woken
-------------
+****************
 
 Woken :cite:`@wokenaxel` est un service, utilisable via une *API REST*, qui fournit la possibilité
 d'explorer les données (*data mining* en anglais) de la plateforme. Cette exploration
@@ -676,8 +689,9 @@ Des requêtes HTTP sont mises à disposition dans le répertoire :code:`dev-debu
 ou :code:`dev-test/http` afin de permettre de se passer de l'interface graphique,
 et de simplifier le développement.
 
+==================================
 Place de Woken dans l'architecture
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==================================
 
 Woken étant un service, il est concu pour être utiliser par d'autres services.
 La :num:`figure #wokenarchiglobal` présente une version simplifiée de l'architecture
@@ -734,8 +748,9 @@ forme :
 .. literalinclude:: examples/query-experiment.sh
    :language: bash
 
+==================================
 Fonctionnement interne de Woken
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==================================
 
 Woken a la responsabilité d'appliquer des algorithmes suite à la demande via l'une
 des deux :ref:`routes REST <routesrest>` mises à disposition.
@@ -826,9 +841,9 @@ Ce flux de travail comporte oblige deux problématiques de taille :
 * Il est nécessaire d'attendre un résultat dans la base de données pour que les `localCoordinatorActor` détectent que le container a fourni un travail.
 * Il est nécessaire de passer par le mécanisme de *cross-validation* pour définir un score à une expérience. Ceci impose aussi un format *PFA* strict.
 
-
+********************************************
 Fonctionnement actuel des containers Docker
--------------------------------------------
+********************************************
 
 Actuellement, les containers utilisés par la plateforme Docker sont lancés via Chronos.
 A partir d'une définition d'expérience au format *JSON*, on instancie un objet de définition
@@ -858,8 +873,9 @@ dans lequel il était. Comme dit précédemment, un *volume* est un répertoire 
 Si il existe des fichiers dans le dossier au moment du montage du *volume*, le container
 y aura accès. Si le container meurt, le contenu du *volume* reste.
 
+******************************
 Tests préliminaires avec TPOT
------------------------------
+******************************
 
 Des tests ont été effectués avec TPOT afin de déterminer son utilisabilité.
 Dans le cadre de du projet, le plus important était de pouvoir:
@@ -888,8 +904,9 @@ A la fin de ces tests, il s'avère que :
 
 A la fin de cette analyse, les attentes envers TPOT dans le cadre du projet sont atteintes.
 
+********************
 Le cas de Marathon
-------------------
+********************
 
 Durant ce projet, la substition de *Chronos* par *Marathon* a été explorée. La raison
 est que *Chronos* n'est pas diretement lié à la *Mesosphere*, et que son développement
@@ -907,9 +924,9 @@ voulue dans les cas d'utilisations de *Marathon*.
 *Metronome* :cite:`@metronome` est destiné à être le remplacant de *Marathon*, mais il n'est actuellement
 pas assez abouti pour être incorporé à l'architecture.
 
-
+############
 Conception
-============
+############
 
 A partir de l'analyse effectuée au chapitre :ref:`analyse`, il est possible de concevoir
 la nouvelle architecture pour résoudre les problèmatiques connues qui sont :
@@ -918,9 +935,9 @@ la nouvelle architecture pour résoudre les problèmatiques connues qui sont :
 * Mettre en place un container qui accepte plusieurs points d'entrées;
 * Se passer de la mise en forme de PFA imposée dans le flux actuel.
 
-
+****************************************
 Modification globale du workflow Woken
-------------
+****************************************
 
 Sans parler directement de la modifications des acteurs *Akka*, il est intéressant
 de présenter une vue d'ensemble des intervenants dans la problématique du projet,
@@ -952,8 +969,9 @@ de la conception est rédigée en parcourant les intervenants de droite à gauch
 
       \clearpage
 
+********************
 Conception pour TPOT
---------------------
+********************
 
 Sans se soucier de la problématique *Docker*, le script *Python* doit pouvoir fournir deux
 méthodes, :code:`train` et :code:`test`.
@@ -974,9 +992,9 @@ La méthode :code:`test` s'occupe de :
 * Effectuer des prédicats sur les données passées en paramètres;
 * Ecrire les scores dans un fichier texte.
 
-
+****************************************
 Système de containers Docker interactifs
-------------
+****************************************
 
 Un container n'est normalement pas conçu pour faire persister des données sur son état.
 Lors de l'arrêt d'un container, l'hôte n'enregistre en général pas de données sur son
@@ -1019,8 +1037,9 @@ par exemple via une bibliothèque comme ZeroMQ :cite:`@zeromq`. Le but de ce pro
 de faire une expérience scientifique sur l'apport de l' *automated machine learning*
 dans le cadre de la plateforme.
 
+**********
 Chronos
-------------------
+**********
 
 Chronos est un logiciel que l'on se contentera d'utiliser depuis une
 image Docker, il n'y a pas de conception liée à cette partie. Il faut néanmoins
@@ -1030,9 +1049,10 @@ la configuration complète et correcte pour notre container qui sera lancé.
 Il a déjà été vérifié que Chronos, dans sa version `3.0.2`, permet de lancer un
 container avec des volumes, des variables d'environnement, et un entrypoint.
 
+**********
 .. _akkaconception:
 Akka
-------------------
+**********
 
 Le flux d'acteurs présenté à la figure :num:`figure #wokenactors` est modifié afin
 de répondre au nouveau container "interactif" lié à Docker. La :num:`figure #newinteractiveactors`
@@ -1058,16 +1078,17 @@ présente le flux de travail alternatif conçu.
    disque ne permet pas de dire si le travail est complet. La mise en forme des prédicats
    pour le retour à l'AlgorithmActor n'est pas encore déterminé.
 
-
+########################
 Implémentation réalisée
-============
+########################
 
 Cette section précise l'implémentation réalisée dans le cadre de ce projet. Comme toutes
 les autres sections, elle ne présente que la version finale, et pas tous les tests et le
 cheminement effectués.
 
+******************************
 Présentation des tâches
-------------
+******************************
 
 Afin de faciliter la lecture, ce chapitre sera présenté en suivant la numérotation de
 la représentation de la :num:`figure #tasksbreakdown`.
@@ -1088,17 +1109,18 @@ la représentation de la :num:`figure #tasksbreakdown`.
 
    \clearpage
 
-
+**********
 TPOT
-------------
+**********
 
 Cette section présente les points importants de l'implémentation du script `Python`
 qui implémente la solution d'optimisation de pipeline automatique de `TPOT`.
 
 Le script implémenté est disponible sur *Github* :cite:`@tpotcode`.
 
+====================================================================
 Tâche 1 : Récupération du meilleur pipeline
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+====================================================================
 
 Le meilleur est disponible après l'optimisation du pipeline via TPOT. La récupération
 se fait via la variable interne :code:`_optimized_pipeline` de l'objet `TPOTClassifier`
@@ -1111,8 +1133,10 @@ montre que les développeurs ont conscience de cette mauvaise pratique.
 Si le changement est effectué dans la même *release*, il faudra modifier le code du
 script.
 
+======================================================================================================
 Tâche 2 : Liaison de la BDD du CHUV, mise en forme du dataset pour TPOT et découpage du dataset
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+======================================================================================================
+
 Le script :code:`database_connector.py`, fourni par le CHUV avec les images de base
 *Docker* `Python` pour l'implémentation de nouveaux algorithme, se base sur les variables
 d'environnement du container. Le script permet d'effectuer des requêtes `SQL` directement
@@ -1123,8 +1147,9 @@ Le dataset est transformé en `array` *numpy* après la récupération des *reco
 la requête, afin de correspondre au type attendu par TPOT. Ceci est appliqué pour les
 *features*, mais aussi pour les *targets*.
 
+====================================================================
 Tâche 3 : Analyse du type de features
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+====================================================================
 
 Il est possible de récupérer le type des features (nominal ou continu) via la
 méthode `var_type` du script `database_connector.py`. Ces types sont récupérés
@@ -1134,8 +1159,9 @@ Cette fonctionnalité n'est pas encore implémentée. Il faudra tester toutes le
 et, si il n'y a que des features de type continues, instancier un `TPOTRegressor`,
 et si non, instancier un `TPOTClassifier`. Le reste du script ne change pas.
 
+======================================================================================================
 Tâche 4 : Reconstruction du pipeline via la description texte crée par TPOT
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+======================================================================================================
 
 Depuis l'enregistrement sous format d'une chaîne de caratères via la phase de *training*,
 il est possible de reconstruire le pipeline en objet *scikit-learn* via la *toolbox* de TPOT
@@ -1145,8 +1171,9 @@ de la phase de `training`. Il est facile de récupérer le même découpage du t
 test et du test set en définissant la `seed` pour la méthode de découpage du dataset,
 soit :code:`train_test_split(X,y, random_state = 42)` qui est fournie par *scikit-learn*.
 
+==================================
 Tâche 5 : Retour des prédictions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==================================
 
 Pour l'instant, le retour des prédictions se fait au format JSON en sérialisant l'objet
 `array` de `numpy`. Ce formatage de retour n'est pas définitif, mais il n'as pas été
@@ -1155,8 +1182,9 @@ encore précisé comment nous allons implémenter la liaison du retour du contai
 s'occuper du formatage pour permettre de retourner au *AlgorithmActor* qui lui a
 confié le *job* pour l'algorithme *TPOT*.
 
+*****************
 Docker
-------------
+*****************
 
 Une fois le script TPOT fonctionnel en stand-alone, il est possible d'intégrer ce
 script dans les images de créations d'algorithmes pour la plateforme fournies par
@@ -1178,8 +1206,9 @@ dans le cadre de Woken.
 
 L'installation de la dépendance TPOT via *pip* est effectuée directement dans le Dockerfile.
 
+====================================================================
 Tâche 6 : Implémentation d’un container stateful
-~~~~~~~~~~~~~~~~~~~~~~~~
+====================================================================
 
 Le point principal d'implémentation de la partie Docker réside dans le fait de pouvoir
 conserver des informations entre la phase de *training* et la phase de *test* (qui correspond
@@ -1248,8 +1277,9 @@ au même *volume* que celui qui a effectué la phase d'entraînement.
 Cette méthode est celle de l'implémentation finale, car elle permet d'être compatible
 avec les restrictions de Chronos, qui ne permet d'envoyer des commandes :code:`docker run`.
 
+==================================
 Tâche 7 : Gestion des entrypoints
-~~~~~~~~~~~~~~~~~~~~~~~~
+==================================
 
 La définition des entrypoints est effectuée en donnant dans le Dockerfile la commande
 :code:`ENTRYPOINT [/docker-entrypoint.sh]`, où :code:`docker-entrypoint.sh` est un
@@ -1263,8 +1293,9 @@ Le paramètre :code:`commande` du :code:`docker-run` est automatiquement transmi
 commande non reconnue, le container n'effectuera pas d'appel au script, et ne plantera
 pas.
 
+====================================
 Tâche 8 : Variables d’environnements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+====================================
 
 Les variables d'environnement sont toutes passées par le demandeur de l'algorithme
 du container. Elles sont passées au moment de l'appel de la méthode de lancement de celui-ci
@@ -1273,8 +1304,9 @@ autant que besoin au lancement, et celles-ci sont accessibles dans le container 
 des variables d'environnement standard Linux, bien que leur portée soit locale au
 container.
 
+====================================================================
 Tâche 9 : Gestion des codes d’erreurs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+====================================================================
 
 Pour la gestion des erreurs dans un container Docker, il faut prendre en compte
 plusieurs niveaux auxquels celle-ci peuvent intervenir :
@@ -1302,8 +1334,9 @@ puisse retourner le code d'erreur au container, et inscrire les exception dans l
 
 Cette fonctionnalité n'a pas été implémentée par manque de temps.
 
+====================================================================
 Tâche 10 : Connexion aux bases de données
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+====================================================================
 
 Etant donné que le script *Python* est désormais intégré dans le container,
 l'accès à la base de données doit s'effectuer entre deux containers.
@@ -1312,8 +1345,9 @@ La configuration correcte du réseau, décrite dans le fichier *docker-compose.y
 l'architecture, est essentielle pour que les bases de données soient accessibles via
 le container. Ces points sont traités dans la partie architecture de ce chapitre.
 
+**********
 Chronos
-------------
+**********
 
 Ce chapitre décrit la méthodologie de mise en place du passage de l'Instanciation
 du container *Docker* *TPOT* de la ligne de commande Docker au lancement via Chronos.
@@ -1329,8 +1363,9 @@ correctement configurée pour qu'il puisse réaliser le travail en interne, la c
 JSON a été enregistrée, et envoyée sur l'API en requête `HTTP POST` via *Woken*, afin de
 découpler au maximum les sources de problèmes.
 
+====================================================================
 Tâche 11 : Instanciation du container personnalisé via le GUI
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+====================================================================
 
 Chronos fourni une interface graphique présentée en :num:`figure #chonosguijson`
 
@@ -1346,8 +1381,9 @@ Il est possible de tester tous les points spécifiques au container TPOT, telles
 la définition de *volumes*, le passage de variables d'environnement, ainsi que le format
 pour la commande pour lancer correctement le
 
+======================================================================================================
 Tâche 12 : Instanciation du container via une requête POST avec un fichier JSON
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+======================================================================================================
 
 Dès que le format JSON a été défini avec la tâche 13, l'envoi de ce fichier via une
 requête :code:`HTTP POST` via curl a été testée. Celle-ci fonctionne comme prévu, en
@@ -1355,8 +1391,9 @@ l'adressant à l'url :code:`127.0.0.1:4400/v1/scheduler/iso8601`, mais aussi sur
 version 2.5 de Chronos, actuellement implémentée en production dans le projet.
 L'ancienne version de Chronos utilise la route :code:`127.0.0.1:4400/scheduler/iso8601`.
 
+**********
 Akka
-------------
+**********
 
 Etant donné que l'instanciation du container TPOT est possible via Chronos, il est
 possible d'implémenter le flux d'acteur nécessaire pour effectuer le travail présenté
@@ -1384,8 +1421,9 @@ Le document de configuration de l'environnement de développement est en cours d
 rédaction.
 
 .. _directories:
+====================================================================
 Tâche 13 : Mise en relation du validation pool Akka
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+====================================================================
 
 Etant donné que *Woken* a été passé en natif dans l'environnement :code:`dev-debug`,
 le pool d'acteurs *Akka* de validation a du être adapté pour que la route `/mining/experiment/`
@@ -1397,8 +1435,9 @@ une expérience de comparaison entre avec et sans optimisation de pipeline autom
 Cette implémentation a été possible grace à une version spécifique de l'image
 :code:`hbpmip/woken-validation:AutoML`.
 
+======================================================================================================
 Tâche 14 : Mise en place du nouveau flux d’acteurs dans Woken pour traiter nos container interactif
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+======================================================================================================
 
 Actuellement, le nouvel acteur :code:`InteractiveActor` est implémenté pour remplacer
 le :code:`ExperimentActor`, comme le suggère la :num:`figure #newinteractiveactors`.
@@ -1436,15 +1475,17 @@ Dès lors, le dernier état s'occupe de récupérer les prédicats, d'en tirer d
 et de les mettre en forme pour les transmettre à l'`AlgorithmActor` qui a appelé l'acteur traitant
 de *TPOT*.
 
+**********
 Scala
-------------
+**********
 
 Bien que la frontière soit mince entre la partie *Scala* et *Akka* soit mince, les
 point suivants sont généralement liés uniquement à la synthaxe *Scala*, et plus au
 paradigme de programmation *Akka*.
 
+======================================================================================================
 Tâche 15 : Mise en relation du scoring pour le retour à l’AlgorithmActor
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+======================================================================================================
 
 Ce point n'est pas encore implémenté, et, comme dit lors de la phase de conception,
 le format de retour du container pour les prédicats n'est pas encore fixé.
@@ -1454,8 +1495,9 @@ le format de sortie du container, ainsi que sur le traitement avant le retour de
 sous format *PFA* au `AlgorithmActor`. La définition sera effectuée quand la partie
 *Akka* sera implémentée et fonctionnelle.
 
+======================================================================================================
 Tâche 16 : Configuration des définitions de containers d’algorithmes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+======================================================================================================
 
 Woken envoie des demandes d'exécution d'algorithmes à Chronos sous format `JSON`.
 Il doit stipuler l'image et la version pour chaque algorithme disponible à l'utilisateur.
@@ -1478,8 +1520,9 @@ Pour information, il est prévu que ce flux soit utilisé afin de mettre à disp
 les algorithmes de *scikit-learn* via ce nouveau flux, car les prédicats pourront
 s'effectuer via une simple représentation du texte du pipeline.
 
+======================================================================================================
 Tâche 17 : Mise en place de la nouvelle structure de case classes pour les volumes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+======================================================================================================
 
 La représentation d'un :code:`Job` donné à Chronos est effectué via des case-classes
 *Scala* directement dans *Woken*. Cette définition n'intégrait pas les notions de
@@ -1493,8 +1536,9 @@ pour l'entrypoint.
 La sérialisation est gérée par Spray :cite:`@spray`. Des tests unitaires ont été implémentés
 pour vérifier le format. Ils sont disponibles au chemin :code:`/src/test/scala/JSONFormat/JSONFormattingTests.scala`.
 
+======================================================================================================
 Tâche 18 : Génération automatique des répertoires pour la liaison des volumes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+======================================================================================================
 
 A l'instant de la rédaction de ce rapport, le chemin pour la liaison de *volume* est
 hard-codé. Ceci n'est pas viable quand le flux d'acteur est complet.
@@ -1520,8 +1564,9 @@ celui-ci le temps du flux de l'*InteractiveActor*.
 Avec cette implémentation, chaque acteur peut travailler de manière autonome,
 sans devoir tenir compte d'un dictionnaire de répertoires global pour les acteurs.
 
+********************
 Architecture
-------------
+********************
 
 Cette section décrit les modifications de l'architecture pour le déroulement du projet.
 Au lancement de ce projet, une architecture de test était disponible dans le répertoire
@@ -1540,8 +1585,9 @@ cas de reprise du projet par un externe. Le fichier :code:`REAMDE` du projet ten
 d'expliquer au mieux la (difficile) configuration de l'environment de développement
 pour la synchronisation entre l'architecture *Docker* et le code natif *Scala*.
 
+======================================================================================================
 Tâche 19 : Sortie de Woken du container pour permettre un débuggage en natif
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+======================================================================================================
 
 C'est la première fois qu'un externe aux ressources du CHUV travaille sur *Woken*.
 Il a été nécessaire d'adapter et de substituer les dépendances qui étaient *hard-codées*,
@@ -1573,8 +1619,9 @@ démarre le pool d'acteurs de validations, mais ils s'arrêtent si le projet *Wo
 n'est pas lancé assez vite pour qu'ils s'envoient des :code:`heartbeats` signalant de
 leur état de santé.
 
+======================================================================================================
 Tâche 20 : Adaptation du docker-compose pour gérer les bases de données via les migrations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+======================================================================================================
 
 De base, le container *Docker* de *PostgresSQL* est prévu pour charger un script de base
 de données dans le dossier :code:`/docker-entrypoint-initdb.d/` du container. On copie en général
@@ -1612,8 +1659,9 @@ Sans entrer dans les détails techniques, les containers de base de données ont
 changés de mode de liaison de réseau de :code:`Host` à :code:`Bridge`, et les chemins
 code:`jdbc` (url + port) adaptés afin de permettre à *Woken* d'y accéder.
 
+======================================================================================================
 Tâche 21 : Mise à jour du docker-compose pour le validation-pool Akka
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+======================================================================================================
 
 Le code de *Woken* ayant été sorti du container *Docker* pour être utilisé en natif,
 les acteurs *Scala* du *validation-pool*, contenus dans un container *Docker* distant,
@@ -1623,8 +1671,9 @@ n'étaient plus accessibles. Il a fallu modifier le fichier de configuration
 Celà nécessite de définir de nouvelles résolutions de noms dans le fichier :code:`/etc/hosts`,
 comme décrit dans la procédure du README du projet :cite:`@readmewoken` .
 
+**************************************************
 Compte rendu graphique de l'avancement du projet
-------------------------------------------------
+**************************************************
 
 Etant donné que le projet n'a pas pu aboutir par manque de temps, la :num:`figure #progressrepresentation`
 présente une représentation visuelle des points ayant été implémentés, de ceux en cours
@@ -1647,20 +1696,24 @@ que l'implémentation de la partie *Akka* soit la seule empêchant de mener à b
 Un développeur expérimenté en *Scala/Akka* devrait pouvoir implémenter une première version
 de l'architecture proposée dans la partie :ref:`conception akka <akkaconception>`.
 
-Conclusion
-============
 
+########################
+Conclusion
+########################
+
+****************************************
 Etat des lieux au moment du rendu
-------------
+****************************************
 
 parler de l'expérience.
 
-
+******************************
 Perspectives et améliorations
-------------
+******************************
 
+########################
 Remerciements
-=============
+########################
 
 
 .. raw:: latex
@@ -1672,8 +1725,9 @@ Remerciements
    :all:
    :style: plain
 
+############
 Annexes
-============
+############
 
 TODO:Annexes :
 - CdC

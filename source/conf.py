@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# MIP App Framework documentation build configuration file, created by
+# AutomML documentation build configuration file, created by
 # sphinx-quickstart on Tue Feb  7 00:24:36 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -106,6 +106,8 @@ htmlhelp_basename = 'Marackerdoc'
 # \usepackage{sphinx}
 # """
 
+latex_toplevel_sectioning = 'parts'
+
 latex_engine = 'xelatex'
 
 latex_elements = {
@@ -131,22 +133,29 @@ latex_elements = {
             	\vspace{1cm}
             	{\scshape\Large Travail de Bachelor 17INF-TB225\par}
             	\vspace{1.5cm}
-            	{\huge\bfseries Automated Machine Learning pour le Human Brain Project\par}
+            	{\huge\bfseries Automated Machine Learning\par}
             	\vspace{1.5cm}
             	{\itshape Auteur : Axel Roy\par}
+            	\vspace{0.1cm}
+                {\itshape Mandant : Human Brain Project - CHUV-LREN\par}
             	\vspace{0.1cm}
             	{\itshape Superviseur : Stefano Carrino\par}
             	\vspace{0.1cm}
             	{\itshape Expert : Antonio Ridi\par}
             	\vfill
             % Bottom of the page
-	{\large \today\par}
-
-
-
+	     {\large \today\par}
          \end{titlepage}
        }
+       \pagestyle{fancy}
+       \fancyhf{}
+       \fancyfoot[LE,RO]{\thepage}
+       \fancyfoot[RE,LO]{HE-Arc - Axel Roy}
        \makeatother''',
+
+    # Supprimer les 4 précédentes lignes pour enlever les footes. La page de titre
+    # se print en double :(
+
 
     # Latex figure (float) alignment
     #
@@ -162,19 +171,12 @@ latex_elements = {
     r'\usepackage[Bjornstrup]{fncychap}',
 }
 
-latex_show_urls = 'footnote'
-
-
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'AutoML.tex', 'Rapport de projet AutoML', 'Axel Roy',
      'report'),
-]
-
-latex_additional_files = [
-    'tex/preamble._tex'
 ]
 
 # -- Options for manual page output ---------------------------------------
