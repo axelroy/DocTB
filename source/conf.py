@@ -45,7 +45,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'AutoML'
+project = 'Automated Machine Learning'
 copyright = '2017, Axel Roy'
 author = 'Axel Roy'
 
@@ -121,6 +121,39 @@ latex_elements = {
 
     # Additional stuff for the LaTeX preamble.
     # 'preamble': ADDITIONAL_PREAMBLE,
+  #   'preamble': r'''
+  #      \makeatletter
+  #      \renewcommand{\maketitle}{
+  #        \begin{titlepage}
+  #
+  # begin{center}
+  # \large \textsc{\ifthenelse{\boolean{@french}}{Rapport de \@worktype}{\@worktype\ report}}}
+  # ifthenelse{\boolean{@confidential}}{\\[2em]\textcolor{red}{\Large \textbf{\MakeUppercase{\confidentialname}}}}{}
+  # end{center}
+  # \vskip 60\p@
+  # \begin{center}%
+  #   {\Huge \@title \par}%
+  #   \vskip 6em%
+  #   {\large
+  #    \lineskip .75em%
+  #     \begin{tabular}[t]{l l}%
+  #       {\small \authorname:} & \@author \\
+  # 		{\small \professorname:} & \@professor \\
+  # 		{\small \requestorname:} & \@requestor \\
+  # 		{\small Date:} & \@date \\
+  # 		{\small \versionname:} & {\small \@version}\\[1em]
+  # 		%\@projectnumber
+  #     \end{tabular} \hspace*{\fill}
+  # 	%\@author \\[2em]
+  # 	%\@date , version \@version
+  # 	\par}%
+  #     \vskip 1.5em%
+  # \end{center}\par
+  # \vfil\null
+  # \end{titlepage}
+  #        \end{titlepage}
+  #      }
+  #      \makeatother''',
 
     # Latex figure (float) alignment
     #
@@ -163,8 +196,10 @@ man_pages = [(master_doc, 'AutoML', 'AutoML', [author], 1)]
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'AutoML', 'Rapport de projet - AutoML', author, 'Rapport de projet - AutoML',
-     'Optimisation du pipeline d\'apprentissage automatique dans le cadre du Human Brain Project SP8.', 'Machine Learning'),
+    (master_doc, 'Automated Machine Learning', 'Rapport de projet du travail de Bachelor 17INF-TB225 -  Automated Machine Learning', author, 'Rapport de projet du travail de Bachelor 17INF-TB225 -  Automated Machine Learning',
+     'Optimisation automatique du pipeline de Machine Learning dans le cadre du Human Brain Project SP8.', 'Machine Learning'),
 ]
+
+
 
  # latex_logo = 'images/ml_pipeline.png'

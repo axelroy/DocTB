@@ -7,11 +7,26 @@ Bienvenue sur la documentation du travail de Bachelor Auto ML
 
 .. raw:: latex
 
-   \clearpage
+   \maketitle
+
+    \begin{abstract}
+
+         L’imagerie médicale est un domaine qui réunit la médecin et l’infographie. En effet, après que les médecins ont procédé à des examens, ils obtiennent alors des données sur le corps du patient. Pour traiter celui-ci, ils ont besoin de visualiser ces données et c’est là que l’infographie est utile. On va pouvoir afficher à l’écran des volumes 3d de donnée. Mais on reste dans un affichage en 2 dimensions.
+         L’Hololens est une nouvelle technologie développée par Microsoft, il s’agit d’un casque de réalité augmenter. Il permet de simuler des hologrammes qui s’intègrent dans le champ de vision de l’utilisateur. Les hologrammes peuvent être disposés dans l’espace et visualisés par plusieurs personnes en même temps.
+         L’idée directrice du projet est de permettre aux chirurgiens de visualiser des IRM et autres matrices HR dans plusieurs casques Hololens à plusieurs spécialistes simultanément dans le cadre de séances préopératoires.
+
+        \begin{center}
+          \textbf{Abstract}
+        \end{center}
+
+        Medical imaging is an area that brings together medicine and computer graphics. Indeed, after doctors have carried out examinations, they obtain data on the body of the patient. To process this, they need to visualize this data and this is where computer graphics is useful. We will be able to display on the screen 3d volumes of data. But we remain in a 2-dimensional display.
+        The Hololens is a new technology developed by Microsoft, this is a augmented reality helmet. It allows to simulate holograms which integrate in the field of view of the user. The holograms can be arranged in space and viewed by several people at the same time.
+        The main idea of the project is to allow surgeons to visualize MRIs and other HR matrices in several Hololens helmets to several specialists simultaneously during preoperative sessions.
+ \end{abstract}
 
 .. toctree::
    :numbered:
-   :maxdepth: 4
+   :maxdepth: 2
 
 .. raw:: latex
 
@@ -319,6 +334,9 @@ Si le travail abouti à une expérience, il est possible que celui-ci soit publi
 Technologies
 ---------------
 
+Après passage en revue des concepts théoriques liés au projet, il est intéressant
+de se pencher sur les technologies principales qui sont utilisées dans le projet.
+
 TPOT
 ~~~~~~~~~~~~~~~
 
@@ -353,10 +371,6 @@ Systèmes distribués
 
 Historiquement, avant que le web ne vienne changer la donne, une application était
 localisé sur une machine unique, et son architecture se présentait comme sur la :num:`figure #computerarchi`
-
-.. raw:: latex
-
-   \clearpage
 
 .. _computerarchi:
 .. figure:: images/computer_architecture.png
@@ -782,6 +796,10 @@ ainsi que de gérer la *cross-validation*.
 
 Le flux de travail entre les acteurs peut être représenté comme montré sur la
 :num:`figure #wokenactors`
+
+.. raw:: latex
+
+   \clearpage
 
 .. _wokenactors:
 .. figure:: images/wokenactors.png
@@ -1613,7 +1631,7 @@ présente une représentation visuelle des points ayant été implémentés, de 
 de réalisation, ainsi que de ceux non commencés, basé sur la même structure que la :num:`figure #tasksbreakdown`.
 
 .. _progressrepresentation:
-.. figure:: images/implementationRepresentationProgress.png
+.. figure:: images/ImplementationRepresentationProgress.png
    :width: 600px
    :align: center
    :alt: Représentation graphique des tâches effectuées.
@@ -1644,22 +1662,23 @@ Perspectives et améliorations
 Remerciements
 =============
 
-Annexes, références et Table des illustrations.
-============
 
-TODO:Annexes :
-- CdC
-- Journal de travail
-- TPOT papers
-- FULL Rest API for TPOT
+.. raw:: latex
+
+   \listoffigures
+
 
 .. bibliography:: references.bib
    :all:
    :style: plain
 
-.. Indices and tables
-.. ==================
+Annexes
+============
 
-.. * :ref:`genindex`
-.. * :ref:`modindex`
-.. * :ref:`search`
+TODO:Annexes :
+- CdC
+- Planifications
+- Compte rendu Milestone
+- Journal de travail
+- TPOT papers
+- (FULL Rest API for TPOT)
