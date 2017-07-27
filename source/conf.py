@@ -129,7 +129,7 @@ latex_elements = {
          \begin{titlepage}
 
             \centering
-            	\includegraphics[width=0.30\textwidth]{logoarc}\par\vspace{1cm}
+            	\includegraphics[width=0.5\textwidth]{logoarc}\par\vspace{1cm}
             	\vspace{1cm}
             	{\scshape\Large Travail de Bachelor 17INF-TB225\par}
             	\vspace{1.5cm}
@@ -137,7 +137,7 @@ latex_elements = {
             	\vspace{1.5cm}
             	{\itshape Auteur : Axel Roy\par}
             	\vspace{0.1cm}
-                {\itshape Mandant : Human Brain Project - CHUV-LREN\par}
+                {\itshape Mandant : Human Brain Project - CHUV-LREN - Arnaud Jutzeler\par}
             	\vspace{0.1cm}
             	{\itshape Superviseur : Stefano Carrino\par}
             	\vspace{0.1cm}
@@ -183,7 +183,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, 'AutoML', 'AutoML', [author], 1)]
+# man_pages = [(master_doc, 'AutoML', 'AutoML', [author], 1)]
 
 # -- Options for Texinfo output -------------------------------------------
 
