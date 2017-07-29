@@ -5,34 +5,6 @@
 Bienvenue sur la documentation du travail de Bachelor Auto ML
 ##############################################################
 
-.. raw:: latex
-
-    \begin{abstract}
-
-    Ce projet s'inscrit dans le cadre de la plateforme MIP du sous-projet 8 du Human Brain Project.
-    Cette plateforme vise à fournir des données médicales anonymisées afin de pouvoir formuler des
-    expériences sur des pathologies neurologiques telles qu'Alzheimer, en vue d'en déterminer les causes.
-    La formulation d'une expérience nécessite des connaissances en machine learning que n'ont pas
-    les utilisateurs cibles de la plateforme. Ce projet vise à simplifier l'utilisation
-    de la plateforme via un mécanisme d'automated machine learning, qui consiste à automatiser la sélection
-    du modèle et de ses hyper-paramètres, ainsi parfois que la sélection des caractéristiques pour la partie description de la partie machine learning de l'expérience.
-    Ce projet fourni une analyse et une conception afin d'intégrer ce processus dans le cadre du projet.
-    L'implémentation est en cours de réalisation, et n'a pas pu être terminée par manque de temps.
-    Une fois l'implémentation terminée, une expérience permettra d'infirmer ou de confirmer l'efficacité de l'approche
-    d'automated machine learning dans le cadre de la plateforme.
-    Si les résultats sont concluants, la recherche dans le domaine de la maladie d'Alzheimer pourrait avancer
-    plus rapidement grâce à la plateforme MIP.
-
-				\begin{center}
-					\textbf{Abstract}
-        \end{center}
-
-          This project is part of the MIP platform of subproject 8 of the Human Brain Project. This platform aims to provide anonymised medical data in order to be able to formulate experiments on neurological pathologies such as Alzheimer's, in order to determine their causes. The formulation of an experiment requires knowledge in machine learning, which does not have the target users of the platform. This project aims to simplify the use of the platform via an automated machine learning mechanism, which consists in automating the selection of the model and its hyper-parameters, as well as sometimes the selection of the characteristics, for the description part of the part Machine learning experience. This project provides analysis and design to integrate this process into the project. Implementation is in progress, and could not be completed due to lack of time. Once the implementation is complete, an experiment will confirm or deny the effectiveness of the automated machine learning approach within the framework of the platform.
-          If the results are conclusive, research in the field of Alzheimer's disease could progress faster through to the MIP platform.
-
-
-		\end{abstract}
-
 .. toctree::
    :maxdepth: 4
 
@@ -45,7 +17,7 @@ Introduction
 
 Le présent document fait office de rapport de projet.
 Il permet de comprendre le contexte de celui-ci, de décrire les éléments qui le compose,
-fait une analyse de la problématique, la conception en vue de la résolution et
+fait une analyse de la problématique, la conception en vue de la résolution de celle-ci et
 présente l'implémentation effectuée. Ce document ne présente pas tout le cheminement,
 mais uniquement l'état final.
 
@@ -55,8 +27,9 @@ Contexte du projet
 Le présent projet s'inscrit dans le cadre du travail de Bachelor en Informatique option "Développement logiciel
 et multimédia", réalisé à la HE-ARC de Neuchâtel.
 
-Le projet est effectué pour le CHUV-LREN dans le cadre du "Human Brain Project". Ce projet s’inscrit dans le cadre du projet Européen « Human Brain Project ».
-Ce chapitre vise à expliquer le contexte du sous-projet 8, et ce qui nous intéresse.
+Le projet est effectué pour le CHUV-LREN dans le cadre du "Human Brain Project" :cite:`hbp`.
+Ce chapitre vise à expliquer le contexte du sous-projet 8 :cite:`hbpmip`, et la problématique
+dans laquelle s'inscrit ce projet.
 
 Présentation de la plateforme MIP
 ****************************************
@@ -186,7 +159,7 @@ le cahier des charges ainsi que la planification sont disponibles en annexes.
 Etat de l'Art
 ########################
 
-Avant de se lancerdans la description du travail,
+Avant de se lancer dans la description du travail,
 il est intéressant d’effectuer un état de l’art des technologies qui pourraient
 nous intéresser. Etant donné que le projet consiste à ajouter des fonctionnalités
 à un projet existant, cette section décrira les technologies actuellement existantes,
@@ -201,7 +174,7 @@ Théorie Machine Learning
 Le *Machine Learning* (apprentissage automatique en francais), est un champ d’activité
 de l’intelligence artificielle qui vise à permettre à une machine d’apprendre par elle-même
 plutôt que d’en fixer tous les comportements de manière programmatique.
-Elle est particulièrement utilisée dans les problématiques où le nombre de cas
+Cette méthodologie est particulièrement utilisée dans les problématiques où le nombre de cas
 est trop important pour être codés à la mano. Le panel d’utilisation est large,
 il peut par exemple concerner :
 
@@ -229,7 +202,8 @@ Apprentissage supervisé
 ========================
 
 Dans cette méthodologie, on connait déjà les classes que l’on souhaite pouvoir déterminer
-automatiquement via l’algorithme. Ces classes sont tirées des données par un expert.
+automatiquement via l’algorithme. Pour les données d'entraînement, les classes sont souvent
+définies manuellement par un expert.
 Dans certains cas, il est aussi possible d’attribuer une probabilité d’appartenance à une classe.
 L’apprentissage se déroule généralement en deux phases. La première phase est dite d’entrainement.
 Elle consiste à déterminer un modèle qui permet de reproduire pour de nouvelles données la même
@@ -264,9 +238,9 @@ Apprentissage semi-supervisé
 
 Etant donné que l’apprentissage supervisé nécessite un labelisation des données par expert,
 il devient très coûteux de réaliser ce travail au fur et à mesure que les données augmentent.
-L’utilisation de données labellées, liées à des données labellées, peut permettre d’améliorer
+L’utilisation de données non labellées, liées à des données labellées, peut permettre d’améliorer
 la qualité de l’apprentissage. Par exemple, il est ainsi possible d’utiliser un classificateur
-crée par l’apprentissage supervisé, et un autre crée par l’apprentissage non-supervisé.
+crée par l’apprentissage supervisé, et un autre créé par l’apprentissage non-supervisé.
 
 Idéalement, les deux classificateurs ne se basent pas sur les mêmes caractéristiques, ce qui
 permet de recouper les deux classificateurs afin d’affiner la classification finale.
@@ -323,7 +297,7 @@ correspondent à la problématique d'exploration d'un espace de solutions de gra
 Cette exploration est effectuée de manière non dirigée tout en fournissant un résultat exploitable.
 
 Les réelles avancées dans le domaine sont récentes, les premiers articles concrets datent de
-2016, et il est difficile de trouver des exemples dans un domaine concret, prouvant l'efficacité de *l'Automated Machine Learning* .
+2016, et il est difficile de trouver des exemples dans un domaine concret, prouvant l'efficacité de *l'Automated Machine Learning*.
 Les créateurs de bibliothèque TPOT :cite:`Olson2016EvoBio` ont rédigé deux papiers :cite:`olson2016evaluation` :cite:`olson2016tpot`
 d'exemple d'applications dans des cas réels, sur la classification de cas de cancers de la prostate, en comprarant
 l'approche conventionnelle et  l'approche *Automed Machine Learning*, et ont pu mettre en avant
@@ -353,7 +327,7 @@ de pipeline automatisée, alias *automated Machine Learning*. Elle se distingue 
 bibliothèques telles que Auto-WEKA :cite:`@autoweka` et Hyperopt :cite:`@hyperopt` par le fait
 qu'il est capable non seulement de faire varier les modèles et le hyper-paramètres,
 mais qu'elle est aussi capable de sélectionner, construire ou d'effectuer du préprocessing
-sur les caractéristiques. *TPOT* dispose d'une communauté active, et le créateur,*Randy Olson*,
+sur les caractéristiques. *TPOT* dispose d'une communauté active, et le créateur, *Randy Olson*,
 répond très rapidement aux *issues* postées sur le *Github* de *TPOT*.
 
 La :num:`figure #mlpipelinetpot` présente un flux de *Machine Learning*.
@@ -1017,7 +991,7 @@ des *volumes Docker* n'est pas définitive, il est prévu de mettre en place une
 directe entre l'acteur *Akka* et le container. La principale option semble être la mise
 en place d'un système de queues de messages entre l'acteur *Akka* et le container *Docker* lié,
 par exemple via une bibliothèque comme ZeroMQ :cite:`@zeromq`. Le but de ce projet est
-de faire une expérience scientifique sur l'apport de l' *automated machine learning*
+de faire une expérience scientifique sur l'apport de l'*automated machine learning*
 dans le cadre de la plateforme.
 
 Chronos
@@ -1084,7 +1058,7 @@ la représentation de la :num:`figure #tasksbreakdown`.
    Représentation graphique des tâches réalisées. Elles sont volontairement
    traitées de droite à gauche, car il y a une imbrication ou une utilisation toujours
    dirigée vers la gauche, ce qui implique que les restrictions proviennent toujours
-   d'un composant plus à gauche. La taille des blocs n'a pas de lien avec la durée
+   d'un composant plus à droite. La taille des blocs n'a pas de lien avec la durée
    d'implémentation d'une tâches.
 
 .. raw:: latex
@@ -1102,15 +1076,15 @@ Le script implémenté est disponible sur *Github* :cite:`@tpotcode`.
 Tâche 1 : Récupération du meilleur pipeline
 ====================================================================
 
-Le meilleur est disponible après l'optimisation du pipeline via TPOT. La récupération
-se fait via la variable interne :code:`_optimized_pipeline` de l'objet `TPOTClassifier`
+Le meilleur pipeline est disponible après l'optimisation du pipeline via TPOT. La récupération
+se fait via la variable interne :code:`_optimized_pipeline` de l'objet code:`TPOTClassifier`
 ou :code:`TPOTRegressor`. L'accès via les variables internes, spécifiées via le "_"
 avant le nom de la variable, est généralement contraire aux conventions de codage `Python`,
 mais il a été confirmé dans une issue :cite:`@tpotissue` par l'auteur du code que
 c'est pour l'instant la seule méthode, mais une récente issue :cite:`@tpotissuerefactor`
 montre que les développeurs ont conscience de cette mauvaise pratique.
 
-Si le changement est effectué dans la même *release*, il faudra modifier le code du
+Si le changement est effectué dans la bibliothèque, il faudra modifier le code du
 script.
 
 Tâche 2 : Liaison de la BDD du CHUV, mise en forme du dataset pour TPOT et découpage du dataset
@@ -1118,7 +1092,7 @@ Tâche 2 : Liaison de la BDD du CHUV, mise en forme du dataset pour TPOT et déc
 
 Le script :code:`database_connector.py`, fourni par le CHUV avec les images de base
 *Docker* `Python` pour l'implémentation de nouveaux algorithme, se base sur les variables
-d'environnement du container. Le script permet d'effectuer des requêtes `SQL` directement
+d'environnement du container pour définir la configuration des bases de données. Le script permet d'effectuer des requêtes `SQL` directement
 sur la `Science-db`, en `SELECT` uniquement, et sur la `Woken-DB` en écriture afin
 d'inscrire les résultats d'expériences.
 
@@ -1135,12 +1109,12 @@ depuis les variables d'environnement du container.
 
 Cette fonctionnalité n'est pas encore implémentée. Il faudra tester toutes les features,
 et, si il n'y a que des features de type continues, instancier un `TPOTRegressor`,
-et si non, instancier un `TPOTClassifier`. Le reste du script ne change pas.
+sinon instancier un `TPOTClassifier`. Le reste du script actuellement implémenté ne change pas.
 
 Tâche 4 : Reconstruction du pipeline via la description texte crée par TPOT
 ======================================================================================================
 
-Depuis l'enregistrement sous format d'une chaîne de caratères via la phase de *training*,
+Depuis l'enregistrement du meilleur pipeline sous forme d'une chaîne de caratères via la phase de *training*,
 il est possible de reconstruire le pipeline en objet *scikit-learn* via la *toolbox* de TPOT
 via la directive :code:`tpot._toolbox.compile(expr=pipeline)`. Dès lors, il est
 possible de fitter le pipeline par rapport au même training et test set que lors
@@ -1173,7 +1147,7 @@ Dans le cadre du projet, Captain :cite:`@captain` est utilisé afin de générer
 taguées par leur numéro de commit. On utilise le script :code:`build.sh` pour générer
 l'image. Le nom de l'image est contenu dans le fichier de définition :code:`captain.yml`.
 
-Le fichier `README` du repository de travail :cite:`@dockerimages` contient les commandes
+Le fichier `README` du dépôt de travail :cite:`@dockerimages` contient les commandes
 pour tester le container interactif.
 
 Une version a été publiée sur Docker-Hub :cite:`@dockerhubtpot` afin de tester l'application du container
@@ -1206,9 +1180,8 @@ Il ne contient qu'un processus d'attente de travail.
 Lorsqu'il reçoit une demande de training via la commande :code:`docker exec containername train`,
 le processus d'attente crée un processus enfant, qui correspond à l'appel *Python* sur le script
 TPOT. Le script python va chercher les informations sur la description de l'expérience, soit dans
-les variables d'environnement, soit dans le fichier de définition du *volume*.Lorsqu'il a fini l'entrainement,
-il inscrit le meilleur pipeline dans fichier texte, dans un répertoire local, non accessible par
-l'hôte.
+les variables d'environnement, soit dans le fichier de définition du *volume*. Lorsqu'il a fini l'entrainement,
+il inscrit le meilleur pipeline dans fichier texte, dans un répertoire local au container.
 
 Le processus enfant est supprimé, et le processus d'attente reste en vie.
 
@@ -1226,7 +1199,7 @@ le processus avec le `PID 1` est responsable de la suite des signaux bas-niveau 
 les enfants, et de récupérer les processus orphelins qui peuvent survenir dans les
 cas ou un parent n'attend pas la fin du travail du sous-processus enfant.
 
-Ces problématiques créent des processus zombies, qui peuvent saturer l'utilisation
+Une mauvaise gestion des signaux créé des processus zombies, qui peuvent saturer l'utilisation
 de `PID` et provoquer un freeze total de la machine.
 
 Ce problème est réglé dans l'implémentation :cite:`@tiniimplementation` effectuée via
@@ -1287,7 +1260,7 @@ plusieurs niveaux auxquels celle-ci peuvent intervenir :
 * Au moment du lancement du container.
 
 Les exceptions dans le script TPOT sont gérées, et renvoyées via la méthode traditionnelle
-de *Python* :code:`sys.exit(code)`.
+de *Python* avec :code:`sys.exit(code)`.
 
 Ceux-ci sont renvoyées au script *bash* :code:`entrypoint.sh`,
 qui s'est occupé d'appeler le script.
@@ -1313,14 +1286,15 @@ l'accès à la base de données doit s'effectuer entre deux containers.
 La configuration des bases de données sont passées via des variables d'environnement.
 La configuration correcte du réseau, décrite dans le fichier *docker-compose.yml* de
 l'architecture, est essentielle pour que les bases de données soient accessibles via
-le container. Ces points sont traités dans la partie architecture de ce chapitre.
+le container. C'est notamment le type de réseau docker (`bridge` ou `host`),
+ainsi que les configurations d'utilisateurs qui sont délicats à paramétrer.
+Ces points sont traités dans la partie architecture de ce chapitre.
 
 Chronos
 **********
 
 Ce chapitre décrit la méthodologie de mise en place du passage de l'Instanciation
 du container *Docker* *TPOT* de la ligne de commande Docker au lancement via Chronos.
-hbpmip/woken-validation:AutoML
 Chronos se base sur un fichier JSON pour définir la configuration d'une tâche.
 Chronos a la fâcheuse manie à ne pas générer de code d'erreur en cas de format incorrect
 du fichier JSON. Il remplace systèmatiquement la partie en question par une configuration
@@ -1352,7 +1326,7 @@ pour la commande pour lancer correctement le
 Tâche 12 : Instanciation du container via une requête POST avec un fichier JSON
 ======================================================================================================
 
-Dès que le format JSON a été défini avec la tâche 13, l'envoi de ce fichier via une
+Dès que le format JSON a été défini avec la tâche 11, l'envoi de ce fichier via une
 requête :code:`HTTP POST` via curl a été testée. Celle-ci fonctionne comme prévu, en
 l'adressant à l'url :code:`127.0.0.1:4400/v1/scheduler/iso8601`, mais aussi sur la
 version 2.5 de Chronos, actuellement implémentée en production dans le projet.
@@ -1367,8 +1341,8 @@ possible d'implémenter le flux d'acteur nécessaire pour effectuer le travail p
 à la :num:`figure #newinteractiveactors`.
 
 Cette partie est plus compliquée que les autres, car l'implémentation demande des connaissances
-en *Scala*, en utilisant les définitions *AKKA* et en liant l'utilisation des automates
-à états finis, choses totalement inconnues au début de ce projet.
+en *Scala*, en utilisant les définitions *Akka* et en liant l'utilisation des automates
+à états finis d'*Akka*.
 
 Dans l'environnement de test `dev-test`, le code de *Woken* est compilé en `jar`, et
 inclu dans un container *Docker*. Le :code:`docker-compose` de cet environnement
@@ -1376,7 +1350,7 @@ lance donc *Woken* dans un container. Le code prend plusieurs minutes à être c
 et les logs d'erreurs sont accessibles via :code:`docker-compose logs woken`, qui fournit
 dans la ligne de commande, les exceptions qui sortent habituellement en console.
 Il s'est vite avéré qu'il était trop compliqué pour chaque modification de tester
-via se procédé, qui au complet prend une dizaine de minutes.
+via ce procédé, qui au complet prend une dizaine de minutes.
 
 Il a été choisi créer un environnement `dev-debug` qui externalise *Woken* du container,
 et le fait fonctionner en natif. Il est ainsi possible de débugger via les points
@@ -1384,8 +1358,8 @@ d'arrêts. La configuration a demandé un certain temps, car le :code:`docker-co
 a du être finement configuré.
 
 L'environnement est désormais disponible pour n'importe quel développeur externe.
-Le document de configuration de l'environnement de développement est en cours de
-rédaction.
+Le document de configuration de l'environnement de développement a été mis à jour
+dans le README de *Woken* sous la branche de travail actuelle :code:`AutoML`.
 
 .. _directories:
 Tâche 13 : Mise en relation du validation pool Akka
@@ -1415,22 +1389,22 @@ suivantes sont pour le moment nécéssaire :
    :language: json
 
 Il est à prévu de générer dynamiquement les répertoire pour les volumes, comme décrit dans la section
-Architecture.
+:ref:`"Génération automatique des répertoires pour la liaison des volumes"<uuid>`.
 
-Pour le moment, le repertoire doit exister, et le fichier doit être valide.
+Pour le moment, le répertoire doit exister, et le fichier doit être valide.
 
 Etant donné le manque de temps, la sérialisation de la configuration de classe Scala
 est encore effectuée par un :code:`localCoordinatorActor`, ce qui implique qu'une fois
 la requête envoyée à Chronos, l'acteur se met dans un état d'attente des résultats dans
 la base de données, chose qui n'arrivera jamais étant donné que le container *TPOT*
-ne répond pas comme ca.
+ne répond pas dans celle-ci, mais dans le *volume*.
 
 la suite de l'implémentation sera effectuée en redéfinissant les :code:`localCoordinatorActor`
 en une autre implémentation, qui permet de ne pas attendre de résultat dans la base de données.
 
 Si cet acteur fontionne, il devient possible de passer dans l'état d'attente de résultat
 de travail du container, géré par Chronos via la route :code:`/v1/scheduler/jobs/search?name=id`,
-ou l'`id` est retourné au moment de la demande d'effectuer la tâche à Chronos.
+ou l'`id` est retourné au moment de la demande d'effectuer la tâche à Chronos via la requête :code:`POST`.
 
 Dès que la tâche est finie, il faut reconfigurer les définitions de classes pour lancer en
 mode test, configurer le fichier en entrée sur le volume, et attendre à nouveau de *Chronos*
@@ -1444,7 +1418,7 @@ Scala
 **********
 
 Bien que la frontière soit mince entre la partie *Scala* et *Akka* soit mince, les
-point suivants sont généralement liés uniquement à la synthaxe *Scala*, et plus au
+point suivants sont généralement liés uniquement à la synthaxe *Scala*, et non plus au
 paradigme de programmation *Akka*.
 
 Tâche 15 : Mise en relation du scoring pour le retour à l’AlgorithmActor
@@ -1465,14 +1439,14 @@ Woken envoie des demandes d'exécution d'algorithmes à Chronos sous format `JSO
 Il doit stipuler l'image et la version pour chaque algorithme disponible à l'utilisateur.
 Le fichier de configuration est propre à l'environnement, soit `dev-debug` ou `dev-test`.
 
-Ces fichiers de configurations sont disponible dans l'arborescence au chemin `/dev-*/woken/cofig/application.conf`.
+Ces fichiers de configurations sont disponible dans l'arborescence au chemin `/dev-debug/woken/config/application.conf`.
 
 .. literalinclude:: examples/application.conf
    :language: conf
 
 Cette exemple montre que l'on définit le nom l'image et la version à utiliser pour
 résoudre un algorithme. Si l'image n'est pas présente localement, elle sera reprise
-depuis le *Docker-Hub*. Le flag prédictive indique si la voie à utiliser peut être
+depuis le *Docker-Hub*. Le flag prédictive indique si l'algorithme peut utiliser la voie
 :code:`mining/experiment`.
 
 A l'avenir, il est probable qu'un tag "interactive" définisse si on peut utiliser
@@ -1497,20 +1471,21 @@ pour l'entrypoint.
 La sérialisation est gérée par Spray :cite:`@spray`. Des tests unitaires ont été implémentés
 pour vérifier le format. Ils sont disponibles au chemin :code:`/src/test/scala/JSONFormat/JSONFormattingTests.scala`.
 
+.. _uuid:
 Tâche 18 : Génération automatique des répertoires pour la liaison des volumes
 ======================================================================================================
 
 A l'instant de la rédaction de ce rapport, le chemin pour la liaison de *volume* est
-hard-codé. Ceci n'est pas viable quand le flux d'acteur est complet.
+hard-codé. Ceci n'est pas viable dans un environnement de production.
 
 La problématique dans le cadre de l'architecture distribuée sur laquelle fonctionne
-Mesos est qu'il n'y a pas de système de fichier centralisé, ce qui implique que
-deux appels successifs via un acteur Woken doit s'effectuer sur la même machine physique
-afin que le résultat de l'entrainement soit récupérable pour les prédicats. Ce problème
+*Mesos* est qu'il n'y a pas de système de fichier centralisé, ce qui implique que
+deux appels successifs via un acteur *Woken* doit s'effectuer sur la même machine physique
+afin que le résultat de l'entraînement soit récupérable pour les prédicats. Ce problème
 peut être résolu en forcant tous les containers TPOT instanciés à être placés sur le
 même hôte. Les recherches pour ce faire n'ont pas encore été effectuées.
 
-En imaginant que le point ci-dessus est le cas, il existe encore un problème de concurrence.
+En imaginant que le point ci-dessus est réalisable, il existe encore un problème de concurrence.
 Dans un cadre de production, le chemin d'optimisation sera utilisé par plusieurs acteurs
 en parralèlle, il est indispensable que chacun ait son propre répertoire de travail.
 
@@ -1529,11 +1504,15 @@ Architecture
 
 Cette section décrit les modifications de l'architecture pour le déroulement du projet.
 Au lancement de ce projet, une architecture de test était disponible dans le répertoire
-:code:`dev-test`. Toute l'architecture, y compris *Woken*, était lancée depuis des
+:code:`dev-test`.
+
+Toute l'architecture, y compris *Woken*, était lancée depuis des
 containers *Docker*. Celui-ci était containerisé via le script :code:`build.sh` situé à la racine
 du projet. Le build consiste en la création d'une image :code:`jar` (java archive)
 contenant le code scala et toutes ses dépendances, et mis dans un container disposant
-d'une :code:`JVM` pouvant l'exécuter. Ceci implique une compilation
+d'une :code:`JVM` pouvant l'exécuter.
+
+Ceci implique une compilation
 et une containerisation à chaque modification du code. Pour débugger, il fallait passer
 par les outils :code:`docker-compose logs`, qui ne fournissent pas toujours les
 détails en cas d'exception, et qui ne permettent pas d'analyser via des points d'arrêt
@@ -1553,14 +1532,14 @@ comme par exemple la base de données des patients qui a été substituée par u
 de données fictive.
 
 Le fruit de ce travail est un nouveau repertoire :code:`dev-debug`, qui contient
-un :code:`docker-compose` permettant de mettre en place une architecture qui permet
+un :code:`docker-compose` permettant de mettre en place une architecture permettant
 de peupler les bases de données, mettre en place l'architecture distribuée (*Mesos, ZooKeeper*)
 ainsi que les outils pour l'utiliser (*Chronos* dans notre cas, et *Marathon* qui reste
 inclu).
 
 L'environnement de développement se démarre via le script :code:`run.sh` situé dans le
 répertoire :code:`dev-debug`. Il est important de ne pas utiliser directement la commande
-:code:`docker-compose up`, car certains containers *Docker* pour des problèmes de dépendances
+:code:`docker-compose up`,pour des raisons de dépendances
 entre containers. Il arrive que :code:`Mesos-slave` ne se coordonne pas
 correctement avec :code:`Mesos-master`, et qu'il ne donne pas de code d'erreur.
 
@@ -1621,10 +1600,10 @@ Tâche 21 : Mise à jour du docker-compose pour le validation-pool Akka
 
 Le code de *Woken* ayant été sorti du container *Docker* pour être utilisé en natif,
 les acteurs *Scala* du *validation-pool*, contenus dans un container *Docker* distant,
-n'étaient plus accessibles. Il a fallu modifier le fichier de configuration
-:code:`/dev-debug/woken/config/validation/application.conf` ont été mis à jour.
+n'étaient plus accessibles. Le fichier de configuration
+:code:`/dev-debug/woken/config/validation/application.conf` a été mis à jour.
 
-Celà nécessite de définir de nouvelles résolutions de noms dans le fichier :code:`/etc/hosts`,
+Celà nécessite aussi de définir de nouvelles résolutions de noms dans le fichier :code:`/etc/hosts`,
 comme décrit dans la procédure du README du projet :cite:`@readmewoken` .
 
 Compte rendu graphique de l'avancement du projet
@@ -1648,7 +1627,7 @@ Etant donné que tous les acteurs doivent remplir leurs fonctions pour qu'une pr
 version soit exploitable, il est regrettable de constater que le manque de temps a fait
 que l'implémentation de la partie *Akka* soit la seule empêchant de mener à bien une expérience.
 
-Un développeur expérimenté en *Scala/Akka* devrait pouvoir implémenter une première version
+Un développeur expérimenté en *Scala/Akka* devrait pouvoir implémenter rapidement une première version
 de l'architecture proposée dans la partie :ref:`conception akka <akkaconception>`.
 
 
@@ -1656,22 +1635,24 @@ Conclusion
 ########################
 
 Ce projet a permis de mettre en place des outils de développement pour qu'un externe à
-l'infrastructure puisse travailler sur *Woken*. Dans le cadre de l'expérimentation
-de *l'automated machine learning*, un état de l'art a montré que le domaine n'a pas encore
+l'infrastructure puisse travailler sur *Woken*.
+
+Dans le cadre de l'expérimentation de *l'automated machine learning*, un état de l'art a montré que le domaine n'a pas encore
 été démontré dans des projets pratiques. Ce projet constitue un excellent terrain
 d'expérimentation, en raison de la nature incomprise de la maladie d'Alzheimer, mais aussi
-car les données sont labellées et renseignées de manière identiques et complètes.
+car les données sont labellées et renseignées de manière complète.
+
 Au delà de l'aspect scientifique, les recherches effectuées démontrent que l'utilisateur
 pourra formuler des expériences de neuroscience sur les données de la plateforme sans
 être un expert dans le domaine du machine learning.
 
 Durant ce projet, une analyse a permis de fournir des technologies susceptibles de mener
-à bien une version exploitable de l'automated machine learning en l'intégrant à la
+à bien une version exploitable de l'*automated machine learning* en l'intégrant à la
 plateforme *Woken*, en tenant compte de l'implémentation de celui-ci.
 
 La conception a fourni la méthodologie de substition du flux actuel pour offrir la
 nouvelle fonctionnalité d'optimisation automatique du pipeline de machine learning,
-tout en conservant le fonctionnement actuel.
+tout en conservant les fonctionnaliés actuelles.
 
 La conception avancée fournit l'avantage de ne pas être exclusivement réservée à
 l'utilisation de l'automated machine learning comme flux alternatif. Le choix de la bibliothèque *TPOT*, implémentée en *python*
@@ -1685,7 +1666,9 @@ L'implémentation est découpée en tâches. Chaque partie de l'infrastructure d
 d'effectuer certaines actions afin de mener à bien le nouveau flux de travail de ce projet.
 Une représentation graphique de l'avancement de ces tâches est diponible en :num:`figure #progressrepresentation`.
 L'implémentation restante pour chacunes de ces tâches est disponible dans les sous-chapitres
-de l'implémentation correspondants aux numéros de tâches. En résumé, il reste à implémenter
+de l'implémentation correspondants aux numéros de tâches.
+
+Pour résumer cette figure, il reste à implémenter
 le flux d'acteurs *Akka* dans *Woken* afin de pouvoir tester l'optimisation de pipeline
 automatique pour le machine learning, dans le cadre de la plateforme. Pour un programmeur expérimenté
 en programmation d'acteurs *Akka*, une première implémentation simpliste des nouveaux
@@ -1695,14 +1678,14 @@ nécessitera des affinements.
 Une fois cette implémentation effectuée, une expérience scientifique sera menée à bien
 afin de déterminer l'apport de cette approche par rapport aux paramétrages manuels d'expériences.
 Ces comparaisons devront se baser sur un expérience utilisateur définie strictement, et
-correspondant à une utilisation réaliste de la plateforme.
+correspondant à une utilisation réaliste de la plateforme par l'utilisateur qui formule l'expérience.
 
 Si l'expérience abouti à des résultats exploitables, un papier pourra être publié.
 Il constituerait un des premiers articles scientifiques sur une problématique réelle
 dans le domaine de *l'automated machine learning*.
 
-Cet avancement n'a pas pu être atteindre au moment de la cloture du projet dans le
-cadre du travail de Bachelor, par manque de temps.
+Cet avancement n'a pas pu être atteindre au moment de la clôture du projet dans le
+cadre du travail de Bachelor,par manque de temps.
 
 A partir du journal de travail, la répartition du temps de travail est distribuée
 comme présenté en :num:`figure #time`.
@@ -1715,7 +1698,7 @@ comme présenté en :num:`figure #time`.
 
    Répartition du temps en heures selon les enregistrements du journal de travail, environ 450 heures
    au total. La documentation ne concerne pas que ce rapport, mais aussi les rapports intermédiaires
-   ainsi que les mises à jour de README pour la configuration. Environ 30% de documentation,
+   ainsi que les mises à jour de README pour la configuration. La répartition est d'environ 30% de documentation,
    50% de code 13% d'analyse et 7% d'administratif (séances avec le superviseur ou le mandant).
 
 Remerciements
@@ -1723,27 +1706,27 @@ Remerciements
 
 Je tiens à remercier Arnaud Jutzeler pour avoir offert l'opportunié
 de travailler sur un projet de cette envergure, pour avoir fait confiance pour
-les recherches, pour l'aide à conception, pour les explications pour partie machine learning,
+les recherches, pour l'aide à conception, pour les explications concernant le *machine learning*,
 pour la patience dont il a fait part pour la mise en place de l'environnement de travail ainsi
-que les questions d'utilisation des technologies de la plateforme.
+que les réponses à mes questions questions d'utilisation des technologies de la plateforme.
 
 Un grand merci aussi à Stefano Carrino pour l'excellent suivi de projet, pour l'attention accordée
-aux questions ainsi qu'aux relectures, pour les explications liées au machine learning ainsi que
+aux questions ainsi qu'aux relectures, pour les explications liées au *machine learning* ainsi que
 pour les propositions d'alternatives pour les aspects techniques.
 
-J'ai aussi pu compter sur l'aide de Mirco Nasuti du CHUV pour répondre à toutes mes
+J'ai aussi pu compter sur l'aide de Mirco Nasuti du *CHUV* pour répondre à toutes mes
 questions techniques, et pour m'expliquer les comportements étranges de Docker, le tout
 avec une disponibilité sans failles.
 
 Merci à mon camarade Julien M'Poy, qui a travaillé en même temps
 sur le projet dans sur la partie architecture, pour l'aide à la compréhension sur celle-ci,
-pour la mise en place du nouveau :code:`docker-compose` qui a permis d'intégrer et de
+pour la mise en place du nouveau :code:`docker-compose` qui a permi d'intégrer et de
 tester *Marathon*, pour l'aide à la configuration de la distribution *Linux Manjaro*,
 pour les conseils en *Docker* ainsi que le partage de la méthodologie *Sphinx* pour la rédaction
 du rappot.
 
-Enfin, merci à Yoan Blanc :code:`@greut` pour le temps et la disponibilité pour les questions sur
-Docker, en particulier sur les problèmes de processus au PID 1 et au problème des processus zombies,
+Enfin, merci à Yoan Blanc :code:`@greut` pour le temps et la disponibilité pour les questions concernant
+*Docker*, en particulier sur les problèmes de processus au PID 1 et au problème des processus zombies,
 ainsi que pour l'aide pour l'utilisation de *Sphinx* pour la documentation.
 
 .. raw:: latex
@@ -1751,5 +1734,5 @@ ainsi que pour l'aide pour l'utilisation de *Sphinx* pour la documentation.
 
 
 .. bibliography:: references.bib
-   :all:
+   :cited:
    :style: plain

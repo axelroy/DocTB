@@ -52,15 +52,16 @@
 <h1>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h1>
 <p>Le présent document fait office de rapport de projet.
 Il permet de comprendre le contexte de celui-ci, de décrire les éléments qui le compose,
-fait une analyse de la problématique, la conception en vue de la résolution et
+fait une analyse de la problématique, la conception en vue de la résolution de celle-ci et
 présente l’implémentation effectuée. Ce document ne présente pas tout le cheminement,
 mais uniquement l’état final.</p>
 <div class="section" id="contexte-du-projet">
 <h2>Contexte du projet<a class="headerlink" href="#contexte-du-projet" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Le présent projet s’inscrit dans le cadre du travail de Bachelor en Informatique option «&nbsp;Développement logiciel
 et multimédia&nbsp;», réalisé à la HE-ARC de Neuchâtel.</p>
-<p>Le projet est effectué pour le CHUV-LREN dans le cadre du «&nbsp;Human Brain Project&nbsp;». Ce projet s’inscrit dans le cadre du projet Européen «&nbsp;Human Brain Project&nbsp;».
-Ce chapitre vise à expliquer le contexte du sous-projet 8, et ce qui nous intéresse.</p>
+<p>Le projet est effectué pour le CHUV-LREN dans le cadre du «&nbsp;Human Brain Project&nbsp;» <a class="reference internal" href="#hbp" id="id1">[28]</a>.
+Ce chapitre vise à expliquer le contexte du sous-projet 8 <a class="reference internal" href="#hbpmip" id="id2">[27]</a>, et la problématique
+dans laquelle s’inscrit ce projet.</p>
 </div>
 <div class="section" id="presentation-de-la-plateforme-mip">
 <h2>Présentation de la plateforme MIP<a class="headerlink" href="#presentation-de-la-plateforme-mip" title="Lien permanent vers ce titre">¶</a></h2>
@@ -69,14 +70,14 @@ expériences neuroscientifiques sur des données de patients recueillies à trav
 cliniques et hôpitaux partenaires. Etant donné la nature médicale de ces données,
 elles sont bien évidemment anonymisées, et il n’est pas possible de retrouver les
 données d’un patient, car les données sont présentées sous la forme d’agrégation
-par caractéristique, comme le présente la <a href="#features">figure  1687</a></p>
-<div class="figure align-center" id="id58">
+par caractéristique, comme le présente la <a href="#features">figure  1918</a></p>
+<div class="figure align-center" id="id60">
 <span id="features"></span><a class="reference internal image-reference" href="_images/Agregation_features_MIP.png"><img alt="Représentation des caractéristiques d'intérêts" src="_images/Agregation_features_MIP.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-text"><em>Représentation des caractéristiques d’intérêts.</em></span></p>
 </div>
 <p>En sélectionnant un des ronds blancs, on accède à la variable en question,
-et on peut observer différentes statistiques, comme par exemple des vues sous forme d’histogrammes [cf <a href="#histogram">figure  1688</a>]</p>
-<div class="figure align-center" id="id59">
+et on peut observer différentes statistiques, comme par exemple des vues sous forme d’histogrammes [cf <a href="#histogram">figure  1919</a>]</p>
+<div class="figure align-center" id="id61">
 <span id="histogram"></span><a class="reference internal image-reference" href="_images/Histogram_features_MIP.png"><img alt="Exemple d'histogramme d'une variable." src="_images/Histogram_features_MIP.png" style="width: 450px;" /></a>
 <p class="caption"><span class="caption-text"><em>Exemple d’histogramme d’une variable.</em></span></p>
 </div>
@@ -93,15 +94,15 @@ des catégories suivantes il compte l’impliquer&nbsp;:</p>
 <li>Co-variable, qui correspondent aux variables de l’expériences.</li>
 <li>Filtre</li>
 </ul>
-<p>Via l’interface suivante présentée en <a href="#variables">figure  1689</a>.</p>
-<div class="figure align-center" id="id60">
+<p>Via l’interface suivante présentée en <a href="#variables">figure  1920</a>.</p>
+<div class="figure align-center" id="id62">
 <span id="variables"></span><a class="reference internal image-reference" href="_images/Variables_experiences.png"><img alt="Exemple de formulation d'expérience, étape selection des variables. Cet exemple vise à trouver un lien entre la quantité de matière grise dans le Cuneus en fonction de l'age et du sexe." src="_images/Variables_experiences.png" style="width: 450px;" /></a>
 <p class="caption"><span class="caption-text"><em>Exemple de formulation d’expérience, étape selection des variables. Cet exemple vise à trouver un lien entre la quantité de matière grise dans le Cuneus gauche en fonction de l’age et du sexe.</em></span></p>
 </div>
 <p>Ce qui permet d’analyser des graphes mêlant les différentes
 variables. Il est encore possible de paramétrer la représentation sur l’axe via
-une boite à outils, afin de faire ressortir les informations intéressantes, comme le montre la <a href="#resultnoml">figure  1690</a></p>
-<div class="figure align-center" id="id61">
+une boite à outils, afin de faire ressortir les informations intéressantes, comme le montre la <a href="#resultnoml">figure  1921</a></p>
+<div class="figure align-center" id="id63">
 <span id="resultnoml"></span><a class="reference internal image-reference" href="_images/Resultat_nonML_experiment.png"><img alt="Résultat de l'expérience formulée à la :num:`figure #variables`. Représentation de la quantité de matière grise en cm3 en fonction de l'age et du sexe (bordeau = femme, rose = homme)." src="_images/Resultat_nonML_experiment.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-text"><em>Résultat de l’expérience formulée Représentation de la quantité de matière grise en cm3 en fonction de l’age et du sexe (bordeau = femme, rose = homme).</em></span></p>
 </div>
@@ -109,8 +110,8 @@ une boite à outils, afin de faire ressortir les informations intéressantes, co
 variables sélectionnées, de lancer une expérience d’apprentissage automatique
 (<em>Machine Learning</em>) afin de trouver le modèle qui permet de représenter au mieux
 le lien entre les caractéristiques et le diagnostique.</p>
-<p>L’aide pour la configuration de l’expérience est présentée comme en <a href="#helpconfig">figure  1691</a></p>
-<div class="figure align-center" id="id62">
+<p>L’aide pour la configuration de l’expérience est présentée comme en <a href="#helpconfig">figure  1922</a></p>
+<div class="figure align-center" id="id64">
 <span id="helpconfig"></span><a class="reference internal image-reference" href="_images/description_experience.png"><img alt="Aide pour la formulation d'une expérience de Machine Learning." src="_images/description_experience.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text"><em>Aide pour la formulation d’une expérience de Machine Learning.</em></span></p>
 </div>
@@ -148,7 +149,7 @@ Dans l’idéal, l’utilisateur n’a qu’un bouton à presser pour cette éta
 </div>
 <div class="section" id="etat-de-l-art">
 <h1>Etat de l’Art<a class="headerlink" href="#etat-de-l-art" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Avant de se lancerdans la description du travail,
+<p>Avant de se lancer dans la description du travail,
 il est intéressant d’effectuer un état de l’art des technologies qui pourraient
 nous intéresser. Etant donné que le projet consiste à ajouter des fonctionnalités
 à un projet existant, cette section décrira les technologies actuellement existantes,
@@ -160,7 +161,7 @@ ainsi que les technologies ajoutées, ou tout du moins leur champ d’applicatio
 <p>Le <em>Machine Learning</em> (apprentissage automatique en francais), est un champ d’activité
 de l’intelligence artificielle qui vise à permettre à une machine d’apprendre par elle-même
 plutôt que d’en fixer tous les comportements de manière programmatique.
-Elle est particulièrement utilisée dans les problématiques où le nombre de cas
+Cette méthodologie est particulièrement utilisée dans les problématiques où le nombre de cas
 est trop important pour être codés à la mano. Le panel d’utilisation est large,
 il peut par exemple concerner&nbsp;:</p>
 <ul class="simple">
@@ -185,7 +186,8 @@ via des containers <a class="reference internal" href="#docker"><span class="std
 <div class="section" id="apprentissage-supervise">
 <h3>Apprentissage supervisé<a class="headerlink" href="#apprentissage-supervise" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Dans cette méthodologie, on connait déjà les classes que l’on souhaite pouvoir déterminer
-automatiquement via l’algorithme. Ces classes sont tirées des données par un expert.
+automatiquement via l’algorithme. Pour les données d’entraînement, les classes sont souvent
+définies manuellement par un expert.
 Dans certains cas, il est aussi possible d’attribuer une probabilité d’appartenance à une classe.
 L’apprentissage se déroule généralement en deux phases. La première phase est dite d’entrainement.
 Elle consiste à déterminer un modèle qui permet de reproduire pour de nouvelles données la même
@@ -200,10 +202,10 @@ une quantité d’informations suffisantes afin d’avoir un modèle représenta
 C’est ici à la machine de déterminer les différentes classes qui représentent le problème.
 A partir d’un ensemble de données en entrées, il va chercher à créer des classes représentatives
 pour celles-ci, en maximisant la distance inter-classe, et en minimisant la distance des éléments intra-classe
-comme représenté sur la <a href="#distanceml">figure  1692</a>.</p>
-<div class="figure align-center" id="id63">
+comme représenté sur la <a href="#distanceml">figure  1923</a>.</p>
+<div class="figure align-center" id="id65">
 <span id="distanceml"></span><a class="reference internal image-reference" href="_images/distance_illustration.png"><img alt="Représentation des distances inter-classe et intra-classe. Illustration issue du site Microsoft :cite:`&#64;theoryMLMS`" src="_images/distance_illustration.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-text">Représentation des distances inter-classe et intra-classe. Illustration issue du site MSDN <a class="reference internal" href="#theorymlms" id="id1">[8]</a></span></p>
+<p class="caption"><span class="caption-text">Représentation des distances inter-classe et intra-classe. Illustration issue du site MSDN <a class="reference internal" href="#theorymlms" id="id3">[8]</a></span></p>
 </div>
 <p>Cette méthodologie peut aussi permettre d’analyser la relation entre les variables, par
 exemple pour réduire la dimension des vecteurs d’entrées.</p>
@@ -212,9 +214,9 @@ exemple pour réduire la dimension des vecteurs d’entrées.</p>
 <h3>Apprentissage semi-supervisé<a class="headerlink" href="#apprentissage-semi-supervise" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Etant donné que l’apprentissage supervisé nécessite un labelisation des données par expert,
 il devient très coûteux de réaliser ce travail au fur et à mesure que les données augmentent.
-L’utilisation de données labellées, liées à des données labellées, peut permettre d’améliorer
+L’utilisation de données non labellées, liées à des données labellées, peut permettre d’améliorer
 la qualité de l’apprentissage. Par exemple, il est ainsi possible d’utiliser un classificateur
-crée par l’apprentissage supervisé, et un autre crée par l’apprentissage non-supervisé.</p>
+crée par l’apprentissage supervisé, et un autre créé par l’apprentissage non-supervisé.</p>
 <p>Idéalement, les deux classificateurs ne se basent pas sur les mêmes caractéristiques, ce qui
 permet de recouper les deux classificateurs afin d’affiner la classification finale.</p>
 </div>
@@ -230,10 +232,10 @@ d’opérations, de la première à la dernière.</p>
 <li>Extraction, normalisation et éventuellement construction des caractéristiques à partir des données brutes.</li>
 <li>Application d’un modèle statistique ou linéaire pour effectuer, selon la problématique, une classification ou une régression.</li>
 </ul>
-<p>On peut représenter ce flux via la <a href="#mlpipeline">figure  1693</a>:</p>
-<div class="figure align-center" id="id64">
+<p>On peut représenter ce flux via la <a href="#mlpipeline">figure  1924</a>:</p>
+<div class="figure align-center" id="id66">
 <span id="mlpipeline"></span><a class="reference internal image-reference" href="_images/ml_pipeline.png"><img alt="Exemple d'un pipeline de *Machine Learning*, tiré de la documentation TPOT :cite:`Olson2016EvoBio` et modifié pour supprimer les parties liées à TPOT." src="_images/ml_pipeline.png" style="width: 650px;" /></a>
-<p class="caption"><span class="caption-text">Exemple d’un pipeline de Machine Learning, tiré de la documentation TPOT <a class="reference internal" href="#olson2016evobio" id="id2">[23]</a> et adapté pour supprimer les parties liées à TPOT.</span></p>
+<p class="caption"><span class="caption-text">Exemple d’un pipeline de Machine Learning, tiré de la documentation TPOT <a class="reference internal" href="#olson2016evobio" id="id4">[23]</a> et adapté pour supprimer les parties liées à TPOT.</span></p>
 </div>
 <p>On peut en décrire les phases ainsi :</p>
 <ul class="simple">
@@ -246,7 +248,7 @@ d’opérations, de la première à la dernière.</p>
 <li><strong>Model Validation</strong>&nbsp;: En sortie, nous avons, pour un ensemble de caractéristiques donnée, un modèle et le hyper-paramètres de ce modèle. Il faut ensuite valider ce modèle sur un ensemble de sujets différents afin de déterminer sa pertinence.</li>
 </ul>
 <p>Dans une approche traditionnelle d’optimisation d’une expérience de <em>Machine Learning</em>,
-on essaie de faire varier les hyper-paramètres du modèle (p.e via les grid-search <a class="reference internal" href="#datagridsearchdoc" id="id3">[5]</a> de Scikit-Learn <a class="reference internal" href="#scikit-learn" id="id4">[26]</a>).</p>
+on essaie de faire varier les hyper-paramètres du modèle (p.e via les grid-search <a class="reference internal" href="#datagridsearchdoc" id="id5">[5]</a> de Scikit-Learn <a class="reference internal" href="#scikit-learn" id="id6">[26]</a>).</p>
 <p>Cette méthode permet d’optimiser les hyper-paramètres du modèle. Ce dernier doit avoir
 été sélectionné manuellement auparavant par l’utilisateur. De plus, l’étendue et le pas des hyper-paramètres sont
 eux-aussi déterminés manuellement, ce qui réduit le domaine d’exploration.</p>
@@ -256,13 +258,13 @@ via des algorithmes génétiques car ils
 correspondent à la problématique d’exploration d’un espace de solutions de grande dimension.
 Cette exploration est effectuée de manière non dirigée tout en fournissant un résultat exploitable.</p>
 <p>Les réelles avancées dans le domaine sont récentes, les premiers articles concrets datent de
-2016, et il est difficile de trouver des exemples dans un domaine concret, prouvant l’efficacité de <em>l’Automated Machine Learning</em> .
-Les créateurs de bibliothèque TPOT <a class="reference internal" href="#olson2016evobio" id="id5">[23]</a> ont rédigé deux papiers <a class="reference internal" href="#olson2016evaluation" id="id6">[21]</a> <a class="reference internal" href="#olson2016tpot" id="id7">[22]</a>
+2016, et il est difficile de trouver des exemples dans un domaine concret, prouvant l’efficacité de <em>l’Automated Machine Learning</em>.
+Les créateurs de bibliothèque TPOT <a class="reference internal" href="#olson2016evobio" id="id7">[23]</a> ont rédigé deux papiers <a class="reference internal" href="#olson2016evaluation" id="id8">[21]</a> <a class="reference internal" href="#olson2016tpot" id="id9">[22]</a>
 d’exemple d’applications dans des cas réels, sur la classification de cas de cancers de la prostate, en comprarant
 l’approche conventionnelle et  l’approche <em>Automed Machine Learning</em>, et ont pu mettre en avant
 une amélioration des résultats.
 Google a récemment communiqué son intérêt pour le domaine, en annoncant l’ouverture d’un département
-sur la recherche de cette discipline <a class="reference internal" href="#googleautoml" id="id8">[4]</a>. Certains sites spécialisés <a class="reference internal" href="#stateautoml" id="id9">[20]</a> <a class="reference internal" href="#hhusain" id="id10">[12]</a>
+sur la recherche de cette discipline <a class="reference internal" href="#googleautoml" id="id10">[4]</a>. Certains sites spécialisés <a class="reference internal" href="#stateautoml" id="id11">[20]</a> <a class="reference internal" href="#hhusain" id="id12">[12]</a>
 décrivent ce domaine avec intérêt, mais en précisant que les résultats ne sont pas encore
 probants, et que, pour le moment, elle n’est pas applicable à toutes les problématiques.</p>
 <p>Dans le cadre du projet, étant donné que les utilisateurs ne sont pas experts dans
@@ -276,37 +278,37 @@ les configurations des utilisateurs.</p>
 de se pencher sur les technologies principales qui sont utilisées dans le projet.</p>
 <div class="section" id="tpot">
 <h3>TPOT<a class="headerlink" href="#tpot" title="Lien permanent vers ce titre">¶</a></h3>
-<p><em>TPOT</em> <a class="reference internal" href="#olson2016evobio" id="id11">[23]</a> est une bibliothèque <em>open-source</em> permettant l’optimisation
+<p><em>TPOT</em> <a class="reference internal" href="#olson2016evobio" id="id13">[23]</a> est une bibliothèque <em>open-source</em> permettant l’optimisation
 de pipeline automatisée, alias <em>automated Machine Learning</em>. Elle se distingue des autres
-bibliothèques telles que Auto-WEKA <a class="reference internal" href="#autoweka" id="id12">[2]</a> et Hyperopt <a class="reference internal" href="#hyperopt" id="id13">[13]</a> par le fait
+bibliothèques telles que Auto-WEKA <a class="reference internal" href="#autoweka" id="id14">[2]</a> et Hyperopt <a class="reference internal" href="#hyperopt" id="id15">[13]</a> par le fait
 qu’il est capable non seulement de faire varier les modèles et le hyper-paramètres,
 mais qu’elle est aussi capable de sélectionner, construire ou d’effectuer du préprocessing
-sur les caractéristiques. <em>TPOT</em> dispose d’une communauté active, et le créateur,*Randy Olson*,
+sur les caractéristiques. <em>TPOT</em> dispose d’une communauté active, et le créateur, <em>Randy Olson</em>,
 répond très rapidement aux <em>issues</em> postées sur le <em>Github</em> de <em>TPOT</em>.</p>
-<p>La <a href="#mlpipelinetpot">figure  1694</a> présente un flux de <em>Machine Learning</em>.</p>
-<div class="figure align-center" id="id65">
+<p>La <a href="#mlpipelinetpot">figure  1925</a> présente un flux de <em>Machine Learning</em>.</p>
+<div class="figure align-center" id="id67">
 <span id="mlpipelinetpot"></span><a class="reference internal image-reference" href="_images/tpot-ml-pipeline.png"><img alt="Exemple d'un pipeline de Machine Learning, avec les parties gérées automatiquement par TPOT. Illustration tirée de la documentation TPOT :cite:`Olson2016EvoBio`" src="_images/tpot-ml-pipeline.png" style="width: 650px;" /></a>
-<p class="caption"><span class="caption-text">Exemple d’un pipeline de Machine Learning, avec les parties gérées automatiquement par TPOT. Illustration tirée de la documentation TPOT <a class="reference internal" href="#olson2016evobio" id="id14">[23]</a></span></p>
+<p class="caption"><span class="caption-text">Exemple d’un pipeline de Machine Learning, avec les parties gérées automatiquement par TPOT. Illustration tirée de la documentation TPOT <a class="reference internal" href="#olson2016evobio" id="id16">[23]</a></span></p>
 </div>
 <p>Les différentes étapes ont la même signification que présenté au point de <a class="reference internal" href="#mlphases"><span class="std std-ref">présentation des phases typiques de machine learning</span></a>,
-au dessous de la <a href="#mlpipeline">figure  1693</a>.</p>
-<p>Cette bibliothèque est codée en Python, et se base sur les modèles de Scikit-learn <a class="reference internal" href="#scikit-learn" id="id15">[26]</a>, ce qui
+au dessous de la <a href="#mlpipeline">figure  1924</a>.</p>
+<p>Cette bibliothèque est codée en Python, et se base sur les modèles de Scikit-learn <a class="reference internal" href="#scikit-learn" id="id17">[26]</a>, ce qui
 permet d’avoir une compatibilité avec cette bibliothèque <em>Python</em>.</p>
 </div>
 <div class="section" id="systemes-distribues">
 <h3>Systèmes distribués<a class="headerlink" href="#systemes-distribues" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Historiquement, avant que le web ne vienne changer la donne, une application était
-localisé sur une machine unique, et son architecture se présentait comme sur la <a href="#computerarchi">figure  1695</a></p>
-<div class="figure align-center" id="id66">
+localisé sur une machine unique, et son architecture se présentait comme sur la <a href="#computerarchi">figure  1926</a></p>
+<div class="figure align-center" id="id68">
 <span id="computerarchi"></span><a class="reference internal image-reference" href="_images/computer_architecture.png"><img alt="Architecture simple basée sur une machine unique" src="_images/computer_architecture.png" style="width: 200px;" /></a>
-<p class="caption"><span class="caption-text">Architecture simple basée sur une application unique : crédits &#64; Groovytron <a class="reference internal" href="#groovytron" id="id16">[9]</a></span></p>
+<p class="caption"><span class="caption-text">Architecture simple basée sur une application unique : crédits &#64; Groovytron <a class="reference internal" href="#groovytron" id="id18">[9]</a></span></p>
 </div>
 <p>Avec l’augmentation de la demande, la première approche pour augmenter la capacité
 de réponse a été de parraléliser plusieurs machines sur le réseau, et d’effectuer
 un balancage de charge entre les différentes instances, en fonction des moyens.</p>
 <p>Les machines sont déployées en cluster (groupes de machines), et le <em>load-balancer</em>
-s’occupe de répartir les requêtes, comme présenté à la <a href="#highavailability">figure  1696</a>.</p>
-<div class="figure align-center" id="id67">
+s’occupe de répartir les requêtes, comme présenté à la <a href="#highavailability">figure  1927</a>.</p>
+<div class="figure align-center" id="id69">
 <span id="highavailability"></span><a class="reference internal image-reference" href="_images/high_availability_architecture.png"><img alt="Architecture orientée haute disponibilité et «scalabilité»" src="_images/high_availability_architecture.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-text"><em>Architecture orientée haute disponibilité et «scalabilité» : crédits &#64; Groovytron</em></span></p>
 </div>
@@ -325,8 +327,8 @@ un balanceur de charge.</p>
 <p>Un système d’exploitation distribué est un système
 qui se superpose au système d’exploitation de la machine, et qui fournit une gestion
 fine des ressources.</p>
-<p>La <a href="#distributedos">figure  1697</a> permet d’illustrer cette architecture.</p>
-<div class="figure align-center" id="id68">
+<p>La <a href="#distributedos">figure  1928</a> permet d’illustrer cette architecture.</p>
+<div class="figure align-center" id="id70">
 <span id="distributedos"></span><a class="reference internal image-reference" href="_images/container_orchestration_revised.png"><img alt="Architecture utilisant un outils d'orchestration de containers" src="_images/container_orchestration_revised.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-text"><em>Architecture superposant un système d’exploitation distribué au système d’exploitation natif de la machine.: crédits &#64; Groovytron</em></span></p>
 </div>
@@ -339,7 +341,7 @@ est basée sur les outils de la <em>Mesosphere</em>, mais n’utilise pas <em>DC
 </div>
 <div class="section" id="mesos">
 <h3>Mesos<a class="headerlink" href="#mesos" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Elément central de l’architecture distribuée utilisée au CHUV, <em>Mesos</em> <a class="reference internal" href="#mesosdoc" id="id17">[6]</a> est un noyau
+<p>Elément central de l’architecture distribuée utilisée au CHUV, <em>Mesos</em> <a class="reference internal" href="#mesosdoc" id="id19">[6]</a> est un noyau
 exécuté sur chaque machine du cluster, qui fournit une abstraction des ressources
 des machines du cluster. Il est ainsi possible de lancer une application en définissant
 la quantité de mémoire vive, le nombre de processeurs, et l’espace disque à disposition,
@@ -365,7 +367,7 @@ sont officiellement soutenus par la fondation <em>Apache</em>. <em>Marathon</em>
 dire qu’une définition de tâche adressée à <em>Marathon</em> concerne un certain nombre
 d’instances de ce service, et que si une instance vient à se stopper,
 <em>Marathon</em> va automatiquement relancer une instance de ce service.</p>
-<p>Le logiciel fournit une <em>API REST</em> <a class="reference internal" href="#marathonapidoc" id="id18">[7]</a> pour instancier des services
+<p>Le logiciel fournit une <em>API REST</em> <a class="reference internal" href="#marathonapidoc" id="id20">[7]</a> pour instancier des services
 via d’autres applications.</p>
 </div>
 <div class="section" id="chronos">
@@ -381,15 +383,15 @@ le même travail sur un système distribué via <em>Mesos</em>.</p>
 <p>Il s’oppose à <em>Marathon</em> dans son utilisation, car il permet de lancer une commande
 ou un container de manière spontanée, ou programmée, mais qu’il ne cherchera pas à
 garder en tout temps un certain nombre d’instances en cours d’exécution.</p>
-<p>Il fournit une interface graphique [cf <a href="#chronosgui">figure  1698</a>] permettant de programmer une nouvelle tâche planifiée,
+<p>Il fournit une interface graphique [cf <a href="#chronosgui">figure  1929</a>] permettant de programmer une nouvelle tâche planifiée,
 mais aussi une <em>API REST</em> permettant l’automatisation programmatique de création de tâches.</p>
-<div class="figure align-center" id="id69">
+<div class="figure align-center" id="id71">
 <span id="chronosgui"></span><a class="reference internal image-reference" href="_images/chronos_gui.png"><img alt="Capture d'écran de l'interface graphique de Chronos" src="_images/chronos_gui.png" style="width: 650px;" /></a>
 <p class="caption"><span class="caption-text"><em>Capture d’écran de l’interface graphique de Chronos</em></span></p>
 </div>
 </div>
-<div class="section" id="id19">
-<h3>Docker<a class="headerlink" href="#id19" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="section" id="id21">
+<h3>Docker<a class="headerlink" href="#id21" title="Lien permanent vers ce titre">¶</a></h3>
 <p><em>Docker</em> est une solution <em>open-source</em> qui permet d’embarquer une application
 dans un container <em>Linux</em> qui peut être executé sur n’importe quelle machine supportant
 le moteur <em>Docker</em>.</p>
@@ -426,12 +428,12 @@ personnalisée à partir d’une image minimale fournie par la communauté comme
 <li>CentOS / Scientific Linux CERN (SLC) on Debian/Ubuntu or on CentOS/RHEL/SLC/etc;</li>
 <li>Debian / Ubuntu;</li>
 </ul>
-<p>Mais aussi from <code class="code docutils literal"><span class="pre">scratch</span></code>, ou via une archive <a class="reference internal" href="#createbaseimagedocker" id="id20">[14]</a>.</p>
+<p>Mais aussi from <code class="code docutils literal"><span class="pre">scratch</span></code>, ou via une archive <a class="reference internal" href="#createbaseimagedocker" id="id22">[14]</a>.</p>
 <p>De plus, on peut hériter de n’importe quelle image et la redéfinir via sa propre surcouche.
 Les images dont on hérite ne sont pas modifiables. L’héritage est possible pour toute image
 publiée sur un dépot d’image Docker (généralement Docker Hub, mais on peut en utiliser d’autres).</p>
 <p>La spécialisation du comportement d’un container Docker s’effectue via un fichier de
-définition, le <cite>Dockerfile</cite>. Ce fichier est constitué de commandes <a class="reference internal" href="#dockerfilereference" id="id21">[15]</a>
+définition, le <cite>Dockerfile</cite>. Ce fichier est constitué de commandes <a class="reference internal" href="#dockerfilereference" id="id23">[15]</a>
 qui peuvent effectuer des actions pour construire l’image, dont les principales sont :</p>
 <ul class="simple">
 <li>Définir de quelle image on hérite;</li>
@@ -455,7 +457,7 @@ des variables d’environnement. Suivant l’implémentation du container, il es
 que celui-ci agisse comme un service, et se maintienne en vie, en attente de nouveaux
 événements, ou qu’il se termine dès que le travail interne soit terminé. Dans les deux cas,
 il se contente d’attendre que le travail interne(souvent implémenté par un script) renvoie
-un code d’exécution. <a class="reference internal" href="#codeerrorissue" id="id22">[36]</a></p>
+un code d’exécution. <a class="reference internal" href="#codeerrorissue" id="id24">[38]</a></p>
 <p>La méthode exec ne peut s’appeler que sur un container qui a déjà été instancié.
 Si le container est en cours d’exécution, il est possible d’envoyer une nouvelle commande
 au container. La plus classique est l’exécution d’un bash en mode interactif, via la commande
@@ -521,7 +523,7 @@ de noms de container, contrairement à un démarrage via <code class="code docut
 <div class="section" id="scala">
 <h3>Scala<a class="headerlink" href="#scala" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Ce travail est effectué au cœur du projet <a class="reference internal" href="#woken"><span class="std std-ref">Woken</span></a> du Human Brain Project. Ce projet
-contient le langage de programmation Scala <a class="reference internal" href="#id56" id="id23">[18]</a>. Scala a été concu à l’école polytechnique
+contient le langage de programmation Scala <a class="reference internal" href="#id58" id="id25">[18]</a>. Scala a été concu à l’école polytechnique
 de Lausanne (EPFL) afin de proposer de lier des paradigmes de programmation différents
 et habituellement opposés, tels que la programmation fonctionnelle et la programmation
 orientée objet. Scala se base sur la <em>JVM</em>, ce qui permet de bénéficier de l’abstraction
@@ -531,7 +533,7 @@ des bibliothèques non codées en Scala.</p>
 </div>
 <div class="section" id="akka">
 <h3>AKKA<a class="headerlink" href="#akka" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Akka <a class="reference internal" href="#id57" id="id24">[19]</a> est un outil de développement et un environnement d’exécution libre et
+<p>Akka <a class="reference internal" href="#id59" id="id26">[19]</a> est un outil de développement et un environnement d’exécution libre et
 open-source qui a pour but de simplifier la mise en place d’applications distribuées
 et concurrentes basée sur la JVM. Il gère donc les langages de programmations <em>Java</em> et <em>Scala</em>,
 et est développé en Scala. Akka propose une résolution des problèmes de concurrence
@@ -550,22 +552,22 @@ haut niveau d’abstraction pour le programmeur.</p>
 </div>
 </div>
 </div>
-<div class="section" id="id25">
-<h1>Analyse<a class="headerlink" href="#id25" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="id27">
+<h1>Analyse<a class="headerlink" href="#id27" title="Lien permanent vers ce titre">¶</a></h1>
 <p>Cette section vise à décrire le cadre logiciel dans lequel le travail sera effectué,
 et à préciser les acteurs ainsi que leurs fonctions.</p>
-<div class="section" id="id26">
-<h2>Woken<a class="headerlink" href="#id26" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Woken <a class="reference internal" href="#wokenaxel" id="id27">[3]</a> est un service, utilisable via une <em>API REST</em>, qui fournit la possibilité
+<div class="section" id="id28">
+<h2>Woken<a class="headerlink" href="#id28" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Woken <a class="reference internal" href="#wokenaxel" id="id29">[3]</a> est un service, utilisable via une <em>API REST</em>, qui fournit la possibilité
 d’explorer les données (<em>data mining</em> en anglais) de la plateforme. Cette exploration
 de données peut être de différentes natures, comme ériger un graphe qui permet
 à l’utilisateur de visualiser les données, de demander une analyse statistique,
 d’effectuer une expérience de classification via un des algorithmes de classification
 fourni, ou encore une expérience de régression.</p>
 <p>Chacune de ces explorations de données est effectuée sur un ensemble de données,
-qui est qualifié par les champs configurés dans la <a href="#variables">Fig.  1689</a> par l’utilisateur
+qui est qualifié par les champs configurés dans la <a href="#variables">Fig.  1920</a> par l’utilisateur
 de la plateforme.</p>
-<p>Une expérience fournit des résultats au service demandeur, sous format PFA <a class="reference internal" href="#pfa" id="id28">[10]</a>
+<p>Une expérience fournit des résultats au service demandeur, sous format PFA <a class="reference internal" href="#pfa" id="id30">[10]</a>
 (Portable Format for Analytics), qui est un format dont la synthaxe est basée sur
 <em>yaml</em>, mais dont la structure est destinée à décrire des pipeline pour le data-mining.</p>
 <p>Des requêtes HTTP sont mises à disposition dans le répertoire <code class="code docutils literal"><span class="pre">dev-debug/http</span></code>
@@ -574,9 +576,9 @@ et de simplifier le développement.</p>
 <div class="section" id="place-de-woken-dans-l-architecture">
 <h3>Place de Woken dans l’architecture<a class="headerlink" href="#place-de-woken-dans-l-architecture" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Woken étant un service, il est concu pour être utiliser par d’autres services.
-La <a href="#wokenarchiglobal">figure  1699</a> présente une version simplifiée de l’architecture
+La <a href="#wokenarchiglobal">figure  1930</a> présente une version simplifiée de l’architecture
 de la plateforme MIP.</p>
-<div class="figure align-center" id="id70">
+<div class="figure align-center" id="id72">
 <span id="wokenarchiglobal"></span><a class="reference internal image-reference" href="_images/woken_archi_global.png"><img alt="Architecture globale simplifiée de la plateforme MIP." src="_images/woken_archi_global.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-text">Architecture globale simplifiée de la plateforme MIP. Le <strong>Portal Frontend</strong> est le point d’accès
 pour l’utilisateur. Il peut consulter les données et effectuer des expériences depuis celle-ci.
@@ -602,7 +604,7 @@ le backend envoie une demande de <cite>mining</cite> à woken via une requête P
 </pre></div>
 </div>
 <p>Ce qui correspond aux paramétrage de l’expérience de l’utilisateur, comme présenté en
-<a href="#variables">figure  1689</a>.Woken traite la requête, effectue l’algorithme et retourne une réponse sous
+<a href="#variables">figure  1920</a>.Woken traite la requête, effectue l’algorithme et retourne une réponse sous
 format <em>PFA</em>. Le format de réponse n’est pas important dans le cadre de ce projet.</p>
 <p>Il existe deux routes REST pour demander à Woken d’effectuer un travail :</p>
 <ul class="simple">
@@ -628,9 +630,9 @@ forme :</p>
 <h3>Fonctionnement interne de Woken<a class="headerlink" href="#fonctionnement-interne-de-woken" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Woken a la responsabilité d’appliquer des algorithmes suite à la demande via l’une
 des deux <a class="reference internal" href="#routesrest"><span class="std std-ref">routes REST</span></a> mises à disposition.</p>
-<p>La <a href="#wokenarchiinternal">figure  1700</a> présente les intervenants liés à <em>Woken</em> lors
+<p>La <a href="#wokenarchiinternal">figure  1931</a> présente les intervenants liés à <em>Woken</em> lors
 d’une demande d’algorithme.</p>
-<div class="figure align-center" id="id71">
+<div class="figure align-center" id="id73">
 <span id="wokenarchiinternal"></span><a class="reference internal image-reference" href="_images/woken_archi_internal.png"><img alt="Architecture  interne de woken." src="_images/woken_archi_internal.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Architecture «&nbsp;interne&nbsp;» de woken. Les intervenants ici présents
 sont ceux qui sont directement utilisés par le service <em>Woken</em>.
@@ -667,8 +669,8 @@ de le retourner au service demandeur.</p>
 Celle-ci a pour caractéristique de pouvoir gérer plusieurs algorithmes pour une expérimentation,
 ainsi que de gérer la <em>cross-validation</em>.</p>
 <p>Le flux de travail entre les acteurs peut être représenté comme montré sur la
-<a href="#wokenactors">figure  1701</a></p>
-<div class="figure align-center" id="id72">
+<a href="#wokenactors">figure  1932</a></p>
+<div class="figure align-center" id="id74">
 <span id="wokenactors"></span><a class="reference internal image-reference" href="_images/wokenactors.png"><img alt="Schéma des acteurs Akka du script coordinator.scala." src="_images/wokenactors.png" style="width: 650px;" /></a>
 <p class="caption"><span class="caption-text">Schéma des acteurs Akka du script coordinator.scala. Les différents acteurs peuvent
 instancier d’autres acteurs dynamiquement, ce qui permet de répondre à n’importe
@@ -753,7 +755,7 @@ Dans le cadre de du projet, le plus important était de pouvoir:</p>
 <li>Déterminer l’importance de chaque feature.</li>
 <li>Déterminer l’exploitabilité de l’export implémenté dans TPOT.</li>
 </ul>
-<p>Des tests <a class="reference internal" href="#tpottests" id="id29">[30]</a> ont été implémentés, et une issue <a class="reference internal" href="#tpotissue" id="id30">[32]</a> a été
+<p>Des tests <a class="reference internal" href="#tpottests" id="id31">[32]</a> ont été implémentés, et une issue <a class="reference internal" href="#tpotissue" id="id32">[34]</a> a été
 adressée sur le projet afin de vérifier les points délicats.</p>
 <p>A la fin de ces tests, il s’avère que :</p>
 <ul class="simple">
@@ -778,7 +780,7 @@ qu’un nouveau soit instancié avant la prochaine demande d’expérience.</p>
 <p>Il est possible de court-circuiter ceci en effectuant une requête <cite>DELETE</cite> sur son
 propre <cite>job</cite>, mais il s’agit d’une mauvaise pratique pour contourner une limitation
 voulue dans les cas d’utilisations de <em>Marathon</em>.</p>
-<p><em>Metronome</em> <a class="reference internal" href="#metronome" id="id31">[1]</a> est destiné à être le remplacant de <em>Marathon</em>, mais il n’est actuellement
+<p><em>Metronome</em> <a class="reference internal" href="#metronome" id="id33">[1]</a> est destiné à être le remplacant de <em>Marathon</em>, mais il n’est actuellement
 pas assez abouti pour être incorporé à l’architecture.</p>
 </div>
 </div>
@@ -796,12 +798,12 @@ la nouvelle architecture pour résoudre les problèmatiques connues qui sont :</
 <p>Sans parler directement de la modifications des acteurs <em>Akka</em>, il est intéressant
 de présenter une vue d’ensemble des intervenants dans la problématique du projet,
 et de définir les rôles qu’ils remplissent dans cette nouvelle conception.</p>
-<p>La <a href="#conceptionflow">figure  1702</a> présente une représentation du flux imaginé.
+<p>La <a href="#conceptionflow">figure  1933</a> présente une représentation du flux imaginé.
 Elle est volontairement présentée en premier, et avec un haut niveau d’abstraction,
 afin de définir la conception des différentes parties qui la constituent. Etant donné
 que les restrictions sont fortement liées à Docker et à son fonctionnement, la suite
 de la conception est rédigée en parcourant les intervenants de droite à gauche.</p>
-<div class="figure align-center" id="id73">
+<div class="figure align-center" id="id75">
 <span id="conceptionflow"></span><a class="reference internal image-reference" href="_images/conceivedworkflow.png"><img alt="Schéma du nouveau workflow global." src="_images/conceivedworkflow.png" style="width: 450px;" /></a>
 <p class="caption"><span class="caption-text">Schéma représentant les intéractions entre les différents intervenants, pour la conception retenue.
 Les titres de colonnes définissent la technologie responsable des tâches qui sont
@@ -838,7 +840,7 @@ méthodes, <code class="code docutils literal"><span class="pre">train</span></c
 <p>Un container n’est normalement pas conçu pour faire persister des données sur son état.
 Lors de l’arrêt d’un container, l’hôte n’enregistre en général pas de données sur son
 état avant de l’arrêter. Il est tout de même possible de partager des informations entre
-un container et l’hôte via le système de volumes <a class="reference internal" href="#dockervolumes" id="id32">[16]</a>.</p>
+un container et l’hôte via le système de volumes <a class="reference internal" href="#dockervolumes" id="id34">[16]</a>.</p>
 <p>Un volume est un répertoire partagé entre l’hôte et le container. Le lien entre l’hôte
 et le container se fait au moment du lancement du container via la commande code:<cite>docker run -v containerpath:hostpath imagename args</cite>.</p>
 <p>Si le répertoire contient des fichiers au moment du lien, les fichiers sont directement
@@ -865,12 +867,12 @@ soient effectués sur <strong>la même machine physique</strong>.</p>
 des <em>volumes Docker</em> n’est pas définitive, il est prévu de mettre en place une communication
 directe entre l’acteur <em>Akka</em> et le container. La principale option semble être la mise
 en place d’un système de queues de messages entre l’acteur <em>Akka</em> et le container <em>Docker</em> lié,
-par exemple via une bibliothèque comme ZeroMQ <a class="reference internal" href="#zeromq" id="id33">[38]</a>. Le but de ce projet est
-de faire une expérience scientifique sur l’apport de l” <em>automated machine learning</em>
+par exemple via une bibliothèque comme ZeroMQ <a class="reference internal" href="#zeromq" id="id35">[40]</a>. Le but de ce projet est
+de faire une expérience scientifique sur l’apport de l”<em>automated machine learning</em>
 dans le cadre de la plateforme.</p>
 </div>
-<div class="section" id="id34">
-<h2>Chronos<a class="headerlink" href="#id34" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="id36">
+<h2>Chronos<a class="headerlink" href="#id36" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Chronos est un logiciel que l’on se contentera d’utiliser depuis une
 image Docker, il n’y a pas de conception liée à cette partie. Il faut néanmoins
 observer précisément le format du JSON à fournir en entrée pour permettre de donner
@@ -878,12 +880,12 @@ la configuration complète et correcte pour notre container qui sera lancé.</p>
 <p>Il a déjà été vérifié que Chronos, dans sa version <cite>3.0.2</cite>, permet de lancer un
 container avec des volumes, des variables d’environnement, et un entrypoint.</p>
 </div>
-<div class="section" id="id35">
-<h2>Akka<a class="headerlink" href="#id35" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Le flux d’acteurs présenté à la figure <a href="#wokenactors">figure  1701</a> est modifié afin
-de répondre au nouveau container «&nbsp;interactif&nbsp;» lié à Docker. La <a href="#newinteractiveactors">figure  1703</a>
+<div class="section" id="id37">
+<h2>Akka<a class="headerlink" href="#id37" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le flux d’acteurs présenté à la figure <a href="#wokenactors">figure  1932</a> est modifié afin
+de répondre au nouveau container «&nbsp;interactif&nbsp;» lié à Docker. La <a href="#newinteractiveactors">figure  1934</a>
 présente le flux de travail alternatif conçu.</p>
-<div class="figure align-center" id="id74">
+<div class="figure align-center" id="id76">
 <span id="newinteractiveactors"></span><a class="reference internal image-reference" href="_images/modifieddiagramactorscoordinator.png"><img alt="Schéma de la nouvelle conception d'acteurs pour le nouveau flux interactif." src="_images/modifieddiagramactorscoordinator.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Schéma de la nouvelle conception d’acteurs pour le nouveau flux interactif.
 Un seul acteur suffit à effectuer les deux appels consécutifs du container TPOT.
@@ -907,37 +909,37 @@ pour le retour à l’AlgorithmActor n’est pas encore déterminé.</span></p>
 les autres sections, elle ne présente que la version finale, et pas tous les tests et le
 cheminement effectués.</p>
 <p>Afin de faciliter la lecture, ce chapitre sera présenté en suivant la numérotation de
-la représentation de la <a href="#tasksbreakdown">figure  1704</a>.</p>
-<div class="figure align-center" id="id75">
+la représentation de la <a href="#tasksbreakdown">figure  1935</a>.</p>
+<div class="figure align-center" id="id77">
 <span id="tasksbreakdown"></span><a class="reference internal image-reference" href="_images/ImplementationRepresentation.png"><img alt="Représentation graphique des tâches réalisées." src="_images/ImplementationRepresentation.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Représentation graphique des tâches réalisées. Elles sont volontairement
 traitées de droite à gauche, car il y a une imbrication ou une utilisation toujours
 dirigée vers la gauche, ce qui implique que les restrictions proviennent toujours
-d’un composant plus à gauche. La taille des blocs n’a pas de lien avec la durée
+d’un composant plus à droite. La taille des blocs n’a pas de lien avec la durée
 d’implémentation d’une tâches.</span></p>
 </div>
-<div class="section" id="id36">
-<h2>TPOT<a class="headerlink" href="#id36" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="id38">
+<h2>TPOT<a class="headerlink" href="#id38" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Cette section présente les points importants de l’implémentation du script <cite>Python</cite>
 qui implémente la solution d’optimisation de pipeline automatique de <cite>TPOT</cite>.</p>
-<p>Le script implémenté est disponible sur <em>Github</em> <a class="reference internal" href="#tpotcode" id="id37">[29]</a>.</p>
+<p>Le script implémenté est disponible sur <em>Github</em> <a class="reference internal" href="#tpotcode" id="id39">[31]</a>.</p>
 <div class="section" id="tache-1-recuperation-du-meilleur-pipeline">
 <h3>Tâche 1 : Récupération du meilleur pipeline<a class="headerlink" href="#tache-1-recuperation-du-meilleur-pipeline" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Le meilleur est disponible après l’optimisation du pipeline via TPOT. La récupération
-se fait via la variable interne <code class="code docutils literal"><span class="pre">_optimized_pipeline</span></code> de l’objet <cite>TPOTClassifier</cite>
+<p>Le meilleur pipeline est disponible après l’optimisation du pipeline via TPOT. La récupération
+se fait via la variable interne <code class="code docutils literal"><span class="pre">_optimized_pipeline</span></code> de l’objet code:<cite>TPOTClassifier</cite>
 ou <code class="code docutils literal"><span class="pre">TPOTRegressor</span></code>. L’accès via les variables internes, spécifiées via le «&nbsp;_&nbsp;»
 avant le nom de la variable, est généralement contraire aux conventions de codage <cite>Python</cite>,
-mais il a été confirmé dans une issue <a class="reference internal" href="#tpotissue" id="id38">[32]</a> par l’auteur du code que
-c’est pour l’instant la seule méthode, mais une récente issue <a class="reference internal" href="#tpotissuerefactor" id="id39">[24]</a>
+mais il a été confirmé dans une issue <a class="reference internal" href="#tpotissue" id="id40">[34]</a> par l’auteur du code que
+c’est pour l’instant la seule méthode, mais une récente issue <a class="reference internal" href="#tpotissuerefactor" id="id41">[24]</a>
 montre que les développeurs ont conscience de cette mauvaise pratique.</p>
-<p>Si le changement est effectué dans la même <em>release</em>, il faudra modifier le code du
+<p>Si le changement est effectué dans la bibliothèque, il faudra modifier le code du
 script.</p>
 </div>
 <div class="section" id="tache-2-liaison-de-la-bdd-du-chuv-mise-en-forme-du-dataset-pour-tpot-et-decoupage-du-dataset">
 <h3>Tâche 2 : Liaison de la BDD du CHUV, mise en forme du dataset pour TPOT et découpage du dataset<a class="headerlink" href="#tache-2-liaison-de-la-bdd-du-chuv-mise-en-forme-du-dataset-pour-tpot-et-decoupage-du-dataset" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Le script <code class="code docutils literal"><span class="pre">database_connector.py</span></code>, fourni par le CHUV avec les images de base
 <em>Docker</em> <cite>Python</cite> pour l’implémentation de nouveaux algorithme, se base sur les variables
-d’environnement du container. Le script permet d’effectuer des requêtes <cite>SQL</cite> directement
+d’environnement du container pour définir la configuration des bases de données. Le script permet d’effectuer des requêtes <cite>SQL</cite> directement
 sur la <cite>Science-db</cite>, en <cite>SELECT</cite> uniquement, et sur la <cite>Woken-DB</cite> en écriture afin
 d’inscrire les résultats d’expériences.</p>
 <p>Le dataset est transformé en <cite>array</cite> <em>numpy</em> après la récupération des <em>records</em> de
@@ -951,11 +953,11 @@ méthode <cite>var_type</cite> du script <cite>database_connector.py</cite>. Ces
 depuis les variables d’environnement du container.</p>
 <p>Cette fonctionnalité n’est pas encore implémentée. Il faudra tester toutes les features,
 et, si il n’y a que des features de type continues, instancier un <cite>TPOTRegressor</cite>,
-et si non, instancier un <cite>TPOTClassifier</cite>. Le reste du script ne change pas.</p>
+sinon instancier un <cite>TPOTClassifier</cite>. Le reste du script actuellement implémenté ne change pas.</p>
 </div>
 <div class="section" id="tache-4-reconstruction-du-pipeline-via-la-description-texte-cree-par-tpot">
 <h3>Tâche 4 : Reconstruction du pipeline via la description texte crée par TPOT<a class="headerlink" href="#tache-4-reconstruction-du-pipeline-via-la-description-texte-cree-par-tpot" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Depuis l’enregistrement sous format d’une chaîne de caratères via la phase de <em>training</em>,
+<p>Depuis l’enregistrement du meilleur pipeline sous forme d’une chaîne de caratères via la phase de <em>training</em>,
 il est possible de reconstruire le pipeline en objet <em>scikit-learn</em> via la <em>toolbox</em> de TPOT
 via la directive <code class="code docutils literal"><span class="pre">tpot._toolbox.compile(expr=pipeline)</span></code>. Dès lors, il est
 possible de fitter le pipeline par rapport au même training et test set que lors
@@ -973,20 +975,20 @@ s’occuper du formatage pour permettre de retourner au <em>AlgorithmActor</em> 
 confié le <em>job</em> pour l’algorithme <em>TPOT</em>.</p>
 </div>
 </div>
-<div class="section" id="id40">
-<h2>Docker<a class="headerlink" href="#id40" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="id42">
+<h2>Docker<a class="headerlink" href="#id42" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Une fois le script TPOT fonctionnel en stand-alone, il est possible d’intégrer ce
 script dans les images de créations d’algorithmes pour la plateforme fournies par
-le CHUV <a class="reference internal" href="#dockerimages" id="id41">[11]</a>.</p>
+le CHUV <a class="reference internal" href="#dockerimages" id="id43">[11]</a>.</p>
 <p>La copie du script dans le container s’effectue via le Dockerfile, en utilisant
 la directive <code class="code docutils literal"><span class="pre">COPY</span></code>. Le script de connexion <code class="code docutils literal"><span class="pre">database_connector.py</span></code>
 est lui aussi copié en interne au container.</p>
-<p>Dans le cadre du projet, Captain <a class="reference internal" href="#captain" id="id42">[35]</a> est utilisé afin de générer des images
+<p>Dans le cadre du projet, Captain <a class="reference internal" href="#captain" id="id44">[37]</a> est utilisé afin de générer des images
 taguées par leur numéro de commit. On utilise le script <code class="code docutils literal"><span class="pre">build.sh</span></code> pour générer
 l’image. Le nom de l’image est contenu dans le fichier de définition <code class="code docutils literal"><span class="pre">captain.yml</span></code>.</p>
-<p>Le fichier <cite>README</cite> du repository de travail <a class="reference internal" href="#dockerimages" id="id43">[11]</a> contient les commandes
+<p>Le fichier <cite>README</cite> du dépôt de travail <a class="reference internal" href="#dockerimages" id="id45">[11]</a> contient les commandes
 pour tester le container interactif.</p>
-<p>Une version a été publiée sur Docker-Hub <a class="reference internal" href="#dockerhubtpot" id="id44">[28]</a> afin de tester l’application du container
+<p>Une version a été publiée sur Docker-Hub <a class="reference internal" href="#dockerhubtpot" id="id46">[30]</a> afin de tester l’application du container
 dans le cadre de Woken.</p>
 <p>L’installation de la dépendance TPOT via <em>pip</em> est effectuée directement dans le Dockerfile.</p>
 <div class="section" id="tache-6-implementation-dun-container-stateful">
@@ -1009,9 +1011,8 @@ Il ne contient qu’un processus d’attente de travail.</p>
 <p>Lorsqu’il reçoit une demande de training via la commande <code class="code docutils literal"><span class="pre">docker</span> <span class="pre">exec</span> <span class="pre">containername</span> <span class="pre">train</span></code>,
 le processus d’attente crée un processus enfant, qui correspond à l’appel <em>Python</em> sur le script
 TPOT. Le script python va chercher les informations sur la description de l’expérience, soit dans
-les variables d’environnement, soit dans le fichier de définition du <em>volume</em>.Lorsqu’il a fini l’entrainement,
-il inscrit le meilleur pipeline dans fichier texte, dans un répertoire local, non accessible par
-l’hôte.</p>
+les variables d’environnement, soit dans le fichier de définition du <em>volume</em>. Lorsqu’il a fini l’entrainement,
+il inscrit le meilleur pipeline dans fichier texte, dans un répertoire local au container.</p>
 <p>Le processus enfant est supprimé, et le processus d’attente reste en vie.</p>
 <p>Lors de la demande de prédicats via la commande <code class="code docutils literal"><span class="pre">docker</span> <span class="pre">exec</span> <span class="pre">containername</span> <span class="pre">test</span></code>,
 un nouveau processus enfant est crée. Il effectue les prédicats et les mets à disposition
@@ -1019,15 +1020,15 @@ dans le <em>volume</em> partagé par l’hôte.</p>
 <p>Une nouvelle demande de travail peut en tout temps être effectuée, car le processus
 d’attente est actif tant que le container n’est pas stoppé.</p>
 <p>Cette implémentation doit être faite en étant attentif au problème de <cite>PID 1</cite> et de processus
-zombies <a class="reference internal" href="#zombiesdocker" id="id45">[17]</a>, problème bas-niveau Linux connu et géré dans toutes les distribution, mais qui n’est
+zombies <a class="reference internal" href="#zombiesdocker" id="id47">[17]</a>, problème bas-niveau Linux connu et géré dans toutes les distribution, mais qui n’est
 pas nativement appliqué dans le cadre de Docker. Pour résumer simplement ce problème,
 le processus avec le <cite>PID 1</cite> est responsable de la suite des signaux bas-niveau à tous
 les enfants, et de récupérer les processus orphelins qui peuvent survenir dans les
 cas ou un parent n’attend pas la fin du travail du sous-processus enfant.</p>
-<p>Ces problématiques créent des processus zombies, qui peuvent saturer l’utilisation
+<p>Une mauvaise gestion des signaux créé des processus zombies, qui peuvent saturer l’utilisation
 de <cite>PID</cite> et provoquer un freeze total de la machine.</p>
-<p>Ce problème est réglé dans l’implémentation <a class="reference internal" href="#tiniimplementation" id="id46">[31]</a> effectuée via
-l’utilisation de <cite>tini</cite> <a class="reference internal" href="#tini" id="id47">[25]</a>.</p>
+<p>Ce problème est réglé dans l’implémentation <a class="reference internal" href="#tiniimplementation" id="id48">[33]</a> effectuée via
+l’utilisation de <cite>tini</cite> <a class="reference internal" href="#tini" id="id49">[25]</a>.</p>
 <p>Cette implémentation, bien que fonctionnelle via la ligne de commande <em>Docker</em>,
 n’est pas utilisable via Chronos, car il ne gère par l’envoi de commande <code class="code docutils literal"><span class="pre">exec</span></code>
 après le lancement d’un container.</p>
@@ -1086,7 +1087,7 @@ plusieurs niveaux auxquels celle-ci peuvent intervenir :</p>
 <li>Au moment du lancement du container.</li>
 </ul>
 <p>Les exceptions dans le script TPOT sont gérées, et renvoyées via la méthode traditionnelle
-de <em>Python</em> <code class="code docutils literal"><span class="pre">sys.exit(code)</span></code>.</p>
+de <em>Python</em> avec <code class="code docutils literal"><span class="pre">sys.exit(code)</span></code>.</p>
 <p>Ceux-ci sont renvoyées au script <em>bash</em> <code class="code docutils literal"><span class="pre">entrypoint.sh</span></code>,
 qui s’est occupé d’appeler le script.</p>
 <p>Les codes d’erreurs au moment de l’exécution, généralement générés par une erreur
@@ -1106,14 +1107,15 @@ l’accès à la base de données doit s’effectuer entre deux containers.
 La configuration des bases de données sont passées via des variables d’environnement.
 La configuration correcte du réseau, décrite dans le fichier <em>docker-compose.yml</em> de
 l’architecture, est essentielle pour que les bases de données soient accessibles via
-le container. Ces points sont traités dans la partie architecture de ce chapitre.</p>
+le container. C’est notamment le type de réseau docker (<cite>bridge</cite> ou <cite>host</cite>),
+ainsi que les configurations d’utilisateurs qui sont délicats à paramétrer.
+Ces points sont traités dans la partie architecture de ce chapitre.</p>
 </div>
 </div>
-<div class="section" id="id48">
-<h2>Chronos<a class="headerlink" href="#id48" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="id50">
+<h2>Chronos<a class="headerlink" href="#id50" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Ce chapitre décrit la méthodologie de mise en place du passage de l’Instanciation
 du container <em>Docker</em> <em>TPOT</em> de la ligne de commande Docker au lancement via Chronos.
-hbpmip/woken-validation:AutoML
 Chronos se base sur un fichier JSON pour définir la configuration d’une tâche.
 Chronos a la fâcheuse manie à ne pas générer de code d’erreur en cas de format incorrect
 du fichier JSON. Il remplace systèmatiquement la partie en question par une configuration
@@ -1125,8 +1127,8 @@ JSON a été enregistrée, et envoyée sur l’API en requête <cite>HTTP POST</
 découpler au maximum les sources de problèmes.</p>
 <div class="section" id="tache-11-instanciation-du-container-personnalise-via-le-gui">
 <h3>Tâche 11 : Instanciation du container personnalisé via le GUI<a class="headerlink" href="#tache-11-instanciation-du-container-personnalise-via-le-gui" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Chronos fourni une interface graphique présentée en <a href="#chonosguijson">figure  1705</a></p>
-<div class="figure align-center" id="id76">
+<p>Chronos fourni une interface graphique présentée en <a href="#chonosguijson">figure  1936</a></p>
+<div class="figure align-center" id="id78">
 <span id="chonosguijson"></span><a class="reference internal image-reference" href="_images/chronos_json_gui.png"><img alt="Interface graphique de configuration JSON d'une tâche Chronos." src="_images/chronos_json_gui.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text">Interface graphique de configuration JSON d’une tâche Chronos.</span></p>
 </div>
@@ -1136,33 +1138,33 @@ pour la commande pour lancer correctement le</p>
 </div>
 <div class="section" id="tache-12-instanciation-du-container-via-une-requete-post-avec-un-fichier-json">
 <h3>Tâche 12 : Instanciation du container via une requête POST avec un fichier JSON<a class="headerlink" href="#tache-12-instanciation-du-container-via-une-requete-post-avec-un-fichier-json" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Dès que le format JSON a été défini avec la tâche 13, l’envoi de ce fichier via une
+<p>Dès que le format JSON a été défini avec la tâche 11, l’envoi de ce fichier via une
 requête <code class="code docutils literal"><span class="pre">HTTP</span> <span class="pre">POST</span></code> via curl a été testée. Celle-ci fonctionne comme prévu, en
 l’adressant à l’url <code class="code docutils literal"><span class="pre">127.0.0.1:4400/v1/scheduler/iso8601</span></code>, mais aussi sur la
 version 2.5 de Chronos, actuellement implémentée en production dans le projet.
 L’ancienne version de Chronos utilise la route <code class="code docutils literal"><span class="pre">127.0.0.1:4400/scheduler/iso8601</span></code>.</p>
-<div class="section" id="id49">
-<h4>Akka<a class="headerlink" href="#id49" title="Lien permanent vers ce titre">¶</a></h4>
+<div class="section" id="id51">
+<h4>Akka<a class="headerlink" href="#id51" title="Lien permanent vers ce titre">¶</a></h4>
 <p>Etant donné que l’instanciation du container TPOT est possible via Chronos, il est
 possible d’implémenter le flux d’acteur nécessaire pour effectuer le travail présenté
-à la <a href="#newinteractiveactors">figure  1703</a>.</p>
+à la <a href="#newinteractiveactors">figure  1934</a>.</p>
 <p>Cette partie est plus compliquée que les autres, car l’implémentation demande des connaissances
-en <em>Scala</em>, en utilisant les définitions <em>AKKA</em> et en liant l’utilisation des automates
-à états finis, choses totalement inconnues au début de ce projet.</p>
+en <em>Scala</em>, en utilisant les définitions <em>Akka</em> et en liant l’utilisation des automates
+à états finis d”<em>Akka</em>.</p>
 <p>Dans l’environnement de test <cite>dev-test</cite>, le code de <em>Woken</em> est compilé en <cite>jar</cite>, et
 inclu dans un container <em>Docker</em>. Le <code class="code docutils literal"><span class="pre">docker-compose</span></code> de cet environnement
 lance donc <em>Woken</em> dans un container. Le code prend plusieurs minutes à être compilées,
 et les logs d’erreurs sont accessibles via <code class="code docutils literal"><span class="pre">docker-compose</span> <span class="pre">logs</span> <span class="pre">woken</span></code>, qui fournit
 dans la ligne de commande, les exceptions qui sortent habituellement en console.
 Il s’est vite avéré qu’il était trop compliqué pour chaque modification de tester
-via se procédé, qui au complet prend une dizaine de minutes.</p>
+via ce procédé, qui au complet prend une dizaine de minutes.</p>
 <p>Il a été choisi créer un environnement <cite>dev-debug</cite> qui externalise <em>Woken</em> du container,
 et le fait fonctionner en natif. Il est ainsi possible de débugger via les points
 d’arrêts. La configuration a demandé un certain temps, car le <code class="code docutils literal"><span class="pre">docker-compose</span></code>
 a du être finement configuré.</p>
 <p>L’environnement est désormais disponible pour n’importe quel développeur externe.
-Le document de configuration de l’environnement de développement est en cours de
-rédaction.</p>
+Le document de configuration de l’environnement de développement a été mis à jour
+dans le README de <em>Woken</em> sous la branche de travail actuelle <code class="code docutils literal"><span class="pre">AutoML</span></code>.</p>
 </div>
 </div>
 <div class="section" id="tache-13-mise-en-relation-du-validation-pool-akka">
@@ -1179,7 +1181,7 @@ une expérience de comparaison entre avec et sans optimisation de pipeline autom
 <div class="section" id="tache-14-mise-en-place-du-nouveau-flux-dacteurs-dans-woken-pour-traiter-nos-container-interactif">
 <h3>Tâche 14 : Mise en place du nouveau flux d’acteurs dans Woken pour traiter nos container interactif<a class="headerlink" href="#tache-14-mise-en-place-du-nouveau-flux-dacteurs-dans-woken-pour-traiter-nos-container-interactif" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Actuellement, le nouvel acteur <code class="code docutils literal"><span class="pre">InteractiveActor</span></code> est implémenté pour remplacer
-le <code class="code docutils literal"><span class="pre">ExperimentActor</span></code>, comme le suggère la <a href="#newinteractiveactors">figure  1703</a>.</p>
+le <code class="code docutils literal"><span class="pre">ExperimentActor</span></code>, comme le suggère la <a href="#newinteractiveactors">figure  1934</a>.</p>
 <p>Au moment du rendu, la configuration du container pour l’entrainement est configuré.
 Un fichier situé au chemin <code class="code docutils literal"><span class="pre">home/user/docker-volume</span></code> et contenant les informations
 suivantes sont pour le moment nécéssaire :</p>
@@ -1190,18 +1192,18 @@ suivantes sont pour le moment nécéssaire :</p>
 </pre></div>
 </div>
 <p>Il est à prévu de générer dynamiquement les répertoire pour les volumes, comme décrit dans la section
-Architecture.</p>
-<p>Pour le moment, le repertoire doit exister, et le fichier doit être valide.</p>
+<a class="reference internal" href="#uuid"><span class="std std-ref">«&nbsp;Génération automatique des répertoires pour la liaison des volumes&nbsp;»</span></a>.</p>
+<p>Pour le moment, le répertoire doit exister, et le fichier doit être valide.</p>
 <p>Etant donné le manque de temps, la sérialisation de la configuration de classe Scala
 est encore effectuée par un <code class="code docutils literal"><span class="pre">localCoordinatorActor</span></code>, ce qui implique qu’une fois
 la requête envoyée à Chronos, l’acteur se met dans un état d’attente des résultats dans
 la base de données, chose qui n’arrivera jamais étant donné que le container <em>TPOT</em>
-ne répond pas comme ca.</p>
+ne répond pas dans celle-ci, mais dans le <em>volume</em>.</p>
 <p>la suite de l’implémentation sera effectuée en redéfinissant les <code class="code docutils literal"><span class="pre">localCoordinatorActor</span></code>
 en une autre implémentation, qui permet de ne pas attendre de résultat dans la base de données.</p>
 <p>Si cet acteur fontionne, il devient possible de passer dans l’état d’attente de résultat
 de travail du container, géré par Chronos via la route <code class="code docutils literal"><span class="pre">/v1/scheduler/jobs/search?name=id</span></code>,
-ou l”<cite>id</cite> est retourné au moment de la demande d’effectuer la tâche à Chronos.</p>
+ou l”<cite>id</cite> est retourné au moment de la demande d’effectuer la tâche à Chronos via la requête <code class="code docutils literal"><span class="pre">POST</span></code>.</p>
 <p>Dès que la tâche est finie, il faut reconfigurer les définitions de classes pour lancer en
 mode test, configurer le fichier en entrée sur le volume, et attendre à nouveau de <em>Chronos</em>
 la confirmation de fin du travail du container.</p>
@@ -1210,10 +1212,10 @@ et de les mettre en forme pour les transmettre à l”<cite>AlgorithmActor</cite
 de <em>TPOT</em>.</p>
 </div>
 </div>
-<div class="section" id="id50">
-<h2>Scala<a class="headerlink" href="#id50" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="id52">
+<h2>Scala<a class="headerlink" href="#id52" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Bien que la frontière soit mince entre la partie <em>Scala</em> et <em>Akka</em> soit mince, les
-point suivants sont généralement liés uniquement à la synthaxe <em>Scala</em>, et plus au
+point suivants sont généralement liés uniquement à la synthaxe <em>Scala</em>, et non plus au
 paradigme de programmation <em>Akka</em>.</p>
 <div class="section" id="tache-15-mise-en-relation-du-scoring-pour-le-retour-a-lalgorithmactor">
 <h3>Tâche 15 : Mise en relation du scoring pour le retour à l’AlgorithmActor<a class="headerlink" href="#tache-15-mise-en-relation-du-scoring-pour-le-retour-a-lalgorithmactor" title="Lien permanent vers ce titre">¶</a></h3>
@@ -1229,7 +1231,7 @@ sous format <em>PFA</em> au <cite>AlgorithmActor</cite>. La définition sera eff
 <p>Woken envoie des demandes d’exécution d’algorithmes à Chronos sous format <cite>JSON</cite>.
 Il doit stipuler l’image et la version pour chaque algorithme disponible à l’utilisateur.
 Le fichier de configuration est propre à l’environnement, soit <cite>dev-debug</cite> ou <cite>dev-test</cite>.</p>
-<p>Ces fichiers de configurations sont disponible dans l’arborescence au chemin <cite>/dev-*/woken/cofig/application.conf</cite>.</p>
+<p>Ces fichiers de configurations sont disponible dans l’arborescence au chemin <cite>/dev-debug/woken/config/application.conf</cite>.</p>
 <div class="highlight-conf"><div class="highlight"><pre><span></span>{
   functions {
     statisticsSummary = {
@@ -1262,7 +1264,7 @@ Le fichier de configuration est propre à l’environnement, soit <cite>dev-debu
 </div>
 <p>Cette exemple montre que l’on définit le nom l’image et la version à utiliser pour
 résoudre un algorithme. Si l’image n’est pas présente localement, elle sera reprise
-depuis le <em>Docker-Hub</em>. Le flag prédictive indique si la voie à utiliser peut être
+depuis le <em>Docker-Hub</em>. Le flag prédictive indique si l’algorithme peut utiliser la voie
 <code class="code docutils literal"><span class="pre">mining/experiment</span></code>.</p>
 <p>A l’avenir, il est probable qu’un tag «&nbsp;interactive&nbsp;» définisse si on peut utiliser
 le nouveau flux de travail interactif implémenté dans ce travail.</p>
@@ -1276,23 +1278,23 @@ s’effectuer via une simple représentation du texte du pipeline.</p>
 <em>Scala</em> directement dans <em>Woken</em>. Cette définition n’intégrait pas les notions de
 <cite>volumes</cite> et de <cite>commandes</cite> dans le flux actuel. Les volumes n’étaient pas utilisés,
 et la commande était systématiquement définie comme <code class="code docutils literal"><span class="pre">compute</span></code>.</p>
-<p>Il a été nécessaire d’ajouter des définitions supplémentaires pour les <cite>volumes</cite> <a class="reference internal" href="#wokenvolume" id="id51">[33]</a>
-et de laisser la possibilité de définir une autre commande que <code class="code docutils literal"><span class="pre">compute</span></code> <a class="reference internal" href="#wokencommands" id="id52">[34]</a>
+<p>Il a été nécessaire d’ajouter des définitions supplémentaires pour les <cite>volumes</cite> <a class="reference internal" href="#wokenvolume" id="id53">[35]</a>
+et de laisser la possibilité de définir une autre commande que <code class="code docutils literal"><span class="pre">compute</span></code> <a class="reference internal" href="#wokencommands" id="id54">[36]</a>
 pour l’entrypoint.</p>
-<p>La sérialisation est gérée par Spray <a class="reference internal" href="#spray" id="id53">[37]</a>. Des tests unitaires ont été implémentés
+<p>La sérialisation est gérée par Spray <a class="reference internal" href="#spray" id="id55">[39]</a>. Des tests unitaires ont été implémentés
 pour vérifier le format. Ils sont disponibles au chemin <code class="code docutils literal"><span class="pre">/src/test/scala/JSONFormat/JSONFormattingTests.scala</span></code>.</p>
 </div>
 <div class="section" id="tache-18-generation-automatique-des-repertoires-pour-la-liaison-des-volumes">
 <h3>Tâche 18 : Génération automatique des répertoires pour la liaison des volumes<a class="headerlink" href="#tache-18-generation-automatique-des-repertoires-pour-la-liaison-des-volumes" title="Lien permanent vers ce titre">¶</a></h3>
 <p>A l’instant de la rédaction de ce rapport, le chemin pour la liaison de <em>volume</em> est
-hard-codé. Ceci n’est pas viable quand le flux d’acteur est complet.</p>
+hard-codé. Ceci n’est pas viable dans un environnement de production.</p>
 <p>La problématique dans le cadre de l’architecture distribuée sur laquelle fonctionne
-Mesos est qu’il n’y a pas de système de fichier centralisé, ce qui implique que
-deux appels successifs via un acteur Woken doit s’effectuer sur la même machine physique
-afin que le résultat de l’entrainement soit récupérable pour les prédicats. Ce problème
+<em>Mesos</em> est qu’il n’y a pas de système de fichier centralisé, ce qui implique que
+deux appels successifs via un acteur <em>Woken</em> doit s’effectuer sur la même machine physique
+afin que le résultat de l’entraînement soit récupérable pour les prédicats. Ce problème
 peut être résolu en forcant tous les containers TPOT instanciés à être placés sur le
 même hôte. Les recherches pour ce faire n’ont pas encore été effectuées.</p>
-<p>En imaginant que le point ci-dessus est le cas, il existe encore un problème de concurrence.
+<p>En imaginant que le point ci-dessus est réalisable, il existe encore un problème de concurrence.
 Dans un cadre de production, le chemin d’optimisation sera utilisé par plusieurs acteurs
 en parralèlle, il est indispensable que chacun ait son propre répertoire de travail.</p>
 <p>Chaque acteur s’occupe de l’instancier avec un nom lié au UUID, identifiant unique utilisé
@@ -1308,11 +1310,13 @@ sans devoir tenir compte d’un dictionnaire de répertoires global pour les act
 <h2>Architecture<a class="headerlink" href="#architecture" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Cette section décrit les modifications de l’architecture pour le déroulement du projet.
 Au lancement de ce projet, une architecture de test était disponible dans le répertoire
-<code class="code docutils literal"><span class="pre">dev-test</span></code>. Toute l’architecture, y compris <em>Woken</em>, était lancée depuis des
+<code class="code docutils literal"><span class="pre">dev-test</span></code>.</p>
+<p>Toute l’architecture, y compris <em>Woken</em>, était lancée depuis des
 containers <em>Docker</em>. Celui-ci était containerisé via le script <code class="code docutils literal"><span class="pre">build.sh</span></code> situé à la racine
 du projet. Le build consiste en la création d’une image <code class="code docutils literal"><span class="pre">jar</span></code> (java archive)
 contenant le code scala et toutes ses dépendances, et mis dans un container disposant
-d’une <code class="code docutils literal"><span class="pre">JVM</span></code> pouvant l’exécuter. Ceci implique une compilation
+d’une <code class="code docutils literal"><span class="pre">JVM</span></code> pouvant l’exécuter.</p>
+<p>Ceci implique une compilation
 et une containerisation à chaque modification du code. Pour débugger, il fallait passer
 par les outils <code class="code docutils literal"><span class="pre">docker-compose</span> <span class="pre">logs</span></code>, qui ne fournissent pas toujours les
 détails en cas d’exception, et qui ne permettent pas d’analyser via des points d’arrêt
@@ -1329,13 +1333,13 @@ Il a été nécessaire d’adapter et de substituer les dépendances qui étaien
 comme par exemple la base de données des patients qui a été substituée par une base
 de données fictive.</p>
 <p>Le fruit de ce travail est un nouveau repertoire <code class="code docutils literal"><span class="pre">dev-debug</span></code>, qui contient
-un <code class="code docutils literal"><span class="pre">docker-compose</span></code> permettant de mettre en place une architecture qui permet
+un <code class="code docutils literal"><span class="pre">docker-compose</span></code> permettant de mettre en place une architecture permettant
 de peupler les bases de données, mettre en place l’architecture distribuée (<em>Mesos, ZooKeeper</em>)
 ainsi que les outils pour l’utiliser (<em>Chronos</em> dans notre cas, et <em>Marathon</em> qui reste
 inclu).</p>
 <p>L’environnement de développement se démarre via le script <code class="code docutils literal"><span class="pre">run.sh</span></code> situé dans le
 répertoire <code class="code docutils literal"><span class="pre">dev-debug</span></code>. Il est important de ne pas utiliser directement la commande
-<code class="code docutils literal"><span class="pre">docker-compose</span> <span class="pre">up</span></code>, car certains containers <em>Docker</em> pour des problèmes de dépendances
+<code class="code docutils literal"><span class="pre">docker-compose</span> <span class="pre">up</span></code>,pour des raisons de dépendances
 entre containers. Il arrive que <code class="code docutils literal"><span class="pre">Mesos-slave</span></code> ne se coordonne pas
 correctement avec <code class="code docutils literal"><span class="pre">Mesos-master</span></code>, et qu’il ne donne pas de code d’erreur.</p>
 <p>Si c’est le cas, cela ce manifeste par des containers qui restent en état «&nbsp;queued&nbsp;»
@@ -1393,18 +1397,18 @@ code:<cite>jdbc</cite> (url + port) adaptés afin de permettre à <em>Woken</em>
 <h3>Tâche 21 : Mise à jour du docker-compose pour le validation-pool Akka<a class="headerlink" href="#tache-21-mise-a-jour-du-docker-compose-pour-le-validation-pool-akka" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Le code de <em>Woken</em> ayant été sorti du container <em>Docker</em> pour être utilisé en natif,
 les acteurs <em>Scala</em> du <em>validation-pool</em>, contenus dans un container <em>Docker</em> distant,
-n’étaient plus accessibles. Il a fallu modifier le fichier de configuration
-<code class="code docutils literal"><span class="pre">/dev-debug/woken/config/validation/application.conf</span></code> ont été mis à jour.</p>
-<p>Celà nécessite de définir de nouvelles résolutions de noms dans le fichier <code class="code docutils literal"><span class="pre">/etc/hosts</span></code>,
-comme décrit dans la procédure du README du projet <a class="reference internal" href="#readmewoken" id="id55">[27]</a> .</p>
+n’étaient plus accessibles. Le fichier de configuration
+<code class="code docutils literal"><span class="pre">/dev-debug/woken/config/validation/application.conf</span></code> a été mis à jour.</p>
+<p>Celà nécessite aussi de définir de nouvelles résolutions de noms dans le fichier <code class="code docutils literal"><span class="pre">/etc/hosts</span></code>,
+comme décrit dans la procédure du README du projet <a class="reference internal" href="#readmewoken" id="id57">[29]</a> .</p>
 </div>
 </div>
 <div class="section" id="compte-rendu-graphique-de-l-avancement-du-projet">
 <h2>Compte rendu graphique de l’avancement du projet<a class="headerlink" href="#compte-rendu-graphique-de-l-avancement-du-projet" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Etant donné que le projet n’a pas pu aboutir par manque de temps, la <a href="#progressrepresentation">figure  1706</a>
+<p>Etant donné que le projet n’a pas pu aboutir par manque de temps, la <a href="#progressrepresentation">figure  1937</a>
 présente une représentation visuelle des points ayant été implémentés, de ceux en cours
-de réalisation, ainsi que de ceux non commencés, basé sur la même structure que la <a href="#tasksbreakdown">figure  1704</a>.</p>
-<div class="figure align-center" id="id77">
+de réalisation, ainsi que de ceux non commencés, basé sur la même structure que la <a href="#tasksbreakdown">figure  1935</a>.</p>
+<div class="figure align-center" id="id79">
 <span id="progressrepresentation"></span><a class="reference internal image-reference" href="_images/ImplementationRepresentationProgress.png"><img alt="Représentation graphique des tâches effectuées." src="_images/ImplementationRepresentationProgress.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Représentation graphique de l’avancement des tâches. Les tâches vertes sont
 totalement implémentées et testées, les tâches oranges sont en cours de réalisation
@@ -1413,27 +1417,27 @@ et les tâches rouges ne sont pas commencées.</span></p>
 <p>Etant donné que tous les acteurs doivent remplir leurs fonctions pour qu’une première
 version soit exploitable, il est regrettable de constater que le manque de temps a fait
 que l’implémentation de la partie <em>Akka</em> soit la seule empêchant de mener à bien une expérience.</p>
-<p>Un développeur expérimenté en <em>Scala/Akka</em> devrait pouvoir implémenter une première version
+<p>Un développeur expérimenté en <em>Scala/Akka</em> devrait pouvoir implémenter rapidement une première version
 de l’architecture proposée dans la partie <a class="reference internal" href="#akkaconception"><span class="std std-ref">conception akka</span></a>.</p>
 </div>
 </div>
 <div class="section" id="conclusion">
 <h1>Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h1>
 <p>Ce projet a permis de mettre en place des outils de développement pour qu’un externe à
-l’infrastructure puisse travailler sur <em>Woken</em>. Dans le cadre de l’expérimentation
-de <em>l’automated machine learning</em>, un état de l’art a montré que le domaine n’a pas encore
+l’infrastructure puisse travailler sur <em>Woken</em>.</p>
+<p>Dans le cadre de l’expérimentation de <em>l’automated machine learning</em>, un état de l’art a montré que le domaine n’a pas encore
 été démontré dans des projets pratiques. Ce projet constitue un excellent terrain
 d’expérimentation, en raison de la nature incomprise de la maladie d’Alzheimer, mais aussi
-car les données sont labellées et renseignées de manière identiques et complètes.
-Au delà de l’aspect scientifique, les recherches effectuées démontrent que l’utilisateur
+car les données sont labellées et renseignées de manière complète.</p>
+<p>Au delà de l’aspect scientifique, les recherches effectuées démontrent que l’utilisateur
 pourra formuler des expériences de neuroscience sur les données de la plateforme sans
 être un expert dans le domaine du machine learning.</p>
 <p>Durant ce projet, une analyse a permis de fournir des technologies susceptibles de mener
-à bien une version exploitable de l’automated machine learning en l’intégrant à la
+à bien une version exploitable de l”<em>automated machine learning</em> en l’intégrant à la
 plateforme <em>Woken</em>, en tenant compte de l’implémentation de celui-ci.</p>
 <p>La conception a fourni la méthodologie de substition du flux actuel pour offrir la
 nouvelle fonctionnalité d’optimisation automatique du pipeline de machine learning,
-tout en conservant le fonctionnement actuel.</p>
+tout en conservant les fonctionnaliés actuelles.</p>
 <p>La conception avancée fournit l’avantage de ne pas être exclusivement réservée à
 l’utilisation de l’automated machine learning comme flux alternatif. Le choix de la bibliothèque <em>TPOT</em>, implémentée en <em>python</em>
 et utilisant les modèles de <em>Scikit-Learn</em>, permet l’implémentation de
@@ -1443,9 +1447,10 @@ des prédicats sur un quelconque modèle issu de <em>Scikit-Learn</em>. Ceci per
 des algorithmes de la plateforme.</p>
 <p>L’implémentation est découpée en tâches. Chaque partie de l’infrastructure doit être capable
 d’effectuer certaines actions afin de mener à bien le nouveau flux de travail de ce projet.
-Une représentation graphique de l’avancement de ces tâches est diponible en <a href="#progressrepresentation">figure  1706</a>.
+Une représentation graphique de l’avancement de ces tâches est diponible en <a href="#progressrepresentation">figure  1937</a>.
 L’implémentation restante pour chacunes de ces tâches est disponible dans les sous-chapitres
-de l’implémentation correspondants aux numéros de tâches. En résumé, il reste à implémenter
+de l’implémentation correspondants aux numéros de tâches.</p>
+<p>Pour résumer cette figure, il reste à implémenter
 le flux d’acteurs <em>Akka</em> dans <em>Woken</em> afin de pouvoir tester l’optimisation de pipeline
 automatique pour le machine learning, dans le cadre de la plateforme. Pour un programmeur expérimenté
 en programmation d’acteurs <em>Akka</em>, une première implémentation simpliste des nouveaux
@@ -1454,19 +1459,19 @@ nécessitera des affinements.</p>
 <p>Une fois cette implémentation effectuée, une expérience scientifique sera menée à bien
 afin de déterminer l’apport de cette approche par rapport aux paramétrages manuels d’expériences.
 Ces comparaisons devront se baser sur un expérience utilisateur définie strictement, et
-correspondant à une utilisation réaliste de la plateforme.</p>
+correspondant à une utilisation réaliste de la plateforme par l’utilisateur qui formule l’expérience.</p>
 <p>Si l’expérience abouti à des résultats exploitables, un papier pourra être publié.
 Il constituerait un des premiers articles scientifiques sur une problématique réelle
 dans le domaine de <em>l’automated machine learning</em>.</p>
-<p>Cet avancement n’a pas pu être atteindre au moment de la cloture du projet dans le
-cadre du travail de Bachelor, par manque de temps.</p>
+<p>Cet avancement n’a pas pu être atteindre au moment de la clôture du projet dans le
+cadre du travail de Bachelor,par manque de temps.</p>
 <p>A partir du journal de travail, la répartition du temps de travail est distribuée
-comme présenté en <a href="#time">figure  1707</a>.</p>
-<div class="figure align-center" id="id78">
+comme présenté en <a href="#time">figure  1938</a>.</p>
+<div class="figure align-center" id="id80">
 <span id="time"></span><a class="reference internal image-reference" href="_images/emploidutemps.png"><img alt="Interface graphique de configuration JSON d'une tâche Chronos." src="_images/emploidutemps.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text">Répartition du temps en heures selon les enregistrements du journal de travail, environ 450 heures
 au total. La documentation ne concerne pas que ce rapport, mais aussi les rapports intermédiaires
-ainsi que les mises à jour de README pour la configuration. Environ 30% de documentation,
+ainsi que les mises à jour de README pour la configuration. La répartition est d’environ 30% de documentation,
 50% de code 13% d’analyse et 7% d’administratif (séances avec le superviseur ou le mandant).</span></p>
 </div>
 </div>
@@ -1474,250 +1479,262 @@ ainsi que les mises à jour de README pour la configuration. Environ 30% de docu
 <h1>Remerciements<a class="headerlink" href="#remerciements" title="Lien permanent vers ce titre">¶</a></h1>
 <p>Je tiens à remercier Arnaud Jutzeler pour avoir offert l’opportunié
 de travailler sur un projet de cette envergure, pour avoir fait confiance pour
-les recherches, pour l’aide à conception, pour les explications pour partie machine learning,
+les recherches, pour l’aide à conception, pour les explications concernant le <em>machine learning</em>,
 pour la patience dont il a fait part pour la mise en place de l’environnement de travail ainsi
-que les questions d’utilisation des technologies de la plateforme.</p>
+que les réponses à mes questions questions d’utilisation des technologies de la plateforme.</p>
 <p>Un grand merci aussi à Stefano Carrino pour l’excellent suivi de projet, pour l’attention accordée
-aux questions ainsi qu’aux relectures, pour les explications liées au machine learning ainsi que
+aux questions ainsi qu’aux relectures, pour les explications liées au <em>machine learning</em> ainsi que
 pour les propositions d’alternatives pour les aspects techniques.</p>
-<p>J’ai aussi pu compter sur l’aide de Mirco Nasuti du CHUV pour répondre à toutes mes
+<p>J’ai aussi pu compter sur l’aide de Mirco Nasuti du <em>CHUV</em> pour répondre à toutes mes
 questions techniques, et pour m’expliquer les comportements étranges de Docker, le tout
 avec une disponibilité sans failles.</p>
 <p>Merci à mon camarade Julien M’Poy, qui a travaillé en même temps
 sur le projet dans sur la partie architecture, pour l’aide à la compréhension sur celle-ci,
-pour la mise en place du nouveau <code class="code docutils literal"><span class="pre">docker-compose</span></code> qui a permis d’intégrer et de
+pour la mise en place du nouveau <code class="code docutils literal"><span class="pre">docker-compose</span></code> qui a permi d’intégrer et de
 tester <em>Marathon</em>, pour l’aide à la configuration de la distribution <em>Linux Manjaro</em>,
 pour les conseils en <em>Docker</em> ainsi que le partage de la méthodologie <em>Sphinx</em> pour la rédaction
 du rappot.</p>
-<p>Enfin, merci à Yoan Blanc <code class="code docutils literal"><span class="pre">&#64;greut</span></code> pour le temps et la disponibilité pour les questions sur
-Docker, en particulier sur les problèmes de processus au PID 1 et au problème des processus zombies,
+<p>Enfin, merci à Yoan Blanc <code class="code docutils literal"><span class="pre">&#64;greut</span></code> pour le temps et la disponibilité pour les questions concernant
+<em>Docker</em>, en particulier sur les problèmes de processus au PID 1 et au problème des processus zombies,
 ainsi que pour l’aide pour l’utilisation de <em>Sphinx</em> pour la documentation.</p>
 <p id="bibtex-bibliography-index-0"><table class="docutils citation" frame="void" id="metronome" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id31">[1]</a></td><td>DCOS/Metronome&nbsp;- Apache. Apache mesos framework for scheduled jobs - github page. <span><a class="reference external" href="#"></a></span>https://github.com/dcos/metronome, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id33">[1]</a></td><td>DCOS/Metronome&nbsp;- Apache. Apache mesos framework for scheduled jobs - github page. <span><a class="reference external" href="#"></a></span>https://github.com/dcos/metronome, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="autoweka" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id12">[2]</a></td><td>auto-WEKA. Automatic model selection and hyperparameter optimization in weka. <span><a class="reference external" href="#"></a></span>http://www.cs.ubc.ca/labs/beta/Projects/autoweka/, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id14">[2]</a></td><td>auto-WEKA. Automatic model selection and hyperparameter optimization in weka. <span><a class="reference external" href="#"></a></span>http://www.cs.ubc.ca/labs/beta/Projects/autoweka/, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="wokenaxel" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id27">[3]</a></td><td>axelroy. Woken - an orchestration platform for docker containers running data mining algorithms - forked by axelroy on github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/woken/tree/AutoML, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id29">[3]</a></td><td>axelroy. Woken - an orchestration platform for docker containers running data mining algorithms - forked by axelroy on github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/woken/tree/AutoML, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="googleautoml" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id8">[4]</a></td><td>Google developers. Google i/o keynote (google i/o “17). <span><a class="reference external" href="#"></a></span>https://www.youtube.com/watch?v=Y2VF8tmLFHw, May 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id10">[4]</a></td><td>Google developers. Google i/o keynote (google i/o “17). <span><a class="reference external" href="#"></a></span>https://www.youtube.com/watch?v=Y2VF8tmLFHw, May 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="datagridsearchdoc" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[5]</a></td><td>Scikit-Learn’s Documentation. Tuning the hyper-parameters of an estimator. <span><a class="reference external" href="#"></a></span>http://scikit-learn.org/stable/modules/grid_search.html, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td>Scikit-Learn’s Documentation. Tuning the hyper-parameters of an estimator. <span><a class="reference external" href="#"></a></span>http://scikit-learn.org/stable/modules/grid_search.html, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="mesosdoc" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id17">[6]</a></td><td>Apache&nbsp;Software Foundation. Apache mesos. <span><a class="reference external" href="#"></a></span>http://mesos.apache.org, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id19">[6]</a></td><td>Apache&nbsp;Software Foundation. Apache mesos. <span><a class="reference external" href="#"></a></span>http://mesos.apache.org, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="marathonapidoc" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id18">[7]</a></td><td>Apache&nbsp;Software Foundation. Marathon rest api. <span><a class="reference external" href="#"></a></span>https://mesosphere.github.io/marathon/docs/rest-api.html, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id20">[7]</a></td><td>Apache&nbsp;Software Foundation. Marathon rest api. <span><a class="reference external" href="#"></a></span>https://mesosphere.github.io/marathon/docs/rest-api.html, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="theorymlms" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[8]</a></td><td>Philippe Beraud -&nbsp;Microsoft France. Un peu de théorie pour l’apprentissage non-supervisé). <span><a class="reference external" href="#"></a></span>https://blogs.msdn.microsoft.com/big_data_france/2014/06/06/un-peu-de-thorie-pour-lapprentissage-non-supervis/, June 2014.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[8]</a></td><td>Philippe Beraud -&nbsp;Microsoft France. Un peu de théorie pour l’apprentissage non-supervisé). <span><a class="reference external" href="#"></a></span>https://blogs.msdn.microsoft.com/big_data_france/2014/06/06/un-peu-de-thorie-pour-lapprentissage-non-supervis/, June 2014.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="groovytron" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id16">[9]</a></td><td>Julien M’Poy&nbsp;/ Groovytron. Maracker’s repository : api aiming to make human brain project’s medical informatics platform’s developped apps deployment on mesos marathon easier. <span><a class="reference external" href="#"></a></span>https://github.com/groovytron/maracker, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id18">[9]</a></td><td>Julien M’Poy&nbsp;/ Groovytron. Maracker’s repository : api aiming to make human brain project’s medical informatics platform’s developped apps deployment on mesos marathon easier. <span><a class="reference external" href="#"></a></span>https://github.com/groovytron/maracker, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="pfa" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id28">[10]</a></td><td>DMG - Data&nbsp;Mining Group. Pfa - portable format for analytics). <span><a class="reference external" href="#"></a></span>http://dmg.org/pfa/index.html, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id30">[10]</a></td><td>DMG - Data&nbsp;Mining Group. Pfa - portable format for analytics). <span><a class="reference external" href="#"></a></span>http://dmg.org/pfa/index.html, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="dockerimages" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[11]</td><td><em>(<a class="fn-backref" href="#id41">1</a>, <a class="fn-backref" href="#id43">2</a>)</em> HBPMedical. Docker’s python implementation for the hbp-mip plateform’s algorithm implementation - github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/python-base-docker-images/tree/python-mip-interactive, July 2017.</td></tr>
+<tr><td class="label">[11]</td><td><em>(<a class="fn-backref" href="#id43">1</a>, <a class="fn-backref" href="#id45">2</a>)</em> HBPMedical. Docker’s python implementation for the hbp-mip plateform’s algorithm implementation - github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/python-base-docker-images/tree/python-mip-interactive, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="hhusain" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id10">[12]</a></td><td>Hamel Husain. Automated machine learning — a paradigm shift that accelerates data scientist productivity &#64; airbnb. <span><a class="reference external" href="#"></a></span>https://medium.com/airbnb-engineering/automated-machine-learning-a-paradigm-shift-that-accelerates-data-scientist-productivity-airbnb-f1f8a10d61f8, July 2016.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id12">[12]</a></td><td>Hamel Husain. Automated machine learning — a paradigm shift that accelerates data scientist productivity &#64; airbnb. <span><a class="reference external" href="#"></a></span>https://medium.com/airbnb-engineering/automated-machine-learning-a-paradigm-shift-that-accelerates-data-scientist-productivity-airbnb-f1f8a10d61f8, July 2016.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="hyperopt" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id13">[13]</a></td><td>hyperopt. Hyperopt - distributed asynchronous hyperparameter optimization in python. <span><a class="reference external" href="#"></a></span>http://hyperopt.github.io/hyperopt, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id15">[13]</a></td><td>hyperopt. Hyperopt - distributed asynchronous hyperparameter optimization in python. <span><a class="reference external" href="#"></a></span>http://hyperopt.github.io/hyperopt, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="createbaseimagedocker" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id20">[14]</a></td><td>Docker Inc. Create a base image - docker documentation. <span><a class="reference external" href="#"></a></span>https://docs.docker.com/engine/userguide/eng-image/baseimages/#create-a-full-image-using-tar, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id22">[14]</a></td><td>Docker Inc. Create a base image - docker documentation. <span><a class="reference external" href="#"></a></span>https://docs.docker.com/engine/userguide/eng-image/baseimages/#create-a-full-image-using-tar, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="dockerfilereference" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id21">[15]</a></td><td>Docker Inc. Dockerfile reference - docker documentation. <span><a class="reference external" href="#"></a></span>https://docs.docker.com/engine/reference/builder/, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id23">[15]</a></td><td>Docker Inc. Dockerfile reference - docker documentation. <span><a class="reference external" href="#"></a></span>https://docs.docker.com/engine/reference/builder/, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="dockervolumes" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id32">[16]</a></td><td>Docker Inc. Manage data in containers - docker’s documentation. <span><a class="reference external" href="#"></a></span>https://docs.docker.com/engine/tutorials/dockervolumes/, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id34">[16]</a></td><td>Docker Inc. Manage data in containers - docker’s documentation. <span><a class="reference external" href="#"></a></span>https://docs.docker.com/engine/tutorials/dockervolumes/, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="zombiesdocker" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id45">[17]</a></td><td>Hongli Lai. Docker and the pid 1 zombie reaping problem. <span><a class="reference external" href="#"></a></span>https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/, January 2015.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id47">[17]</a></td><td>Hongli Lai. Docker and the pid 1 zombie reaping problem. <span><a class="reference external" href="#"></a></span>https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/, January 2015.</td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="id56" rules="none">
+<table class="docutils citation" frame="void" id="id58" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id23">[18]</a></td><td>Switzerland Lausanne (EPFL)&nbsp;Lausanne. The scala programming language. <span><a class="reference external" href="#"></a></span>https://www.scala-lang.org/, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id25">[18]</a></td><td>Switzerland Lausanne (EPFL)&nbsp;Lausanne. The scala programming language. <span><a class="reference external" href="#"></a></span>https://www.scala-lang.org/, July 2017.</td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="id57" rules="none">
+<table class="docutils citation" frame="void" id="id59" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id24">[19]</a></td><td>AKKA Lightbend&nbsp;Inc. Akka official website. <span><a class="reference external" href="#"></a></span>http://akka.io, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id26">[19]</a></td><td>AKKA Lightbend&nbsp;Inc. Akka official website. <span><a class="reference external" href="#"></a></span>http://akka.io, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="stateautoml" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id9">[20]</a></td><td>Matthew Mayo. The current state of automated machine learning). <span><a class="reference external" href="#"></a></span>http://www.kdnuggets.com/2017/01/current-state-automated-machine-learning.html, Jan 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id11">[20]</a></td><td>Matthew Mayo. The current state of automated machine learning). <span><a class="reference external" href="#"></a></span>http://www.kdnuggets.com/2017/01/current-state-automated-machine-learning.html, Jan 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="olson2016evaluation" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id6">[21]</a></td><td>Randal&nbsp;S Olson, Nathan Bartley, Ryan&nbsp;J Urbanowicz, and Jason&nbsp;H Moore. Evaluation of a tree-based pipeline optimization tool for automating data science. In <em>Proceedings of the 2016 on Genetic and Evolutionary Computation Conference</em>, 485–492. ACM, 2016.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id8">[21]</a></td><td>Randal&nbsp;S Olson, Nathan Bartley, Ryan&nbsp;J Urbanowicz, and Jason&nbsp;H Moore. Evaluation of a tree-based pipeline optimization tool for automating data science. In <em>Proceedings of the 2016 on Genetic and Evolutionary Computation Conference</em>, 485–492. ACM, 2016.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="olson2016tpot" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id7">[22]</a></td><td>Randal&nbsp;S Olson and Jason&nbsp;H Moore. Tpot: a tree-based pipeline optimization tool for automating machine learning. In <em>Workshop on Automatic Machine Learning</em>, 66–74. 2016.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id9">[22]</a></td><td>Randal&nbsp;S Olson and Jason&nbsp;H Moore. Tpot: a tree-based pipeline optimization tool for automating machine learning. In <em>Workshop on Automatic Machine Learning</em>, 66–74. 2016.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="olson2016evobio" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[23]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id5">2</a>, <a class="fn-backref" href="#id11">3</a>, <a class="fn-backref" href="#id14">4</a>)</em> Randal&nbsp;S. Olson, Ryan&nbsp;J. Urbanowicz, Peter&nbsp;C. Andrews, Nicole&nbsp;A. Lavender, La&nbsp;Creis Kidd, and Jason&nbsp;H. Moore. <em>Applications of Evolutionary Computation: 19th European Conference, EvoApplications 2016, Porto, Portugal, March 30 – April 1, 2016, Proceedings, Part I</em>. Springer International Publishing, 2016. ISBN 978-3-319-31204-0. URL: <a class="reference external" href="http://dx.doi.org/10.1007/978-3-319-31204-0_9">http://dx.doi.org/10.1007/978-3-319-31204-0_9</a>, <a class="reference external" href="https://doi.org/10.1007/978-3-319-31204-0_9">doi:10.1007/978-3-319-31204-0_9</a>.</td></tr>
+<tr><td class="label">[23]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id7">2</a>, <a class="fn-backref" href="#id13">3</a>, <a class="fn-backref" href="#id16">4</a>)</em> Randal&nbsp;S. Olson, Ryan&nbsp;J. Urbanowicz, Peter&nbsp;C. Andrews, Nicole&nbsp;A. Lavender, La&nbsp;Creis Kidd, and Jason&nbsp;H. Moore. <em>Applications of Evolutionary Computation: 19th European Conference, EvoApplications 2016, Porto, Portugal, March 30 – April 1, 2016, Proceedings, Part I</em>. Springer International Publishing, 2016. ISBN 978-3-319-31204-0. URL: <a class="reference external" href="http://dx.doi.org/10.1007/978-3-319-31204-0_9">http://dx.doi.org/10.1007/978-3-319-31204-0_9</a>, <a class="reference external" href="https://doi.org/10.1007/978-3-319-31204-0_9">doi:10.1007/978-3-319-31204-0_9</a>.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="tpotissuerefactor" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id39">[24]</a></td><td>Randy Olson. Refactor: _fitted_pipeline, _pareto_front_fitted_pipelines, and _evaluated_individuals - github issue. <span><a class="reference external" href="#"></a></span>https://github.com/rhiever/tpot/issues/474, May 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id41">[24]</a></td><td>Randy Olson. Refactor: _fitted_pipeline, _pareto_front_fitted_pipelines, and _evaluated_individuals - github issue. <span><a class="reference external" href="#"></a></span>https://github.com/rhiever/tpot/issues/474, May 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="tini" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id47">[25]</a></td><td>Thomas Orozco. A tiny but valid `init` for containers - github. <span><a class="reference external" href="#"></a></span>https://github.com/krallin/tini, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id49">[25]</a></td><td>Thomas Orozco. A tiny but valid `init` for containers - github. <span><a class="reference external" href="#"></a></span>https://github.com/krallin/tini, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="scikit-learn" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[26]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id15">2</a>)</em> F.&nbsp;Pedregosa, G.&nbsp;Varoquaux, A.&nbsp;Gramfort, V.&nbsp;Michel, B.&nbsp;Thirion, O.&nbsp;Grisel, M.&nbsp;Blondel, P.&nbsp;Prettenhofer, R.&nbsp;Weiss, V.&nbsp;Dubourg, J.&nbsp;Vanderplas, A.&nbsp;Passos, D.&nbsp;Cournapeau, M.&nbsp;Brucher, M.&nbsp;Perrot, and E.&nbsp;Duchesnay. Scikit-learn: machine learning in Python. <em>Journal of Machine Learning Research</em>, 12:2825–2830, 2011.</td></tr>
+<tr><td class="label">[26]</td><td><em>(<a class="fn-backref" href="#id6">1</a>, <a class="fn-backref" href="#id17">2</a>)</em> F.&nbsp;Pedregosa, G.&nbsp;Varoquaux, A.&nbsp;Gramfort, V.&nbsp;Michel, B.&nbsp;Thirion, O.&nbsp;Grisel, M.&nbsp;Blondel, P.&nbsp;Prettenhofer, R.&nbsp;Weiss, V.&nbsp;Dubourg, J.&nbsp;Vanderplas, A.&nbsp;Passos, D.&nbsp;Cournapeau, M.&nbsp;Brucher, M.&nbsp;Perrot, and E.&nbsp;Duchesnay. Scikit-learn: machine learning in Python. <em>Journal of Machine Learning Research</em>, 12:2825–2830, 2011.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="hbpmip" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[27]</a></td><td>Human Brain Project - Medical&nbsp;Informatics Platform. Human brain projet home. <span><a class="reference external" href="#"></a></span>https://www.humanbrainproject.eu/en/medicine/medical-informatics-platform/, July 2016.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="hbp" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[28]</a></td><td>Human&nbsp;Brain Project. Human brain projet home. <span><a class="reference external" href="#"></a></span>https://www.humanbrainproject.eu/en/, July 2016.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="readmewoken" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id55">[27]</a></td><td>Axel Roy. Readme updated for woken new dev-debug environment - github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/woken/blob/AutoML/README.md, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id57">[29]</a></td><td>Axel Roy. Readme updated for woken new dev-debug environment - github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/woken/blob/AutoML/README.md, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="dockerhubtpot" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id44">[28]</a></td><td>Axel Roy. Tpot’s implementation’s container for the integration in hbp woken’s project - github. <span><a class="reference external" href="#"></a></span>https://hub.docker.com/r/axelroy/python-mip-tpot/, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id46">[30]</a></td><td>Axel Roy. Tpot’s implementation’s container for the integration in hbp woken’s project - github. <span><a class="reference external" href="#"></a></span>https://hub.docker.com/r/axelroy/python-mip-tpot/, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="tpotcode" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id37">[29]</a></td><td>Axel Roy. Tpot’s python script implementation for the docker container - github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/python-base-docker-images/blob/python-mip-interactive/python-mip-interactive/scripts/main.py, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id39">[31]</a></td><td>Axel Roy. Tpot’s python script implementation for the docker container - github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/python-base-docker-images/blob/python-mip-interactive/python-mip-interactive/scripts/main.py, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="tpottests" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id29">[30]</a></td><td>Axel Roy. Tests with the tpot library github page. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/TPOT_Tests, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id31">[32]</a></td><td>Axel Roy. Tests with the tpot library github page. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/TPOT_Tests, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="tiniimplementation" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id46">[31]</a></td><td>Axel Roy. Tini’s implementation in the mip python container for activewait - github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/python-base-docker-images/blob/python-mip-interactive/Old/python-mip-interactive-activewait/Dockerfile#L17, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id48">[33]</a></td><td>Axel Roy. Tini’s implementation in the mip python container for activewait - github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/python-base-docker-images/blob/python-mip-interactive/Old/python-mip-interactive-activewait/Dockerfile#L17, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="tpotissue" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[32]</td><td><em>(<a class="fn-backref" href="#id30">1</a>, <a class="fn-backref" href="#id38">2</a>)</em> Axel Roy. Visualize constructed features and get best pipeline found. <span><a class="reference external" href="#"></a></span>https://github.com/rhiever/tpot/issues/459, May 2017.</td></tr>
+<tr><td class="label">[34]</td><td><em>(<a class="fn-backref" href="#id32">1</a>, <a class="fn-backref" href="#id40">2</a>)</em> Axel Roy. Visualize constructed features and get best pipeline found. <span><a class="reference external" href="#"></a></span>https://github.com/rhiever/tpot/issues/459, May 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="wokenvolume" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id51">[33]</a></td><td>Axel Roy. Woken’s implementation for volumes serialization - github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/woken/commit/6fdafc881acef18b52b95314d94c0b969433b10d, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id53">[35]</a></td><td>Axel Roy. Woken’s implementation for volumes serialization - github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/woken/commit/6fdafc881acef18b52b95314d94c0b969433b10d, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="wokencommands" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id52">[34]</a></td><td>Axel Roy. Woken’s implementation for commands serialization - github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/woken/commit/b71a3d4cccc444dbccf0ba1837edc51d431ac5ca, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id54">[36]</a></td><td>Axel Roy. Woken’s implementation for commands serialization - github. <span><a class="reference external" href="#"></a></span>https://github.com/axelroy/woken/commit/b71a3d4cccc444dbccf0ba1837edc51d431ac5ca, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="captain" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id42">[35]</a></td><td>Harbur Cloud&nbsp;Solutions S.L. Captain - convert your git workflow to docker containers ). <span><a class="reference external" href="#"></a></span>https://github.com/harbur/captain, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id44">[37]</a></td><td>Harbur Cloud&nbsp;Solutions S.L. Captain - convert your git workflow to docker containers ). <span><a class="reference external" href="#"></a></span>https://github.com/harbur/captain, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="codeerrorissue" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id22">[36]</a></td><td>sallyom. Change “docker run” exit codes to distinguish docker/contained errors #14012. <span><a class="reference external" href="#"></a></span>https://github.com/moby/moby/pull/14012, December 2015.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id24">[38]</a></td><td>sallyom. Change “docker run” exit codes to distinguish docker/contained errors #14012. <span><a class="reference external" href="#"></a></span>https://github.com/moby/moby/pull/14012, December 2015.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="spray" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id53">[37]</a></td><td>SPRAY. A lightweight, clean and simple json implementation in scala - github. <span><a class="reference external" href="#"></a></span>https://github.com/spray/spray-json, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id55">[39]</a></td><td>SPRAY. A lightweight, clean and simple json implementation in scala - github. <span><a class="reference external" href="#"></a></span>https://github.com/spray/spray-json, July 2017.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="zeromq" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id33">[38]</a></td><td>ZeroMQ. <span><a class="reference external" href="#"></a></span>http://zeromq.org, July 2017.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id35">[40]</a></td><td>ZeroMQ. <span><a class="reference external" href="#"></a></span>http://zeromq.org, July 2017.</td></tr>
 </tbody>
 </table>
 </p>
@@ -1753,15 +1770,15 @@ ainsi que pour l’aide pour l’utilisation de <em>Sphinx</em> pour la document
 <li><a class="reference internal" href="#mesos">Mesos</a></li>
 <li><a class="reference internal" href="#marathon">Marathon</a></li>
 <li><a class="reference internal" href="#chronos">Chronos</a></li>
-<li><a class="reference internal" href="#id19">Docker</a></li>
+<li><a class="reference internal" href="#id21">Docker</a></li>
 <li><a class="reference internal" href="#scala">Scala</a></li>
 <li><a class="reference internal" href="#akka">AKKA</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id25">Analyse</a><ul>
-<li><a class="reference internal" href="#id26">Woken</a><ul>
+<li><a class="reference internal" href="#id27">Analyse</a><ul>
+<li><a class="reference internal" href="#id28">Woken</a><ul>
 <li><a class="reference internal" href="#place-de-woken-dans-l-architecture">Place de Woken dans l’architecture</a></li>
 <li><a class="reference internal" href="#fonctionnement-interne-de-woken">Fonctionnement interne de Woken</a></li>
 </ul>
@@ -1775,12 +1792,12 @@ ainsi que pour l’aide pour l’utilisation de <em>Sphinx</em> pour la document
 <li><a class="reference internal" href="#modification-globale-du-workflow-woken">Modification globale du workflow Woken</a></li>
 <li><a class="reference internal" href="#conception-pour-tpot">Conception pour TPOT</a></li>
 <li><a class="reference internal" href="#systeme-de-containers-docker-interactifs">Système de containers Docker interactifs</a></li>
-<li><a class="reference internal" href="#id34">Chronos</a></li>
-<li><a class="reference internal" href="#id35">Akka</a></li>
+<li><a class="reference internal" href="#id36">Chronos</a></li>
+<li><a class="reference internal" href="#id37">Akka</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#implementation-realisee">Implémentation réalisée</a><ul>
-<li><a class="reference internal" href="#id36">TPOT</a><ul>
+<li><a class="reference internal" href="#id38">TPOT</a><ul>
 <li><a class="reference internal" href="#tache-1-recuperation-du-meilleur-pipeline">Tâche 1 : Récupération du meilleur pipeline</a></li>
 <li><a class="reference internal" href="#tache-2-liaison-de-la-bdd-du-chuv-mise-en-forme-du-dataset-pour-tpot-et-decoupage-du-dataset">Tâche 2 : Liaison de la BDD du CHUV, mise en forme du dataset pour TPOT et découpage du dataset</a></li>
 <li><a class="reference internal" href="#tache-3-analyse-du-type-de-features">Tâche 3 : Analyse du type de features</a></li>
@@ -1788,7 +1805,7 @@ ainsi que pour l’aide pour l’utilisation de <em>Sphinx</em> pour la document
 <li><a class="reference internal" href="#tache-5-retour-des-predictions">Tâche 5 : Retour des prédictions</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id40">Docker</a><ul>
+<li><a class="reference internal" href="#id42">Docker</a><ul>
 <li><a class="reference internal" href="#tache-6-implementation-dun-container-stateful">Tâche 6 : Implémentation d’un container stateful</a></li>
 <li><a class="reference internal" href="#tache-7-gestion-des-entrypoints">Tâche 7 : Gestion des entrypoints</a></li>
 <li><a class="reference internal" href="#tache-8-variables-denvironnements">Tâche 8 : Variables d’environnements</a></li>
@@ -1796,17 +1813,17 @@ ainsi que pour l’aide pour l’utilisation de <em>Sphinx</em> pour la document
 <li><a class="reference internal" href="#tache-10-connexion-aux-bases-de-donnees">Tâche 10 : Connexion aux bases de données</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id48">Chronos</a><ul>
+<li><a class="reference internal" href="#id50">Chronos</a><ul>
 <li><a class="reference internal" href="#tache-11-instanciation-du-container-personnalise-via-le-gui">Tâche 11 : Instanciation du container personnalisé via le GUI</a></li>
 <li><a class="reference internal" href="#tache-12-instanciation-du-container-via-une-requete-post-avec-un-fichier-json">Tâche 12 : Instanciation du container via une requête POST avec un fichier JSON</a><ul>
-<li><a class="reference internal" href="#id49">Akka</a></li>
+<li><a class="reference internal" href="#id51">Akka</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#tache-13-mise-en-relation-du-validation-pool-akka">Tâche 13 : Mise en relation du validation pool Akka</a></li>
 <li><a class="reference internal" href="#tache-14-mise-en-place-du-nouveau-flux-dacteurs-dans-woken-pour-traiter-nos-container-interactif">Tâche 14 : Mise en place du nouveau flux d’acteurs dans Woken pour traiter nos container interactif</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id50">Scala</a><ul>
+<li><a class="reference internal" href="#id52">Scala</a><ul>
 <li><a class="reference internal" href="#tache-15-mise-en-relation-du-scoring-pour-le-retour-a-lalgorithmactor">Tâche 15 : Mise en relation du scoring pour le retour à l’AlgorithmActor</a></li>
 <li><a class="reference internal" href="#tache-16-configuration-des-definitions-de-containers-dalgorithmes">Tâche 16 : Configuration des définitions de containers d’algorithmes</a></li>
 <li><a class="reference internal" href="#tache-17-mise-en-place-de-la-nouvelle-structure-de-case-classes-pour-les-volumes">Tâche 17 : Mise en place de la nouvelle structure de case classes pour les volumes</a></li>
